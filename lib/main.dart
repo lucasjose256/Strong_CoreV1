@@ -6,11 +6,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:strong_core/screen_semanas.dart';
-import 'package:strong_core/sign_up_widget.dart';
-import 'package:strong_core/splash_page.dart';
+import 'package:strong_core/SCREENS/questions.dart';
+import 'package:strong_core/SCREENS/screen_semanas.dart';
+import 'package:strong_core/SCREENS/sign_up_widget.dart';
+import 'package:strong_core/SCREENS/splash_page.dart';
 
-import 'google_sign_in.dart';
+import 'API/google_sign_in.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,11 +52,7 @@ class MyHomePage extends StatelessWidget {
         //backgroundColor: Color.fromRGBO(254, 159, 103, 1),
         appBar: AppBar(
           // foregroundColor: Colors.orange,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20)),
-          ),
+
           backgroundColor: Colors.red[800],
           title: Center(
             child: Text('Strong Core',
@@ -174,7 +171,9 @@ class MyHomePage extends StatelessWidget {
                     ),
                     onPressed: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (constect) => Semanas()),
+                        MaterialPageRoute(
+                            builder: (constect) => Question(),
+                            settings: RouteSettings()),
                       );
                     },
                   ),

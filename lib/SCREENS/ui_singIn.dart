@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:strong_core/splash_page.dart';
+import 'package:strong_core/SCREENS/splash_page.dart';
 
-import 'google_sign_in.dart';
+import '../API/google_sign_in.dart';
 
 class UISingIn extends StatelessWidget {
   const UISingIn({Key? key}) : super(key: key);
