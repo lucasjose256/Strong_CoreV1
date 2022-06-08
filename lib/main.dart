@@ -1,19 +1,17 @@
 // ignore_for_file: prefer_const_constructors
-
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:splash_screen_view/SplashScreenView.dart';
+import 'package:strong_core/SCREENS/basic_questions.dart';
 import 'package:strong_core/SCREENS/questions.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:strong_core/SCREENS/sign_up_widget.dart';
-import 'package:strong_core/SCREENS/splash_page.dart';
 
 import 'API/google_sign_in.dart';
 
-Future main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
@@ -27,20 +25,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => GoogleSignInProvider(),
-      child: MaterialApp(
-        // initialRoute: '/splash',
-        routes: {
-          '/splash': (_) => SplashPage(),
-        },
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.red,
-        ),
-        home: MyHomePage(),
-      ),
-    );
+        create: (context) => GoogleSignInProvider(),
+        child: MaterialApp(
+            // initialRoute: '/splash',
+            routes: {
+              // '/splash': (_) => SplashPage(),
+            },
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.red,
+            ),
+            home: SplashScreenView(
+              navigateRoute: MyHomePage(),
+              duration: 1800,
+              text: 'Strong Core',
+              textStyle: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Comfortaa',
+                  fontSize: 32,
+                  fontWeight: FontWeight.w500),
+              backgroundColor: Colors.red,
+            )));
   }
 }
 
@@ -87,28 +93,6 @@ class MyHomePage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(height: 20),
-              Container(
-                child: TextFormField(
-                  keyboardType: TextInputType.emailAddress,
-                  autofocus: false,
-                  decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none),
-                      fillColor: Colors.red[200],
-                      icon: Icon(
-                        Icons.person,
-                        color: Colors.red,
-                      ),
-                      filled: true,
-                      //labelText: 'E-mail',
-                      hintText: 'Usuário'),
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-
               //e-mail
               SizedBox(height: 17),
               Container(
@@ -172,7 +156,7 @@ class MyHomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (constect) => Question(),
+                            builder: (constect) => BasicQuestions(),
                             settings: RouteSettings()),
                       );
                     },

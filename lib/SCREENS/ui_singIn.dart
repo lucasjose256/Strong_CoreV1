@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:strong_core/SCREENS/splash_page.dart';
+import 'package:splash_screen_view/SplashScreenView.dart';
 
 import '../API/google_sign_in.dart';
 
@@ -17,7 +17,7 @@ class UISingIn extends StatelessWidget {
       child: MaterialApp(
         initialRoute: '/splash',
         routes: {
-          '/splash': (_) => SplashPage(),
+          // '/splash': (_) => UISingIn(),
         },
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

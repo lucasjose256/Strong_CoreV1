@@ -13,7 +13,7 @@ class _SemanasState extends State<Semanas> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red[800],
-        title: Center(
+        title: const Center(
           child: Text('Strong Core',
               style: TextStyle(
                   fontSize: 20,
