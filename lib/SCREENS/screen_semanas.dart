@@ -32,16 +32,18 @@ class _SemanasState extends State<Semanas> {
             child: Card(
               borderOnForeground: true,
               semanticContainer: true,
-              child: RaisedButton(
-                child: Text(
-                  'Semana 1',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(color: Colors.white),
-                  textScaleFactor: 2,
+              child: ElevatedButton(
+                child: const Text('Semana 1', style: TextStyle(fontSize: 14)),
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                    ),
+                  ),
                 ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
-                color: Colors.red,
                 onPressed: () {},
               ),
             ),

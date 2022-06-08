@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,6 +9,7 @@ import 'package:strong_core/SCREENS/basic_questions.dart';
 import 'package:strong_core/SCREENS/questions.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:strong_core/SCREENS/sign_up_widget.dart';
+import 'package:strong_core/SCREENS/ui_singIn.dart';
 
 import 'API/google_sign_in.dart';
 
@@ -54,6 +56,10 @@ class MyHomePage extends StatelessWidget {
   MyHomePage();
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _emailControler = TextEditingController();
+    final TextEditingController _passwordControler = TextEditingController();
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
     return Scaffold(
         //backgroundColor: Color.fromRGBO(254, 159, 103, 1),
         appBar: AppBar(
@@ -72,20 +78,25 @@ class MyHomePage extends StatelessWidget {
           padding: const EdgeInsets.only(left: 10, right: 10),
           child: ListView(
             children: [
+              SizedBox(
+                height: 50,
+              ),
               Container(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 40.0),
-                  child: Text(
+                  padding: const EdgeInsets.only(top: 50.0),
+                  child: const Text(
                     'Seja bem vindo ao Strong Core!',
                     textAlign: TextAlign.center,
-                    textScaleFactor: 1,
                     style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Comfortaa'),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 35,
+                        color: Colors.black),
                   ),
                 ),
                 height: 150,
+              ),
+              SizedBox(
+                height: 10,
               ),
               Container(
                 child: Text(
@@ -97,6 +108,7 @@ class MyHomePage extends StatelessWidget {
               SizedBox(height: 17),
               Container(
                 child: TextFormField(
+                  controller: _emailControler,
                   style: TextStyle(color: Colors.white),
                   keyboardType: TextInputType.emailAddress,
                   autofocus: false,
@@ -115,14 +127,13 @@ class MyHomePage extends StatelessWidget {
                       hintText: 'E-mail'),
                 ),
               ),
-              //senha
+              //////////////////////                       SENHA
               SizedBox(height: 17),
               Container(
                 child: TextFormField(
                   obscureText: true,
                   style: TextStyle(color: Colors.white),
                   keyboardType: TextInputType.emailAddress,
-                  autofocus: false,
                   decoration: InputDecoration(
                       hintStyle: TextStyle(color: Colors.white),
                       border: OutlineInputBorder(
@@ -134,8 +145,8 @@ class MyHomePage extends StatelessWidget {
                         color: Colors.red,
                       ),
                       filled: true,
-                      //labelText: 'E-mail',
                       hintText: 'Senha'),
+                  controller: _passwordControler,
                 ),
               ),
               const SizedBox(height: 10),
@@ -145,15 +156,23 @@ class MyHomePage extends StatelessWidget {
                   SizedBox(
                     width: 20,
                   ),
-                  RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
-                    color: Colors.red[800],
-                    child: Text(
-                      "Entrar",
-                      style: TextStyle(color: Colors.white),
+                  ElevatedButton(
+                    child: Text('Entrar', style: TextStyle(fontSize: 14)),
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all<Color>(
+                          Color.fromARGB(255, 255, 255, 255)),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.red),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                        ),
+                      ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
+                      await _firebaseAuth.signInWithEmailAndPassword(
+                          email: _emailControler.text,
+                          password: _passwordControler.text);
                       Navigator.of(context).push(
                         MaterialPageRoute(
                             builder: (constect) => BasicQuestions(),
@@ -172,22 +191,27 @@ class MyHomePage extends StatelessWidget {
                     width: 10,
                   ),
                   Center(
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50))),
-                      color: Colors.blue[300],
-                      child: Text(
-                        "Entrar com Google",
-                        style: TextStyle(color: Colors.white),
+                      child: ElevatedButton(
+                    child: Text('Entrar com google',
+                        style: TextStyle(fontSize: 14)),
+                    style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.blue),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                        ),
                       ),
-                      onPressed: () {
-                        final provider = Provider.of<GoogleSignInProvider>(
-                            context,
-                            listen: false);
-                        provider.googleLogin();
-                      },
                     ),
-                  ),
+                    onPressed: () {
+                      final provider = Provider.of<GoogleSignInProvider>(
+                          context,
+                          listen: false);
+                      provider.googleLogin();
+                    },
+                  )),
                 ],
               ),
 
@@ -195,13 +219,19 @@ class MyHomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    ' Já possui uma conta?',
+                    ' Não possui uma conta?',
                     textAlign: TextAlign.center,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (constect) => SingUpPage(),
+                            settings: RouteSettings()),
+                      );
+                    },
                     child: Text(
-                      'Sing In',
+                      'Registre-se',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.red),
                     ),

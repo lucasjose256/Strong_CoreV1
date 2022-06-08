@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:strong_core/SCREENS/questions.dart';
 
 class BasicQuestions extends StatefulWidget {
-  BasicQuestions({Key? key}) : super(key: key);
+  const BasicQuestions({Key? key}) : super(key: key);
 
   @override
   State<BasicQuestions> createState() => _BasicQuestionsState();
@@ -110,13 +110,17 @@ class _BasicQuestionsState extends State<BasicQuestions> {
             ),
             Container(
               margin: EdgeInsets.only(left: 50, right: 50),
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
-                color: Colors.red[800],
-                child: Text(
-                  "Continuar",
-                  style: TextStyle(color: Colors.white),
+              child: ElevatedButton(
+                child: Text('Continuar', style: TextStyle(fontSize: 14)),
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                    ),
+                  ),
                 ),
                 onPressed: () {
                   Navigator.of(context).push(
