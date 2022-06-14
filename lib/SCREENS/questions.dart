@@ -1,14 +1,28 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:strong_core/SCREENS/screen_semanas.dart';
+import 'package:strong_core/main.dart';
 
 //Configurar um tamanho dinâmico para o dropDownButton
 class Question extends StatefulWidget {
-  Question({Key? key}) : super(key: key);
+  // final Function(User) onSingOut;
+  Question();
 
   @override
   State<Question> createState() => _QuestionState();
 }
 
 class _QuestionState extends State<Question> {
+  var user = FirebaseAuth.instance.currentUser;
+
+  onRefrash(userCreed) {
+    setState(() {
+      user = userCreed;
+    });
+  }
+
   late TextSelectionControls tex;
   final items1 = ['Bombeiro Militar', 'Policial Militar'];
   String? answer1;
@@ -20,10 +34,14 @@ class _QuestionState extends State<Question> {
     'Cabo',
     '3º Sargento',
     '2º Sargento',
-    '1 º Sargento'
+    '1 º Sargento',
   ];
   String? answer2;
-  final items3 = [
+
+  final items3 = ['Cargo administrativo', 'Cargo operacional'];
+  String? answer3;
+
+  final items4 = [
     'AC',
     'AL',
     'AP',
@@ -52,12 +70,35 @@ class _QuestionState extends State<Question> {
     'SE',
     'TO',
   ];
-  String? answer3;
+  String? answer4;
+  final items5 = ['Curitiba', 'Pinhais', 'São José dos Pinhais'];
+  String? answer5;
+
+  final items6 = ['Curitiba', 'Pinhais', 'São José dos Pinhais'];
+  String? answer6;
+
+  Future<void> logOut() async {
+    await FirebaseAuth.instance.signOut();
+    onRefrash(null);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: MaterialButton(
+        color: Colors.red,
+        child: Text('Sair'),
+        onPressed: () {
+          logOut;
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (constect) => MyHomePage(), settings: RouteSettings()),
+          );
+        },
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+      ),
       //backgroundColor: Colors.grey,
-      appBar: AppBar(
+      /*  appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.red[800],
         title: const Center(
@@ -66,14 +107,13 @@ class _QuestionState extends State<Question> {
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Comfortaa')),
-        ),
-      ),
+        ),*/
       body: ListView(
         addRepaintBoundaries: false,
         shrinkWrap: false,
         addAutomaticKeepAlives: false,
         addSemanticIndexes: false,
-        primary: false,
+        // primary: false,//MOSTRA UMA COR AO TENTAR MOVER A LIST VIEW
         children: [
           const SizedBox(
             height: 50,
@@ -92,7 +132,7 @@ class _QuestionState extends State<Question> {
           ),
           Center(
             child: Container(
-              padding:const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               width: 300,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
@@ -179,6 +219,104 @@ class _QuestionState extends State<Question> {
                   onChanged: (value) => setState(() {
                     this.answer3 = value;
                   }),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+
+          const Text(
+            'Estado',
+            style: TextStyle(
+              fontFamily: 'Comfortaa',
+              fontSize: 19,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+
+          Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              width: 300,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.black, width: 4)),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  focusColor: Colors.red,
+                  isExpanded: true,
+                  dropdownColor: Colors.red[200],
+                  value: answer4,
+                  items: items4.map(buildMenuItem).toList(),
+                  onChanged: (value) => setState(() {
+                    this.answer4 = value;
+                  }),
+                ),
+              ),
+            ),
+          ),
+//pegar uma API PARA AS LOCALIDADES
+          const SizedBox(
+            height: 25,
+          ),
+
+          const Text(
+            'Cidade',
+            style: TextStyle(
+              fontFamily: 'Comfortaa',
+              fontSize: 19,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+
+          Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              width: 300,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.black, width: 4)),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  focusColor: Colors.red,
+                  isExpanded: true,
+                  dropdownColor: Colors.red[200],
+                  value: answer5,
+                  items: items5.map(buildMenuItem).toList(),
+                  onChanged: (value) => setState(() {
+                    this.answer5 = value;
+                  }),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Center(
+            child: MaterialButton(
+              color: Color.fromARGB(255, 24, 117, 43),
+              shape: const CircleBorder(),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (constect) => Semanas(),
+                      settings: RouteSettings()),
+                );
+              },
+              child: const Padding(
+                padding: EdgeInsets.all(40),
+                child: Text(
+                  'Seguir',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
             ),

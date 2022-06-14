@@ -8,8 +8,7 @@ import 'package:splash_screen_view/SplashScreenView.dart';
 import 'package:strong_core/SCREENS/basic_questions.dart';
 import 'package:strong_core/SCREENS/questions.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
-import 'package:strong_core/SCREENS/sign_up_widget.dart';
-import 'package:strong_core/SCREENS/ui_singIn.dart';
+import 'package:strong_core/SCREENS/sing_up_Page.dart';
 
 import 'API/google_sign_in.dart';
 
@@ -26,12 +25,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // Get the firebase user
+    User? firebaseUser = FirebaseAuth.instance.currentUser;
+// Define a widget
+    Widget firstWidget;
+
+// Assign widget based on availability of currentUser
+    if (firebaseUser != null) {
+      firstWidget = Question();
+    } else {
+      firstWidget = MyHomePage();
+    }
     return ChangeNotifierProvider(
         create: (context) => GoogleSignInProvider(),
         child: MaterialApp(
-            // initialRoute: '/splash',
+            //  initialRoute: '/splash',
             routes: {
-              // '/splash': (_) => SplashPage(),
+              //     '/splash': (_) => SingUpPage(),
             },
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
@@ -39,7 +49,7 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.red,
             ),
             home: SplashScreenView(
-              navigateRoute: MyHomePage(),
+              navigateRoute: firstWidget,
               duration: 1800,
               text: 'Strong Core',
               textStyle: TextStyle(
@@ -62,7 +72,7 @@ class MyHomePage extends StatelessWidget {
 
     return Scaffold(
         //backgroundColor: Color.fromRGBO(254, 159, 103, 1),
-        appBar: AppBar(
+        /* appBar: AppBar(
           // foregroundColor: Colors.orange,
 
           backgroundColor: Colors.red[800],
@@ -73,175 +83,178 @@ class MyHomePage extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     fontFamily: 'Comfortaa')),
           ),
-        ),
+        ),*/
         body: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: ListView(
+      padding: const EdgeInsets.only(left: 10, right: 10),
+      child: ListView(
+        children: [
+          SizedBox(
+            height: 50,
+          ),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 50.0),
+              child: const Text(
+                'Seja bem vindo ao Strong Core!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 35,
+                    color: Colors.black),
+              ),
+            ),
+            height: 150,
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            child: Text(
+              'Insira seu e-mail e senha para continuar',
+              textAlign: TextAlign.center,
+            ),
+          ),
+          //e-mail
+          SizedBox(height: 17),
+          Container(
+            child: TextFormField(
+              controller: _emailControler,
+              style: TextStyle(color: Colors.white),
+              keyboardType: TextInputType.emailAddress,
+              autofocus: false,
+              decoration: InputDecoration(
+                  hintStyle: TextStyle(color: Colors.white),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none),
+                  fillColor: Colors.red[200],
+                  icon: Icon(
+                    Icons.email,
+                    color: Colors.red,
+                  ),
+                  filled: true,
+                  //labelText: 'E-mail',
+                  hintText: 'E-mail'),
+            ),
+          ),
+          //////////////////////                       SENHA
+          SizedBox(height: 17),
+          Container(
+            child: TextFormField(
+              obscureText: true,
+              style: TextStyle(color: Colors.white),
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                  hintStyle: TextStyle(color: Colors.white),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none),
+                  fillColor: Colors.red[200],
+                  icon: Icon(
+                    Icons.lock,
+                    color: Colors.red,
+                  ),
+                  filled: true,
+                  hintText: 'Senha'),
+              controller: _passwordControler,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 50,
+                width: 20,
               ),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 50.0),
-                  child: const Text(
-                    'Seja bem vindo ao Strong Core!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 35,
-                        color: Colors.black),
+              ElevatedButton(
+                child: Text('Entrar', style: TextStyle(fontSize: 14)),
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 255, 255, 255)),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                    ),
                   ),
                 ),
-                height: 150,
+                onPressed: () async {
+                  await _firebaseAuth.signInWithEmailAndPassword(
+                      email: _emailControler.text,
+                      password: _passwordControler.text);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (constect) => BasicQuestions(),
+                        settings: RouteSettings()),
+                  );
+                },
               ),
               SizedBox(
-                height: 10,
+                width: 5,
               ),
-              Container(
-                child: Text(
-                  'Crie um usuário e digite seu e-mail para continuar',
-                  textAlign: TextAlign.center,
-                ),
+              const Text(
+                'ou',
+                textAlign: TextAlign.center,
               ),
-              //e-mail
-              SizedBox(height: 17),
-              Container(
-                child: TextFormField(
-                  controller: _emailControler,
-                  style: TextStyle(color: Colors.white),
-                  keyboardType: TextInputType.emailAddress,
-                  autofocus: false,
-                  decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none),
-                      fillColor: Colors.red[200],
-                      icon: Icon(
-                        Icons.email,
-                        color: Colors.red,
-                      ),
-                      filled: true,
-                      //labelText: 'E-mail',
-                      hintText: 'E-mail'),
-                ),
+              SizedBox(
+                width: 10,
               ),
-              //////////////////////                       SENHA
-              SizedBox(height: 17),
-              Container(
-                child: TextFormField(
-                  obscureText: true,
-                  style: TextStyle(color: Colors.white),
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          borderSide: BorderSide.none),
-                      fillColor: Colors.red[200],
-                      icon: Icon(
-                        Icons.lock,
-                        color: Colors.red,
-                      ),
-                      filled: true,
-                      hintText: 'Senha'),
-                  controller: _passwordControler,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 20,
-                  ),
-                  ElevatedButton(
-                    child: Text('Entrar', style: TextStyle(fontSize: 14)),
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromARGB(255, 255, 255, 255)),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
-                        ),
-                      ),
-                    ),
-                    onPressed: () async {
-                      await _firebaseAuth.signInWithEmailAndPassword(
-                          email: _emailControler.text,
-                          password: _passwordControler.text);
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (constect) => BasicQuestions(),
-                            settings: RouteSettings()),
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  const Text(
-                    'ou',
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Center(
-                      child: ElevatedButton(
-                    child: Text('Entrar com google',
-                        style: TextStyle(fontSize: 14)),
-                    style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.blue),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
-                        ),
-                      ),
-                    ),
-                    onPressed: () {
-                      final provider = Provider.of<GoogleSignInProvider>(
-                          context,
-                          listen: false);
-                      provider.googleLogin();
-                    },
-                  )),
-                ],
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    ' Não possui uma conta?',
-                    textAlign: TextAlign.center,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (constect) => SingUpPage(),
-                            settings: RouteSettings()),
-                      );
-                    },
-                    child: Text(
-                      'Registre-se',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.red),
+              Center(
+                  child: ElevatedButton(
+                child:
+                    Text('Entrar com google', style: TextStyle(fontSize: 14)),
+                style: ButtonStyle(
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blue),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
                     ),
                   ),
-                  const SizedBox(height: 1),
-                ],
-              ),
+                ),
+                onPressed: () {
+                  final provider =
+                      Provider.of<GoogleSignInProvider>(context, listen: false);
+                  provider.googleLogin();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (constect) => BasicQuestions(),
+                        settings: RouteSettings()),
+                  );
+                },
+              )),
             ],
           ),
-        ) // This trailing comma makes auto-formatting nicer for build methods.
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                ' Não possui uma conta?',
+                textAlign: TextAlign.center,
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (constect) => SingUpPage(),
+                        settings: RouteSettings()),
+                  );
+                },
+                child: Text(
+                  'Registre-se',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+              const SizedBox(height: 1),
+            ],
+          ),
+        ],
+      ),
+    ) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
 }

@@ -1,5 +1,10 @@
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:strong_core/SCREENS/basic_questions.dart';
+import 'package:strong_core/SCREENS/questions.dart';
+import 'package:strong_core/SCREENS/screen_semanas.dart';
 
 class SingUpPage extends StatefulWidget {
   const SingUpPage({Key? key}) : super(key: key);
@@ -46,16 +51,16 @@ class _SingUpPageState extends State<SingUpPage> {
               Container(
                 child: TextFormField(
                   controller: _emailControler,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   keyboardType: TextInputType.emailAddress,
                   autofocus: false,
                   decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: const TextStyle(color: Colors.white),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide.none),
                       fillColor: Colors.red[200],
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.email,
                         color: Colors.red,
                       ),
@@ -70,16 +75,16 @@ class _SingUpPageState extends State<SingUpPage> {
               Container(
                 child: TextFormField(
                   obscureText: true,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   keyboardType: TextInputType.emailAddress,
                   autofocus: false,
                   decoration: InputDecoration(
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: const TextStyle(color: Colors.white),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide.none),
                       fillColor: Colors.red[200],
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.lock,
                         color: Colors.red,
                       ),
@@ -117,13 +122,20 @@ class _SingUpPageState extends State<SingUpPage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50)),
                   child: const Text(
-                    'Sign up',
+                    'Registrar',
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                   onPressed: () async {
+                    if (_passwordControler.text != '' ||
+                        _passwordControler.text.length < 8) {}
                     await _firebaseAuth.createUserWithEmailAndPassword(
                         email: _emailControler.text,
                         password: _passwordControler.text);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (constect) => BasicQuestions(),
+                          settings: const RouteSettings()),
+                    );
                   },
                 ),
               ),

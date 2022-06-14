@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace, unnecessary_this
+
 import 'package:flutter/material.dart';
 import 'package:strong_core/SCREENS/questions.dart';
 
@@ -9,7 +11,10 @@ class BasicQuestions extends StatefulWidget {
 }
 
 class _BasicQuestionsState extends State<BasicQuestions> {
+  //lista de opções para a seleção do sexo
   final items = ['Feminino', 'Masculino'];
+  //variável para armazenar a resposta escolhida,que será
+  //usada para renderizar na tela a mesma
   String? answer;
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,7 @@ class _BasicQuestionsState extends State<BasicQuestions> {
       appBar: AppBar(
         // foregroundColor: Colors.orange,
         backgroundColor: Colors.red[800],
-        title: Center(
+        title: const Center(
           child: Text('Strong Core',
               style: TextStyle(
                   fontSize: 20,
@@ -27,17 +32,17 @@ class _BasicQuestionsState extends State<BasicQuestions> {
       ),
       body: Container(
         child: ListView(
-          padding: EdgeInsets.only(left: 12),
+          padding: const EdgeInsets.only(left: 12),
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Text('Preencha os seguintes campos para continuar',
+            const Text('Preencha os seguintes campos para continuar',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Comfortaa')),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
@@ -46,7 +51,7 @@ class _BasicQuestionsState extends State<BasicQuestions> {
                   width: 150,
                   child: buildName(),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Container(
@@ -57,12 +62,12 @@ class _BasicQuestionsState extends State<BasicQuestions> {
                 //buildLastName(),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
-              padding: EdgeInsets.all(12),
-              margin: EdgeInsets.only(right: 100),
+              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.only(right: 100),
               width: 150,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
@@ -75,7 +80,7 @@ class _BasicQuestionsState extends State<BasicQuestions> {
                     isExpanded: true,
                     dropdownColor: Colors.red[200],
                     value: answer,
-                    hint: Text('Sexo'),
+                    hint: const Text('Sexo'),
                     items: items.map(buildMenuItem).toList(),
                     onChanged: (value) => setState(() {
                       this.answer = value;
@@ -84,40 +89,40 @@ class _BasicQuestionsState extends State<BasicQuestions> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
-              margin: EdgeInsets.only(right: 150),
+              margin: const EdgeInsets.only(right: 150),
               child: buildDate(),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
-              margin: EdgeInsets.only(right: 150),
+              margin: const EdgeInsets.only(right: 150),
               child: buildPeso(),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
-              margin: EdgeInsets.only(right: 150),
+              margin: const EdgeInsets.only(right: 150),
               child: buildAltura(),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
-              margin: EdgeInsets.only(left: 50, right: 50),
+              margin: const EdgeInsets.only(left: 50, right: 50),
               child: ElevatedButton(
-                child: Text('Continuar', style: TextStyle(fontSize: 14)),
+                child: const Text('Continuar', style: TextStyle(fontSize: 14)),
                 style: ButtonStyle(
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
+                    const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(50)),
                     ),
                   ),
@@ -139,7 +144,7 @@ class _BasicQuestionsState extends State<BasicQuestions> {
 }
 
 Widget buildName() => TextFormField(
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         focusColor: Colors.red,
         labelText: 'Nome',
         border: OutlineInputBorder(),
@@ -147,7 +152,7 @@ Widget buildName() => TextFormField(
     );
 
 Widget buildLastName() => TextFormField(
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         focusColor: Colors.red,
         labelText: 'Sobrenome',
         border: OutlineInputBorder(),
@@ -156,7 +161,7 @@ Widget buildLastName() => TextFormField(
 //lembrar de fazer as verificações se as informações foram preenchidas corretamentes
 Widget buildDate() => TextFormField(
       keyboardType: TextInputType.datetime,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         focusColor: Colors.red,
         labelText: 'Data de nascimento',
         border: OutlineInputBorder(),
@@ -165,7 +170,7 @@ Widget buildDate() => TextFormField(
 
 Widget buildPeso() => TextFormField(
       keyboardType: TextInputType.number,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         focusColor: Colors.red,
         labelText: 'Peso',
         hintText: 'Kg',
@@ -175,7 +180,7 @@ Widget buildPeso() => TextFormField(
 
 Widget buildAltura() => TextFormField(
       keyboardType: TextInputType.number,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         focusColor: Colors.red,
         labelText: 'Altura',
         hintText: 'cm',
@@ -191,5 +196,3 @@ DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
       ),
     );
 //floating action button
-
-

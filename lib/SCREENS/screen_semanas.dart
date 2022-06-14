@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 
 class Semanas extends StatefulWidget {
@@ -22,7 +24,8 @@ class _SemanasState extends State<Semanas> {
         ),
       ),
       body: ListView(
-        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.width / 5.5,
