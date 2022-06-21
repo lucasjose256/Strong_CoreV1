@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:strong_core/SCREENS/corpo_humano.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:strong_core/main.dart';
 
@@ -16,6 +18,8 @@ class Question extends StatefulWidget {
 
 class _QuestionState extends State<Question> {
   var user = FirebaseAuth.instance.currentUser;
+  CollectionReference questionData =
+      FirebaseFirestore.instance.collection('user');
 
   onRefrash(userCreed) {
     setState(() {
@@ -38,7 +42,7 @@ class _QuestionState extends State<Question> {
   ];
   String? answer2;
 
-  final items3 = ['Cargo administrativo', 'Cargo operacional'];
+  final items3 = ['Cargo  administrativo', 'Cargo operacional'];
   String? answer3;
 
   final items4 = [
@@ -89,7 +93,7 @@ class _QuestionState extends State<Question> {
         color: Colors.red,
         child: Text('Sair'),
         onPressed: () {
-          logOut;
+          logOut();
           Navigator.of(context).push(
             MaterialPageRoute(
                 builder: (constect) => MyHomePage(), settings: RouteSettings()),
@@ -305,10 +309,23 @@ class _QuestionState extends State<Question> {
             child: MaterialButton(
               color: Color.fromARGB(255, 24, 117, 43),
               shape: const CircleBorder(),
-              onPressed: () {
+              onPressed: () async {
+                //Criando um document no firebase em 'user'
+                DocumentReference documentReference = FirebaseFirestore.instance
+                    .collection('user')
+                    .doc(user!.displayName);
+                await documentReference.set({
+                  'cargo': answer1,
+                });
+                documentReference.update({
+                  'Posto': answer2,
+                  'Lotado em': answer3,
+                  'estado': answer4,
+                  'cidade': answer5,
+                });
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (constect) => Semanas(),
+                      builder: (constect) => CorpoHumano(),
                       settings: RouteSettings()),
                 );
               },

@@ -8,7 +8,8 @@ import 'package:strong_core/SCREENS/screen_semanas.dart';
 
 class SingUpPage extends StatefulWidget {
   const SingUpPage({Key? key}) : super(key: key);
-
+//colocar após a pessoa fazer o registro, o formulario de questoes
+//as quais somente poderam ser preenchidas nesse instante
   @override
   _SingUpPageState createState() => _SingUpPageState();
 }
@@ -50,6 +51,9 @@ class _SingUpPageState extends State<SingUpPage> {
               ),
               Container(
                 child: TextFormField(
+                  validator: (value) => value != null && value.contains('@')
+                      ? 'E-mail inválido'
+                      : null,
                   controller: _emailControler,
                   style: const TextStyle(color: Colors.white),
                   keyboardType: TextInputType.emailAddress,
@@ -98,9 +102,7 @@ class _SingUpPageState extends State<SingUpPage> {
                 children: [
                   Checkbox(
                     value: isActive,
-                    onChanged: (value) => setState(() {
-                      isActive = value!;
-                    }),
+                    onChanged: (value) => null,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 18.0),

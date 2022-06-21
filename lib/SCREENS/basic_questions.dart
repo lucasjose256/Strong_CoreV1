@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace, unnecessary_this
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:strong_core/SCREENS/questions.dart';
 
@@ -16,8 +17,20 @@ class _BasicQuestionsState extends State<BasicQuestions> {
   //variável para armazenar a resposta escolhida,que será
   //usada para renderizar na tela a mesma
   String? answer;
+  CollectionReference basicQuestionsData =
+      FirebaseFirestore.instance.collection('user');
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _nome = TextEditingController();
+    Widget buildName() => TextFormField(
+          decoration: const InputDecoration(
+            focusColor: Colors.red,
+            labelText: 'Nome',
+            border: OutlineInputBorder(),
+          ),
+          controller: _nome,
+        );
+
     return Scaffold(
       appBar: AppBar(
         // foregroundColor: Colors.orange,
@@ -48,9 +61,15 @@ class _BasicQuestionsState extends State<BasicQuestions> {
             Row(
               children: [
                 Container(
-                  width: 150,
-                  child: buildName(),
-                ),
+                    width: 150,
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        focusColor: Colors.red,
+                        labelText: 'Nome',
+                        border: OutlineInputBorder(),
+                      ),
+                      controller: _nome,
+                    )),
                 const SizedBox(
                   width: 10,
                 ),
@@ -116,18 +135,21 @@ class _BasicQuestionsState extends State<BasicQuestions> {
             Container(
               margin: const EdgeInsets.only(left: 50, right: 50),
               child: ElevatedButton(
-                child: const Text('Continuar', style: TextStyle(fontSize: 14)),
+                child: const Text('Continuar', style: TextStyle(fontSize: 18)),
                 style: ButtonStyle(
                   foregroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      borderRadius: BorderRadius.all(Radius.circular(60)),
                     ),
                   ),
                 ),
-                onPressed: () {
+                onPressed: () async {
+                  /*  await basicQuestionsData.add({
+                    'nome': _nome,
+                  });*/
                   Navigator.of(context).push(
                     MaterialPageRoute(
                         builder: (constect) => Question(),
@@ -142,14 +164,6 @@ class _BasicQuestionsState extends State<BasicQuestions> {
     );
   }
 }
-
-Widget buildName() => TextFormField(
-      decoration: const InputDecoration(
-        focusColor: Colors.red,
-        labelText: 'Nome',
-        border: OutlineInputBorder(),
-      ),
-    );
 
 Widget buildLastName() => TextFormField(
       decoration: const InputDecoration(

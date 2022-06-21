@@ -58,6 +58,8 @@ flutter_native_splash:
    image: "Assets/images/ball.png"
    android: true
    ios: true
+
+   
    
 
 dev_dependencies:
@@ -86,7 +88,7 @@ flutter:
   assets:
   - Assets/images/ball.png
   - Assets/images/loginPage.png
-    
+  - Assets/images/corpoHumano.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
