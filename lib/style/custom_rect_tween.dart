@@ -21,7 +21,7 @@ class CustomRectTween extends RectTween {
       lerpDouble(begin!.left, end!.left, elasticCurveValue)!,
       lerpDouble(begin!.top, end!.top, elasticCurveValue)!,
       lerpDouble(begin!.right, end!.right, elasticCurveValue)!,
-      lerpDouble(begin!.bottom, end!.bottom, elasticCurveValue!)!,
+      lerpDouble(begin!.bottom, end!.bottom, elasticCurveValue)!,
     );
   }
 }

@@ -42,7 +42,7 @@ dependencies:
   cloud_firestore: ^2.5.0
   firebase_auth: ^1.1.4
   google_sign_in: ^5.0.3
-  
+  expansion_card: ^0.1.0
 
 # Google Icon
   font_awesome_flutter: ^9.0.0
@@ -58,6 +58,10 @@ flutter_native_splash:
    image: "Assets/images/ball.png"
    android: true
    ios: true
+
+   # plugins para a UI
+   
+
 
    
    
@@ -104,7 +108,7 @@ flutter:
 fonts:
      - family: Comfortaa
        fonts:
-         - asset: fonts/Comfortaa-VariableFont_wght.ttf
+        - asset: fonts/Comfortaa-VariableFont_wght.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

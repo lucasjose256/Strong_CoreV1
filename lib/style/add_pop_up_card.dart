@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:strong_core/style/custom_rect_tween.dart';
 
-import '../API/hero_dialog_route.dart';
+import 'hero_dialog_route.dart';
 
 /// {@template add_todo_button}
 /// Button to add a new [Todo].
@@ -13,7 +13,9 @@ import '../API/hero_dialog_route.dart';
 /// {@endtemplate}
 class AddTodoButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  const AddTodoButton({Key? key}) : super(key: key);
+  ///
+  final String? number;
+  const AddTodoButton(this.number);
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +25,14 @@ class AddTodoButton extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(HeroDialogRoute(
               builder: (context) {
-                return const AddTodoPopupCard();
+                return AddTodoPopupCard(
+                  nome: number,
+                );
               },
               settings: RouteSettings(arguments: null, name: null)));
         },
         child: Hero(
-          tag: _heroAddTodo,
+          tag: _heroAddTodo + '$number',
           createRectTween: (begin, end) {
             return CustomRectTween(begin: begin!, end: end!);
           },
@@ -39,7 +43,7 @@ class AddTodoButton extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(7.0),
               child: Text(
-                '1',
+                number!,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 22,
@@ -64,7 +68,8 @@ const String _heroAddTodo = 'add-todo-hero';
 /// {@endtemplate}
 class AddTodoPopupCard extends StatelessWidget {
   /// {@macro add_todo_popup_card}
-  const AddTodoPopupCard({Key? key}) : super(key: key);
+  final String? nome;
+  const AddTodoPopupCard({required this.nome});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +77,7 @@ class AddTodoPopupCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Hero(
-          tag: _heroAddTodo,
+          tag: _heroAddTodo + '$nome',
           createRectTween: (begin, end) {
             return CustomRectTween(begin: begin!, end: end!);
           },
@@ -87,23 +92,23 @@ class AddTodoPopupCard extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('Selecione o grau de dor nessa região'),
+                    const Text('Selecione o grau de dor nessa região'),
                     const Divider(
                       color: Colors.white,
                       thickness: 0.2,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text('1'),
-                    SizedBox(
+                    const Text('1'),
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text('2'),
-                    SizedBox(
+                    const Text('2'),
+                    const SizedBox(
                       height: 20,
                     ),
-                    Text('3'),
+                    const Text('3'),
                     MaterialButton(
                       onPressed: () {},
                       child: const Text('Add'),

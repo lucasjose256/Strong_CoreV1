@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage();
+  const MyHomePage();
   @override
   Widget build(BuildContext context) {
     final TextEditingController _emailControler = TextEditingController();
