@@ -32,6 +32,8 @@ class _CorpoHumanoState extends State<CorpoHumano> {
             },
             color: Colors.green,
             child: Text('Continuar'),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
           )
         ],
       ),

@@ -10,6 +10,7 @@ import 'package:strong_core/SCREENS/corpo_humano.dart';
 import 'package:strong_core/SCREENS/questions.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:strong_core/SCREENS/sing_up_Page.dart';
+import 'package:strong_core/style/add_pop_up_card.dart';
 
 import 'API/google_sign_in.dart';
 
