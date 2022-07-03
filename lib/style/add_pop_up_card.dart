@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +19,8 @@ class AddTodoButton extends StatefulWidget {
   ///
 
   final String? number;
-  const AddTodoButton(this.number);
+  late Color? newColor = Colors.yellow;
+  AddTodoButton({this.number, this.newColor});
 
   @override
   State<AddTodoButton> createState() => _AddTodoButtonState();
@@ -26,43 +29,53 @@ class AddTodoButton extends StatefulWidget {
 class _AddTodoButtonState extends State<AddTodoButton> {
   @override
   Widget build(BuildContext context) {
+    // widget.newColor=Navigator.of(context).push();
     //Color? newButtunColor = Provider.of<newColorForCard>(context).color;
     //  bool flag = false;
-    return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(HeroDialogRoute(
-                builder: (context) {
-                  return AddTodoPopupCard(
-                    nome: widget.number,
-                  );
-                },
-                settings: RouteSettings(arguments: null, name: null)));
-          },
-          child: Hero(
-            tag: _heroAddTodo + '${widget.number}',
-            createRectTween: (begin, end) {
-              return CustomRectTween(begin: begin!, end: end!);
+
+    return ChangeNotifierProvider(
+      create: (context) => newColorForCard(),
+      child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GestureDetector(
+            onTap: () async {
+              Color tempColor = await Navigator.push(
+                  context,
+                  HeroDialogRoute(
+                      builder: (context) => AddTodoPopupCard(
+                            nome: widget.number,
+                          ),
+                      settings: RouteSettings(arguments: null, name: null)));
+              // settings: RouteSettings(arguments: null, name: null)
+
+              setState(() {
+                widget.newColor = tempColor;
+              });
             },
-            child: Material(
-              color: // Provider.of<newColorForCard>(context).colortr
-                  true ? Colors.grey : Colors.pink,
-              elevation: 2,
-              shape: CircleBorder(),
-              child: Padding(
-                padding: const EdgeInsets.all(7.0),
-                child: Text(
-                  widget.number!,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 22,
+            child: Hero(
+              tag: _heroAddTodo + '${widget.number}',
+              createRectTween: (begin, end) {
+                return CustomRectTween(begin: begin!, end: end!);
+              },
+              child: Material(
+                color: widget
+                    .newColor, //Provider.of<newColorForCard>(context)._color,
+                elevation: 2,
+                shape: CircleBorder(),
+                child: Padding(
+                  padding: const EdgeInsets.all(7.0),
+                  child: Text(
+                    widget.number!,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ));
+          )),
+    );
   }
 }
 
@@ -78,7 +91,8 @@ const String _heroAddTodo = 'add-todo-hero';
 class AddTodoPopupCard extends StatelessWidget {
   /// {@macro add_todo_popup_card}
   final String? nome;
-  const AddTodoPopupCard({required this.nome});
+  //final Color? tempColor;
+  AddTodoPopupCard({required this.nome});
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +157,7 @@ class AddTodoPopupCard extends StatelessWidget {
   }
 
   MaterialButton MarcarRegiao(
-      String num, String nome, Color color, BuildContext context) {
+      String num, String nome, Color? color, BuildContext context) {
     return MaterialButton(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -170,21 +184,24 @@ class AddTodoPopupCard extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        //   Provider.of<newColorForCard>(context, listen: false).changeColor(false);
-        Navigator.of(context).pop();
+        /* Provider.of<newColorForCard>(context, listen: false)
+            .changeColor(color, true);*/
         //Mandar para o servidor
+        Navigator.pop(context, color);
       },
     );
   }
 }
 
 class newColorForCard extends ChangeNotifier {
-  bool color = true;
-  // Color get _color =>
+  Color? _color;
+  bool b = false;
+  Color get color => _color!;
   // //newColorForCard(this.color);
 
-  void changeColor(bool newColor) {
-    color = newColor;
+  void changeColor(Color newColor, bool b) {
+    this.b = b;
+    _color = newColor;
     notifyListeners();
   }
 }

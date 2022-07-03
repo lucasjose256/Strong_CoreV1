@@ -19,8 +19,10 @@ class _CorpoHumanoState extends State<CorpoHumano> {
         children: [
           Stack(children: [
             Image.asset('Assets/images/corpoHumano.png'),
-            Positioned(right: 138, top: 75, child: AddTodoButton('1')),
-            Positioned(right: 138, top: 130, child: AddTodoButton('2'))
+            Positioned(right: 138, top: 75, child: AddTodoButton(number: '1')),
+            Positioned(right: 138, top: 130, child: AddTodoButton(number: '2')),
+            Positioned(right: 138, top: 177, child: AddTodoButton(number: '3')),
+            Positioned(right: 138, top: 211, child: AddTodoButton(number: '4')),
           ]),
           MaterialButton(
             onPressed: () {
