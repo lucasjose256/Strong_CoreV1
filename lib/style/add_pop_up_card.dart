@@ -20,7 +20,8 @@ class AddTodoButton extends StatefulWidget {
 
   final String? number;
   late Color? newColor = Colors.yellow;
-  AddTodoButton({this.number, this.newColor});
+  String numberId = '';
+  AddTodoButton({this.number, this.newColor, required this.numberId});
 
   @override
   State<AddTodoButton> createState() => _AddTodoButtonState();
@@ -43,7 +44,7 @@ class _AddTodoButtonState extends State<AddTodoButton> {
                   context,
                   HeroDialogRoute(
                       builder: (context) => AddTodoPopupCard(
-                            nome: widget.number,
+                            nome: widget.number! + widget.numberId!,
                           ),
                       settings: RouteSettings(arguments: null, name: null)));
               // settings: RouteSettings(arguments: null, name: null)
@@ -53,13 +54,15 @@ class _AddTodoButtonState extends State<AddTodoButton> {
               });
             },
             child: Hero(
-              tag: _heroAddTodo + '${widget.number}',
+              tag: _heroAddTodo + '${widget.number}' + '${widget.numberId}',
               createRectTween: (begin, end) {
                 return CustomRectTween(begin: begin!, end: end!);
               },
               child: Material(
-                color: widget
-                    .newColor, //Provider.of<newColorForCard>(context)._color,
+                color: widget.newColor == null
+                    ? Colors.grey
+                    : widget
+                        .newColor, //Provider.of<newColorForCard>(context)._color,
                 elevation: 2,
                 shape: CircleBorder(),
                 child: Padding(
@@ -123,27 +126,27 @@ class AddTodoPopupCard extends StatelessWidget {
                     height: 15,
                   ),
                   MarcarRegiao('1', 'Nenhuma   ',
-                      const Color.fromARGB(255, 11, 103, 14), context),
+                      Color.fromARGB(255, 31, 106, 34), context),
                   SizedBox(
                     height: 5,
                   ),
                   MarcarRegiao('2', 'Leve            ',
-                      Color.fromARGB(185, 126, 206, 21), context),
+                      Color.fromARGB(255, 99, 179, 46), context),
                   SizedBox(
                     height: 5,
                   ),
                   MarcarRegiao('3', 'Moderada  ',
-                      Color.fromARGB(255, 247, 239, 15), context),
+                      Color.fromARGB(255, 224, 220, 80), context),
                   SizedBox(
                     height: 5,
                   ),
                   MarcarRegiao('4', 'Forte           ',
-                      Color.fromARGB(184, 230, 100, 8), context),
+                      Color.fromARGB(255, 230, 101, 8), context),
                   SizedBox(
                     height: 5,
                   ),
                   MarcarRegiao('5', 'Muito Forte',
-                      Color.fromARGB(184, 215, 26, 16), context),
+                      Color.fromARGB(222, 238, 39, 29), context),
                   SizedBox(
                     height: 20,
                   ),
