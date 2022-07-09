@@ -1,5 +1,6 @@
 import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
+import 'package:strong_core/MODELS/card_semana_model.dart';
 
 class Semanas extends StatelessWidget {
   const Semanas({Key? key}) : super(key: key);
@@ -9,15 +10,15 @@ class Semanas extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          centerTitle: true,
           // foregroundColor: Colors.orange,
           backgroundColor: Colors.red[800],
-          title: const Center(
-            child: Text('Strong Core',
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Comfortaa')),
-          ),
+          title: Text('Strong Core',
+              style: TextStyle(
+                  fontSize: 21,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Comfortaa')),
         ),
         body: buildSemanas(),
       ),
@@ -26,11 +27,8 @@ class Semanas extends StatelessWidget {
 
   Container buildSemanas() {
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 15,
-      ),
-      child: Column(
+      margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+      child: ListView(
         children: [
           ExpansionCard(
             borderRadius: 30,
@@ -103,6 +101,12 @@ class Semanas extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          CardSemanas(
+            title: 'SEMANA 3',
           ),
         ],
       ),

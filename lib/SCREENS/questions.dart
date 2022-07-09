@@ -72,7 +72,7 @@ class _QuestionState extends State<Question> {
     'SC',
     'SP',
     'SE',
-    'TO',
+    'TO'
   ];
   String? answer4;
   final items5 = ['Curitiba', 'Pinhais', 'São José dos Pinhais'];
@@ -80,6 +80,17 @@ class _QuestionState extends State<Question> {
 
   final items6 = ['Curitiba', 'Pinhais', 'São José dos Pinhais'];
   String? answer6;
+  final items7 = [
+    'Nenhum dia',
+    'Um dia',
+    'Dois sias',
+    'Três dias',
+    'Quatro dias',
+    'Cinco Dias',
+    'Seis Dias',
+    'Sete dias ou mais'
+  ];
+  String? answer7;
 
   Future<void> logOut() async {
     await FirebaseAuth.instance.signOut();
@@ -89,8 +100,20 @@ class _QuestionState extends State<Question> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // foregroundColor: Colors.orange,
+        centerTitle: true,
+        backgroundColor: Colors.red[800],
+        title: Center(
+          child: Text('Strong Core',
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Comfortaa')),
+        ),
+      ),
       floatingActionButton: MaterialButton(
-        color: Colors.red,
+        color: Color.fromARGB(255, 237, 100, 90),
         child: Text('Sair'),
         onPressed: () {
           logOut();
@@ -139,8 +162,8 @@ class _QuestionState extends State<Question> {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               width: 300,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.black, width: 4)),
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: Colors.black, width: 1)),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   focusColor: Colors.red,
@@ -175,8 +198,8 @@ class _QuestionState extends State<Question> {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               width: 300,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.black, width: 4)),
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: Colors.black, width: 1)),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   focusColor: Colors.red,
@@ -211,8 +234,8 @@ class _QuestionState extends State<Question> {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               width: 300,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.black, width: 4)),
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: Colors.black, width: 1)),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   focusColor: Colors.red,
@@ -248,8 +271,8 @@ class _QuestionState extends State<Question> {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               width: 300,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.black, width: 4)),
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: Colors.black, width: 1)),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   focusColor: Colors.red,
@@ -286,8 +309,8 @@ class _QuestionState extends State<Question> {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               width: 300,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.black, width: 4)),
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: Colors.black, width: 1)),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   focusColor: Colors.red,
@@ -305,13 +328,47 @@ class _QuestionState extends State<Question> {
           SizedBox(
             height: 30,
           ),
+          /*   const Text(
+            'No último mês, durante o horário de plantão quantos dias' +
+                'você foi instruído a realizar exercício físico para melhorar a performance ? ',
+            style: TextStyle(
+              fontFamily: 'Comfortaa',
+              fontSize: 19,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              width: 300,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: Colors.black, width: 1)),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  focusColor: Colors.red,
+                  isExpanded: true,
+                  dropdownColor: Colors.red[200],
+                  value: answer7,
+                  items: items7.map(buildMenuItem).toList(),
+                  onChanged: (value) => setState(() {
+                    this.answer7 = value;
+                  }),
+                ),
+              ),
+            ),
+          ),
+*/
           Center(
             child: MaterialButton(
               color: Color.fromARGB(255, 24, 117, 43),
               shape: const CircleBorder(),
-              onPressed: () async {
+              onPressed: () /* async*/ {
                 //Criando um document no firebase em 'user'
-                DocumentReference documentReference = FirebaseFirestore.instance
+                /* DocumentReference documentReference = FirebaseFirestore.instance
                     .collection('user')
                     .doc(user!.displayName);
                 await documentReference.set({
@@ -322,7 +379,7 @@ class _QuestionState extends State<Question> {
                   'Lotado em': answer3,
                   'estado': answer4,
                   'cidade': answer5,
-                });
+                });*/
                 Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (constect) => CorpoHumano(),

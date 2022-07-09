@@ -16,9 +16,24 @@ class _CorpoHumanoState extends State<CorpoHumano> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      /*  appBar: AppBar(
+        automaticallyImplyLeading: false,
+        // foregroundColor: Colors.orange,
+        backgroundColor: Color.fromARGB(188, 198, 40, 40),
+        title: const Center(
+          child: Text('Strong Core',
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Comfortaa')),
+        ),
+      ),*/
       body: Column(
         children: [
-          Stack(children: [
+          SizedBox(
+            height: 20,
+          ),
+          Stack(alignment: AlignmentDirectional.centerStart, children: [
             Image.asset('Assets/images/corpoHumano.png'),
             Positioned(
                 right: 138,
@@ -48,13 +63,13 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                 right: 200,
                 top: 90,
                 child: AddTodoButton(number: '6', numberId: '2')),
-            Positioned(
+            /* Positioned(
                 right: 5,
                 top: 90,
                 child: AddTodoButtonDouble(
                   numberId: '',
                   number: '8',
-                ))
+                ))*/
           ]),
           MaterialButton(
             onPressed: () {

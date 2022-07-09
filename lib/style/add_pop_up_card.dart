@@ -44,7 +44,7 @@ class _AddTodoButtonState extends State<AddTodoButton> {
                   context,
                   HeroDialogRoute(
                       builder: (context) => AddTodoPopupCard(
-                            nome: widget.number! + widget.numberId!,
+                            nome: widget.number! + widget.numberId,
                           ),
                       settings: RouteSettings(arguments: null, name: null)));
               // settings: RouteSettings(arguments: null, name: null)
