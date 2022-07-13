@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -29,13 +30,14 @@ class _VideoState extends State<Video> {
           timer.cancel();
           cancelTime = false;
         });
-      } else
+      } else {
         setState(() {
           tempo = 0;
           porcent = 0;
           timer.cancel();
           tempo = 30;
         });
+      }
     });
   }
 
@@ -70,6 +72,19 @@ class _VideoState extends State<Video> {
                 ),
               ),
             ),
+            /*  Padding(
+              padding: EdgeInsets.all(15.0),
+              child: LinearPercentIndicator(
+                width: MediaQuery.of(context).size.width - 200,
+                animation: true,
+                lineHeight: 20.0,
+                animationDuration: 2000,
+                //animationDuration: 2000,
+                percent: porcent,
+                linearStrokeCap: LinearStrokeCap.roundAll,
+                progressColor: Color.fromARGB(255, 9, 10, 10),
+              ),
+            ),*/
             SizedBox(
               width: 5,
             ),
@@ -118,6 +133,40 @@ class _VideoState extends State<Video> {
           },
           color: Color.fromARGB(255, 183, 183, 183),
         ),
+        SizedBox(
+          height: 10,
+        ),
+        /*CircularCountDownTimer(
+          duration: 10,
+          initialDuration: 0,
+          controller: CountDownController(),
+          width: MediaQuery.of(context).size.width / 2,
+          height: MediaQuery.of(context).size.height / 2,
+          ringColor: Colors.grey[300]!,
+          ringGradient: null,
+          fillColor: Colors.purpleAccent[100]!,
+          fillGradient: null,
+          backgroundColor: Colors.purple[500],
+          backgroundGradient: null,
+          strokeWidth: 20.0,
+          strokeCap: StrokeCap.round,
+          textStyle: TextStyle(
+              fontSize: 33.0, color: Colors.white, fontWeight: FontWeight.bold),
+          textFormat: CountdownTextFormat.S,
+          isReverse: false,
+          isReverseAnimation: false,
+          isTimerTextShown: true,
+          autoStart: false,
+          onStart: () {
+            debugPrint('Countdown Started');
+          },
+          onComplete: () {
+            debugPrint('Countdown Ended');
+          },
+          onChange: (String timeStamp) {
+            debugPrint('Countdown Changed $timeStamp');
+          },
+        )*/
       ]),
     );
   }
