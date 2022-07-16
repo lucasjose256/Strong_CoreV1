@@ -11,7 +11,7 @@ class Provisoria extends StatelessWidget {
           height: 100,
           width: 100,
           color: Colors.blue,
-          child: Text(
+          child: const Text(
             'Selecione o grau da dor',
           ),
         ),

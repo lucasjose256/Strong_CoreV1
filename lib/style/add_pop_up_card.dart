@@ -46,7 +46,7 @@ class _AddTodoButtonState extends State<AddTodoButton> {
                       builder: (context) => AddTodoPopupCard(
                             nome: widget.number! + widget.numberId,
                           ),
-                      settings: RouteSettings(arguments: null, name: null)));
+                      settings: const RouteSettings(arguments: null, name: null)));
               // settings: RouteSettings(arguments: null, name: null)
 
               setState(() {
@@ -54,23 +54,21 @@ class _AddTodoButtonState extends State<AddTodoButton> {
               });
             },
             child: Hero(
-              tag: _heroAddTodo + '${widget.number}' + '${widget.numberId}',
+              tag: _heroAddTodo + '${widget.number}' + widget.numberId,
               createRectTween: (begin, end) {
                 return CustomRectTween(begin: begin!, end: end!);
               },
               child: Material(
-                color: widget.newColor == null
-                    ? Colors.grey
-                    : widget
-                        .newColor, //Provider.of<newColorForCard>(context)._color,
+                color: widget
+                        .newColor ?? Colors.grey, //Provider.of<newColorForCard>(context)._color,
                 elevation: 2,
-                shape: CircleBorder(),
+                shape: const CircleBorder(),
                 child: Padding(
                   padding: const EdgeInsets.all(7.0),
                   child: Text(
                     widget.number!,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 22,
                     ),
                   ),
@@ -95,7 +93,7 @@ class AddTodoPopupCard extends StatelessWidget {
   /// {@macro add_todo_popup_card}
   final String? nome;
   //final Color? tempColor;
-  AddTodoPopupCard({required this.nome});
+  const AddTodoPopupCard({required this.nome});
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +106,7 @@ class AddTodoPopupCard extends StatelessWidget {
             return CustomRectTween(begin: begin!, end: end!);
           },
           child: Material(
-            color: Color.fromRGBO(181, 136, 136, 1),
+            color: const Color.fromRGBO(181, 136, 136, 1),
             elevation: 2,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
@@ -122,32 +120,32 @@ class AddTodoPopupCard extends StatelessWidget {
                     color: Colors.white,
                     thickness: 0.2,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   MarcarRegiao('1', 'Nenhuma   ',
-                      Color.fromARGB(255, 31, 106, 34), context),
-                  SizedBox(
+                      const Color.fromARGB(255, 31, 106, 34), context),
+                  const SizedBox(
                     height: 5,
                   ),
                   MarcarRegiao('2', 'Leve            ',
-                      Color.fromARGB(255, 99, 179, 46), context),
-                  SizedBox(
+                      const Color.fromARGB(255, 99, 179, 46), context),
+                  const SizedBox(
                     height: 5,
                   ),
                   MarcarRegiao('3', 'Moderada  ',
-                      Color.fromARGB(255, 224, 220, 80), context),
-                  SizedBox(
+                      const Color.fromARGB(255, 224, 220, 80), context),
+                  const SizedBox(
                     height: 5,
                   ),
                   MarcarRegiao('4', 'Forte           ',
-                      Color.fromARGB(255, 230, 101, 8), context),
-                  SizedBox(
+                      const Color.fromARGB(255, 230, 101, 8), context),
+                  const SizedBox(
                     height: 5,
                   ),
                   MarcarRegiao('5', 'Muito Forte',
-                      Color.fromARGB(222, 238, 39, 29), context),
-                  SizedBox(
+                      const Color.fromARGB(222, 238, 39, 29), context),
+                  const SizedBox(
                     height: 20,
                   ),
                 ]),
@@ -174,10 +172,10 @@ class AddTodoPopupCard extends StatelessWidget {
               backgroundColor: color,
               child: Text(
                 num,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Text(

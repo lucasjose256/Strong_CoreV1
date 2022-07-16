@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:strong_core/SCREENS/corpo_humano.dart';
-import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:strong_core/main.dart';
 
 //Configurar um tamanho dinâmico para o dropDownButton
@@ -104,7 +103,7 @@ class _QuestionState extends State<Question> {
         // foregroundColor: Colors.orange,
         centerTitle: true,
         backgroundColor: Colors.red[800],
-        title: Center(
+        title: const Center(
           child: Text('Strong Core',
               style: TextStyle(
                   fontSize: 20,
@@ -113,13 +112,13 @@ class _QuestionState extends State<Question> {
         ),
       ),
       floatingActionButton: MaterialButton(
-        color: Color.fromARGB(255, 237, 100, 90),
-        child: Text('Sair'),
+        color: const Color.fromARGB(255, 237, 100, 90),
+        child: const Text('Sair'),
         onPressed: () {
           logOut();
           Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (constect) => MyHomePage(), settings: RouteSettings()),
+                builder: (constect) => const MyHomePage(), settings: const RouteSettings()),
           );
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
@@ -172,7 +171,7 @@ class _QuestionState extends State<Question> {
                   value: answer1,
                   items: items1.map(buildMenuItem).toList(),
                   onChanged: (value) => setState(() {
-                    this.answer1 = value;
+                    answer1 = value;
                   }),
                 ),
               ),
@@ -244,7 +243,7 @@ class _QuestionState extends State<Question> {
                   value: answer3,
                   items: items3.map(buildMenuItem).toList(),
                   onChanged: (value) => setState(() {
-                    this.answer3 = value;
+                    answer3 = value;
                   }),
                 ),
               ),
@@ -281,7 +280,7 @@ class _QuestionState extends State<Question> {
                   value: answer4,
                   items: items4.map(buildMenuItem).toList(),
                   onChanged: (value) => setState(() {
-                    this.answer4 = value;
+                    answer4 = value;
                   }),
                 ),
               ),
@@ -319,13 +318,13 @@ class _QuestionState extends State<Question> {
                   value: answer5,
                   items: items5.map(buildMenuItem).toList(),
                   onChanged: (value) => setState(() {
-                    this.answer5 = value;
+                    answer5 = value;
                   }),
                 ),
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           /*   const Text(
@@ -364,7 +363,7 @@ class _QuestionState extends State<Question> {
 */
           Center(
             child: MaterialButton(
-              color: Color.fromARGB(255, 24, 117, 43),
+              color: const Color.fromARGB(255, 24, 117, 43),
               shape: const CircleBorder(),
               onPressed: () /* async*/ {
                 //Criando um document no firebase em 'user'
@@ -382,8 +381,8 @@ class _QuestionState extends State<Question> {
                 });*/
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (constect) => CorpoHumano(),
-                      settings: RouteSettings()),
+                      builder: (constect) => const CorpoHumano(),
+                      settings: const RouteSettings()),
                 );
               },
               child: const Padding(

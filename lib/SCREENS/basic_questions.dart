@@ -158,7 +158,7 @@ class _BasicQuestionsState extends State<BasicQuestions> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                           builder: (constect) => Question(),
-                          settings: RouteSettings()),
+                          settings: const RouteSettings()),
                     );
                   },
                 ),
@@ -218,5 +218,5 @@ DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
 //floating action button
 
 Widget builllll() => Container(
-      child: Text('dsadsad'),
+      child: const Text('dsadsad'),
     );

@@ -1,7 +1,6 @@
 import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
 import 'package:strong_core/MODELS/video_model.dart';
-import 'package:strong_core/SCREENS/basic_questions.dart';
 
 class CardSemanas extends StatefulWidget {
   String title;
@@ -32,12 +31,12 @@ class _CardSemanasState extends State<CardSemanas> {
       ),
       title: Container(
         child: Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 40,
           ),
           child: Text(
             widget.title,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color.fromARGB(255, 255, 255, 255),
               fontSize: 38,
               fontFamily: 'Comfortaa',
@@ -47,7 +46,7 @@ class _CardSemanasState extends State<CardSemanas> {
         ),
       ),
       children: [
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         /*   Container(
@@ -58,13 +57,13 @@ class _CardSemanasState extends State<CardSemanas> {
                 color: Color.fromARGB(255, 255, 255, 254), fontSize: 18),
           ),
         ),*/
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           //  mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.values[1],
           mainAxisSize: MainAxisSize.values[1],
           children: [
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
             Checkbox(
@@ -115,15 +114,15 @@ class _CardSemanasState extends State<CardSemanas> {
             MaterialButton(
               minWidth: 30,
               elevation: 10,
-              color: Color.fromARGB(255, 150, 201, 145),
+              color: const Color.fromARGB(255, 150, 201, 145),
               onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Video(),
+                      builder: (context) => const Video(),
                     ));
               },
-              child: Text('Começar'),
+              child: const Text('Começar'),
               // shape: CircleBorder(side: ),
             )
           ],

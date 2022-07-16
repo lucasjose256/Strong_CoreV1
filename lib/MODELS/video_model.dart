@@ -1,11 +1,9 @@
 import 'dart:async';
 
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class Video extends StatefulWidget {
-  Video({Key? key}) : super(key: key);
+  const Video({Key? key}) : super(key: key);
 
   @override
   State<Video> createState() => _VideoState();
@@ -17,7 +15,7 @@ class _VideoState extends State<Video> {
   int tempo = 30;
 
   void carregarBarra() {
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       if (porcent < 1 && !(cancelTime)) {
         setState(() {
           tempo--;
@@ -45,29 +43,29 @@ class _VideoState extends State<Video> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(children: [
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
-        SizedBox(
+        const SizedBox(
           height: 50,
         ),
         Row(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 50,
             ),
-            Container(
+            SizedBox(
               width: 250,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Container(
+                child: SizedBox(
                   height: 18,
                   child: LinearProgressIndicator(
                     color: Colors.greenAccent,
                     value: porcent, // percent filled
-                    valueColor: AlwaysStoppedAnimation<Color>(
+                    valueColor: const AlwaysStoppedAnimation<Color>(
                         Color.fromARGB(255, 27, 27, 27)),
-                    backgroundColor: Color.fromARGB(129, 167, 166, 166),
+                    backgroundColor: const Color.fromARGB(129, 167, 166, 166),
                   ),
                 ),
               ),
@@ -85,44 +83,44 @@ class _VideoState extends State<Video> {
                 progressColor: Color.fromARGB(255, 9, 10, 10),
               ),
             ),*/
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
             Text(tempo.toString(),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 30,
                 )),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(30)),
+            borderRadius: const BorderRadius.all(Radius.circular(30)),
             child: Container(
               height: 300,
-              color: Color.fromARGB(255, 113, 112, 112),
+              color: const Color.fromARGB(255, 113, 112, 112),
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         MaterialButton(
-          child: Text(
+          child: const Text(
             'I N I C I A R',
             style: TextStyle(color: Colors.white),
           ),
           onPressed: carregarBarra,
           color: Colors.black,
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         MaterialButton(
-          child: Text(
+          child: const Text(
             'P A R A R',
             style: TextStyle(color: Colors.white),
           ),
@@ -131,9 +129,9 @@ class _VideoState extends State<Video> {
               cancelTime = true;
             });
           },
-          color: Color.fromARGB(255, 183, 183, 183),
+          color: const Color.fromARGB(255, 183, 183, 183),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         /*CircularCountDownTimer(

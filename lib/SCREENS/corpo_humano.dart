@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:strong_core/SCREENS/basic_questions.dart';
-import 'package:strong_core/SCREENS/double_buttun.dart';
-import 'package:strong_core/SCREENS/provisoria.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:strong_core/style/add_pop_up_card.dart';
 
 class CorpoHumano extends StatefulWidget {
-  CorpoHumano({Key? key}) : super(key: key);
+  const CorpoHumano({Key? key}) : super(key: key);
 
   @override
   State<CorpoHumano> createState() => _CorpoHumanoState();
@@ -30,7 +27,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
       ),*/
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Stack(alignment: AlignmentDirectional.centerStart, children: [
@@ -75,12 +72,12 @@ class _CorpoHumanoState extends State<CorpoHumano> {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                    builder: (constect) => Semanas(),
-                    settings: RouteSettings()),
+                    builder: (constect) => const Semanas(),
+                    settings: const RouteSettings()),
               );
             },
             color: Colors.green,
-            child: Text('Continuar'),
+            child: const Text('Continuar'),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
           )

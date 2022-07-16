@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "128665954043",
+    "firebase_url": "https://strongapp-94590-default-rtdb.firebaseio.com",
     "project_id": "strongapp-94590",
     "storage_bucket": "strongapp-94590.appspot.com"
   },
@@ -19,6 +20,14 @@
           "android_info": {
             "package_name": "com.example.strong_core",
             "certificate_hash": "117c631e3a363ac43caf13e7297eccb6d57a65c0"
+          }
+        },
+        {
+          "client_id": "128665954043-p4pl8ee6ld66onvigbib2vndthltqmj7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.strong_core",
+            "certificate_hash": "640861ea3959f76f14602d25cc6d4aeea147cb20"
           }
         },
         {
