@@ -54,6 +54,8 @@ dependencies:
   splash_screen_view: ^3.0.0
   date_format: ^1.0.4
   circular_countdown_timer: ^0.2.2
+  spotify: ^0.7.2
+  video_player: ^2.4.5
 
 flutter_native_splash:
    color: "#eb3e31"

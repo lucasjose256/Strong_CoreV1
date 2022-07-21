@@ -119,7 +119,7 @@ class _CardSemanasState extends State<CardSemanas> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Video(),
+                      builder: (context) => Video(20),
                     ));
               },
               child: const Text('Começar'),

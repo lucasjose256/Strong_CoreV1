@@ -43,10 +43,14 @@ class Semanas extends StatelessWidget {
                     SizedBox(
                       height: 6,
                     ),
-                    CircleAvatar(
-                      radius: 45,
-                      backgroundImage: NetworkImage(user!.photoURL!),
-                    )
+                    user != null
+                        ? CircleAvatar(
+                            radius: 45,
+                            backgroundImage: NetworkImage(user!.photoURL!),
+                          )
+                        : Container(
+                            color: Colors.pink,
+                          )
                   ],
                 ),
               ),
