@@ -221,6 +221,7 @@ class _VideoState extends State<Video> {
           ),
           onPressed: () {
             setState(() {
+              circulatTimerControl.pause();
               cancelTime = true;
             });
           },
@@ -233,6 +234,7 @@ class _VideoState extends State<Video> {
           child: Text('PLAY'),
           onPressed: () {
             setState(() {
+              circulatTimerControl.resume();
               if (_controller!.value.isPlaying) {
                 _controller!.pause();
               } else {

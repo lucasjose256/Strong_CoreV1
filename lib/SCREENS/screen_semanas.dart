@@ -1,7 +1,9 @@
 import 'package:expansion_card/expansion_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:strong_core/MODELS/card_expansivel_semana.dart';
 import 'package:strong_core/MODELS/card_semana_model.dart';
+import 'package:strong_core/MODELS/lista_semanas.dart';
 
 import '../main.dart';
 
@@ -106,9 +108,8 @@ class Semanas extends StatelessWidget {
 
   Container buildSemanas() {
     return Container(
-      margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-      child: ListView(
-        children: [
+        margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+        child: ListView(children: [
           ExpansionCard(
             borderRadius: 30,
             background:
@@ -184,11 +185,22 @@ class Semanas extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
+          CartaoSemanas(
+              cor: Color.fromARGB(255, 187, 82, 82), title: 'SEMANA 0'),
+
+          SizedBox(
+            height: 20,
+          ),
+
           CardSemanas(
             title: 'SEMANA 3',
           ),
-        ],
-      ),
-    );
+
+          /*  Column(
+              children: LISTASEMANAS
+                  .map((e) =>
+                      CartaoSemanas(cor: e.backGroundColor, title: e.titulo))
+                  .toList()),*/
+        ]));
   }
 }
