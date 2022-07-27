@@ -101,7 +101,13 @@ class Semanas extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Comfortaa')),
         ),
-        body: buildSemanas(),
+        body: SingleChildScrollView(
+          child: Column(
+              children: LISTASEMANAS
+                  .map((e) =>
+                      CartaoSemanas(cor: e.backGroundColor, title: e.titulo))
+                  .toList()),
+        ),
       ),
     );
   }

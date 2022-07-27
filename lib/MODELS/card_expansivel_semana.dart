@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
+import 'package:strong_core/MODELS/video_model.dart';
 
 class CartaoSemanas extends StatefulWidget {
   @override
@@ -13,12 +15,22 @@ class CartaoSemanas extends StatefulWidget {
 
 class _CartaoSemanasState extends State<CartaoSemanas> {
   String TapToExpandIt = 'SEMANA 4';
-  String Sentence = 'Widgets that have global keys reparent their subtrees when'
-      ' they are moved from one location in the tree to another location in the'
-      ' tree. In order to reparent its subtree, a widget must arrive at its new';
+  String Sentence = 'EXERCICIOS DA SEMANA:\n'
+      '3X PRANCHA(30s)\n'
+      '3X ABDOMINAL(30s)\n'
+      '3X FLEXÃO(30s)';
   bool isExpanded = true;
   bool isExpanded2 = true;
+//flags para checkbox
+  bool isChecked = false;
+  bool isChecked1 = false;
+  bool isChecked2 = false;
+  bool isChecked3 = false;
+  bool isChecked4 = false;
+  bool isChecked5 = false;
+  bool isChecked6 = false;
 
+  int stepBarControll = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,23 +74,24 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                       Text(
                         widget.title,
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w400,
-                        ),
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Comfortaa'),
                       ),
                       SizedBox(
                         width: 15,
                       ),
-                      Icon(Icons.lock_sharp, size: 50),
+                      //Icon(Icons.lock_sharp, size: 50),
                     ],
                   ),
                   Icon(
+                    //desaparecer a flecha se a semana estiver travada
                     isExpanded
                         ? Icons.keyboard_arrow_down
                         : Icons.keyboard_arrow_up,
                     color: Colors.white,
-                    size: 27,
+                    size: 30,
                   ),
                 ],
               ),
@@ -93,11 +106,52 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                 secondChild: Column(
                   children: [
                     Text(
-                      Sentence,
+                      'EXERCÍCIOS DA SEMANA:',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15.7,
-                      ),
+                          color: Colors.white,
+                          fontSize: 20,
+                          backgroundColor: Colors.black),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //mainAxisSize: MainAxisSize.values[2],
+                      //mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          ' PROGRESSO ',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    StepProgressIndicator(
+                      totalSteps: 5,
+                      currentStep: 4,
+                      size: 36,
+                      selectedColor: Colors.black,
+                      unselectedColor: Colors.grey,
+                      customStep: (index, color, _) => color == Colors.black
+                          ? Container(
+                              color: color,
+                              child: Icon(
+                                Icons.check,
+                                color: Colors.white,
+                              ),
+                            )
+                          : Container(
+                              color: color,
+                              child: Icon(
+                                Icons.remove,
+                              ),
+                            ),
                     ),
                     SizedBox(
                       height: 10,
@@ -111,7 +165,11 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                       ),
                       color: Colors.purple,
                       onPressed: () {
-                        print('hello');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Video(20),
+                            ));
                       },
                     )
                   ],
@@ -123,6 +181,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                 reverseDuration: Duration.zero,
                 sizeCurve: Curves.fastLinearToSlowEaseIn,
               ),
+              // MaterialButton(onPressed: () {})
             ],
           ),
         ),
