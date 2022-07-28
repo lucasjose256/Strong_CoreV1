@@ -64,7 +64,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
               Radius.circular(isExpanded ? 20 : 20),
             ),
           ),
-          child: ListView(
+          child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -96,11 +96,15 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                 ],
               ),
               isExpanded ? SizedBox() : SizedBox(height: 20),
+
               AnimatedCrossFade(
-                firstChild: Text(
-                  '',
-                  style: TextStyle(
-                    fontSize: 0,
+                firstCurve: Curves.fastLinearToSlowEaseIn,
+                firstChild: SingleChildScrollView(
+                  child: Text(
+                    '',
+                    style: TextStyle(
+                      fontSize: 0,
+                    ),
                   ),
                 ),
                 secondChild: Column(
@@ -132,26 +136,37 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                     SizedBox(
                       height: 15,
                     ),
-                    StepProgressIndicator(
-                      totalSteps: 5,
-                      currentStep: 4,
-                      size: 36,
-                      selectedColor: Colors.black,
-                      unselectedColor: Colors.grey,
-                      customStep: (index, color, _) => color == Colors.black
-                          ? Container(
-                              color: color,
-                              child: Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              ),
-                            )
-                          : Container(
-                              color: color,
-                              child: Icon(
-                                Icons.remove,
-                              ),
-                            ),
+                    Row(
+                      children: [
+                        ConstrainedBox(
+                          constraints: BoxConstraints(maxWidth: 300),
+                          child: StepProgressIndicator(
+                            //stepCrossAxisAlignment: CrossAxisAlignment.start,
+                            //   crossAxisAlignment: CrossAxisAlignment.start,
+                            totalSteps: 5,
+                            currentStep: 3,
+                            size: 36,
+                            selectedColor: Colors.black,
+                            unselectedColor: Colors.grey,
+                            customStep: (indexs, color2, _) =>
+                                color2 == Colors.black
+                                    ? Container(
+                                        color: color2,
+                                        child: Icon(
+                                          Icons.check,
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : Container(
+                                        width: 10,
+                                        color: color2,
+                                        child: Icon(
+                                          Icons.remove,
+                                        ),
+                                      ),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 10,
