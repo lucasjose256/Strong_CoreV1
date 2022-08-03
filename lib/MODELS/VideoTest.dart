@@ -10,6 +10,7 @@ class TelaEspera extends StatefulWidget {
 
 class _TelaEsperaState extends State<TelaEspera> {
   Color? color = Color.fromARGB(255, 114, 114, 114);
+  int tamRelogio = 5;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,8 +19,8 @@ class _TelaEsperaState extends State<TelaEspera> {
             duration: 10,
             initialDuration: 0,
             controller: CountDownController(),
-            width: MediaQuery.of(context).size.width / 5,
-            height: MediaQuery.of(context).size.height / 5,
+            width: MediaQuery.of(context).size.width / tamRelogio,
+            height: MediaQuery.of(context).size.height / tamRelogio,
             ringColor: Colors.grey[300]!,
             ringGradient: null,
             fillColor: color!,
@@ -58,6 +59,7 @@ class _TelaEsperaState extends State<TelaEspera> {
                 if (timeStamp.toString() == '3') {
                   setState(() {
                     build(context);
+                    tamRelogio = 4;
                     color = Colors.red;
                   });
                 }

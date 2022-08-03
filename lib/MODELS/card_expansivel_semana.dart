@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:strong_core/MODELS/video_model.dart';
+import 'package:intl/intl.dart';
 
 class CartaoSemanas extends StatefulWidget {
   @override
@@ -33,6 +34,9 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
   int stepBarControll = 0;
   @override
   Widget build(BuildContext context) {
+    if (isExpanded) {
+      setState(() {});
+    }
     return Container(
       child: InkWell(
         highlightColor: Colors.transparent,
@@ -82,7 +86,10 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                       SizedBox(
                         width: 15,
                       ),
-                      //Icon(Icons.lock_sharp, size: 50),
+                      Text(DateFormat.Hms().format(DateTime.now())),
+                      /*   isExpanded
+                          ? Icon(Icons.lock_sharp, size: 50)
+                          : Icon(Icons.lock_sharp, size: 20),*/
                     ],
                   ),
                   Icon(
@@ -96,7 +103,6 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                 ],
               ),
               isExpanded ? SizedBox() : SizedBox(height: 20),
-
               AnimatedCrossFade(
                 firstCurve: Curves.fastLinearToSlowEaseIn,
                 firstChild: SingleChildScrollView(
@@ -137,6 +143,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                       height: 15,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ConstrainedBox(
                           constraints: BoxConstraints(maxWidth: 300),
@@ -144,10 +151,10 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                             //stepCrossAxisAlignment: CrossAxisAlignment.start,
                             //   crossAxisAlignment: CrossAxisAlignment.start,
                             totalSteps: 5,
-                            currentStep: 3,
+                            currentStep: stepBarControll,
                             size: 36,
                             selectedColor: Colors.black,
-                            unselectedColor: Colors.grey,
+                            unselectedColor: Color.fromARGB(255, 194, 183, 183),
                             customStep: (indexs, color2, _) =>
                                 color2 == Colors.black
                                     ? Container(
@@ -178,7 +185,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                         'I N I C I A R ',
                         style: TextStyle(color: Colors.white),
                       ),
-                      color: Colors.purple,
+                      color: Colors.black87,
                       onPressed: () {
                         Navigator.push(
                             context,
@@ -186,6 +193,22 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                               builder: (context) => Video(20),
                             ));
                       },
+                    ),
+                    MaterialButton(
+                      child: Icon(
+                        Icons.plus_one_outlined,
+                        size: 20,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          stepBarControll++;
+                          if (stepBarControll == 6) {
+                            stepBarControll = 0;
+                          }
+                        });
+                      },
+                      color: Color.fromARGB(255, 98, 92, 84),
                     )
                   ],
                 ),
@@ -196,7 +219,6 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                 reverseDuration: Duration.zero,
                 sizeCurve: Curves.fastLinearToSlowEaseIn,
               ),
-              // MaterialButton(onPressed: () {})
             ],
           ),
         ),
