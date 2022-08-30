@@ -193,19 +193,13 @@ class _VideoState extends State<Video> {
                           circulatTimerControl.start();
                         });
                       if (flag == 2) {
+                        atualVid = nomeVid[1];
+                        _controller = VideoPlayerController.network(atualVid);
+
+                        _controller!.setLooping(true);
+                        _controller!.initialize().then((_) => setState(() {}));
+                        _controller!.play();
                         setState(() {
-                          atualVid = nomeVid[1];
-                          _controller = VideoPlayerController.network(atualVid);
-
-                          _controller!.addListener(() {
-                            setState(() {});
-                          });
-                          _controller!.setLooping(true);
-                          _controller!
-                              .initialize()
-                              .then((_) => setState(() {}));
-                          _controller!.play();
-
                           flag = 0;
                           circulatTimerControl.reset();
                           circulatTimerControl.start();
