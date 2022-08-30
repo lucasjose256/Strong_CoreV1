@@ -16,7 +16,7 @@ class _TelaEsperaState extends State<TelaEspera> {
     return Scaffold(
       body: Center(
         child: CircularCountDownTimer(
-            duration: 10,
+            duration: 3,
             initialDuration: 0,
             controller: CountDownController(),
             width: MediaQuery.of(context).size.width / tamRelogio,

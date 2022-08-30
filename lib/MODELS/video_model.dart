@@ -9,10 +9,11 @@ import 'package:video_player/video_player.dart';
 
 class Video extends StatefulWidget {
   int time;
-  Video(this.time);
+  List<String> nomeVideos;
 
+  Video(this.time, this.nomeVideos);
   @override
-  State<Video> createState() => _VideoState(time);
+  State<Video> createState() => _VideoState(time, nomeVideos);
 }
 
 class _VideoState extends State<Video> {
@@ -22,9 +23,11 @@ class _VideoState extends State<Video> {
   Future<void>? _initializePlayer;
   int flag = 0;
   int tempo;
+  List<String> nomeVid;
   CountDownController circulatTimerControl = CountDownController();
-  _VideoState(this.tempo);
 
+  _VideoState(this.tempo, this.nomeVid);
+  late String atualVid = nomeVid[0];
   void carregarBarra() {
     Timer.periodic(const Duration(seconds: 1), (timer) {
       if (porcent < 1 && !(cancelTime)) {
@@ -53,8 +56,7 @@ class _VideoState extends State<Video> {
 
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4');
+    _controller = VideoPlayerController.network(atualVid);
 
     _controller!.addListener(() {
       setState(() {});
@@ -82,6 +84,7 @@ class _VideoState extends State<Video> {
 
   @override
   Widget build(BuildContext context) {
+    int i = 0;
     return Scaffold(
       body: Column(children: [
         const SizedBox(
@@ -148,7 +151,7 @@ class _VideoState extends State<Video> {
               Positioned(
                 left: 300,
                 child: CircularCountDownTimer(
-                    duration: 10,
+                    duration: 6,
                     initialDuration: 0,
                     controller: circulatTimerControl,
                     width: MediaQuery.of(context).size.width / 8.8,
@@ -189,13 +192,29 @@ class _VideoState extends State<Video> {
                           circulatTimerControl.reset();
                           circulatTimerControl.start();
                         });
+                      if (flag == 2) {
+                        setState(() {
+                          atualVid = nomeVid[1];
+                          _controller = VideoPlayerController.network(atualVid);
+
+                          _controller!.addListener(() {
+                            setState(() {});
+                          });
+                          _controller!.setLooping(true);
+                          _controller!
+                              .initialize()
+                              .then((_) => setState(() {}));
+                          _controller!.play();
+
+                          flag = 0;
+                          circulatTimerControl.reset();
+                          circulatTimerControl.start();
+                        });
+                      }
 
                       debugPrint('Countdown Ended');
                     },
-                    onChange: (String timeStamp) {
-                      debugPrint('flag: $flag');
-                      debugPrint('Countdown Changed $timeStamp');
-                    }),
+                    onChange: (String timeStamp) {}),
               )
             ])),
         const SizedBox(

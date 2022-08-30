@@ -1,5 +1,6 @@
 import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
+import 'package:strong_core/MODELS/VideoTest.dart';
 import 'package:strong_core/MODELS/video_model.dart';
 
 class CardSemanas extends StatefulWidget {
@@ -119,8 +120,8 @@ class _CardSemanasState extends State<CardSemanas> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Video(20),
-                    ));
+                        builder: (context) => TelaEspera() //Video(20,),
+                        ));
               },
               child: const Text('Começar'),
               // shape: CircleBorder(side: ),

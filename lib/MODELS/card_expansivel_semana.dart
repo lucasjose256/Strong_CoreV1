@@ -34,6 +34,10 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
   int stepBarControll = 0;
   @override
   Widget build(BuildContext context) {
+    List<String> nomeVideos = [
+      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+      'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+    ];
     if (isExpanded) {
       setState(() {});
     }
@@ -190,7 +194,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Video(20),
+                              builder: (context) => Video(20, nomeVideos),
                             ));
                       },
                     ),
