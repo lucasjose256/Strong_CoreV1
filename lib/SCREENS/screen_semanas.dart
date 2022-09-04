@@ -103,10 +103,12 @@ class Semanas extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Column(
-              children: LISTASEMANAS
-                  .map((e) =>
-                      CartaoSemanas(cor: e.backGroundColor, title: e.titulo))
-                  .toList()),
+              children: LISTASEMANAS.map((e) {
+            if (e.backGroundColor == Colors.orange) {
+              return CartaoSemanas(cor: Colors.black, title: 'ddddddddddd');
+            }
+            return CartaoSemanas(cor: e.backGroundColor, title: e.titulo);
+          }).toList()),
         ),
       ),
     );

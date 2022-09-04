@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:strong_core/style/add_pop_up_card.dart';
@@ -12,6 +14,7 @@ class CorpoHumano extends StatefulWidget {
 class _CorpoHumanoState extends State<CorpoHumano> {
   @override
   Widget build(BuildContext context) {
+    Stack dataCorpo;
     return Scaffold(
       /*  appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -30,7 +33,8 @@ class _CorpoHumanoState extends State<CorpoHumano> {
           const SizedBox(
             height: 20,
           ),
-          Stack(alignment: AlignmentDirectional.centerStart, children: [
+          dataCorpo =
+              Stack(alignment: AlignmentDirectional.centerStart, children: [
             Image.asset('Assets/images/corpoHumano.png'),
             Positioned(
                 right: 138,
@@ -69,7 +73,13 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                 ))*/
           ]),
           MaterialButton(
-            onPressed: () {
+            onPressed: () async {
+              await FirebaseFirestore.instance
+                  .collection('user')
+                  .doc(FirebaseAuth.instance.currentUser!.displayName!)
+                  .collection('Corpo HUmano')
+                  .add({'Anaminese': 'sasasasasasa'});
+
               Navigator.of(context).push(
                 MaterialPageRoute(
                     builder: (constect) => const Semanas(),
