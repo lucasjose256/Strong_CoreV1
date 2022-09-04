@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify/spotify.dart';
 import 'package:strong_core/MODELS/VideoTest.dart';
@@ -85,6 +87,8 @@ class _VideoState extends State<Video> {
   @override
   Widget build(BuildContext context) {
     int i = 0;
+    var user = FirebaseAuth.instance.currentUser;
+
     return Scaffold(
       body: Column(children: [
         const SizedBox(
@@ -233,9 +237,21 @@ class _VideoState extends State<Video> {
             style: TextStyle(color: Colors.white),
           ),
           onPressed: () {
-            setState(() {
+            setState(() async {
               circulatTimerControl.pause();
-              cancelTime = true;
+              DocumentReference documentReference = FirebaseFirestore.instance
+                  .collection('user')
+                  .doc(user!.displayName);
+
+              await documentReference.update(
+                  {'EXERCICIO ${flag}': circulatTimerControl.getTime()});
+
+              flag += (await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TelaEspera(),
+                  )))!;
+              circulatTimerControl.start();
             });
           },
           color: const Color.fromARGB(255, 183, 183, 183),

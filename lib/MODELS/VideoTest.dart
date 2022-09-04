@@ -1,4 +1,5 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class TelaEspera extends StatefulWidget {
@@ -11,6 +12,7 @@ class TelaEspera extends StatefulWidget {
 class _TelaEsperaState extends State<TelaEspera> {
   Color? color = Color.fromARGB(255, 114, 114, 114);
   int tamRelogio = 5;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

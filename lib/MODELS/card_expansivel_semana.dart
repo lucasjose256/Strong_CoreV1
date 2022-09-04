@@ -90,7 +90,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                       SizedBox(
                         width: 15,
                       ),
-                      Text(DateFormat.Hms().format(DateTime.now())),
+                      // Text(DateFormat.Hms().format(DateTime.now())),
                       /*   isExpanded
                           ? Icon(Icons.lock_sharp, size: 50)
                           : Icon(Icons.lock_sharp, size: 20),*/
@@ -154,7 +154,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                           child: StepProgressIndicator(
                             //stepCrossAxisAlignment: CrossAxisAlignment.start,
                             //   crossAxisAlignment: CrossAxisAlignment.start,
-                            totalSteps: 5,
+                            totalSteps: 3,
                             currentStep: stepBarControll,
                             size: 36,
                             selectedColor: Colors.black,
@@ -207,7 +207,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                       onPressed: () {
                         setState(() {
                           stepBarControll++;
-                          if (stepBarControll == 6) {
+                          if (stepBarControll == 4) {
                             stepBarControll = 0;
                           }
                         });

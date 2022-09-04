@@ -118,7 +118,8 @@ class _QuestionState extends State<Question> {
           logOut();
           Navigator.of(context).push(
             MaterialPageRoute(
-                builder: (constect) => const MyHomePage(), settings: const RouteSettings()),
+                builder: (constect) => const MyHomePage(),
+                settings: const RouteSettings()),
           );
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
@@ -365,9 +366,9 @@ class _QuestionState extends State<Question> {
             child: MaterialButton(
               color: const Color.fromARGB(255, 24, 117, 43),
               shape: const CircleBorder(),
-              onPressed: () /* async*/ {
+              onPressed: () /* async*/ async {
                 //Criando um document no firebase em 'user'
-                /* DocumentReference documentReference = FirebaseFirestore.instance
+                DocumentReference documentReference = FirebaseFirestore.instance
                     .collection('user')
                     .doc(user!.displayName);
                 await documentReference.set({
@@ -378,7 +379,7 @@ class _QuestionState extends State<Question> {
                   'Lotado em': answer3,
                   'estado': answer4,
                   'cidade': answer5,
-                });*/
+                });
                 Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (constect) => const CorpoHumano(),
