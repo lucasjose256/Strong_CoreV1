@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:strong_core/style/add_pop_up_card.dart';
 
@@ -12,6 +15,7 @@ class CorpoHumano extends StatefulWidget {
 }
 
 class _CorpoHumanoState extends State<CorpoHumano> {
+  Uint8List? bytes;
   @override
   Widget build(BuildContext context) {
     Stack dataCorpo;
@@ -28,52 +32,23 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                   fontFamily: 'Comfortaa')),
         ),
       ),*/
-      body: Column(
+      body: ListView(
         children: [
           const SizedBox(
             height: 20,
           ),
-          dataCorpo =
-              Stack(alignment: AlignmentDirectional.centerStart, children: [
-            Image.asset('Assets/images/corpoHumano.png'),
-            Positioned(
-                right: 138,
-                top: 75,
-                child: AddTodoButton(number: '1', numberId: '')),
-            Positioned(
-                right: 138,
-                top: 130,
-                child: AddTodoButton(number: '2', numberId: '')),
-            Positioned(
-                right: 138,
-                top: 177,
-                child: AddTodoButton(number: '3', numberId: '')),
-            Positioned(
-                right: 138,
-                top: 211,
-                child: AddTodoButton(number: '4', numberId: '')),
-            Positioned(
-                right: 138,
-                top: 247,
-                child: AddTodoButton(number: '5', numberId: '')),
-            Positioned(
-                right: 79,
-                top: 90,
-                child: AddTodoButton(number: '6', numberId: '1')),
-            Positioned(
-                right: 200,
-                top: 90,
-                child: AddTodoButton(number: '6', numberId: '2')),
-            /* Positioned(
-                right: 5,
-                top: 90,
-                child: AddTodoButtonDouble(
-                  numberId: '',
-                  number: '8',
-                ))*/
-          ]),
+          buildCorpo(),
+          const SizedBox(
+            height: 20,
+          ),
+          if (bytes != null) Container(child: Image.memory(bytes!)),
           MaterialButton(
             onPressed: () async {
+              final controller = ScreenshotController();
+              final bytes = await controller
+                  .captureFromWidget(Material(child: buildCorpo()));
+              setState(() => this.bytes = bytes);
+
               await FirebaseFirestore.instance
                   .collection('user')
                   .doc(FirebaseAuth.instance.currentUser!.displayName!)
@@ -94,6 +69,43 @@ class _CorpoHumanoState extends State<CorpoHumano> {
         ],
       ),
     );
+  }
+
+  Stack buildCorpo() {
+    return Stack(alignment: AlignmentDirectional.centerStart, children: [
+      Image.asset('Assets/images/corpoHumano.png'),
+      Positioned(
+          right: 138, top: 75, child: AddTodoButton(number: '1', numberId: '')),
+      Positioned(
+          right: 138,
+          top: 130,
+          child: AddTodoButton(number: '2', numberId: '')),
+      Positioned(
+          right: 138,
+          top: 177,
+          child: AddTodoButton(number: '3', numberId: '')),
+      Positioned(
+          right: 138,
+          top: 211,
+          child: AddTodoButton(number: '4', numberId: '')),
+      Positioned(
+          right: 138,
+          top: 247,
+          child: AddTodoButton(number: '5', numberId: '')),
+      Positioned(
+          right: 79, top: 90, child: AddTodoButton(number: '6', numberId: '1')),
+      Positioned(
+          right: 200,
+          top: 90,
+          child: AddTodoButton(number: '6', numberId: '2')),
+      /* Positioned(
+              right: 5,
+              top: 90,
+              child: AddTodoButtonDouble(
+                numberId: '',
+                number: '8',
+              ))*/
+    ]);
   }
 }
 /*
