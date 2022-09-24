@@ -21,6 +21,7 @@ class AddTodoButton extends StatefulWidget {
   final String? number;
   late Color? newColor = Colors.yellow;
   String numberId = '';
+  late String graudaDor;
   AddTodoButton({this.number, this.newColor, required this.numberId});
 
   @override
@@ -40,17 +41,18 @@ class _AddTodoButtonState extends State<AddTodoButton> {
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
             onTap: () async {
-              Color tempColor = await Navigator.push(
+              Map temp = await Navigator.push(
                   context,
                   HeroDialogRoute(
                       builder: (context) => AddTodoPopupCard(
                             nome: widget.number! + widget.numberId,
                           ),
-                      settings: const RouteSettings(arguments: null, name: null)));
+                      settings:
+                          const RouteSettings(arguments: null, name: null)));
               // settings: RouteSettings(arguments: null, name: null)
-
+              widget.graudaDor = temp["numero"];
               setState(() {
-                widget.newColor = tempColor;
+                widget.newColor = temp["color"];
               });
             },
             child: Hero(
@@ -59,8 +61,8 @@ class _AddTodoButtonState extends State<AddTodoButton> {
                 return CustomRectTween(begin: begin!, end: end!);
               },
               child: Material(
-                color: widget
-                        .newColor ?? Colors.grey, //Provider.of<newColorForCard>(context)._color,
+                color: widget.newColor ??
+                    Colors.grey, //Provider.of<newColorForCard>(context)._color,
                 elevation: 2,
                 shape: const CircleBorder(),
                 child: Padding(
@@ -158,7 +160,7 @@ class AddTodoPopupCard extends StatelessWidget {
   }
 
   MaterialButton MarcarRegiao(
-      String num, String nome, Color? color, BuildContext context) {
+      String numero, String nome, Color? color, BuildContext context) {
     return MaterialButton(
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -171,7 +173,7 @@ class AddTodoPopupCard extends StatelessWidget {
               radius: 13,
               backgroundColor: color,
               child: Text(
-                num,
+                numero,
                 style: const TextStyle(color: Colors.white),
               ),
             ),
@@ -188,7 +190,7 @@ class AddTodoPopupCard extends StatelessWidget {
         /* Provider.of<newColorForCard>(context, listen: false)
             .changeColor(color, true);*/
         //Mandar para o servidor
-        Navigator.pop(context, color);
+        Navigator.pop(context, {"color": color, "numero": numero});
       },
     );
   }
