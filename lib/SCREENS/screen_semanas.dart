@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expansion_card/expansion_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:strong_core/MODELS/card_expansivel_semana.dart';
-import 'package:strong_core/MODELS/card_semana_model.dart';
+import 'package:strong_core/MODELS/cartao_bloqueado.dart';
+
 import 'package:strong_core/MODELS/lista_semanas.dart';
 
 import '../main.dart';
@@ -13,6 +15,7 @@ class Semanas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
+    DateTime? horario;
     onRefrash(userCreed) {
       user = userCreed;
     }
@@ -104,9 +107,24 @@ class Semanas extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
               children: LISTASEMANAS.map((e) {
-            if (e.backGroundColor == Colors.orange) {
-              return CartaoSemanas(cor: Colors.black, title: 'ddddddddddd');
+            var horaDeInInicio = FirebaseFirestore.instance
+                .collection('user')
+                .doc(FirebaseAuth.instance.currentUser!.displayName!)
+                .get()
+                .then((value) {
+              DateTime horario = value['HORARIO_PRIMEIRO_ACESSO'];
+              print(horario);
+            });
+
+            //  print(horaDeInInicio['HORARIO_PRIMEIRO_ACESSO']);
+            if (e.backGroundColor == Color.fromARGB(255, 68, 181, 206)) {
+              return CartaoBloqueado(cor: e.backGroundColor, title: e.titulo);
             }
+            if (horario?.compareTo(DateTime.now()) != null) {
+              return CartaoSemanas(
+                  cor: Colors.black, title: '5455555555555555');
+            }
+            
             return CartaoSemanas(cor: e.backGroundColor, title: e.titulo);
           }).toList()),
         ),
@@ -200,9 +218,9 @@ class Semanas extends StatelessWidget {
             height: 20,
           ),
 
-          CardSemanas(
+          /*  CardSemanas(
             title: 'SEMANA 3',
-          ),
+          ),*/
 
           /*  Column(
               children: LISTASEMANAS
