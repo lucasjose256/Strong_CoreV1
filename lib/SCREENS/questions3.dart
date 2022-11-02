@@ -7,88 +7,50 @@ import 'package:strong_core/SCREENS/corpo_humano.dart';
 import 'package:strong_core/main.dart';
 
 //Configurar um tamanho dinâmico para o dropDownButton
-class Question extends StatefulWidget {
+class Question3 extends StatefulWidget {
   // final Function(User) onSingOut;
-  Question();
+  Question3();
 
   @override
-  State<Question> createState() => _QuestionState();
+  State<Question3> createState() => _Question3State();
 }
 
-class _QuestionState extends State<Question> {
+class _Question3State extends State<Question3> {
   var user = FirebaseAuth.instance.currentUser;
   CollectionReference questionData =
       FirebaseFirestore.instance.collection('user');
 
-  onRefrash(userCreed) {
-    setState(() {
-      user = userCreed;
-    });
-  }
-
-  late TextSelectionControls tex;
-  final items1 = ['Bombeiro Militar', 'Policial Militar'];
+  final items1 = [
+    'Dores Oteomusculares',
+    'Entorse Articular',
+    'Fratura Óssea',
+    'Enxaqueca',
+  ];
   String? answer1;
+
   final items2 = [
-    'Soldado 2ª classe',
-    'Cadete',
-    'Soldado 1ª classe',
-    'Aluno oficial',
-    'Cabo',
-    '3º Sargento',
-    '2º Sargento',
-    '1 º Sargento',
+    'Sim',
+    'Não',
   ];
   String? answer2;
 
-  final items3 = ['Cargo  administrativo', 'Cargo operacional'];
-  String? answer3;
-
-  String? answer6;
-  final items4 = [
-    'Nenhum dia',
-    'Um dia',
-    'Dois sias',
-    'Três dias',
-    'Quatro dias',
-    'Cinco Dias ou +',
+  final items3 = [
+    'Nenhum estresse',
+    'Estresse abaixo do normal',
+    'Estresse normal',
+    'Estresse acima do normal',
+    'Estresse extremamente elevado',
   ];
-  String? answer4;
-  TextEditingController c = TextEditingController();
-  Widget buildDateAdmissao() => TextFormField(
-        keyboardType: TextInputType.datetime,
-        decoration: const InputDecoration(
-            focusColor: Colors.red,
-            // labelText: 'Date de Admissão',
-            border: OutlineInputBorder(),
-            hintText: 'dd/mm/aaaa'),
-        onChanged: (value) {
-          if (value.length == 2) {
-            setState(() {
-              //    c.value= '${value}';
-            });
-            print('foiiiiiiiiii');
-          }
-        },
-        // controller: _nome,
-      );
-  Future<void> logOut() async {
-    await FirebaseAuth.instance.signOut();
-    onRefrash(null);
-  }
+  String? answer3;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      /*  addRepaintBoundaries: false,
-        shrinkWrap: false,
-        addAutomaticKeepAlives: false,
-        addSemanticIndexes: false,*/
       // primary: false,//MOSTRA UMA COR AO TENTAR MOVER A LIST VIEW
       children: [
         ////////////////////////////////////////////1
-        /* const Text(
-          'Você é?',
+        const Text(
+          'Nos últimos 12 meses você foi diagnosticado com algum desses problemas de saúde?',
           style: TextStyle(
             fontFamily: 'Comfortaa',
             fontSize: 19,
@@ -104,7 +66,7 @@ class _QuestionState extends State<Question> {
             width: 300,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: Colors.black, width: 1)),
+                border: Border.all(color: Colors.black, width: 0.7)),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
                 focusColor: Colors.red,
@@ -118,13 +80,13 @@ class _QuestionState extends State<Question> {
               ),
             ),
           ),
-        ),*/
+        ),
         //////////////////////////////////////////////////////////2
         const SizedBox(
           height: 25,
         ),
         const Text(
-          'Posto ou Graduação',
+          'Nos últimos 7 dias quantos dias você dormiu o suficiente, sentindo-se descansado pela manhã?',
           style: TextStyle(
             fontFamily: 'Comfortaa',
             fontSize: 19,
@@ -156,12 +118,13 @@ class _QuestionState extends State<Question> {
             ),
           ),
         ),
-        //////////////////////////////////3
+
         const SizedBox(
           height: 25,
         ),
+
         const Text(
-          'Você está lotado em:',
+          'Nos últimos 6 meses como você classifica o seu estresse geral?*',
           style: TextStyle(
             fontFamily: 'Comfortaa',
             fontSize: 19,
@@ -169,7 +132,7 @@ class _QuestionState extends State<Question> {
           textAlign: TextAlign.center,
         ),
         const SizedBox(
-          height: 8,
+          height: 25,
         ),
         Center(
           child: Container(
@@ -180,6 +143,7 @@ class _QuestionState extends State<Question> {
                 border: Border.all(color: Colors.black, width: 0.7)),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
+                itemHeight: 70,
                 focusColor: Colors.red,
                 isExpanded: true,
                 dropdownColor: Colors.red[200],
@@ -192,61 +156,6 @@ class _QuestionState extends State<Question> {
             ),
           ),
         ),
-
-        const SizedBox(
-          height: 25,
-        ),
-        const Text(
-          'Data de admissão',
-          style: TextStyle(
-            fontFamily: 'Comfortaa',
-            fontSize: 19,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Center(
-            child: Container(
-          child: buildDateAdmissao(),
-          width: 300,
-        )),
-
-        /*   const Text(
-            'No último mês, durante o horário de plantão quantos dias' +
-                'você foi instruído a realizar exercício físico para melhorar a performance ? ',
-            style: TextStyle(
-              fontFamily: 'Comfortaa',
-              fontSize: 19,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Center(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              width: 300,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(color: Colors.black, width: 1)),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  focusColor: Colors.red,
-                  isExpanded: true,
-                  dropdownColor: Colors.red[200],
-                  value: answer7,
-                  items: items7.map(buildMenuItem).toList(),
-                  onChanged: (value) => setState(() {
-                    this.answer7 = value;
-                  }),
-                ),
-              ),
-            ),
-          ),
-*/
       ],
     );
   }
@@ -260,21 +169,19 @@ DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
       ),
     );
 //floating action button
-
-/*
-DocumentReference documentReference = FirebaseFirestore.instance
-                  .collection('user')
-                  .doc(user!.displayName);
-              await documentReference.set({
-                'cargo': answer1,
-                'Posto': answer2,
-                'Lotado em': answer3,
-                'estado': answer4,
-                'cidade': answer5,
-              });
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (constect) => const CorpoHumano(),
-                    settings: const RouteSettings()),
-              );
-            },*/
+DropdownMenuItem<String> buildMenuItemWithOptions(String item) =>
+    DropdownMenuItem(
+      value: item,
+      child: Column(
+        children: [
+          Text(
+            item,
+            style: const TextStyle(fontSize: 14),
+          ),
+          Row(
+            children: [Checkbox(value: false, onChanged: ((value) => true))],
+          ),
+        ],
+      ),
+    );
+//floating action button

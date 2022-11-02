@@ -22,6 +22,7 @@ class Semanas extends StatelessWidget {
 
     Future<void> logOut() async {
       await FirebaseAuth.instance.signOut();
+
       onRefrash(null);
     }
 
@@ -124,7 +125,7 @@ class Semanas extends StatelessWidget {
               return CartaoSemanas(
                   cor: Colors.black, title: '5455555555555555');
             }
-            
+
             return CartaoSemanas(cor: e.backGroundColor, title: e.titulo);
           }).toList()),
         ),

@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 import 'package:strong_core/SCREENS/basic_questions.dart';
 import 'package:strong_core/SCREENS/corpo_humano.dart';
+import 'package:strong_core/SCREENS/forms.dart';
 import 'package:strong_core/SCREENS/questions.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:strong_core/SCREENS/sing_up_Page.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
 
 // Assign widget based on availability of currentUser
     if (firebaseUser != null) {
-      firstWidget = BasicQuestions(); // Question();
+      firstWidget = Forms(); //Question();
     } else {
       firstWidget = MyHomePage();
     }

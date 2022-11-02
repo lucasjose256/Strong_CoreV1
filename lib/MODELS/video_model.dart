@@ -244,6 +244,7 @@ class _VideoState extends State<Video> {
                   .doc(user!.displayName);
 
               await documentReference.update(
+                  //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                   {'EXERCICIO ${flag}': circulatTimerControl.getTime()});
 
               flag += (await Navigator.push(

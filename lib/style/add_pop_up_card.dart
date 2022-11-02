@@ -36,49 +36,59 @@ class _AddTodoButtonState extends State<AddTodoButton> {
     //  bool flag = false;
 
     return ChangeNotifierProvider(
-      create: (context) => newColorForCard(),
-      child: Padding(
+        create: (context) => newColorForCard(),
+        child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
-            onTap: () async {
-              Map temp = await Navigator.push(
-                  context,
-                  HeroDialogRoute(
-                      builder: (context) => AddTodoPopupCard(
-                            nome: widget.number! + widget.numberId,
-                          ),
-                      settings:
-                          const RouteSettings(arguments: null, name: null)));
-              // settings: RouteSettings(arguments: null, name: null)
-              widget.graudaDor = temp["numero"];
-              setState(() {
-                widget.newColor = temp["color"];
-              });
-            },
-            child: Hero(
-              tag: _heroAddTodo + '${widget.number}' + widget.numberId,
-              createRectTween: (begin, end) {
-                return CustomRectTween(begin: begin!, end: end!);
+              onTap: () async {
+                Map temp = await Navigator.push(
+                    context,
+                    HeroDialogRoute(
+                        builder: (context) => AddTodoPopupCard(
+                              nome: widget.number! + widget.numberId,
+                            ),
+                        settings:
+                            const RouteSettings(arguments: null, name: null)));
+                // settings: RouteSettings(arguments: null, name: null)
+                widget.graudaDor = temp["numero"];
+                setState(() {
+                  widget.newColor = temp["color"];
+                });
               },
-              child: Material(
-                color: widget.newColor ??
-                    Colors.grey, //Provider.of<newColorForCard>(context)._color,
-                elevation: 2,
-                shape: const CircleBorder(),
-                child: Padding(
-                  padding: const EdgeInsets.all(7.0),
-                  child: Text(
-                    widget.number!,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 22,
-                    ),
+              child: Hero(
+                tag: _heroAddTodo + '${widget.number}' + widget.numberId,
+                createRectTween: (begin, end) {
+                  return CustomRectTween(begin: begin!, end: end!);
+                },
+                child: Material(
+                  color: widget.newColor ??
+                      Colors
+                          .grey, //Provider.of<newColorForCard>(context)._color,
+                  elevation: 2,
+                  shape: const CircleBorder(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(7.0),
+                    child: widget.number!.length == 2
+                        ? Text(
+                            widget.number!,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                            ),
+                          )
+                        : Text(
+                            widget.number!,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                            ),
+                          ),
                   ),
                 ),
-              ),
-            ),
-          )),
-    );
+              )),
+        ));
   }
 }
 
