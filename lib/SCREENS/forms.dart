@@ -87,7 +87,39 @@ class _FormsState extends State<Forms> {
                 });
               }),
         // type: StepperType.horizontal,
-
+        controlsBuilder: (BuildContext context, ControlsDetails details) {
+          return Row(
+            children: <Widget>[
+              stepCounter == stepsList().length - 1
+                  ? Expanded(
+                      child: MaterialButton(
+                        onPressed: details.onStepContinue,
+                        child: const Text(
+                          'ENVIAR',
+                          style: TextStyle(color: Colors.red, fontSize: 15),
+                        ),
+                      ),
+                    )
+                  : Expanded(
+                      child: MaterialButton(
+                          onPressed: details.onStepContinue,
+                          child: const Text(
+                            'PROXIMO',
+                            style: TextStyle(color: Colors.red, fontSize: 15),
+                          )),
+                    ),
+              Expanded(
+                child: MaterialButton(
+                  onPressed: details.onStepCancel,
+                  child: const Text(
+                    'VOLTAR',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
         currentStep: stepCounter,
         type: StepperType.horizontal,
       ),

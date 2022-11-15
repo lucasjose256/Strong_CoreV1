@@ -24,14 +24,6 @@ class _BasicQuestionsState extends State<BasicQuestions> {
   @override
   Widget build(BuildContext context) {
     final TextEditingController _nome = TextEditingController();
-    Widget buildName() => TextFormField(
-          decoration: const InputDecoration(
-            focusColor: Colors.red,
-            labelText: 'Nome Completo',
-            border: OutlineInputBorder(),
-          ),
-          // controller: _nome,
-        );
 
     return Column(
       //padding: const EdgeInsets.only(left: 12),
@@ -51,7 +43,14 @@ class _BasicQuestionsState extends State<BasicQuestions> {
           children: [
             Container(
               width: 300,
-              child: buildName(),
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  focusColor: Colors.red,
+                  labelText: 'Nome Completo',
+                  border: OutlineInputBorder(),
+                ),
+                // controller: _nome,
+              ),
             ),
             const SizedBox(
               width: 10,
@@ -217,4 +216,12 @@ DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
 
 Widget builllll() => Container(
       child: const Text('dsadsad'),
+    );
+Widget buildName() => TextFormField(
+      decoration: const InputDecoration(
+        focusColor: Colors.red,
+        labelText: 'Nome Completo',
+        border: OutlineInputBorder(),
+      ),
+      // controller: _nome,
     );

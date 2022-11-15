@@ -29,8 +29,13 @@ class _Question3State extends State<Question3> {
   String? answer1;
 
   final items2 = [
-    'Sim',
-    'Não',
+    'Nenhum dia',
+    'Um dia',
+    'Dois sias',
+    'Três dias',
+    'Quatro dias',
+    'Cinco dias',
+    'Seis dias ou mais'
   ];
   String? answer2;
 

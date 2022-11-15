@@ -11,6 +11,7 @@ import 'package:strong_core/SCREENS/forms.dart';
 import 'package:strong_core/SCREENS/questions.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:strong_core/SCREENS/sing_up_Page.dart';
+import 'package:strong_core/notifier/colors2.dart';
 import 'package:strong_core/style/add_pop_up_card.dart';
 
 import 'API/google_sign_in.dart';
@@ -19,7 +20,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider(create: (_) => Cor2(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

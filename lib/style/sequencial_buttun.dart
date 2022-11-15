@@ -2,9 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:strong_core/SCREENS/corpo_humano.dart';
+import 'package:strong_core/style/add_pop_up_card.dart';
 
 import 'package:strong_core/style/custom_rect_tween.dart';
 
+import '../notifier/colors.dart';
+import '../notifier/colors2.dart';
 import 'hero_dialog_route.dart';
 
 /// {@template add_todo_button}
@@ -14,35 +18,41 @@ import 'hero_dialog_route.dart';
 ///
 /// Uses a [Hero] with tag [_heroAddTodo].
 /// {@endtemplate}
-class AddTodoButton extends StatefulWidget {
+class AddTodoButtonSeq extends StatefulWidget {
   /// {@macro add_todo_button}
   ///
 
   final String? number; //number o fbuttun
-  Color? newColor = Colors.grey;
+  late Color? newColor = null;
   String numberId = ''; //if the buttun has a duplicate
   late String graudaDor;
   final String nomeMembro;
-  final onChange;
-  // ignore: avoid_init_to_null
-  AddTodoButton({
-    this.onChange,
+  final AddTodoButton? botaoEsqDir;
+  final onchange;
+  final Colors? tela1;
+  AddTodoButtonSeq({
+    this.tela1,
+    this.newColor,
+    this.botaoEsqDir,
     this.number,
     required this.nomeMembro,
     required this.numberId,
+    this.onchange,
   });
 
   @override
-  State<AddTodoButton> createState() => _AddTodoButtonState();
+  State<AddTodoButtonSeq> createState() => _AddTodoButtonSeqState();
 }
 
-class _AddTodoButtonState extends State<AddTodoButton> {
+class _AddTodoButtonSeqState extends State<AddTodoButtonSeq> {
   @override
   Widget build(BuildContext context) {
+    final corProvider = Provider.of<Cor1>(context);
+    final cor2Provider = Provider.of<Cor1>(context);
+    //final cor2Provider = Provider.of<Cor2>(context);
     // widget.newColor=Navigator.of(context).push();
     //Color? newButtunColor = Provider.of<newColorForCard>(context).color;
     //  bool flag = false;
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
@@ -58,13 +68,25 @@ class _AddTodoButtonState extends State<AddTodoButton> {
                     settings:
                         const RouteSettings(arguments: null, name: null)));
             // settings: RouteSettings(arguments: null, name: null)
-
             widget.graudaDor = temp["numero"];
-            setState(() {
-              //    widget.newColor = Colors.purple;
-              // widget.onChange(temp["color"]);
-              widget.newColor = temp["color"];
-            });
+            corProvider.changeColor(temp["color"]);
+/*
+            Map temp2 = await Navigator.push(
+                context,
+                HeroDialogRoute(
+                    builder: (context) => AddTodoPopupCard(
+                          nome: widget.botaoEsqDir!.number! +
+                              widget.botaoEsqDir!.numberId,
+                          nomeMembro: widget.botaoEsqDir!.nomeMembro,
+                          esqDir: widget.botaoEsqDir!.numberId,
+                        ),
+                    settings:
+                        const RouteSettings(arguments: null, name: null)));
+
+            // widget.botaoEsqDir!.graudaDor = temp2["color"];
+            // corProvider.changeColor(temp2["color"]);
+            //widget.newColor = temp2["color"];
+            widget.botaoEsqDir!.graudaDor = temp2["numero"];*/
           },
           child: Hero(
             tag: _heroAddTodo + '${widget.number}' + widget.numberId,
@@ -72,7 +94,7 @@ class _AddTodoButtonState extends State<AddTodoButton> {
               return CustomRectTween(begin: begin!, end: end!);
             },
             child: Material(
-              color: widget.newColor, // ?? Colors.grey,
+              color: corProvider.cor ?? Colors.grey,
               elevation: 2,
               shape: const CircleBorder(),
               child: Padding(

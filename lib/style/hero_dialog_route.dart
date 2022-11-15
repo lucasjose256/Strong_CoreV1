@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 /// {@template hero_dialog_route}
@@ -24,7 +23,7 @@ class HeroDialogRoute<T> extends PageRoute<T> {
   bool get barrierDismissible => true;
 
   @override
-  Duration get transitionDuration => const Duration(milliseconds: 250);
+  Duration get transitionDuration => const Duration(milliseconds: 300); //250
 
   @override
   bool get maintainState => true;

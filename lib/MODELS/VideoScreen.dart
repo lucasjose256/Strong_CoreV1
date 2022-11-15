@@ -1,64 +1,45 @@
-import 'dart:async';
-
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:spotify/spotify.dart';
-import 'package:strong_core/MODELS/VideoTest.dart';
-import 'package:strong_core/SCREENS/corpo_humano.dart';
 import 'package:video_player/video_player.dart';
 
-class Video extends StatefulWidget {
-  int time;
-  List<String> nomeVideos;
+import 'VideoTest.dart';
 
-  Video(this.time, this.nomeVideos);
+class VideoScreen extends StatefulWidget {
+  final int tempo;
+  final String url;
+  final String nomeExercicio;
+  final int loop;
+
+  VideoScreen(
+      {Key? key,
+      required this.tempo,
+      required this.url,
+      required this.nomeExercicio,
+      required this.loop})
+      : super(key: key);
+
   @override
-  State<Video> createState() => _VideoState(time, nomeVideos);
+  State<VideoScreen> createState() =>
+      _VideoScreenState(tempo, url, nomeExercicio, loop);
 }
 
-class _VideoState extends State<Video> {
-  bool cancelTime = false;
-  double porcent = 0;
-  VideoPlayerController? _controller;
+class _VideoScreenState extends State<VideoScreen> {
   Future<void>? _initializePlayer;
+  final int tempo;
+  final String url;
+  final String nomeExercicio;
+  final int loop;
   int flag = 0;
-  int tempo;
-  List<String> nomeVid;
+  VideoPlayerController? _controller;
   CountDownController circulatTimerControl = CountDownController();
 
-  _VideoState(this.tempo, this.nomeVid);
-  late String atualVid = nomeVid[0];
-  void carregarBarra() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (porcent < 1 && !(cancelTime)) {
-        setState(() {
-          tempo--;
-          // porcent += 0.034;
-          porcent += ((1) / widget.time);
-        });
-      } else if ((cancelTime)) {
-        setState(() {
-          porcent = porcent;
-          tempo = tempo;
-          timer.cancel();
-          cancelTime = false;
-        });
-      } else {
-        setState(() {
-          tempo = 0;
-          porcent = 0;
-          timer.cancel();
-          tempo = widget.time;
-        });
-      }
-    });
-  }
+  _VideoScreenState(this.tempo, this.url, this.nomeExercicio, this.loop);
 
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(atualVid);
+    _controller = VideoPlayerController.network(url);
 
     _controller!.addListener(() {
       if (mounted) setState(() {});
@@ -75,20 +56,9 @@ class _VideoState extends State<Video> {
     super.dispose();
   }
 
-  Future<void> spotifyTest() async {
-    final credentials = SpotifyApiCredentials(
-        '4b5e568fadb2498789b4d712ce5c87ef', '93e891e4f16a4dc780dcefd252026671');
-    final spotify = SpotifyApi(credentials);
-    final artist =
-        await spotify.artists.get('4b5e568fadb2498789b4d712ce5c87ef');
-    print(artist.name);
-  }
-
   @override
   Widget build(BuildContext context) {
-    int i = 0;
     var user = FirebaseAuth.instance.currentUser;
-    int flag2 = 0;
     return Scaffold(
       body: Column(children: [
         const SizedBox(
@@ -102,35 +72,6 @@ class _VideoState extends State<Video> {
             const SizedBox(
               width: 50,
             ),
-            SizedBox(
-              width: 250,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: SizedBox(
-                  height: 18,
-                  child: LinearProgressIndicator(
-                    color: Colors.greenAccent,
-                    value: porcent, // percent filled
-                    valueColor: const AlwaysStoppedAnimation<Color>(
-                        Color.fromARGB(255, 27, 27, 27)),
-                    backgroundColor: const Color.fromARGB(129, 167, 166, 166),
-                  ),
-                ),
-              ),
-            ),
-            /*  Padding(
-              padding: EdgeInsets.all(15.0),
-              child: LinearPercentIndicator(
-                width: MediaQuery.of(context).size.width - 200,
-                animation: true,
-                lineHeight: 20.0,
-                animationDuration: 2000,
-                //animationDuration: 2000,
-                percent: porcent,
-                linearStrokeCap: LinearStrokeCap.roundAll,
-                progressColor: Color.fromARGB(255, 9, 10, 10),
-              ),
-            ),*/
             const SizedBox(
               width: 5,
             ),
@@ -185,56 +126,33 @@ class _VideoState extends State<Video> {
                     onComplete: () async {
                       //  circulatTimerControl.reset();
                       //  circulatTimerControl.reset();
-                      flag2 += flag += (await Navigator.push(
+                      flag += (await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => TelaEspera(),
                           )))!;
-                      if (flag > 2) flag2++;
-                      if (flag == 1 || flag == 2)
+                      if (flag == loop - 1) {
+                        if (mounted)
+                          setState(() {
+                            Navigator.pop(
+                              context,
+                            );
+                          });
+                      }
+                      if (flag < loop)
                         setState(() {
                           // circulatTimerControl.restart(duration: 10);
                           circulatTimerControl.reset();
                           circulatTimerControl.start();
                         });
-                      if (flag == 3) {
-                        if (mounted)
-                          setState(() {
-                            atualVid = nomeVid[1];
-                            _controller =
-                                VideoPlayerController.network(atualVid);
-                          });
-
-                        _controller!.setLooping(true);
-                        _controller!.initialize().then((_) => setState(() {}));
-                        _controller!.setVolume(0);
-                        _controller!.play();
-                        flag = 0;
-                        flag2++;
-                        circulatTimerControl.reset();
-                        circulatTimerControl.start();
-                      }
 
                       debugPrint('Countdown Ended');
-                      if (flag >= 3 && flag2 >= 3) {
-                        Navigator.pop(context);
-                      }
                     },
                     onChange: (String timeStamp) {}),
               )
             ])),
         const SizedBox(
           height: 20,
-        ),
-        MaterialButton(
-          child: const Text(
-            'I N I C I A R',
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            carregarBarra();
-          },
-          color: Colors.black,
         ),
         const SizedBox(
           height: 10,
@@ -254,7 +172,7 @@ class _VideoState extends State<Video> {
 
                 await documentReference.update(
                     //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
-                    {'EXERCICIO ${flag}': circulatTimerControl.getTime()});
+                    {'EXERCICIO{flag}': circulatTimerControl.getTime()});
 
                 flag += (await Navigator.push(
                     context,

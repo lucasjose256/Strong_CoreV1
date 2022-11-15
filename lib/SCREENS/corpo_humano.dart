@@ -5,11 +5,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
+import 'package:strong_core/notifier/colors.dart';
 import 'package:strong_core/style/add_pop_up_card.dart';
 import 'package:intl/intl.dart';
+import 'package:strong_core/style/botao_duplo.dart';
 import 'package:strong_core/style/sequencial_buttun.dart';
+
+import '../notifier/colors2.dart';
 
 class CorpoHumano extends StatefulWidget {
   const CorpoHumano({Key? key}) : super(key: key);
@@ -44,7 +49,9 @@ class _CorpoHumanoState extends State<CorpoHumano> {
     Stack dataCorpo;
     AddTodoButton pescoco1;
     AddTodoButton pescoco2;
-    AddTodoButton ombroDir = new AddTodoButton(
+    Color color = Colors.black;
+
+    AddTodoButton ombroDir = AddTodoButton(
       number: '6',
       numberId: 'DIR',
       nomeMembro: 'na região do ombro DIREITO',
@@ -52,7 +59,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
     AddTodoButton ombroEsq;
 
     AddTodoButton regiaoCervical1;
-    ;
+
     AddTodoButton;
     AddTodoButton costasSuperior2;
     AddTodoButton costasMedia3;
@@ -61,7 +68,6 @@ class _CorpoHumanoState extends State<CorpoHumano> {
     AddTodoButton;
     AddTodoButton;
     AddTodoButton;
-
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context);
@@ -105,6 +111,11 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                       numberId: '',
                       nomeMembro: 'na região das costas média',
                     )),
+                Container(
+                  child: Text('sssssssssssssss'),
+                  width: 266,
+                  color: ombroDir.newColor,
+                ),
                 /*  Positioned(
                     right: 79,
                     top: 90,
@@ -121,23 +132,45 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                       numberId: 'ESQ',
                       nomeMembro: 'na região do ombro ESQUERDO',
                     )),*/
-
-                Positioned(right: 230, top: 175, child: ombroDir),
+                ChangeNotifierProvider<Cor1>(
+                    create: (context) => Cor1(), child: BotaoDuplo()),
+                // Positioned(right: 230, top: 175, child: ombroDir),
+                /* Positioned(
+                  right: 48,
+                  top: 175,
+                  child: ChangeNotifierProvider<Cor1>(
+                    create: ((context) => Cor1()),
+                    child: AddTodoButtonSeq(
+                      botaoEsqDir: ombroDir,
+                      nomeMembro: 'na região do ombro ESQUERDO',
+                      number: '6',
+                      numberId: 'ESQ',
+                      onchange: (newvalue) {
+                        setState(() {
+                          ombroDir.newColor = newvalue;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: 230,
+                  top: 175,
+                  child: ChangeNotifierProvider<Cor1>(
+                      create: ((context) => Cor1()),
+                      child: AddTodoButtonSeq(
+                        botaoEsqDir: ombroDir,
+                        nomeMembro: 'na região do ombro ',
+                        number: '6-',
+                        numberId: 'DIR',
+                      )),
+                ),
+*/
                 /*  AddTodoButton(
                   number: '6',
                   numberId: 'ESQ',
                   nomeMembro: 'na região do ombro ESQUERDO',
                 ),*/
-                Positioned(
-                  right: 48,
-                  top: 175,
-                  child: AddTodoButtonSeq(
-                    nomeMembro: 'na região do ombro ESQUERDO',
-                    number: '6',
-                    numberId: 'ESQ',
-                    botaoEsqDir: ombroDir,
-                  ),
-                )
 
                 /*
                 Positioned(
@@ -218,14 +251,17 @@ class _CorpoHumanoState extends State<CorpoHumano> {
             const SizedBox(
               height: 20,
             ),
+            /* MaterialButton(
+                onPressed: (() => setState(() {})), child: Text('atualizar')),*/
             MaterialButton(
               minWidth: 100,
               padding: EdgeInsets.only(top: 8, bottom: 8),
               color: ui.Color.fromARGB(255, 202, 43, 32),
               onPressed: () async {
-                final controller = ScreenshotController();
-
-                await FirebaseFirestore.instance
+                setState(() {
+                  ombroDir.newColor = Colors.purple;
+                });
+                /*  await FirebaseFirestore.instance
                     .collection('user')
                     .doc(FirebaseAuth.instance.currentUser!.displayName!)
                     .set({
@@ -249,12 +285,12 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                   '_HORARIO_PRIMEIRO_ACESSO':
                       DateFormat.yMMMEd().format(DateTime.now())*/
                 });
-
-                Navigator.of(context).push(
+*/
+                /* Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (constect) => const Semanas(),
                       settings: const RouteSettings()),
-                );
+                );*/
               },
               child: Text(
                 'Finalizar',

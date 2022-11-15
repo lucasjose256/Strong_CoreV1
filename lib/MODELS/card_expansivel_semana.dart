@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+import 'package:strong_core/MODELS/VideoScreen.dart';
 import 'package:strong_core/MODELS/video_model.dart';
 import 'package:intl/intl.dart';
 
@@ -38,6 +39,23 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
       'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
     ];
+    List<VideoScreen> videos = [
+      VideoScreen(
+          tempo: 20,
+          url:
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+          nomeExercicio: 'borboleta',
+          loop: 3) //Video(20, nomeVideos),
+      ,
+      VideoScreen(
+          tempo: 10,
+          url:
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+          nomeExercicio: 'abelha',
+          loop: 3) //Video(20, nomeVideos),
+      ,
+    ];
+
     if (isExpanded) {
       setState(() {});
     }
@@ -191,11 +209,10 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                       ),
                       color: Colors.black87,
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Video(20, nomeVideos),
-                            ));
+                        videos.forEach((element) {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => element));
+                        });
                       },
                     ),
                     MaterialButton(

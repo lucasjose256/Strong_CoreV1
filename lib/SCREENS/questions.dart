@@ -30,14 +30,23 @@ class _QuestionState extends State<Question> {
   final items1 = ['Bombeiro Militar', 'Policial Militar'];
   String? answer1;
   final items2 = [
-    'Soldado 2ª classe',
-    'Cadete',
-    'Soldado 1ª classe',
-    'Aluno oficial',
+    'Soldado 2º Classe',
+    'Soldado 1º Clase',
     'Cabo',
     '3º Sargento',
     '2º Sargento',
-    '1 º Sargento',
+    '1º Sargento',
+    'Subtenente',
+    'Cadete 1º ano',
+    'Cadete 2º ano',
+    'Cadete 3º ano',
+    'Aspirante à Oficial',
+    '2º Tenente',
+    '1º Tenente',
+    'Capitão',
+    'Major',
+    'Tenente Coronel',
+    'Coronel'
   ];
   String? answer2;
 
@@ -51,7 +60,7 @@ class _QuestionState extends State<Question> {
     'Dois sias',
     'Três dias',
     'Quatro dias',
-    'Cinco Dias ou +',
+    'Cinco Dias ou mais',
   ];
   String? answer4;
   TextEditingController c = TextEditingController();
@@ -61,7 +70,7 @@ class _QuestionState extends State<Question> {
             focusColor: Colors.red,
             // labelText: 'Date de Admissão',
             border: OutlineInputBorder(),
-            hintText: 'dd/mm/aaaa'),
+            hintText: 'mm/aaaa'),
         onChanged: (value) {
           if (value.length == 2) {
             setState(() {

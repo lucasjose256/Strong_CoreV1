@@ -26,109 +26,106 @@ class Semanas extends StatelessWidget {
       onRefrash(null);
     }
 
-    return SafeArea(
-      child: Scaffold(
-        drawer: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(241, 186, 30, 22),
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      user!.displayName!,
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                    SizedBox(
-                      height: 6,
-                    ),
-                    user != null
-                        ? CircleAvatar(
-                            radius: 45,
-                            backgroundImage: NetworkImage(user!.photoURL!),
-                          )
-                        : Container(
-                            color: Colors.pink,
-                          )
-                  ],
-                ),
+    return Scaffold(
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(241, 186, 30, 22),
               ),
-              ListTile(
-                leading: Icon(Icons.question_mark),
-                title: Text('Ajuda'),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
+              child: Column(
+                children: [
+                  Text(
+                    user!.displayName!,
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  user != null
+                      ? CircleAvatar(
+                          radius: 45,
+                          backgroundImage: NetworkImage(user!.photoURL!),
+                        )
+                      : Container(
+                          color: Colors.pink,
+                        )
+                ],
               ),
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: const Text('Configurações'),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.exit_to_app),
-                title: const Text('Sair'),
-                onTap: () {
-                  logOut();
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (constect) => const MyHomePage(),
-                        settings: const RouteSettings()),
-                  );
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-            ],
-          ),
+            ),
+            ListTile(
+              leading: Icon(Icons.question_mark),
+              title: Text('Ajuda'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: const Text('Configurações'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: const Text('Sair'),
+              onTap: () {
+                logOut();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (constect) => const MyHomePage(),
+                      settings: const RouteSettings()),
+                );
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
         ),
-        appBar: AppBar(
-          //   automaticallyImplyLeading: false,
+      ),
+      appBar: AppBar(
+        //   automaticallyImplyLeading: false,
 
-          centerTitle: true,
-          // foregroundColor: Colors.orange,
-          backgroundColor: Colors.red[800],
-          title: const Text('Strong Core',
-              style: TextStyle(
-                  fontSize: 21,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Comfortaa')),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-              children: LISTASEMANAS.map((e) {
-            var horaDeInInicio = FirebaseFirestore.instance
-                .collection('user')
-                .doc(FirebaseAuth.instance.currentUser!.displayName!)
-                .get()
-                .then((value) {
-              DateTime horario = value['HORARIO_PRIMEIRO_ACESSO'];
-              print(horario);
-            });
+        centerTitle: true,
+        // foregroundColor: Colors.orange,
+        backgroundColor: Colors.red[800],
+        title: const Text('Strong Core',
+            style: TextStyle(
+                fontSize: 21,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Comfortaa')),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+            children: LISTASEMANAS.map((e) {
+          var horaDeInInicio = FirebaseFirestore.instance
+              .collection('user')
+              .doc(FirebaseAuth.instance.currentUser!.displayName!)
+              .get()
+              .then((value) {
+            DateTime horario = value['HORARIO_PRIMEIRO_ACESSO'];
+            print(horario);
+          });
 
-            //  print(horaDeInInicio['HORARIO_PRIMEIRO_ACESSO']);
-            if (e.backGroundColor == Color.fromARGB(255, 68, 181, 206)) {
-              return CartaoBloqueado(cor: e.backGroundColor, title: e.titulo);
-            }
-            if (horario?.compareTo(DateTime.now()) != null) {
-              return CartaoSemanas(
-                  cor: Colors.black, title: '5455555555555555');
-            }
+          //  print(horaDeInInicio['HORARIO_PRIMEIRO_ACESSO']);
+          if (e.backGroundColor == Color.fromARGB(255, 68, 181, 206)) {
+            return CartaoBloqueado(cor: e.backGroundColor, title: e.titulo);
+          }
+          if (horario?.compareTo(DateTime.now()) != null) {
+            return CartaoSemanas(cor: Colors.black, title: '5455555555555555');
+          }
 
-            return CartaoSemanas(cor: e.backGroundColor, title: e.titulo);
-          }).toList()),
-        ),
+          return CartaoSemanas(cor: e.backGroundColor, title: e.titulo);
+        }).toList()),
       ),
     );
   }
