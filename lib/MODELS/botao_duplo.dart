@@ -55,9 +55,6 @@ class _BotaoDuploState extends State<BotaoDuplo> {
       height: 60,
       child: Row(
         children: [
-          CircleAvatar(
-            backgroundColor: Colors.blue,
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
@@ -74,22 +71,23 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                               arguments: null, name: null)));
                   // settings: RouteSettings(arguments: null, name: null)
 
-                  ombroDir.graudaDor = temp["numero"];
                   corProvider.changeColor(temp["color"]);
+                  ombroDir.graudaDor = temp["numero"];
+                  if (cor2Provider.cor == null) {
+                    Map temp2 = await Navigator.push(
+                        context,
+                        HeroDialogRoute(
+                            builder: (context) => AddTodoPopupCard(
+                                  nome: ombroEsq.number! + ombroEsq.numberId,
+                                  nomeMembro: ombroEsq.nomeMembro,
+                                  esqDir: ombroEsq.numberId,
+                                ),
+                            settings: const RouteSettings(
+                                arguments: null, name: null)));
 
-                  Map temp2 = await Navigator.push(
-                      context,
-                      HeroDialogRoute(
-                          builder: (context) => AddTodoPopupCard(
-                                nome: ombroEsq.number! + ombroEsq.numberId,
-                                nomeMembro: ombroEsq.nomeMembro,
-                                esqDir: ombroEsq.numberId,
-                              ),
-                          settings: const RouteSettings(
-                              arguments: null, name: null)));
-
-                  ombroEsq.graudaDor = temp2["numero"];
-                  cor2Provider.changeColor(temp2["color"]);
+                    ombroEsq.graudaDor = temp2["numero"];
+                    cor2Provider.changeColor(temp2["color"]);
+                  }
                 },
                 child: Hero(
                   tag: _heroAddTodo + '${ombroDir.number}' + ombroDir.numberId,
@@ -97,7 +95,7 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                     return CustomRectTween(begin: begin!, end: end!);
                   },
                   child: Material(
-                    color: corProvider.cor ?? Colors.pink, // ?? Colors.grey,
+                    color: corProvider.cor ?? Colors.grey, // ?? Colors.grey,
                     elevation: 2,
                     shape: const CircleBorder(),
                     child: Padding(
@@ -147,8 +145,24 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                               arguments: null, name: null)));
                   // settings: RouteSettings(arguments: null, name: null)
 
-                  //ombroDir.graudaDor = temp3["numero"];
+                  ombroEsq.graudaDor = temp3["numero"];
                   cor2Provider.changeColor(temp3["color"]);
+
+                  if (corProvider.cor == null) {
+                    Map temp4 = await Navigator.push(
+                        context,
+                        HeroDialogRoute(
+                            builder: (context) => AddTodoPopupCard(
+                                  nome: ombroDir.number! + ombroDir.numberId,
+                                  nomeMembro: ombroDir.nomeMembro,
+                                  esqDir: ombroDir.numberId,
+                                ),
+                            settings: const RouteSettings(
+                                arguments: null, name: null))) as Map;
+
+                    corProvider.changeColor(temp4["color"]);
+                    ombroDir.graudaDor = temp4["numero"];
+                  }
                 },
                 child: Hero(
                   tag: _heroAddTodo + '${ombroEsq.number}' + ombroEsq.numberId,
@@ -156,7 +170,7 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                     return CustomRectTween(begin: begin!, end: end!);
                   },
                   child: Material(
-                    color: cor2Provider.cor ?? Colors.pink, // ?? Colors.grey,
+                    color: cor2Provider.cor ?? Colors.grey, // ?? Colors.grey,
                     elevation: 2,
                     shape: const CircleBorder(),
                     child: Padding(
