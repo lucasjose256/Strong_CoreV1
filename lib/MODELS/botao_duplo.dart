@@ -9,7 +9,7 @@ import 'package:strong_core/style/add_pop_up_card.dart';
 import 'package:strong_core/style/custom_rect_tween.dart';
 
 import '../notifier/colors.dart';
-import 'hero_dialog_route.dart';
+import '../style/hero_dialog_route.dart';
 
 /// {@template add_todo_button}
 /// Button to add a new [Todo].
@@ -126,6 +126,11 @@ class _BotaoDuploState extends State<BotaoDuplo> {
           SizedBox(
             width: 50,
           ),
+          /////////////////////////////////////
+          /////////////////////////////
+          ///
+          ///
+          ///
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(

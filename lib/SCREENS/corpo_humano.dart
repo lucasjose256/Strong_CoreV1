@@ -11,8 +11,8 @@ import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:strong_core/notifier/colors.dart';
 import 'package:strong_core/style/add_pop_up_card.dart';
 import 'package:intl/intl.dart';
-import 'package:strong_core/style/botao_duplo.dart';
-import 'package:strong_core/style/sequencial_buttun.dart';
+import 'package:strong_core/MODELS/botao_duplo.dart';
+import 'package:strong_core/MODELS/sequencial_buttun.dart';
 
 import '../notifier/colors2.dart';
 
@@ -132,8 +132,11 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                       numberId: 'ESQ',
                       nomeMembro: 'na região do ombro ESQUERDO',
                     )),*/
-                ChangeNotifierProvider<Cor1>(
-                    create: (context) => Cor1(), child: BotaoDuplo()),
+                ChangeNotifierProvider<Cor2>(
+                  create: (context) => Cor2(),
+                  child: ChangeNotifierProvider<Cor1>(
+                      create: (context) => Cor1(), child: BotaoDuplo()),
+                ),
                 // Positioned(right: 230, top: 175, child: ombroDir),
                 /* Positioned(
                   right: 48,

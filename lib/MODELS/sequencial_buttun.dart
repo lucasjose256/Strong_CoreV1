@@ -9,7 +9,7 @@ import 'package:strong_core/style/custom_rect_tween.dart';
 
 import '../notifier/colors.dart';
 import '../notifier/colors2.dart';
-import 'hero_dialog_route.dart';
+import '../style/hero_dialog_route.dart';
 
 /// {@template add_todo_button}
 /// Button to add a new [Todo].
