@@ -39,6 +39,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
       'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
     ];
+    int i = 0;
     List<VideoScreen> videos = [
       VideoScreen(
           tempo: 20,
@@ -52,7 +53,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
           url:
               'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
           nomeExercicio: 'abelha',
-          loop: 3) //Video(20, nomeVideos),
+          loop: 4) //Video(20, nomeVideos),
       ,
     ];
 
@@ -208,11 +209,13 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                         style: TextStyle(color: Colors.white),
                       ),
                       color: Colors.black87,
-                      onPressed: () {
-                        videos.forEach((element) {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => element));
-                        });
+                      onPressed: () async {
+                        for (var element in videos) {
+                          await Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return element;
+                          }));
+                        }
                       },
                     ),
                     MaterialButton(
