@@ -283,7 +283,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                   'DIA_SEMANA 1': 0,
                   '_HORARIO_PRIMEIRO_ACESSO':
                       DateFormat.yMMMEd().format(DateTime.now()),
-                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA 1}': null,
+                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_1': null,
                 });
 
                 Navigator.of(context).push(

@@ -15,8 +15,12 @@ class CartaoSemanas extends StatefulWidget {
   @override
   final Color cor;
   final String title;
-
-  const CartaoSemanas({Key? key, required this.cor, required this.title})
+  final int numeroSemana;
+  const CartaoSemanas(
+      {Key? key,
+      required this.cor,
+      required this.title,
+      required this.numeroSemana})
       : super(key: key);
   _CartaoSemanasState createState() => _CartaoSemanasState();
 }
@@ -40,6 +44,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
   DateTime? newdate;
   DateTime? date;
   int stepBarControll = 0;
+
   @override
   Widget build(BuildContext context) {
     List<String> nomeVideos = [
@@ -229,6 +234,21 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                       ),
                       color: Colors.black87,
                       onPressed: () async {
+                        await FirebaseFirestore.instance
+                            .collection('user')
+                            .doc(
+                                FirebaseAuth.instance.currentUser!.displayName!)
+                            .get()
+                            .then((value) {
+                          horario = (value[
+                                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}']
+                              as Timestamp) as DateTime?;
+
+                          dia = value['DIA_SEMANA 1'];
+
+                          print(horario);
+                        });
+
                         //AINDA PRECISA VER SE É O PRIMERO ACESSO DA PESSOA
                         if (horario == null ||
                             DateTime.now().isAfter(horario!)) {
@@ -242,15 +262,29 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                           setState(() {
                             stepBarControll++;
                           });
+
                           await FirebaseFirestore.instance
                               .collection('user')
                               .doc(FirebaseAuth
                                   .instance.currentUser!.displayName!)
-                              .update({
-                            'DIA_${widget.title}': stepBarControll,
-                            '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA 1': horario =
-                                DateTime.now().add(Duration(days: 2)),
+                              .set({
+                            //verificar se o update apaga os dados dos formularios
+                            '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}':
+                                horario = DateTime.now().add(Duration(days: 2)),
                           });
+                          if (stepBarControll == 3) {
+                            //lembrar de verificar para semana 9
+                            await FirebaseFirestore.instance
+                                .collection('user')
+                                .doc(FirebaseAuth
+                                    .instance.currentUser!.displayName!)
+                                .update({
+                              'DIA_${widget.title}': stepBarControll,
+                              '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana + 1}':
+                                  horario =
+                                      DateTime.now().add(Duration(days: 2)),
+                            });
+                          }
                         }
                       },
                     ),

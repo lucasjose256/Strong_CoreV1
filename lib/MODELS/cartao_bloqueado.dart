@@ -8,8 +8,10 @@ class CartaoBloqueado extends StatefulWidget {
   @override
   final Color cor;
   final String title;
+  final int number;
 
-  const CartaoBloqueado({Key? key, required this.cor, required this.title})
+  const CartaoBloqueado(
+      {Key? key, required this.cor, required this.title, required this.number})
       : super(key: key);
   _CartaoBloqueadoState createState() => _CartaoBloqueadoState();
 }

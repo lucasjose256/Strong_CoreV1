@@ -118,13 +118,22 @@ class Semanas extends StatelessWidget {
 
           //  print(horaDeInInicio['HORARIO_PRIMEIRO_ACESSO']);
           if (e.backGroundColor == Color.fromARGB(255, 68, 181, 206)) {
-            return CartaoBloqueado(cor: e.backGroundColor, title: e.titulo);
+            return CartaoBloqueado(
+                cor: e.backGroundColor, title: e.titulo, number: e.numeroSem);
           }
           if (horario?.compareTo(DateTime.now()) != null) {
-            return CartaoSemanas(cor: Colors.black, title: '5455555555555555');
+            return CartaoSemanas(
+              cor: Colors.black,
+              title: '5455555555555555',
+              numeroSemana: e.numeroSem,
+            );
           }
 
-          return CartaoSemanas(cor: e.backGroundColor, title: e.titulo);
+          return CartaoSemanas(
+            cor: e.backGroundColor,
+            title: e.titulo,
+            numeroSemana: e.numeroSem,
+          );
         }).toList()),
       ),
     );
@@ -209,8 +218,8 @@ class Semanas extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          CartaoSemanas(
-              cor: Color.fromARGB(255, 187, 82, 82), title: 'SEMANA 0'),
+          /*  CartaoSemanas(
+              cor: Color.fromARGB(255, 187, 82, 82), title: 'SEMANA 0'),*/
 
           SizedBox(
             height: 20,
