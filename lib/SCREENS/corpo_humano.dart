@@ -8,13 +8,13 @@ import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
-import 'package:strong_core/notifier/colors.dart';
+import 'package:strong_core/provider/colors.dart';
 import 'package:strong_core/style/add_pop_up_card.dart';
 import 'package:intl/intl.dart';
 import 'package:strong_core/MODELS/botao_duplo.dart';
 import 'package:strong_core/MODELS/sequencial_buttun.dart';
 
-import '../notifier/colors2.dart';
+import '../provider/colors2.dart';
 
 class CorpoHumano extends StatefulWidget {
   const CorpoHumano({Key? key}) : super(key: key);
@@ -111,11 +111,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                       numberId: '',
                       nomeMembro: 'na região das costas média',
                     )),
-                Container(
-                  child: Text('sssssssssssssss'),
-                  width: 266,
-                  color: ombroDir.newColor,
-                ),
+
                 /*  Positioned(
                     right: 79,
                     top: 90,
@@ -264,12 +260,11 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                 setState(() {
                   ombroDir.newColor = Colors.purple;
                 });
-                /*  await FirebaseFirestore.instance
+                await FirebaseFirestore.instance
                     .collection('user')
                     .doc(FirebaseAuth.instance.currentUser!.displayName!)
                     .set({
-                  /*
-                  'Regiao_cervical_SEM_0': regiaoCervical1.graudaDor != null
+                  /*'Regiao_cervical_SEM_0': regiaoCervical1.graudaDor != null
                       ? regiaoCervical1.graudaDor
                       : '0',
                   'Costas_superior_SEM_0': costasSuperior2.graudaDor != null
@@ -281,19 +276,21 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                   'Costas_inferior_SEM_0': costasInferior4.graudaDor != null
                       ? costasInferior4.graudaDor
                       : '0',
-                  'Bacia_SEM_0': bacia5.graudaDor,
+                  'Bacia_SEM_0': bacia5.graudaDor,*/
                   /*'SEM_1_pescoço1': pescoco1.graudaDor,
                   'SEM_1_pescoço2': pescoco2.graudaDor,
                   'SEM_1_ombro1': ombro1.graudaDor,*/
+                  'DIA_SEMANA 1': 0,
                   '_HORARIO_PRIMEIRO_ACESSO':
-                      DateFormat.yMMMEd().format(DateTime.now())*/
+                      DateFormat.yMMMEd().format(DateTime.now()),
+                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA 1}': null,
                 });
-*/
-                /* Navigator.of(context).push(
+
+                Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (constect) => const Semanas(),
                       settings: const RouteSettings()),
-                );*/
+                );
               },
               child: Text(
                 'Finalizar',

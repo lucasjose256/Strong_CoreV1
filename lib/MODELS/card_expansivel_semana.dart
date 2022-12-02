@@ -1,9 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:strong_core/MODELS/VideoScreen.dart';
 import 'package:strong_core/MODELS/video_model.dart';
 import 'package:intl/intl.dart';
+import 'package:strong_core/SCREENS/corpo_humano.dart';
+
+import '../provider/check.dart';
 
 class CartaoSemanas extends StatefulWidget {
   @override
@@ -31,7 +37,8 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
   bool isChecked4 = false;
   bool isChecked5 = false;
   bool isChecked6 = false;
-
+  DateTime? newdate;
+  DateTime? date;
   int stepBarControll = 0;
   @override
   Widget build(BuildContext context) {
@@ -40,26 +47,38 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
       'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
     ];
     int i = 0;
-    List<VideoScreen> videos = [
+    List<Widget> videos = [
       VideoScreen(
           tempo: 20,
           url:
               'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
           nomeExercicio: 'borboleta',
-          loop: 3) //Video(20, nomeVideos),
+          loop: 2) //Video(20, nomeVideos),
       ,
       VideoScreen(
           tempo: 10,
           url:
               'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
           nomeExercicio: 'abelha',
-          loop: 4) //Video(20, nomeVideos),
+          loop: 2) //Video(20, nomeVideos),
       ,
     ];
 
     if (isExpanded) {
       setState(() {});
     }
+    DateTime? horario;
+    DateTime? horarioAgora = DateTime.now();
+    int dia;
+    var letsgo = FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.displayName!)
+        .get()
+        .then((value) {
+      horario = value['_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA 1'];
+      dia = value['DIA_SEMANA 1'];
+    });
+
     return Container(
       child: InkWell(
         highlightColor: Colors.transparent,
@@ -210,11 +229,28 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                       ),
                       color: Colors.black87,
                       onPressed: () async {
-                        for (var element in videos) {
-                          await Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return element;
-                          }));
+                        //AINDA PRECISA VER SE É O PRIMERO ACESSO DA PESSOA
+                        if (horario == null ||
+                            DateTime.now().isAfter(horario!)) {
+                          for (var element in videos) {
+                            await Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return element;
+                            }));
+                          }
+
+                          setState(() {
+                            stepBarControll++;
+                          });
+                          await FirebaseFirestore.instance
+                              .collection('user')
+                              .doc(FirebaseAuth
+                                  .instance.currentUser!.displayName!)
+                              .update({
+                            'DIA_${widget.title}': stepBarControll,
+                            '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA 1': horario =
+                                DateTime.now().add(Duration(days: 2)),
+                          });
                         }
                       },
                     ),

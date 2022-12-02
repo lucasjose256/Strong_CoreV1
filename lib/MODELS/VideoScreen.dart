@@ -132,6 +132,7 @@ class _VideoScreenState extends State<VideoScreen> {
                             builder: (context) => TelaEspera(),
                           )))!;
                       if (flag == loop - 1) {
+                        //AQUI TERMINA O EXRCICIO
                         if (mounted)
                           setState(() {
                             Navigator.pop(
@@ -174,11 +175,15 @@ class _VideoScreenState extends State<VideoScreen> {
                     //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                     {'EXERCICIO{flag}': circulatTimerControl.getTime()});
 
-                flag += (await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TelaEspera(),
-                    )))!;
+                if (flag == loop - 1) {
+                  //AQUI TERMINA O EXRCICIO
+                  Navigator.pop(context);
+                } else
+                  flag += (await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TelaEspera(),
+                      )))!;
                 circulatTimerControl.start();
               });
             }

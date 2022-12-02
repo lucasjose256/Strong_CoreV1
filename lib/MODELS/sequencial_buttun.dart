@@ -7,8 +7,8 @@ import 'package:strong_core/style/add_pop_up_card.dart';
 
 import 'package:strong_core/style/custom_rect_tween.dart';
 
-import '../notifier/colors.dart';
-import '../notifier/colors2.dart';
+import '../provider/colors.dart';
+import '../provider/colors2.dart';
 import '../style/hero_dialog_route.dart';
 
 /// {@template add_todo_button}
