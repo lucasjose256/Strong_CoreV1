@@ -240,13 +240,10 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                 FirebaseAuth.instance.currentUser!.displayName!)
                             .get()
                             .then((value) {
-                          horario = (value[
-                                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}']
-                              as Timestamp) as DateTime?;
-
-                          dia = value['DIA_SEMANA 1'];
-
-                          print(horario);
+                          horario =
+                              (value['_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}']
+                                      as Timestamp)
+                                  .toDate();
                         });
 
                         //AINDA PRECISA VER SE É O PRIMERO ACESSO DA PESSOA
@@ -280,7 +277,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                     .instance.currentUser!.displayName!)
                                 .update({
                               'DIA_${widget.title}': stepBarControll,
-                              '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana + 1}':
+                              '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana + 2}':
                                   horario =
                                       DateTime.now().add(Duration(days: 2)),
                             });
@@ -296,6 +293,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                       ),
                       onPressed: () {
                         setState(() {
+                          horario!.subtract(Duration(days: 3));
                           stepBarControll++;
                           if (stepBarControll == 4) {
                             stepBarControll = 0;
