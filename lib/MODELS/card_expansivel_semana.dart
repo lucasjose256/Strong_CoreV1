@@ -44,7 +44,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
   DateTime? newdate;
   DateTime? date;
   int stepBarControll = 0;
-
+  String tempBotao = 'I N I C I A R ';
   @override
   Widget build(BuildContext context) {
     List<String> nomeVideos = [
@@ -55,8 +55,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
     List<Widget> videos = [
       VideoScreen(
           tempo: 20,
-          url:
-              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+          url: 'https://github.com/lucasjose256/video/blob/main/0001-0250.avi',
           nomeExercicio: 'borboleta',
           loop: 2) //Video(20, nomeVideos),
       ,
@@ -229,7 +228,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                       minWidth: 200,
                       height: 50,
                       child: Text(
-                        'I N I C I A R ',
+                        tempBotao,
                         style: TextStyle(color: Colors.white),
                       ),
                       color: Colors.black87,
@@ -269,6 +268,17 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                             '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}':
                                 horario = DateTime.now().add(Duration(days: 2)),
                           });
+
+                          setState(() {
+                            if (horario != null)
+                              tempBotao = horario!
+                                      .difference(DateTime.now())
+                                      .inHours
+                                      .toString() +
+                                  ' HORAS';
+                          });
+
+                          print(tempBotao);
                           if (stepBarControll == 3) {
                             //lembrar de verificar para semana 9
                             await FirebaseFirestore.instance
@@ -293,7 +303,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                       ),
                       onPressed: () {
                         setState(() {
-                          horario!.subtract(Duration(days: 3));
+                          //horario!.subtract(Duration(days: 3));
                           stepBarControll++;
                           if (stepBarControll == 4) {
                             stepBarControll = 0;
