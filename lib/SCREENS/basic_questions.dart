@@ -25,152 +25,154 @@ class _BasicQuestionsState extends State<BasicQuestions> {
   Widget build(BuildContext context) {
     final TextEditingController _nome = TextEditingController();
 
-    return Column(
-      //padding: const EdgeInsets.only(left: 12),
-      children: [
-        SizedBox(
-          height: 20,
-        ),
-        const Text('  Preencha os seguintes campos para continuar',
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                fontFamily: 'Comfortaa')),
-        const SizedBox(
-          height: 30,
-        ),
-        Row(
-          children: [
-            Container(
-              width: 300,
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  focusColor: Colors.red,
-                  labelText: 'Nome Completo',
-                  border: OutlineInputBorder(),
-                ),
-                // controller: _nome,
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-
-            //buildLastName(),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(12),
-              //margin: const EdgeInsets.only(right: 100),
-              width: 160,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(color: Colors.black26)),
-              child: Container(
-                height: 35,
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
+    return Container(
+      child: Column(
+        //padding: const EdgeInsets.only(left: 12),
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          const Text('  Preencha os seguintes campos para continuar',
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'Comfortaa')),
+          const SizedBox(
+            height: 30,
+          ),
+          Row(
+            children: [
+              Container(
+                width: 300,
+                child: TextFormField(
+                  decoration: const InputDecoration(
                     focusColor: Colors.red,
-                    isExpanded: true,
-                    dropdownColor: Colors.red[200],
-                    value: answer,
-                    hint: const Text('Sexo'),
-                    items: items.map(buildMenuItem).toList(),
-                    onChanged: (value) => setState(() {
-                      this.answer = value;
-                    }),
+                    labelText: 'Nome Completo',
+                    border: OutlineInputBorder(),
+                  ),
+                  // controller: _nome,
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+
+              //buildLastName(),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                //margin: const EdgeInsets.only(right: 100),
+                width: 160,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: Colors.black26)),
+                child: Container(
+                  height: 35,
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      focusColor: Colors.red,
+                      isExpanded: true,
+                      dropdownColor: Colors.red[200],
+                      value: answer,
+                      hint: const Text('Sexo'),
+                      items: items.map(buildMenuItem).toList(),
+                      onChanged: (value) => setState(() {
+                        this.answer = value;
+                      }),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          children: [
-            Container(
-              width: 130,
-              child: buildPeso(),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: 130,
-              //margin: const EdgeInsets.only(right: 150),
-              child: buildAltura(),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          children: [
-            Container(
-              width: 200,
-              // margin: const EdgeInsets.only(right: 150),
-              child: buildDate(),
-            ),
-          ],
-        ),
-        /*   SizedBox(
-          height: 30,
-        ),
-        Container(
-          margin: EdgeInsets.only(left: 50, right: 50),
-          child: MaterialButton(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50)),
-            color: Colors.red,
-            child: Text('Continuar'),
-            onPressed: (() {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (constect) => QuestionTEMP(),
-                    settings: const RouteSettings()),
-              );
-            }),
+            ],
           ),
-        )*/
-        /* Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
             children: [
-              MaterialButton(
-                  onPressed: (() {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (constect) => Question(),
-                          settings: const RouteSettings()),
-                    );
-                  }),
-                  child: CircleAvatar(
-                    backgroundColor: Color.fromARGB(255, 221, 88, 85),
-                    child: Icon(
-                      Icons.chevron_left_rounded,
-                      size: 60,
-                      color: Colors.white,
-                    ),
-                    radius: 40,
-                  )),
-            
-                  child: CircleAvatar(
-                    backgroundColor: Color.fromARGB(255, 171, 42, 40),
-                    child: Icon(
-                      Icons.chevron_right_rounded,
-                      size: 60,
-                      color: Colors.white,
-                    ),
-                    radius: 40,
-                  )),*/
-      ],
+              Container(
+                width: 130,
+                child: buildPeso(),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                width: 130,
+                //margin: const EdgeInsets.only(right: 150),
+                child: buildAltura(),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              Container(
+                width: 200,
+                // margin: const EdgeInsets.only(right: 150),
+                child: buildDate(),
+              ),
+            ],
+          ),
+          /*   SizedBox(
+            height: 30,
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 50, right: 50),
+            child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50)),
+              color: Colors.red,
+              child: Text('Continuar'),
+              onPressed: (() {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (constect) => QuestionTEMP(),
+                      settings: const RouteSettings()),
+                );
+              }),
+            ),
+          )*/
+          /* Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                MaterialButton(
+                    onPressed: (() {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (constect) => Question(),
+                            settings: const RouteSettings()),
+                      );
+                    }),
+                    child: CircleAvatar(
+                      backgroundColor: Color.fromARGB(255, 221, 88, 85),
+                      child: Icon(
+                        Icons.chevron_left_rounded,
+                        size: 60,
+                        color: Colors.white,
+                      ),
+                      radius: 40,
+                    )),
+              
+                    child: CircleAvatar(
+                      backgroundColor: Color.fromARGB(255, 171, 42, 40),
+                      child: Icon(
+                        Icons.chevron_right_rounded,
+                        size: 60,
+                        color: Colors.white,
+                      ),
+                      radius: 40,
+                    )),*/
+        ],
+      ),
     );
   }
 }

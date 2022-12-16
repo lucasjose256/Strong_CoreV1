@@ -284,6 +284,23 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                   '_HORARIO_PRIMEIRO_ACESSO':
                       DateFormat.yMMMEd().format(DateTime.now()),
                   '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_1': DateTime.now(),
+                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_2':
+                      DateTime.utc(1900, 1, 9),
+                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_3':
+                      DateTime.utc(1900, 1, 9),
+                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_4':
+                      DateTime.utc(1900, 1, 9),
+                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_5':
+                      DateTime.utc(1900, 1, 9),
+                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_6':
+                      DateTime.utc(1900, 1, 9),
+                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_7':
+                      DateTime.utc(1900, 1, 9),
+                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_8':
+                      DateTime.utc(1900, 1, 9),
+                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_9':
+                      DateTime.utc(1900, 1, 9),
+                  'LUCAS': 'LUCAS',
                 });
 
                 Navigator.of(context).push(

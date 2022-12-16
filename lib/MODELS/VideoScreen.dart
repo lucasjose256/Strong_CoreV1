@@ -96,7 +96,7 @@ class _VideoScreenState extends State<VideoScreen> {
               Positioned(
                 left: 300,
                 child: CircularCountDownTimer(
-                    duration: 3,
+                    duration: 5,
                     initialDuration: 0,
                     controller: circulatTimerControl,
                     width: MediaQuery.of(context).size.width / 8.8,

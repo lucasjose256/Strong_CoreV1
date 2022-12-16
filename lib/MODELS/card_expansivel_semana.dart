@@ -55,7 +55,8 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
     List<Widget> videos = [
       VideoScreen(
           tempo: 20,
-          url: 'https://github.com/lucasjose256/video/blob/main/0001-0250.avi',
+          url:
+              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
           nomeExercicio: 'borboleta',
           loop: 2) //Video(20, nomeVideos),
       ,
@@ -71,7 +72,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
     if (isExpanded) {
       setState(() {});
     }
-    DateTime? horario;
+    DateTime? horario = DateTime.utc(1900, 1, 9);
     DateTime? horarioAgora = DateTime.now();
     int dia;
     var letsgo = FirebaseFirestore.instance
@@ -79,7 +80,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
         .doc(FirebaseAuth.instance.currentUser!.displayName!)
         .get()
         .then((value) {
-      horario = value['_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA 1'];
+      horario = value['_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_1'];
       dia = value['DIA_SEMANA 1'];
     });
 
