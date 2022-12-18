@@ -8,7 +8,7 @@ final LISTASEMANAS = [
   InfoSemanas(Color.fromARGB(255, 98, 199, 157), 'SEMANA 4', botao, 4),
   InfoSemanas(Color.fromARGB(255, 155, 124, 154), 'SEMANA 5', botao, 5),
   InfoSemanas(Color.fromARGB(255, 199, 98, 98), 'SEMANA 6', botao, 6),
-  InfoSemanas(Color.fromARGB(255, 202, 193, 62), 'SEMANA 7', botao, 7),
+  InfoSemanas(Color.fromARGB(255, 248, 0, 140), 'SEMANA 7', botao, 7),
 ];
 
 MaterialButton botao = MaterialButton(onPressed: () {});

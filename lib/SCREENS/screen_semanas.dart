@@ -17,10 +17,33 @@ class Semanas extends StatefulWidget {
 }
 
 class _SemanasState extends State<Semanas> {
+  DateTime? horario;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //caregaMap(1);
+    print('abacaxi');
+  }
+/*
+  void caregaMap(int num) async {
+    final DocumentSnapshot dadosUsuario = await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.displayName!)
+        .get();
+    setState(() {
+      horario = (dadosUsuario.get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_$num')
+              as Timestamp)
+          .toDate();
+    });
+    print('chocolater');
+    print(horario!.day);
+  }*/
+
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
-    DateTime? horario;
+    // DateTime? horario = DateTime.utc(1500, 10, 2);
     Map mapSemanas;
     onRefrash(userCreed) {
       user = userCreed;
@@ -30,24 +53,6 @@ class _SemanasState extends State<Semanas> {
       await FirebaseAuth.instance.signOut();
 
       onRefrash(null);
-    }
-
-    Future<void> caregaMap(int num) async {
-      final DocumentSnapshot dadosUsuario = await FirebaseFirestore.instance
-          .collection('user')
-          .doc(FirebaseAuth.instance.currentUser!.displayName!)
-          .get();
-      horario = (dadosUsuario.get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_$num')
-              as Timestamp)
-          .toDate();
-      //horario = dadosUsuario.get('LUCAS');
-      // print(horario!.day.toString());
-    }
-
-    Map horarioSemana;
-
-    void initState() async {
-      super.initState();
     }
 
     return Scaffold(
@@ -131,20 +136,15 @@ class _SemanasState extends State<Semanas> {
       body: SingleChildScrollView(
         child: Column(
             children: LISTASEMANAS.map((e) {
-          caregaMap(e.numeroSem);
-
           // print(horario!.hour.toString());
           //  print(horaDeInInicio['HORARIO_PRIMEIRO_ACESSO']);
           // print(horario == null ? horario!.day.toString() : 'null');
-          if (horario!.year == 1900) {
-            return CartaoBloqueado(
-                cor: e.backGroundColor, title: e.titulo, number: e.numeroSem);
-          } else
-            return CartaoSemanas(
-              cor: e.backGroundColor,
-              title: e.titulo,
-              numeroSemana: e.numeroSem,
-            );
+
+          return CartaoSemanas(
+            cor: e.backGroundColor,
+            title: e.titulo,
+            numeroSemana: e.numeroSem,
+          );
         }).toList()),
       ),
     );

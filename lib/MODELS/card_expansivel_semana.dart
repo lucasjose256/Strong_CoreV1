@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:strong_core/MODELS/VideoScreen.dart';
+import 'package:strong_core/MODELS/cartao_bloqueado.dart';
 import 'package:strong_core/MODELS/video_model.dart';
 import 'package:intl/intl.dart';
 import 'package:strong_core/SCREENS/corpo_humano.dart';
@@ -26,6 +27,35 @@ class CartaoSemanas extends StatefulWidget {
 }
 
 class _CartaoSemanasState extends State<CartaoSemanas> {
+  DateTime? horario;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    caregaMap();
+  }
+
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    super.setState(fn);
+  }
+
+  void caregaMap() async {
+    final DocumentSnapshot dadosUsuario = await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.displayName!)
+        .get();
+    setState(() {
+      horario = (dadosUsuario.get(
+                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}')
+              as Timestamp)
+          .toDate();
+    });
+    print('chocolater');
+    print(horario!.year);
+  }
+
   String TapToExpandIt = 'SEMANA 4';
   String Sentence = 'EXERCICIOS DA SEMANA:\n'
       '3X PRANCHA(30s)\n'
@@ -72,10 +102,10 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
     if (isExpanded) {
       setState(() {});
     }
-    DateTime? horario = DateTime.utc(1900, 1, 9);
+
     DateTime? horarioAgora = DateTime.now();
     int dia;
-    var letsgo = FirebaseFirestore.instance
+    /*var letsgo = FirebaseFirestore.instance
         .collection('user')
         .doc(FirebaseAuth.instance.currentUser!.displayName!)
         .get()
@@ -83,250 +113,262 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
       horario = value['_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_1'];
       dia = value['DIA_SEMANA 1'];
     });
-
-    return Container(
-      child: InkWell(
-        highlightColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        onTap: () {
-          setState(() {
-            isExpanded = !isExpanded;
-          });
-        },
-        child: AnimatedContainer(
-          margin: EdgeInsets.symmetric(
-            horizontal: 10, // isExpanded ? 25 : 10,
-            vertical: 20,
-          ),
-          padding: EdgeInsets.all(20),
-          height: isExpanded ? 100 : 330,
-          curve: Curves.fastLinearToSlowEaseIn,
-          duration: Duration(milliseconds: 1200),
-          decoration: BoxDecoration(
-            /*  boxShadow: [
+*/
+    if (horario!.isBefore(
+      DateTime.utc(1999, 1, 9),
+    )) {
+      return CartaoBloqueado(
+        cor: widget.cor,
+        number: widget.numeroSemana,
+        title: widget.title,
+      );
+    } else {
+      return Container(
+        child: InkWell(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          onTap: () {
+            setState(() {
+              isExpanded = !isExpanded;
+            });
+          },
+          child: AnimatedContainer(
+            margin: EdgeInsets.symmetric(
+              horizontal: 10, // isExpanded ? 25 : 10,
+              vertical: 20,
+            ),
+            padding: EdgeInsets.all(20),
+            height: isExpanded ? 100 : 330,
+            curve: Curves.fastLinearToSlowEaseIn,
+            duration: Duration(milliseconds: 1200),
+            decoration: BoxDecoration(
+              /*  boxShadow: [
               BoxShadow(
                 color: Color.fromARGB(255, 91, 55, 137).withOpacity(0.5),
                 blurRadius: 20,
                 offset: Offset(5, 10),
               ),
             ],*/
-            color: widget.cor,
-            borderRadius: BorderRadius.all(
-              Radius.circular(isExpanded ? 20 : 20),
-            ),
-          ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        widget.title,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Comfortaa'),
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      // Text(DateFormat.Hms().format(DateTime.now())),
-                      /*   isExpanded
-                          ? Icon(Icons.lock_sharp, size: 50)
-                          : Icon(Icons.lock_sharp, size: 20),*/
-                    ],
-                  ),
-                  Icon(
-                    //desaparecer a flecha se a semana estiver travada
-                    isExpanded
-                        ? Icons.keyboard_arrow_down
-                        : Icons.keyboard_arrow_up,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                ],
+              color: widget.cor,
+              borderRadius: BorderRadius.all(
+                Radius.circular(isExpanded ? 20 : 20),
               ),
-              isExpanded ? SizedBox() : SizedBox(height: 20),
-              AnimatedCrossFade(
-                firstCurve: Curves.fastLinearToSlowEaseIn,
-                firstChild: SingleChildScrollView(
-                  child: Text(
-                    '',
-                    style: TextStyle(
-                      fontSize: 0,
-                    ),
-                  ),
-                ),
-                secondChild: Column(
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'EXERCÍCIOS DA SEMANA:',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          backgroundColor: Colors.black),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //mainAxisSize: MainAxisSize.values[2],
-                      //mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          ' PROGRESSO ',
+                          widget.title,
                           style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Comfortaa'),
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        // Text(DateFormat.Hms().format(DateTime.now())),
+                        /*   isExpanded
+                          ? Icon(Icons.lock_sharp, size: 50)
+                          : Icon(Icons.lock_sharp, size: 20),*/
+                      ],
+                    ),
+                    Icon(
+                      //desaparecer a flecha se a semana estiver travada
+                      isExpanded
+                          ? Icons.keyboard_arrow_down
+                          : Icons.keyboard_arrow_up,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ],
+                ),
+                isExpanded ? SizedBox() : SizedBox(height: 20),
+                AnimatedCrossFade(
+                  firstCurve: Curves.fastLinearToSlowEaseIn,
+                  firstChild: SingleChildScrollView(
+                    child: Text(
+                      '',
+                      style: TextStyle(
+                        fontSize: 0,
+                      ),
+                    ),
+                  ),
+                  secondChild: Column(
+                    children: [
+                      Text(
+                        'EXERCÍCIOS DA SEMANA:',
+                        style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ConstrainedBox(
-                          constraints: BoxConstraints(maxWidth: 300),
-                          child: StepProgressIndicator(
-                            //stepCrossAxisAlignment: CrossAxisAlignment.start,
-                            //   crossAxisAlignment: CrossAxisAlignment.start,
-                            totalSteps: 3,
-                            currentStep: stepBarControll,
-                            size: 36,
-                            selectedColor: Colors.black,
-                            unselectedColor: Color.fromARGB(255, 194, 183, 183),
-                            customStep: (indexs, color2, _) =>
-                                color2 == Colors.black
-                                    ? Container(
-                                        color: color2,
-                                        child: Icon(
-                                          Icons.check,
-                                          color: Colors.white,
-                                        ),
-                                      )
-                                    : Container(
-                                        width: 10,
-                                        color: color2,
-                                        child: Icon(
-                                          Icons.remove,
-                                        ),
-                                      ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    MaterialButton(
-                      minWidth: 200,
-                      height: 50,
-                      child: Text(
-                        tempBotao,
-                        style: TextStyle(color: Colors.white),
+                            backgroundColor: Colors.black),
                       ),
-                      color: Colors.black87,
-                      onPressed: () async {
-                        await FirebaseFirestore.instance
-                            .collection('user')
-                            .doc(
-                                FirebaseAuth.instance.currentUser!.displayName!)
-                            .get()
-                            .then((value) {
-                          horario =
-                              (value['_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}']
-                                      as Timestamp)
-                                  .toDate();
-                        });
-
-                        //AINDA PRECISA VER SE É O PRIMERO ACESSO DA PESSOA
-                        if (horario == null ||
-                            DateTime.now().isAfter(horario!)) {
-                          for (var element in videos) {
-                            await Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return element;
-                            }));
-                          }
-
-                          setState(() {
-                            stepBarControll++;
-                          });
-
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //mainAxisSize: MainAxisSize.values[2],
+                        //mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            ' PROGRESSO ',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ConstrainedBox(
+                            constraints: BoxConstraints(maxWidth: 300),
+                            child: StepProgressIndicator(
+                              //stepCrossAxisAlignment: CrossAxisAlignment.start,
+                              //   crossAxisAlignment: CrossAxisAlignment.start,
+                              totalSteps: 3,
+                              currentStep: stepBarControll,
+                              size: 36,
+                              selectedColor: Colors.black,
+                              unselectedColor:
+                                  Color.fromARGB(255, 194, 183, 183),
+                              customStep: (indexs, color2, _) =>
+                                  color2 == Colors.black
+                                      ? Container(
+                                          color: color2,
+                                          child: Icon(
+                                            Icons.check,
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      : Container(
+                                          width: 10,
+                                          color: color2,
+                                          child: Icon(
+                                            Icons.remove,
+                                          ),
+                                        ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      MaterialButton(
+                        minWidth: 200,
+                        height: 50,
+                        child: Text(
+                          tempBotao,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: Color.fromRGBO(0, 0, 0, 0.867),
+                        onPressed: () async {
                           await FirebaseFirestore.instance
                               .collection('user')
                               .doc(FirebaseAuth
                                   .instance.currentUser!.displayName!)
-                              .set({
-                            //verificar se o update apaga os dados dos formularios
-                            '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}':
-                                horario = DateTime.now().add(Duration(days: 2)),
+                              .get()
+                              .then((value) {
+                            horario =
+                                (value['_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}']
+                                        as Timestamp)
+                                    .toDate();
                           });
 
-                          setState(() {
-                            if (horario != null)
-                              tempBotao = horario!
-                                      .difference(DateTime.now())
-                                      .inHours
-                                      .toString() +
-                                  ' HORAS';
-                          });
+                          //AINDA PRECISA VER SE É O PRIMERO ACESSO DA PESSOA
+                          if (horario == null ||
+                              DateTime.now().isAfter(horario!)) {
+                            for (var element in videos) {
+                              await Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return element;
+                              }));
+                            }
 
-                          print(tempBotao);
-                          if (stepBarControll == 3) {
-                            //lembrar de verificar para semana 9
+                            setState(() {
+                              stepBarControll++;
+                            });
+
                             await FirebaseFirestore.instance
                                 .collection('user')
                                 .doc(FirebaseAuth
                                     .instance.currentUser!.displayName!)
                                 .update({
-                              'DIA_${widget.title}': stepBarControll,
-                              '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana + 2}':
+                              //verificar se o update apaga os dados dos formularios
+                              '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}':
                                   horario =
                                       DateTime.now().add(Duration(days: 2)),
                             });
+
+                            setState(() {
+                              if (horario != null)
+                                tempBotao = horario!
+                                        .difference(DateTime.now())
+                                        .inHours
+                                        .toString() +
+                                    ' HORAS';
+                            });
+
+                            print(tempBotao);
+                            if (stepBarControll == 3) {
+                              //lembrar de verificar para semana 9
+                              await FirebaseFirestore.instance
+                                  .collection('user')
+                                  .doc(FirebaseAuth
+                                      .instance.currentUser!.displayName!)
+                                  .update({
+                                'DIA_${widget.title}': stepBarControll,
+                                '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana + 1}':
+                                    horario =
+                                        DateTime.now().add(Duration(days: 2)),
+                              });
+                            }
                           }
-                        }
-                      },
-                    ),
-                    MaterialButton(
-                      child: Icon(
-                        Icons.plus_one_outlined,
-                        size: 20,
-                        color: Colors.white,
+                        },
                       ),
-                      onPressed: () {
-                        setState(() {
-                          //horario!.subtract(Duration(days: 3));
-                          stepBarControll++;
-                          if (stepBarControll == 4) {
-                            stepBarControll = 0;
-                          }
-                        });
-                      },
-                      color: Color.fromARGB(255, 98, 92, 84),
-                    )
-                  ],
+                      MaterialButton(
+                        child: Icon(
+                          Icons.plus_one_outlined,
+                          size: 20,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            //horario!.subtract(Duration(days: 3));
+                            stepBarControll++;
+                            if (stepBarControll == 4) {
+                              stepBarControll = 0;
+                            }
+                          });
+                        },
+                        color: Color.fromARGB(255, 98, 92, 84),
+                      )
+                    ],
+                  ),
+                  crossFadeState: isExpanded
+                      ? CrossFadeState.showFirst
+                      : CrossFadeState.showSecond,
+                  duration: Duration(milliseconds: 1200),
+                  reverseDuration: Duration.zero,
+                  sizeCurve: Curves.fastLinearToSlowEaseIn,
                 ),
-                crossFadeState: isExpanded
-                    ? CrossFadeState.showFirst
-                    : CrossFadeState.showSecond,
-                duration: Duration(milliseconds: 1200),
-                reverseDuration: Duration.zero,
-                sizeCurve: Curves.fastLinearToSlowEaseIn,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
     /*  InkWell(
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
