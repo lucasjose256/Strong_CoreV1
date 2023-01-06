@@ -16,14 +16,14 @@ import 'package:strong_core/MODELS/sequencial_buttun.dart';
 
 import '../provider/colors2.dart';
 
-class CorpoHumano extends StatefulWidget {
-  const CorpoHumano({Key? key}) : super(key: key);
+class AuxCorpoHumano extends StatefulWidget {
+  const AuxCorpoHumano({Key? key}) : super(key: key);
 
   @override
-  State<CorpoHumano> createState() => _CorpoHumanoState();
+  State<AuxCorpoHumano> createState() => _AuxCorpoHumanoState();
 }
 
-class _CorpoHumanoState extends State<CorpoHumano> {
+class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
   Uint8List? bytes;
   GlobalKey _globalKey = GlobalKey();
   bool loading = false;
@@ -274,26 +274,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                   /*'SEM_1_pescoço1': pescoco1.graudaDor,
                   'SEM_1_pescoço2': pescoco2.graudaDor,
                   'SEM_1_ombro1': ombro1.graudaDor,*/
-                  'DIA_SEMANA 1': 0,
-                  '_HORARIO_PRIMEIRO_ACESSO':
-                      DateFormat.yMMMEd().format(DateTime.now()),
-                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_1': DateTime.now(),
-                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_2':
-                      DateTime.utc(1900, 1, 9),
-                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_3':
-                      DateTime.utc(1900, 1, 9),
-                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_4':
-                      DateTime.utc(1900, 1, 9),
-                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_5':
-                      DateTime.utc(1900, 1, 9),
-                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_6':
-                      DateTime.utc(1900, 1, 9),
-                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_7':
-                      DateTime.utc(1900, 1, 9),
-                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_8':
-                      DateTime.utc(1900, 1, 9),
-                  '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_9':
-                      DateTime.utc(1900, 1, 9),
+
                   'LUCAS': 'LUCAS',
                   'DATA DIREITO': data.painDegreeRight,
                   'DATA ESQUERDO': data.painDegreeleft

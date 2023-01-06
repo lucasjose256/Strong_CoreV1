@@ -19,14 +19,12 @@ class AddTodoButton extends StatefulWidget {
   ///
 
   final String? number; //number o fbuttun
-  Color? newColor = Colors.grey;
+  Color? newColor = null;
   String numberId = ''; //if the buttun has a duplicate
   String graudaDor = '';
   final String nomeMembro;
-  final onChange;
   // ignore: avoid_init_to_null
   AddTodoButton({
-    this.onChange,
     this.number,
     required this.nomeMembro,
     required this.numberId,
