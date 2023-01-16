@@ -7,6 +7,7 @@ class UserPreferences {
   static const stps2 = 'stepsCont2';
   static const stps3 = 'stepsCont3';
   static const list = 'lista';
+  static const flagPrimeiroAcesso = 'primeroAcesso';
   static Future init() async {
     _preferences = await SharedPreferences.getInstance();
   }
@@ -17,6 +18,14 @@ class UserPreferences {
 
   static List<String>? getList() {
     return _preferences?.getStringList(list);
+  }
+
+  static Future setBool(bool value) async {
+    await _preferences?.setBool(flagPrimeiroAcesso, value);
+  }
+
+  static bool? getBool() {
+    return _preferences?.getBool(flagPrimeiroAcesso);
   }
 
   static Future setSteps(int numberSemana, int s) async {

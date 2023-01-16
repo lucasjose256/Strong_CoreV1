@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
+import 'package:strong_core/MODELS/user_preferences.dart';
 import 'package:strong_core/SCREENS/basic_questions.dart';
 import 'package:strong_core/SCREENS/corpo_humano.dart';
 import 'package:strong_core/SCREENS/forms.dart';
@@ -15,30 +16,70 @@ import 'package:strong_core/provider/colors2.dart';
 import 'package:strong_core/style/add_pop_up_card.dart';
 
 import 'API/google_sign_in.dart';
+import 'SCREENS/auxiliar_corpo_humano.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+  await UserPreferences.init();
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp();
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  bool? flag;
+
+  DateTime? horario;
+
+  bool? primeiroAcessoCompleto;
+  @override
+  void initState() {
+    super.initState();
+
+    primeiroAcessoCompleto = UserPreferences.getBool() as bool ?? false;
+  }
+
+  void caregaMap() async {
+    final DocumentSnapshot dadosUsuario = await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.displayName!)
+        .get();
+    //mudar para um provider
+    setState(() {
+      primeiroAcessoCompleto = dadosUsuario.get('PRIMEIRO_ACESSO_COMPLETO');
+    });
+    //PRECISO CRIAR UMA FUNÇAO PARA SETAR ESSE CAMPO COMO FALSO AO INICIO
+  }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     // Get the firebase user
+
     User? firebaseUser = FirebaseAuth.instance.currentUser;
 // Define a widget
     Widget firstWidget;
+    Widget secondWidget;
 
 // Assign widget based on availability of currentUser
+
     if (firebaseUser != null) {
-      firstWidget = Forms(); //Question();
+      print(primeiroAcessoCompleto);
+      if (primeiroAcessoCompleto!) {
+        firstWidget = Semanas();
+      } else {
+        firstWidget = Forms();
+      } //Question();
+      //firstWidget = Semanas();
     } else {
-      firstWidget = MyHomePage();
+      firstWidget = MyHomePage(primeiroAcessoCompleto!);
     }
     return ChangeNotifierProvider(
         create: (context) => GoogleSignInProvider(),
@@ -67,12 +108,14 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage();
+  final bool isLandingPage;
+  const MyHomePage(this.isLandingPage);
   @override
   Widget build(BuildContext context) {
     final TextEditingController _emailControler = TextEditingController();
     final TextEditingController _passwordControler = TextEditingController();
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    Widget landingWidget;
 
     return WillPopScope(
       onWillPop: () => Future.value(false),
@@ -189,9 +232,14 @@ class MyHomePage extends StatelessWidget {
                     await _firebaseAuth.signInWithEmailAndPassword(
                         email: _emailControler.text,
                         password: _passwordControler.text);
+                    if (isLandingPage) {
+                      landingWidget = Semanas();
+                    } else {
+                      landingWidget = Forms();
+                    }
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (constect) => BasicQuestions(),
+                          builder: (constect) => Semanas(),
                           settings: RouteSettings()),
                     );
                   },
@@ -225,9 +273,17 @@ class MyHomePage extends StatelessWidget {
                     final provider = Provider.of<GoogleSignInProvider>(context,
                         listen: false);
                     await provider.googleLogin();
+
+                    await FirebaseFirestore.instance
+                        .collection('user')
+                        .doc(FirebaseAuth.instance.currentUser!.displayName!)
+                        .set({
+                      'PRIMEIRO_ACESSO_COMPLETO': false,
+                    });
+
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (constect) => BasicQuestions(),
+                          builder: (constect) => Semanas(),
                           settings: RouteSettings()),
                     );
                   },

@@ -22,7 +22,21 @@ class BotaoDuplo extends StatefulWidget {
   /// {@macro add_todo_button}
   ///
 
-  BotaoDuplo();
+  final double? buttunDistance;
+  final String? numberButtun;
+  final String? phraseCard;
+  late String painDegreeRight;
+  late String painDegreeleft;
+  Color? colorRight;
+  Color? colorleft;
+
+  BotaoDuplo({
+    this.colorRight,
+    this.colorleft,
+    this.buttunDistance,
+    this.numberButtun,
+    this.phraseCard,
+  });
 
   @override
   State<BotaoDuplo> createState() => _BotaoDuploState();
@@ -34,17 +48,22 @@ class _BotaoDuploState extends State<BotaoDuplo> {
     // widget.newColor=Navigator.of(context).push();
     //Color? newButtunColor = Provider.of<newColorForCard>(context).color;
     //  bool flag = false;
+
     final corProvider = Provider.of<Cor1>(context);
     final cor2Provider = Provider.of<Cor2>(context);
-    AddTodoButton ombroDir = AddTodoButton(
-      number: '6',
+    AddTodoButton membroDir = AddTodoButton(
+      corSemanaAnterior: widget.colorRight,
+      number: widget.numberButtun,
       numberId: 'DIR',
-      nomeMembro: 'na região do ombro DIREITO',
+      nomeMembro:
+          'Selecione o grau da dor na região ${widget.phraseCard} DIREITO',
     );
-    AddTodoButton ombroEsq = AddTodoButton(
-      number: '6',
+    AddTodoButton membroEsq = AddTodoButton(
+      corSemanaAnterior: widget.colorleft,
+      number: widget.numberButtun,
       numberId: 'ESQ',
-      nomeMembro: 'na região do ombro ESQUERDO',
+      nomeMembro:
+          'Selecione o grau da dor na região ${widget.phraseCard} ESQUERDO',
     );
     const String _heroAddTodo = 'add-todo-hero';
     Map? temp;
@@ -63,34 +82,37 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                       context,
                       HeroDialogRoute(
                           builder: (context) => AddTodoPopupCard(
-                                nome: ombroDir.number! + ombroDir.numberId,
-                                nomeMembro: ombroDir.nomeMembro,
-                                esqDir: ombroDir.numberId,
+                                nome: membroEsq.number! + membroEsq.numberId,
+                                nomeMembro: membroEsq.nomeMembro,
+                                esqDir: membroEsq.numberId,
                               ),
                           settings: const RouteSettings(
                               arguments: null, name: null)));
                   // settings: RouteSettings(arguments: null, name: null)
 
                   corProvider.changeColor(temp["color"]);
-                  ombroDir.graudaDor = temp["numero"];
+                  membroEsq.graudaDor = temp["numero"];
+                  widget.painDegreeleft = membroEsq.graudaDor;
                   if (cor2Provider.cor == null) {
                     Map temp2 = await Navigator.push(
                         context,
                         HeroDialogRoute(
                             builder: (context) => AddTodoPopupCard(
-                                  nome: ombroEsq.number! + ombroEsq.numberId,
-                                  nomeMembro: ombroEsq.nomeMembro,
-                                  esqDir: ombroEsq.numberId,
+                                  nome: membroDir.number! + membroDir.numberId,
+                                  nomeMembro: membroDir.nomeMembro,
+                                  esqDir: membroDir.numberId,
                                 ),
                             settings: const RouteSettings(
                                 arguments: null, name: null)));
 
-                    ombroEsq.graudaDor = temp2["numero"];
+                    membroDir.graudaDor = temp2["numero"];
+                    widget.painDegreeRight = temp2["numero"];
                     cor2Provider.changeColor(temp2["color"]);
                   }
                 },
                 child: Hero(
-                  tag: _heroAddTodo + '${ombroDir.number}' + ombroDir.numberId,
+                  tag:
+                      _heroAddTodo + '${membroEsq.number}' + membroEsq.numberId,
                   createRectTween: (begin, end) {
                     return CustomRectTween(begin: begin!, end: end!);
                   },
@@ -100,9 +122,9 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                     shape: const CircleBorder(),
                     child: Padding(
                       padding: const EdgeInsets.all(7.0),
-                      child: ombroDir.number!.length == 2
+                      child: membroEsq.number!.length == 2
                           ? Text(
-                              ombroDir.number!,
+                              membroEsq.number!,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: Colors.white,
@@ -110,7 +132,7 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                               ),
                             )
                           : Text(
-                              ombroDir.number!,
+                              membroDir.number!,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: Colors.white,
@@ -122,7 +144,7 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                 )),
           ),
           SizedBox(
-            width: 50,
+            width: widget.buttunDistance,
           ),
           /////////////////////////////////////
           /////////////////////////////
@@ -137,15 +159,16 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                       context,
                       HeroDialogRoute(
                           builder: (context) => AddTodoPopupCard(
-                                nome: ombroEsq.number! + ombroEsq.numberId,
-                                nomeMembro: ombroEsq.nomeMembro,
-                                esqDir: ombroEsq.numberId,
+                                nome: membroDir.number! + membroDir.numberId,
+                                nomeMembro: membroDir.nomeMembro,
+                                esqDir: membroDir.numberId,
                               ),
                           settings: const RouteSettings(
                               arguments: null, name: null)));
                   // settings: RouteSettings(arguments: null, name: null)
 
-                  ombroEsq.graudaDor = temp3["numero"];
+                  membroDir.graudaDor = temp3["numero"];
+                  widget.painDegreeRight = temp3["numero"];
                   cor2Provider.changeColor(temp3["color"]);
 
                   if (corProvider.cor == null) {
@@ -153,19 +176,21 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                         context,
                         HeroDialogRoute(
                             builder: (context) => AddTodoPopupCard(
-                                  nome: ombroDir.number! + ombroDir.numberId,
-                                  nomeMembro: ombroDir.nomeMembro,
-                                  esqDir: ombroDir.numberId,
+                                  nome: membroEsq.number! + membroEsq.numberId,
+                                  nomeMembro: membroEsq.nomeMembro,
+                                  esqDir: membroEsq.numberId,
                                 ),
                             settings: const RouteSettings(
                                 arguments: null, name: null))) as Map;
 
                     corProvider.changeColor(temp4["color"]);
-                    ombroDir.graudaDor = temp4["numero"];
+                    widget.painDegreeleft = temp4["numero"];
+                    membroEsq.graudaDor = temp4["numero"];
                   }
                 },
                 child: Hero(
-                  tag: _heroAddTodo + '${ombroEsq.number}' + ombroEsq.numberId,
+                  tag:
+                      _heroAddTodo + '${membroDir.number}' + membroDir.numberId,
                   createRectTween: (begin, end) {
                     return CustomRectTween(begin: begin!, end: end!);
                   },
@@ -175,9 +200,9 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                     shape: const CircleBorder(),
                     child: Padding(
                       padding: const EdgeInsets.all(7.0),
-                      child: ombroDir.number!.length == 2
+                      child: membroEsq.number!.length == 2
                           ? Text(
-                              ombroDir.number!,
+                              membroEsq.number!,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: Colors.white,
@@ -185,7 +210,7 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                               ),
                             )
                           : Text(
-                              ombroDir.number!,
+                              membroEsq.number!,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: Colors.white,

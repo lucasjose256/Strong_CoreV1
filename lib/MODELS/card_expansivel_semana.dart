@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:strong_core/MODELS/VideoScreen.dart';
 import 'package:strong_core/MODELS/cartao_bloqueado.dart';
+import 'package:strong_core/MODELS/user_preferences.dart';
 import 'package:strong_core/MODELS/video_model.dart';
 import 'package:intl/intl.dart';
 import 'package:strong_core/SCREENS/corpo_humano.dart';
@@ -33,6 +34,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
     // TODO: implement initState
     super.initState();
     caregaMap();
+    stepBarControll = UserPreferences.getSteps(widget.numeroSemana) as int ?? 0;
   }
 
   @override
@@ -114,15 +116,18 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
       dia = value['DIA_SEMANA 1'];
     });
 */
-    if (horario!.isBefore(
-      DateTime.utc(1999, 1, 9),
-    )) {
+    if (horario == null ||
+        horario!.isBefore(
+          DateTime.utc(1999, 1, 9),
+        )) {
+      setState(() {});
       return CartaoBloqueado(
         cor: widget.cor,
         number: widget.numeroSemana,
         title: widget.title,
       );
     } else {
+      setState(() {});
       return Container(
         child: InkWell(
           highlightColor: Colors.transparent,
@@ -286,8 +291,47 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                     .toDate();
                           });
 
+                          setState(() {
+                            stepBarControll++;
+                          });
+                          await UserPreferences.setSteps(
+                              widget.numeroSemana, stepBarControll);
+                          await FirebaseFirestore.instance
+                              .collection('user')
+                              .doc(FirebaseAuth
+                                  .instance.currentUser!.displayName!)
+                              .update({
+                            //verificar se o update apaga os dados dos formularios
+                            '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}':
+                                horario = DateTime.now().add(Duration(days: 2)),
+                          });
+
+                          setState(() {
+                            if (horario != null)
+                              tempBotao = horario!
+                                      .difference(DateTime.now())
+                                      .inHours
+                                      .toString() +
+                                  ' HORAS';
+                          });
+
+                          print(tempBotao);
+                          if (stepBarControll == 3) {
+                            //lembrar de verificar para semana 9
+                            await FirebaseFirestore.instance
+                                .collection('user')
+                                .doc(FirebaseAuth
+                                    .instance.currentUser!.displayName!)
+                                .update({
+                              'DIA_${widget.title}': stepBarControll,
+                              '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana + 1}':
+                                  horario =
+                                      DateTime.now().add(Duration(days: 2)),
+                            });
+                          }
+
                           //AINDA PRECISA VER SE É O PRIMERO ACESSO DA PESSOA
-                          if (horario == null ||
+                          /* if (horario == null ||
                               DateTime.now().isAfter(horario!)) {
                             for (var element in videos) {
                               await Navigator.push(context,
@@ -334,7 +378,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                         DateTime.now().add(Duration(days: 2)),
                               });
                             }
-                          }
+                          }*/
                         },
                       ),
                       MaterialButton(

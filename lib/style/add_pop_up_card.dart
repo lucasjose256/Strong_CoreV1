@@ -19,12 +19,14 @@ class AddTodoButton extends StatefulWidget {
   ///
 
   final String? number; //number o fbuttun
-  Color? newColor = null;
+  Color? newColor = Colors.grey;
   String numberId = ''; //if the buttun has a duplicate
   String graudaDor = '';
   final String nomeMembro;
+  Color? corSemanaAnterior = null;
   // ignore: avoid_init_to_null
   AddTodoButton({
+    this.corSemanaAnterior,
     this.number,
     required this.nomeMembro,
     required this.numberId,
@@ -62,6 +64,7 @@ class _AddTodoButtonState extends State<AddTodoButton> {
               //    widget.newColor = Colors.purple;
               // widget.onChange(temp["color"]);
               widget.newColor = temp["color"];
+              widget.corSemanaAnterior = temp["color"];
             });
           },
           child: Hero(
@@ -70,7 +73,8 @@ class _AddTodoButtonState extends State<AddTodoButton> {
               return CustomRectTween(begin: begin!, end: end!);
             },
             child: Material(
-              color: widget.newColor, // ?? Colors.grey,
+              color: widget.corSemanaAnterior ??
+                  widget.newColor, // ?? Colors.grey,
               elevation: 2,
               shape: const CircleBorder(),
               child: Padding(

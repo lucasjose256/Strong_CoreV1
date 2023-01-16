@@ -14,6 +14,7 @@ import 'package:intl/intl.dart';
 import 'package:strong_core/MODELS/botao_duplo.dart';
 import 'package:strong_core/MODELS/sequencial_buttun.dart';
 
+import '../MODELS/user_preferences.dart';
 import '../provider/colors2.dart';
 
 class AuxCorpoHumano extends StatefulWidget {
@@ -24,6 +25,16 @@ class AuxCorpoHumano extends StatefulWidget {
 }
 
 class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
+  List<Color> cores = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    grauDores = UserPreferences.getList() ?? [''];
+    cores = transformaEmCor(grauDores);
+  }
+
+  List<String> grauDores = [];
   Uint8List? bytes;
   GlobalKey _globalKey = GlobalKey();
   bool loading = false;
@@ -76,6 +87,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                     right: 138,
                     top: 75,
                     child: regiaoCervical1 = AddTodoButton(
+                      corSemanaAnterior: cores[0],
                       number: '1',
                       numberId: '',
                       nomeMembro: 'na região cervical',
@@ -84,6 +96,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                     right: 138,
                     top: 130,
                     child: costasSuperior2 = AddTodoButton(
+                      corSemanaAnterior: cores[1],
                       number: '2',
                       numberId: '',
                       nomeMembro: 'na região da costas superior',
@@ -92,6 +105,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                     right: 138,
                     top: 177,
                     child: costasMedia3 = AddTodoButton(
+                      corSemanaAnterior: cores[2],
                       number: '3',
                       numberId: '',
                       nomeMembro: 'na região das costas média',
@@ -257,29 +271,11 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                 await FirebaseFirestore.instance
                     .collection('user')
                     .doc(FirebaseAuth.instance.currentUser!.displayName!)
-                    .set({
-                  /*'Regiao_cervical_SEM_0': regiaoCervical1.graudaDor != null
-                      ? regiaoCervical1.graudaDor
-                      : '0',
-                  'Costas_superior_SEM_0': costasSuperior2.graudaDor != null
-                      ? costasSuperior2.graudaDor
-                      : '0',
-                  'Costas_média_SEM_0': costasMedia3.graudaDor != null
-                      ? costasMedia3.graudaDor
-                      : '0',
-                  'Costas_inferior_SEM_0': costasInferior4.graudaDor != null
-                      ? costasInferior4.graudaDor
-                      : '0',
-                  'Bacia_SEM_0': bacia5.graudaDor,*/
-                  /*'SEM_1_pescoço1': pescoco1.graudaDor,
-                  'SEM_1_pescoço2': pescoco2.graudaDor,
-                  'SEM_1_ombro1': ombro1.graudaDor,*/
-
+                    .update({
                   'LUCAS': 'LUCAS',
                   'DATA DIREITO': data.painDegreeRight,
                   'DATA ESQUERDO': data.painDegreeleft
                 });
-
                 Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (constect) => const Semanas(),
@@ -300,4 +296,30 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
       ),
     );
   }
+}
+
+List<Color> transformaEmCor(List<String> graudores) {
+  List<Color> cores = [];
+  for (int i = 0; i < graudores.length; i++) {
+    switch (graudores[i]) {
+      case '1':
+        cores.add(Color.fromARGB(255, 31, 106, 34));
+        break;
+      case '2':
+        cores.add(Color.fromARGB(255, 99, 179, 46));
+        break;
+      case '3':
+        cores.add(Color.fromARGB(255, 224, 220, 80));
+        break;
+      case '4':
+        cores.add(Color.fromARGB(255, 230, 101, 8));
+        break;
+      case '5':
+        cores.add(Color.fromARGB(222, 238, 39, 29));
+        break;
+
+      default:
+    }
+  }
+  return cores;
 }

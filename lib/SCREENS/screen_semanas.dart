@@ -6,7 +6,9 @@ import 'package:strong_core/MODELS/card_expansivel_semana.dart';
 import 'package:strong_core/MODELS/cartao_bloqueado.dart';
 
 import 'package:strong_core/MODELS/lista_semanas.dart';
+import 'package:strong_core/SCREENS/auxiliar_corpo_humano.dart';
 
+import '../MODELS/user_preferences.dart';
 import '../main.dart';
 
 class Semanas extends StatefulWidget {
@@ -17,31 +19,36 @@ class Semanas extends StatefulWidget {
 }
 
 class _SemanasState extends State<Semanas> {
-  DateTime? horario;
   @override
   void initState() {
     // TODO: implement initState
+
     super.initState();
-    //caregaMap(1);
+
+    caregaMap();
     print('abacaxi');
+    estadoAcesso = UserPreferences.getBool() as bool ?? false;
   }
-/*
-  void caregaMap(int num) async {
+
+  bool? estadoAcesso;
+  bool? situacaoAnamnse;
+  DateTime? horario;
+  void caregaMap() async {
     final DocumentSnapshot dadosUsuario = await FirebaseFirestore.instance
         .collection('user')
         .doc(FirebaseAuth.instance.currentUser!.displayName!)
         .get();
-    setState(() {
-      horario = (dadosUsuario.get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_$num')
-              as Timestamp)
-          .toDate();
-    });
-    print('chocolater');
-    print(horario!.day);
-  }*/
+    situacaoAnamnse = dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM2');
+    horario = (dadosUsuario.get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_2')
+            as Timestamp)
+        .toDate();
+  }
 
   @override
   Widget build(BuildContext context) {
+    /* 
+*/
+
     User? user = FirebaseAuth.instance.currentUser;
     // DateTime? horario = DateTime.utc(1500, 10, 2);
     Map mapSemanas;
@@ -55,7 +62,21 @@ class _SemanasState extends State<Semanas> {
       onRefrash(null);
     }
 
+    /*if ((horario == null || horario!.isAfter(DateTime.utc(1999, 1, 9))) &&
+        situacaoAnamnse!) {
+      return AuxCorpoHumano();
+    } else*/
+
     return Scaffold(
+      floatingActionButton: MaterialButton(
+          onPressed: (() async {
+            for (int i = 1; i < 7; i++) {
+              await UserPreferences.setSteps(i, 0);
+            }
+            setState(() {});
+          }),
+          child: Text('LIMPAR'),
+          color: Colors.grey),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
@@ -111,7 +132,7 @@ class _SemanasState extends State<Semanas> {
                 logOut();
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (constect) => const MyHomePage(),
+                      builder: (constect) => MyHomePage(estadoAcesso!),
                       settings: const RouteSettings()),
                 );
                 // Update the state of the app.

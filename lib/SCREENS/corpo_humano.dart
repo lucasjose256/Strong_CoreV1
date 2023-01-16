@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:strong_core/SCREENS/auxiliar_corpo_humano.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:strong_core/provider/colors.dart';
 import 'package:strong_core/style/add_pop_up_card.dart';
@@ -14,6 +15,7 @@ import 'package:intl/intl.dart';
 import 'package:strong_core/MODELS/botao_duplo.dart';
 import 'package:strong_core/MODELS/sequencial_buttun.dart';
 
+import '../MODELS/user_preferences.dart';
 import '../provider/colors2.dart';
 
 class CorpoHumano extends StatefulWidget {
@@ -27,7 +29,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
   Uint8List? bytes;
   GlobalKey _globalKey = GlobalKey();
   bool loading = false;
-
+  List<String> grauDores = [];
   @override
   Widget build(BuildContext context) {
     Stack dataCorpo;
@@ -52,7 +54,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
     AddTodoButton;
     AddTodoButton;
     AddTodoButton;
-    BotaoDuplo data;
+    BotaoDuplo? data;
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context);
@@ -251,13 +253,21 @@ class _CorpoHumanoState extends State<CorpoHumano> {
               padding: EdgeInsets.only(top: 8, bottom: 8),
               color: ui.Color.fromARGB(255, 202, 43, 32),
               onPressed: () async {
-                setState(() {
-                  ombroDir.newColor = Colors.purple;
-                });
-                await FirebaseFirestore.instance
+                grauDores = [
+                  regiaoCervical1.graudaDor,
+                  costasSuperior2.graudaDor,
+                  costasMedia3.graudaDor,
+                ];
+                await UserPreferences.setList(grauDores);
+                await UserPreferences.setBool(true);
+
+                var firebase = await FirebaseFirestore.instance
                     .collection('user')
-                    .doc(FirebaseAuth.instance.currentUser!.displayName!)
-                    .set({
+                    .doc(FirebaseAuth.instance.currentUser!.displayName!);
+                firebase.update({
+                  'PRIMEIRO_ACESSO_COMPLETO': true,
+                });
+                firebase.set({
                   /*'Regiao_cervical_SEM_0': regiaoCervical1.graudaDor != null
                       ? regiaoCervical1.graudaDor
                       : '0',
@@ -274,7 +284,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                   /*'SEM_1_pescoço1': pescoco1.graudaDor,
                   'SEM_1_pescoço2': pescoco2.graudaDor,
                   'SEM_1_ombro1': ombro1.graudaDor,*/
-                  'DIA_SEMANA 1': 0,
+
                   '_HORARIO_PRIMEIRO_ACESSO':
                       DateFormat.yMMMEd().format(DateTime.now()),
                   '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_1': DateTime.now(),
@@ -295,7 +305,11 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                   '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_9':
                       DateTime.utc(1900, 1, 9),
                   'LUCAS': 'LUCAS',
-                  'DATA DIREITO': data.painDegreeRight,
+                  'ATUALIZOU_ANAMNSE_SEM2': false,
+                  'ATUALIZOU_ANAMNSE_SEM4': false,
+                  'ATUALIZOU_ANAMNSE_SEM6': false,
+                  'ATUALIZOU_ANAMNSE_SEM8': false,
+                  'DATA DIREITO': data!.painDegreeRight,
                   'DATA ESQUERDO': data.painDegreeleft
                 });
 

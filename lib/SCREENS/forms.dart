@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:strong_core/MODELS/VideoTest.dart';
 import 'package:strong_core/MODELS/card_expansivel_semana.dart';
 import 'package:strong_core/MODELS/cartao_bloqueado.dart';
+import 'package:strong_core/MODELS/user_preferences.dart';
 import 'package:strong_core/MODELS/video_model.dart';
 import 'package:strong_core/SCREENS/basic_questions.dart';
 import 'package:strong_core/SCREENS/corpo_humano.dart';
@@ -65,6 +66,8 @@ class _FormsState extends State<Forms> {
                 .collection('user')
                 .doc(FirebaseAuth.instance.currentUser!.displayName!)
                 .set({'Quanto tempo vc passa no pc': q2.answers[1]});*/
+            await UserPreferences.setBool(false);
+
             Navigator.of(context).push(
               MaterialPageRoute(
                   builder: (constect) => const CorpoHumano(),
