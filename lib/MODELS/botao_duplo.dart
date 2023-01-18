@@ -117,7 +117,8 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                     return CustomRectTween(begin: begin!, end: end!);
                   },
                   child: Material(
-                    color: corProvider.cor ?? Colors.grey, // ?? Colors.grey,
+                    color:
+                        corProvider.cor ?? widget.colorRight, // ?? Colors.grey,
                     elevation: 2,
                     shape: const CircleBorder(),
                     child: Padding(
