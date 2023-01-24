@@ -3,8 +3,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:strong_core/SCREENS/questions.dart';
 import 'package:strong_core/SCREENS/questions2.dart';
+
+import '../provider/information_forms.dart';
 
 class BasicQuestions extends StatefulWidget {
   const BasicQuestions({Key? key}) : super(key: key);
@@ -23,8 +26,8 @@ class _BasicQuestionsState extends State<BasicQuestions> {
       FirebaseFirestore.instance.collection('user');
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _nome = TextEditingController();
-
+    //final TextEditingController _nome = TextEditingController();
+    final nome = Provider.of<Information>(context);
     return Container(
       child: Column(
         //padding: const EdgeInsets.only(left: 12),
@@ -45,6 +48,10 @@ class _BasicQuestionsState extends State<BasicQuestions> {
               Container(
                 width: 300,
                 child: TextFormField(
+                  onChanged: (value) {
+                    nome.setName(value);
+                  },
+
                   decoration: const InputDecoration(
                     focusColor: Colors.red,
                     labelText: 'Nome Completo',

@@ -6,6 +6,13 @@ class UserPreferences {
   static const stps1 = 'stepsCont1';
   static const stps2 = 'stepsCont2';
   static const stps3 = 'stepsCont3';
+  static const stps4 = 'stepsCont3';
+  static const stps5 = 'stepsCont3';
+  static const stps6 = 'stepsCont3';
+  static const stps7 = 'stepsCont3';
+  static const stps8 = 'stepsCont3';
+  static const stps9 = 'stepsCont3';
+
   static const list = 'lista';
   static const flagPrimeiroAcesso = 'primeroAcesso';
   static Future init() async {

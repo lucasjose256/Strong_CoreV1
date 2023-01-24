@@ -7,7 +7,7 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:strong_core/MODELS/VideoScreen.dart';
 import 'package:strong_core/MODELS/cartao_bloqueado.dart';
 import 'package:strong_core/MODELS/user_preferences.dart';
-import 'package:strong_core/MODELS/video_model.dart';
+import 'package:strong_core/MODELS/_____video_model.dart';
 import 'package:intl/intl.dart';
 import 'package:strong_core/SCREENS/corpo_humano.dart';
 
@@ -46,7 +46,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
   void caregaMap() async {
     final DocumentSnapshot dadosUsuario = await FirebaseFirestore.instance
         .collection('user')
-        .doc(FirebaseAuth.instance.currentUser!.displayName!)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
     setState(() {
       horario = (dadosUsuario.get(
@@ -87,17 +87,15 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
     List<Widget> videos = [
       VideoScreen(
           tempo: 20,
-          url:
-              'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+          url: 'Assets/video/prancha.mp4', //'Assets/video/prancha.mp4',
           nomeExercicio: 'borboleta',
-          loop: 2) //Video(20, nomeVideos),
+          loop: 3) //Video(20, nomeVideos),
       ,
       VideoScreen(
           tempo: 10,
-          url:
-              'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+          url: 'Assets/video/ponte.mp4',
           nomeExercicio: 'abelha',
-          loop: 2) //Video(20, nomeVideos),
+          loop: 3) //Video(20, nomeVideos),
       ,
     ];
 
@@ -281,8 +279,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                         onPressed: () async {
                           await FirebaseFirestore.instance
                               .collection('user')
-                              .doc(FirebaseAuth
-                                  .instance.currentUser!.displayName!)
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
                               .get()
                               .then((value) {
                             horario =
@@ -290,38 +287,22 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                         as Timestamp)
                                     .toDate();
                           });
+                          for (var element in videos) {
+                            await Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return element;
+                            }));
+                          }
 
-                          setState(() {
-                            stepBarControll++;
-                          });
                           await UserPreferences.setSteps(
                               widget.numeroSemana, stepBarControll);
-                          await FirebaseFirestore.instance
-                              .collection('user')
-                              .doc(FirebaseAuth
-                                  .instance.currentUser!.displayName!)
-                              .update({
-                            //verificar se o update apaga os dados dos formularios
-                            '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}':
-                                horario = DateTime.now().add(Duration(days: 2)),
-                          });
 
-                          setState(() {
-                            if (horario != null)
-                              tempBotao = horario!
-                                      .difference(DateTime.now())
-                                      .inHours
-                                      .toString() +
-                                  ' HORAS';
-                          });
-
-                          print(tempBotao);
+                          /*      print(tempBotao);
                           if (stepBarControll == 3) {
                             //lembrar de verificar para semana 9
                             await FirebaseFirestore.instance
                                 .collection('user')
-                                .doc(FirebaseAuth
-                                    .instance.currentUser!.displayName!)
+                                .doc(FirebaseAuth.instance.currentUser!.uid!)
                                 .update({
                               'DIA_${widget.title}': stepBarControll,
                               '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana + 1}':
@@ -331,7 +312,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                           }
 
                           //AINDA PRECISA VER SE É O PRIMERO ACESSO DA PESSOA
-                          /* if (horario == null ||
+                          if (horario == null ||
                               DateTime.now().isAfter(horario!)) {
                             for (var element in videos) {
                               await Navigator.push(context,
@@ -378,7 +359,25 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                         DateTime.now().add(Duration(days: 2)),
                               });
                             }
-                          }*/
+                          }
+                          await FirebaseFirestore.instance
+                              .collection('user')
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .update({
+                            //verificar se o update apaga os dados dos formularios
+                            '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}':
+                                horario = DateTime.now().add(Duration(days: 2)),
+                          });
+
+                          setState(() {
+                            if (horario != null) {
+                              tempBotao = horario!
+                                      .difference(DateTime.now())
+                                      .inHours
+                                      .toString() +
+                                  ' HORAS';
+                            }
+                          });*/
                         },
                       ),
                       MaterialButton(

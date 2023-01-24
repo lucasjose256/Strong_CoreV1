@@ -37,17 +37,20 @@ class _VideoScreenState extends State<VideoScreen> {
 
   _VideoScreenState(this.tempo, this.url, this.nomeExercicio, this.loop);
 
+  @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(url);
+    _controller = VideoPlayerController.asset(url);
 
     _controller!.addListener(() {
-      if (mounted) setState(() {});
+      setState(() {});
     });
     _controller!.setLooping(true);
-    _controller!.initialize().then((_) => setState(() {}));
+    _controller!.initialize().then((_) {
+      setState(() {});
+    });
     _controller!.play();
-    _controller!.setVolume(0);
+    _controller!.setVolume(5);
   }
 
   @override
@@ -75,10 +78,6 @@ class _VideoScreenState extends State<VideoScreen> {
             const SizedBox(
               width: 5,
             ),
-            Text(tempo.toString(),
-                style: const TextStyle(
-                  fontSize: 30,
-                )),
           ],
         ),
         const SizedBox(
@@ -126,26 +125,34 @@ class _VideoScreenState extends State<VideoScreen> {
                     onComplete: () async {
                       //  circulatTimerControl.reset();
                       //  circulatTimerControl.reset();
+
+                      //_controller!.dispose();
                       flag += (await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => TelaEspera(),
                           )))!;
+                      _controller!.notifyListeners();
                       if (flag == loop - 1) {
                         //AQUI TERMINA O EXRCICIO
-                        if (mounted)
+                        if (mounted) {
                           setState(() {
                             Navigator.pop(
                               context,
                             );
+                            _controller!.dispose();
                           });
+                        }
                       }
-                      if (flag < loop)
-                        setState(() {
-                          // circulatTimerControl.restart(duration: 10);
-                          circulatTimerControl.reset();
-                          circulatTimerControl.start();
-                        });
+                      if (flag < loop) {
+                        if (mounted) {
+                          setState(() {
+                            // circulatTimerControl.restart(duration: 10);
+                            circulatTimerControl.reset();
+                            circulatTimerControl.start();
+                          });
+                        }
+                      }
 
                       debugPrint('Countdown Ended');
                     },
@@ -169,7 +176,7 @@ class _VideoScreenState extends State<VideoScreen> {
                 circulatTimerControl.pause();
                 DocumentReference documentReference = FirebaseFirestore.instance
                     .collection('user')
-                    .doc(user!.displayName);
+                    .doc(user!.uid);
 
                 await documentReference.update(
                     //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
@@ -196,7 +203,7 @@ class _VideoScreenState extends State<VideoScreen> {
         MaterialButton(
           child: Text('PLAY'),
           onPressed: () {
-            if (mounted)
+            if (mounted) {
               setState(() {
                 circulatTimerControl.resume();
                 if (_controller!.value.isPlaying) {
@@ -205,6 +212,7 @@ class _VideoScreenState extends State<VideoScreen> {
                   _controller!.play();
                 }
               });
+            }
           },
           color: Colors.green,
         ),

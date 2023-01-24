@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
-import 'package:strong_core/MODELS/video_model.dart';
+import 'package:strong_core/MODELS/_____video_model.dart';
 import 'package:intl/intl.dart';
 
 class CartaoBloqueado extends StatefulWidget {

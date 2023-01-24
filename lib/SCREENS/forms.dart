@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:strong_core/MODELS/VideoTest.dart';
 import 'package:strong_core/MODELS/card_expansivel_semana.dart';
 import 'package:strong_core/MODELS/cartao_bloqueado.dart';
 import 'package:strong_core/MODELS/user_preferences.dart';
-import 'package:strong_core/MODELS/video_model.dart';
+import 'package:strong_core/MODELS/_____video_model.dart';
 import 'package:strong_core/SCREENS/basic_questions.dart';
 import 'package:strong_core/SCREENS/corpo_humano.dart';
 import 'package:strong_core/SCREENS/questions.dart';
@@ -13,6 +14,7 @@ import 'package:strong_core/SCREENS/questions2.dart';
 import 'package:strong_core/SCREENS/questions3.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
 
+import '../provider/information_forms.dart';
 import '../style/add_pop_up_card.dart';
 
 class Forms extends StatefulWidget {
@@ -51,6 +53,7 @@ class _FormsState extends State<Forms> {
 
   @override
   Widget build(BuildContext context) {
+    final nome = Provider.of<Information>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Strong Core'),
@@ -62,10 +65,10 @@ class _FormsState extends State<Forms> {
         onStepContinue: () async {
           final isLastStep = stepCounter == stepsList().length - 1;
           if (isLastStep) {
-            /* await FirebaseFirestore.instance
+            await FirebaseFirestore.instance
                 .collection('user')
-                .doc(FirebaseAuth.instance.currentUser!.displayName!)
-                .set({'Quanto tempo vc passa no pc': q2.answers[1]});*/
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .set({'seu nome é': nome.nome});
             await UserPreferences.setBool(false);
 
             Navigator.of(context).push(

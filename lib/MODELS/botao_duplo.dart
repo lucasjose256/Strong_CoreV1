@@ -93,7 +93,7 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                   corProvider.changeColor(temp["color"]);
                   membroEsq.graudaDor = temp["numero"];
                   widget.painDegreeleft = membroEsq.graudaDor;
-                  if (cor2Provider.cor == null) {
+                  if (cor2Provider.cor == null && widget.colorRight == null) {
                     Map temp2 = await Navigator.push(
                         context,
                         HeroDialogRoute(
@@ -117,8 +117,9 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                     return CustomRectTween(begin: begin!, end: end!);
                   },
                   child: Material(
-                    color:
-                        corProvider.cor ?? widget.colorRight, // ?? Colors.grey,
+                    color: corProvider.cor ??
+                        widget.colorleft ??
+                        Colors.grey, // ?? Colors.grey,
                     elevation: 2,
                     shape: const CircleBorder(),
                     child: Padding(
@@ -172,7 +173,7 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                   widget.painDegreeRight = temp3["numero"];
                   cor2Provider.changeColor(temp3["color"]);
 
-                  if (corProvider.cor == null) {
+                  if (corProvider.cor == null && widget.colorleft == null) {
                     Map temp4 = await Navigator.push(
                         context,
                         HeroDialogRoute(
@@ -196,7 +197,9 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                     return CustomRectTween(begin: begin!, end: end!);
                   },
                   child: Material(
-                    color: cor2Provider.cor ?? Colors.grey, // ?? Colors.grey,
+                    color: cor2Provider.cor ??
+                        widget.colorRight ??
+                        Colors.grey, // ?? Colors.grey,
                     elevation: 2,
                     shape: const CircleBorder(),
                     child: Padding(

@@ -13,6 +13,7 @@ import 'package:strong_core/SCREENS/questions.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:strong_core/SCREENS/sing_up_Page.dart';
 import 'package:strong_core/provider/colors2.dart';
+import 'package:strong_core/provider/information_forms.dart';
 import 'package:strong_core/style/add_pop_up_card.dart';
 
 import 'API/google_sign_in.dart';
@@ -49,7 +50,7 @@ class _MyAppState extends State<MyApp> {
   void caregaMap() async {
     final DocumentSnapshot dadosUsuario = await FirebaseFirestore.instance
         .collection('user')
-        .doc(FirebaseAuth.instance.currentUser!.displayName!)
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
     //mudar para um provider
     setState(() {
@@ -75,7 +76,8 @@ class _MyAppState extends State<MyApp> {
       if (primeiroAcessoCompleto!) {
         firstWidget = Semanas();
       } else {
-        firstWidget = Forms();
+        firstWidget = ChangeNotifierProvider<Information>(
+            create: (context) => Information(), child: Forms());
       } //Question();
       //firstWidget = Semanas();
     } else {
@@ -109,11 +111,11 @@ class _MyAppState extends State<MyApp> {
 
 class MyHomePage extends StatelessWidget {
   final bool isLandingPage;
-  const MyHomePage(this.isLandingPage);
+  MyHomePage(this.isLandingPage);
+  final TextEditingController _emailControler = TextEditingController();
+  final TextEditingController _passwordControler = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _emailControler = TextEditingController();
-    final TextEditingController _passwordControler = TextEditingController();
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     Widget landingWidget;
 
@@ -235,11 +237,12 @@ class MyHomePage extends StatelessWidget {
                     if (isLandingPage) {
                       landingWidget = Semanas();
                     } else {
-                      landingWidget = Forms();
+                      landingWidget = ChangeNotifierProvider<Information>(
+                          create: (context) => Information(), child: Forms());
                     }
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (constect) => Semanas(),
+                          builder: (constect) => landingWidget,
                           settings: RouteSettings()),
                     );
                   },
@@ -274,16 +277,21 @@ class MyHomePage extends StatelessWidget {
                         listen: false);
                     await provider.googleLogin();
 
-                    await FirebaseFirestore.instance
-                        .collection('user')
-                        .doc(FirebaseAuth.instance.currentUser!.displayName!)
-                        .set({
-                      'PRIMEIRO_ACESSO_COMPLETO': false,
-                    });
-
+                    if (isLandingPage) {
+                      landingWidget = Semanas();
+                    } else {
+                      await FirebaseFirestore.instance
+                          .collection('user')
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .set({
+                        'PRIMEIRO_ACESSO_COMPLETO': false,
+                      });
+                      landingWidget = ChangeNotifierProvider<Information>(
+                          create: (context) => Information(), child: Forms());
+                    }
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (constect) => Semanas(),
+                          builder: (constect) => landingWidget,
                           settings: RouteSettings()),
                     );
                   },

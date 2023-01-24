@@ -134,6 +134,8 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                     child: ChangeNotifierProvider<Cor1>(
                         create: (context) => Cor1(),
                         child: data = BotaoDuplo(
+                          colorRight: cores[3],
+                          colorleft: cores[4],
                           phraseCard: 'do OMBRO',
                           buttunDistance: 50,
                           numberButtun: '8',
@@ -265,20 +267,16 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
               padding: EdgeInsets.only(top: 8, bottom: 8),
               color: ui.Color.fromARGB(255, 202, 43, 32),
               onPressed: () async {
-                setState(() {
-                  ombroDir.newColor = Colors.purple;
-                });
                 await FirebaseFirestore.instance
                     .collection('user')
-                    .doc(FirebaseAuth.instance.currentUser!.displayName!)
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
                     .update({
-                  'LUCAS': 'LUCAS',
                   'DATA DIREITO': data.painDegreeRight,
                   'DATA ESQUERDO': data.painDegreeleft
                 });
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (constect) => const Semanas(),
+                      builder: (constect) => Semanas(),
                       settings: const RouteSettings()),
                 );
               },

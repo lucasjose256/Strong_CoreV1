@@ -1,7 +1,7 @@
 import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
 import 'package:strong_core/MODELS/VideoTest.dart';
-import 'package:strong_core/MODELS/video_model.dart';
+import 'package:strong_core/MODELS/_____video_model.dart';
 
 class CardSemanas extends StatefulWidget {
   String title;

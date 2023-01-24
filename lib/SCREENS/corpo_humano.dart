@@ -257,13 +257,15 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                   regiaoCervical1.graudaDor,
                   costasSuperior2.graudaDor,
                   costasMedia3.graudaDor,
+                  data!.painDegreeRight,
+                  data.painDegreeleft
                 ];
                 await UserPreferences.setList(grauDores);
                 await UserPreferences.setBool(true);
 
                 var firebase = await FirebaseFirestore.instance
                     .collection('user')
-                    .doc(FirebaseAuth.instance.currentUser!.displayName!);
+                    .doc(FirebaseAuth.instance.currentUser!.uid);
                 firebase.update({
                   'PRIMEIRO_ACESSO_COMPLETO': true,
                 });
@@ -315,7 +317,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
 
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (constect) => const Semanas(),
+                      builder: (constect) => Semanas(),
                       settings: const RouteSettings()),
                 );
               },

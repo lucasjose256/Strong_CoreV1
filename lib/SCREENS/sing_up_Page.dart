@@ -3,27 +3,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:strong_core/SCREENS/basic_questions.dart';
+import 'package:strong_core/SCREENS/forms.dart';
 
 class SingUpPage extends StatefulWidget {
-  const SingUpPage({Key? key}) : super(key: key);
-//colocar após a pessoa fazer o registro, o formulario de questoes
-//as quais somente poderam ser preenchidas nesse instante
+  SingUpPage({Key? key}) : super(key: key);
+
   @override
-  _SingUpPageState createState() => _SingUpPageState();
+  State<SingUpPage> createState() => _SingUpPageState();
 }
 
 class _SingUpPageState extends State<SingUpPage> {
+//colocar após a pessoa fazer o registro, o formulario de questoes
   bool isActive = false;
-
+  TextEditingController _emailControler = TextEditingController();
+  TextEditingController _passwordControler = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _emailControler = TextEditingController();
-    final TextEditingController _passwordControler = TextEditingController();
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
+      body: ListView(children: [
+        Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,20 +49,20 @@ class _SingUpPageState extends State<SingUpPage> {
               ),
               Container(
                 child: TextFormField(
-                  validator: (value) => value != null && value.contains('@')
-                      ? 'E-mail inválido'
-                      : null,
                   controller: _emailControler,
-                  style: const TextStyle(color: Colors.white),
+                  onChanged: (value) {
+                    setState(() {});
+                  },
+                  style: TextStyle(color: Colors.white),
                   keyboardType: TextInputType.emailAddress,
                   autofocus: false,
                   decoration: InputDecoration(
-                      hintStyle: const TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.white),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide.none),
                       fillColor: Colors.red[200],
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.email,
                         color: Colors.red,
                       ),
@@ -77,16 +77,15 @@ class _SingUpPageState extends State<SingUpPage> {
               Container(
                 child: TextFormField(
                   obscureText: true,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white),
                   keyboardType: TextInputType.emailAddress,
-                  autofocus: false,
                   decoration: InputDecoration(
-                      hintStyle: const TextStyle(color: Colors.white),
+                      hintStyle: TextStyle(color: Colors.white),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                           borderSide: BorderSide.none),
                       fillColor: Colors.red[200],
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.lock,
                         color: Colors.red,
                       ),
@@ -126,14 +125,18 @@ class _SingUpPageState extends State<SingUpPage> {
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
                   onPressed: () async {
+                    // Unhandled Exception:
+                    //[firebase_auth/email-already-in-use] The email address is already in use by another account.
+
+                    print(_emailControler.text);
                     if (_passwordControler.text != '' ||
-                        _passwordControler.text.length < 8) {}
+                        _passwordControler.text.length > 5) {}
                     await _firebaseAuth.createUserWithEmailAndPassword(
                         email: _emailControler.text,
                         password: _passwordControler.text);
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (constect) => const BasicQuestions(),
+                          builder: (constect) => Forms(),
                           settings: const RouteSettings()),
                     );
                   },
@@ -145,7 +148,7 @@ class _SingUpPageState extends State<SingUpPage> {
             ],
           ),
         ),
-      ),
+      ]),
     );
   }
 }
