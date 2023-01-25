@@ -5,7 +5,7 @@ class InfoSemanas {
   final Color backGroundColor;
   final String titulo;
   //final Widget checkBox;
-  final Widget Conteudo;
+  final List<Widget> Conteudo;
   final int numeroSem;
   InfoSemanas(this.backGroundColor, this.titulo, this.Conteudo, this.numeroSem);
 }

@@ -31,26 +31,17 @@ class _VideoScreenState extends State<VideoScreen> {
   final String url;
   final String nomeExercicio;
   final int loop;
-  int flag = 0;
+  int flag = 1;
   VideoPlayerController? _controller;
-  CountDownController circulatTimerControl = CountDownController();
-
+  CountDownController? _circulatTimerControl;
   _VideoScreenState(this.tempo, this.url, this.nomeExercicio, this.loop);
 
+  bool showTimer = true;
   @override
   void initState() {
     super.initState();
+    _circulatTimerControl = CountDownController();
     _controller = VideoPlayerController.asset(url);
-
-    _controller!.addListener(() {
-      setState(() {});
-    });
-    _controller!.setLooping(true);
-    _controller!.initialize().then((_) {
-      setState(() {});
-    });
-    _controller!.play();
-    _controller!.setVolume(5);
   }
 
   @override
@@ -59,29 +50,63 @@ class _VideoScreenState extends State<VideoScreen> {
     super.dispose();
   }
 
+  void resumeController() {
+    _circulatTimerControl!.resume();
+  }
+
   @override
   Widget build(BuildContext context) {
     var user = FirebaseAuth.instance.currentUser;
+    bool delay = true;
+    Key key = Key('v1');
     return Scaffold(
       body: Column(children: [
         const SizedBox(
-          height: 30,
+          height: 60,
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.9,
+          decoration: const BoxDecoration(
+              color: Color.fromARGB(169, 113, 112, 112),
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 20,
+              ),
+              Center(
+                child: Container(
+                  /*   decoration: const BoxDecoration(
+                      color: Color.fromARGB(169, 113, 112, 112),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),*/
+                  child: Text(
+                    nomeExercicio,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 32),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 35,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.19,
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(225, 69, 69, 69),
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: Text('${flag}/${loop}',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 32)),
+              )
+            ],
+          ),
         ),
         const SizedBox(
-          height: 50,
-        ),
-        Row(
-          children: [
-            const SizedBox(
-              width: 50,
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 30,
+          height: 60,
         ),
         Padding(
             padding: const EdgeInsets.all(8.0),
@@ -93,71 +118,87 @@ class _VideoScreenState extends State<VideoScreen> {
                     aspectRatio: _controller!.value.aspectRatio),
               ),
               Positioned(
-                left: 300,
-                child: CircularCountDownTimer(
-                    duration: 5,
-                    initialDuration: 0,
-                    controller: circulatTimerControl,
-                    width: MediaQuery.of(context).size.width / 8.8,
-                    height: MediaQuery.of(context).size.height / 8.8,
-                    ringColor: Colors.grey[300]!,
-                    ringGradient: null,
-                    fillColor: Color.fromARGB(255, 114, 114, 114),
-                    fillGradient: null,
-                    backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                    backgroundGradient: null,
-                    strokeWidth: 20.0,
-                    strokeCap: StrokeCap.round,
-                    textStyle: TextStyle(
-                        fontSize: 33.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                    textFormat: CountdownTextFormat.S,
-                    isReverse: true,
-                    isReverseAnimation: true,
-                    isTimerTextShown: true,
-                    autoStart: true,
-                    onStart: () {
-                      //circulatTimerControl.reset()
-                      debugPrint('flag: $flag');
-                      debugPrint('Countdown Started');
-                    },
-                    onComplete: () async {
-                      //  circulatTimerControl.reset();
-                      //  circulatTimerControl.reset();
+                  left: MediaQuery.of(context).size.width * 0.78,
+                  child: LayoutBuilder(builder: ((p0, p1) {
+                    Future.delayed(Duration(seconds: 3));
+                    return CircularCountDownTimer(
+                        duration: widget.tempo + 1,
+                        initialDuration: 0,
+                        controller: _circulatTimerControl,
+                        width: MediaQuery.of(context).size.width / 8.8,
+                        height: MediaQuery.of(context).size.height / 8.8,
+                        ringColor: Colors.grey[300]!,
+                        ringGradient: null,
+                        fillColor: Color.fromARGB(255, 114, 114, 114),
+                        fillGradient: null,
+                        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                        backgroundGradient: null,
+                        strokeWidth: 20.0,
+                        strokeCap: StrokeCap.round,
+                        textStyle: TextStyle(
+                            fontSize: 33.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                        textFormat: CountdownTextFormat.S,
+                        isReverse: true,
+                        isReverseAnimation: true,
+                        isTimerTextShown: true,
+                        // autoStart: true,
+                        onStart: () async {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            _controller!.addListener(() {
+                              setState(() {});
+                            });
+                            _controller!.initialize().then((_) {
+                              setState(() {});
+                            });
+                            _controller!.setLooping(true);
+                            _controller!.setVolume(0);
+                            _controller!.play();
+                            // Add Your Code here.
+                          });
 
-                      //_controller!.dispose();
-                      flag += (await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => TelaEspera(),
-                          )))!;
-                      _controller!.notifyListeners();
-                      if (flag == loop - 1) {
-                        //AQUI TERMINA O EXRCICIO
-                        if (mounted) {
-                          setState(() {
-                            Navigator.pop(
+                          //   _controller!.setLooping(true);
+                          print('sssssss');
+                          //circulatTimerControl.reset()
+
+                          debugPrint('flag: $flag');
+                          debugPrint('Countdown Started');
+                        },
+                        onComplete: () async {
+                          //  circulatTimerControl.reset();
+                          //  circulatTimerControl.reset();
+
+                          flag += (await Navigator.push(
                               context,
-                            );
-                            _controller!.dispose();
-                          });
-                        }
-                      }
-                      if (flag < loop) {
-                        if (mounted) {
-                          setState(() {
-                            // circulatTimerControl.restart(duration: 10);
-                            circulatTimerControl.reset();
-                            circulatTimerControl.start();
-                          });
-                        }
-                      }
+                              MaterialPageRoute(
+                                builder: (context) => TelaEspera(),
+                              )))!;
+                          // _controller!.notifyListeners();
+                          if (flag == loop) {
+                            //AQUI TERMINA O EXRCICIO
+                            if (mounted) {
+                              setState(() {
+                                Navigator.pop(
+                                  context,
+                                );
+                              });
+                            }
+                          }
+                          if (flag < loop) {
+                            if (mounted) {
+                              //circulatTimerControl.restart(duration: 10);
+                              setState(() {
+                                _circulatTimerControl!.reset();
+                                _circulatTimerControl!.start();
+                              });
+                            }
+                          }
 
-                      debugPrint('Countdown Ended');
-                    },
-                    onChange: (String timeStamp) {}),
-              )
+                          debugPrint('Countdown Ended');
+                        },
+                        onChange: (String timeStamp) async {});
+                  })))
             ])),
         const SizedBox(
           height: 20,
@@ -166,46 +207,49 @@ class _VideoScreenState extends State<VideoScreen> {
           height: 10,
         ),
         MaterialButton(
-          child: const Text(
-            'P A R A R',
-            style: TextStyle(color: Colors.white),
+          child: CircleAvatar(
+            backgroundColor: Color.fromARGB(255, 57, 56, 56),
+            radius: 60,
+            child: const Text(
+              'P A R A R',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
-          onPressed: () {
+          onPressed: () async {
             if (mounted) {
-              setState(() async {
-                circulatTimerControl.pause();
-                DocumentReference documentReference = FirebaseFirestore.instance
-                    .collection('user')
-                    .doc(user!.uid);
+              _circulatTimerControl!.pause();
+              DocumentReference documentReference =
+                  FirebaseFirestore.instance.collection('user').doc(user!.uid);
 
-                await documentReference.update(
-                    //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
-                    {'EXERCICIO{flag}': circulatTimerControl.getTime()});
+              await documentReference.update(
+                  //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                  {'EXERCICIO{flag}': _circulatTimerControl!.getTime()});
 
-                if (flag == loop - 1) {
-                  //AQUI TERMINA O EXRCICIO
-                  Navigator.pop(context);
-                } else
-                  flag += (await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TelaEspera(),
-                      )))!;
-                circulatTimerControl.start();
-              });
+              if (flag == loop) {
+                //AQUI TERMINA O EXRCICIO
+                Navigator.pop(context);
+              } else {
+                flag += (await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TelaEspera(),
+                    )))!;
+              }
+              _circulatTimerControl!.start();
+              setState(() {});
             }
           },
-          color: const Color.fromARGB(255, 183, 183, 183),
+          //  color: const Color.fromARGB(255, 183, 183, 183),
         ),
         const SizedBox(
           height: 10,
         ),
-        MaterialButton(
+        /*  MaterialButton(
           child: Text('PLAY'),
           onPressed: () {
             if (mounted) {
               setState(() {
-                circulatTimerControl.resume();
+                _circulatTimerControl!.resume();
                 if (_controller!.value.isPlaying) {
                   _controller!.pause();
                 } else {
@@ -215,7 +259,7 @@ class _VideoScreenState extends State<VideoScreen> {
             }
           },
           color: Colors.green,
-        ),
+        ),*/
       ]),
     );
   }

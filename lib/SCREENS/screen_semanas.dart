@@ -215,6 +215,7 @@ class _SemanasState extends State<Semanas> {
                       // print(horario == null ? horario!.day.toString() : 'null');
 
                       return CartaoSemanas(
+                        vd: e.Conteudo,
                         cor: e.backGroundColor,
                         title: e.titulo,
                         numeroSemana: e.numeroSem,

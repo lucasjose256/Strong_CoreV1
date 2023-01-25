@@ -18,17 +18,21 @@ class CartaoSemanas extends StatefulWidget {
   final Color cor;
   final String title;
   final int numeroSemana;
-  const CartaoSemanas(
+  final List<Widget>? vd;
+  CartaoSemanas(
       {Key? key,
+      this.vd,
       required this.cor,
       required this.title,
       required this.numeroSemana})
       : super(key: key);
-  _CartaoSemanasState createState() => _CartaoSemanasState();
+  _CartaoSemanasState createState() => _CartaoSemanasState(vd);
 }
 
 class _CartaoSemanasState extends State<CartaoSemanas> {
   DateTime? horario;
+  List<Widget>? videos;
+  _CartaoSemanasState(this.videos);
   @override
   void initState() {
     // TODO: implement initState
@@ -84,20 +88,6 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
       'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
     ];
     int i = 0;
-    List<Widget> videos = [
-      VideoScreen(
-          tempo: 20,
-          url: 'Assets/video/prancha.mp4', //'Assets/video/prancha.mp4',
-          nomeExercicio: 'borboleta',
-          loop: 3) //Video(20, nomeVideos),
-      ,
-      VideoScreen(
-          tempo: 10,
-          url: 'Assets/video/ponte.mp4',
-          nomeExercicio: 'abelha',
-          loop: 3) //Video(20, nomeVideos),
-      ,
-    ];
 
     if (isExpanded) {
       setState(() {});
@@ -287,7 +277,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                         as Timestamp)
                                     .toDate();
                           });
-                          for (var element in videos) {
+                          for (var element in videos!) {
                             await Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
                               return element;
