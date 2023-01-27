@@ -11,11 +11,17 @@ final LISTASEMANAS = [
   InfoSemanas(Color.fromARGB(255, 199, 98, 98), 'SEMANA 6', videos, 6),
   InfoSemanas(Color.fromARGB(255, 248, 0, 140), 'SEMANA 7', videos, 7),
 ];
-List<Widget> videos = [
+List<VideoScreen> videos = [
   VideoScreen(
       tempo: 5,
-      url: 'Assets/video/prancha.mp4', //'Assets/video/prancha.mp4',
+      url: 'Assets/video/pranchaESQ.mp4', //'Assets/video/prancha.mp4',
       nomeExercicio: 'PRANCHA',
+      loop: 3) //Video(20, nomeVideos),
+  ,
+  VideoScreen(
+      tempo: 5,
+      url: 'Assets/video/ponte.mp4',
+      nomeExercicio: 'PONTE',
       loop: 3) //Video(20, nomeVideos),
   ,
   VideoScreen(
