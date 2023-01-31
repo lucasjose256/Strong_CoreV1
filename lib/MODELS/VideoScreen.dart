@@ -2,6 +2,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:strong_core/MODELS/VideoDIR_ESQ.dart';
 import 'package:video_player/video_player.dart';
 
 import 'VideoTest.dart';
@@ -64,6 +65,7 @@ class _VideoScreenState extends State<VideoScreen> {
   @override
   Widget build(BuildContext context) {
     var user = FirebaseAuth.instance.currentUser;
+    int tempoEspera = 2;
     bool delay = true;
     Key key = Key('v1');
     return Scaffold(
@@ -91,7 +93,7 @@ class _VideoScreenState extends State<VideoScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 32),
+                        fontSize: 22),
                   ),
                 ),
               ),
@@ -177,22 +179,65 @@ class _VideoScreenState extends State<VideoScreen> {
                             onComplete: () async {
                               //  circulatTimerControl.reset();
                               //  circulatTimerControl.reset();
-
-                              flag += (await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TelaEspera(),
-                                  )))!;
-                              // _controller!.notifyListeners();
-                              /*    if (widget.nomeExercicioDE != null) {
-                                Navigator.push(
+                              if (flag == loop &&
+                                  widget.nomeExercicioDE == null) {
+                                flag += (await Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => VideoScreen(tempo:tempo,loop: 1,nomeExercicio: widget.nomeExercicioDE!,url: ),
+                                      builder: (context) =>
+                                          TelaEspera(tempoEspera: 6),
+                                    )))!;
+                                _controller!.notifyListeners();
+                              } else {
+                                flag += (await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          TelaEspera(tempoEspera: 2),
+                                    )))!;
+                                _controller!.notifyListeners();
+                              }
+                              if (widget.nomeExercicioDE != null) {
+                                if (flag == loop + 1) {
+                                  tempoEspera = 10;
+                                }
+
+                                await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => VideoDirEsq(
+                                          tempoEspera: tempoEspera,
+                                          flag: flag - 1,
+                                          tempo: tempo,
+                                          loop: loop,
+                                          nomeExercicio:
+                                              widget.nomeExercicioDE!,
+                                          url: widget.urlDE!),
                                     ));
-                              }*/
-                              if (flag == loop) {
+
+                                if (flag == loop + 1) {
+                                  //AQUI TERMINA O EXRCICIO
+                                  if (mounted) {
+                                    Navigator.pop(
+                                      context,
+                                    );
+                                  }
+                                }
+                                if (flag < loop + 1) {
+                                  if (mounted) {
+                                    //circulatTimerControl.restart(duration: 10);
+                                    setState(() {
+                                      _circulatTimerControl!.reset();
+                                      _circulatTimerControl!.start();
+                                    });
+                                  }
+                                }
+                              }
+
+                              if (flag == loop + 1 &&
+                                  widget.nomeExercicioDE == null) {
                                 //AQUI TERMINA O EXRCICIO
+
                                 if (mounted) {
                                   setState(() {
                                     Navigator.pop(
@@ -201,7 +246,8 @@ class _VideoScreenState extends State<VideoScreen> {
                                   });
                                 }
                               }
-                              if (flag < loop) {
+                              if (flag < loop + 2 &&
+                                  widget.nomeExercicioDE == null) {
                                 if (mounted) {
                                   //circulatTimerControl.restart(duration: 10);
                                   setState(() {
@@ -256,7 +302,7 @@ class _VideoScreenState extends State<VideoScreen> {
                   flag += (await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => TelaEspera(),
+                        builder: (context) => TelaEspera(tempoEspera: 6),
                       )))!;
                 }
               } else {
