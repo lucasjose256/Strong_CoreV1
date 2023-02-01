@@ -14,16 +14,16 @@ class VideoScreen extends StatefulWidget {
   final int loop;
   String? nomeExercicioDE;
   String? urlDE;
-
+  UniqueKey? key2;
   VideoScreen(
-      {Key? key,
+      {this.key2,
       this.urlDE,
       this.nomeExercicioDE,
       required this.tempo,
       required this.url,
       required this.nomeExercicio,
       required this.loop})
-      : super(key: key);
+      : super();
 
   @override
   State<VideoScreen> createState() =>
@@ -37,7 +37,7 @@ class _VideoScreenState extends State<VideoScreen> {
   final String nomeExercicio;
   final int loop;
   int flag = 1;
-  VideoPlayerController? _controller;
+  late VideoPlayerController _controller;
   CountDownController? _circulatTimerControl;
 
   _VideoScreenState(this.tempo, this.url, this.nomeExercicio, this.loop);
@@ -48,7 +48,10 @@ class _VideoScreenState extends State<VideoScreen> {
   void initState() {
     super.initState();
     _circulatTimerControl = CountDownController();
-    _controller = VideoPlayerController.asset(url);
+    _controller = VideoPlayerController.asset(
+      url,
+    );
+
     _inicializeVideoPlayer = _controller!.initialize();
   }
 
@@ -118,19 +121,17 @@ class _VideoScreenState extends State<VideoScreen> {
           height: 60,
         ),
         Padding(
+            //priciso mudar o clipreact para o future builder
             padding: const EdgeInsets.all(8.0),
-            child: Stack(children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(30)),
-                child: AspectRatio(
-                    child: VideoPlayer(_controller!),
-                    aspectRatio: _controller!.value.aspectRatio),
-              ),
-              FutureBuilder(
-                  future: _inicializeVideoPlayer,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return Positioned(
+            child: FutureBuilder(
+                future: _inicializeVideoPlayer,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Stack(children: [
+                      Positioned(
+                        child: buildVideo(),
+                      ),
+                      Positioned(
                         left: MediaQuery.of(context).size.width * 0.78,
                         child: CircularCountDownTimer(
                             duration: widget.tempo + 1,
@@ -154,7 +155,7 @@ class _VideoScreenState extends State<VideoScreen> {
                             isReverse: true,
                             isReverseAnimation: true,
                             isTimerTextShown: true,
-                            // autoStart: true,
+                            //autoStart: true,
                             onStart: () async {
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 _controller!.addListener(() {
@@ -169,6 +170,8 @@ class _VideoScreenState extends State<VideoScreen> {
                                 // Add Your Code here.
                               });
 
+                              // Add Your Code here.
+
                               //   _controller!.setLooping(true);
                               print('sssssss');
                               //circulatTimerControl.reset()
@@ -179,27 +182,27 @@ class _VideoScreenState extends State<VideoScreen> {
                             onComplete: () async {
                               //  circulatTimerControl.reset();
                               //  circulatTimerControl.reset();
+                              //   _controller!.notifyListeners();
                               if (flag == loop &&
                                   widget.nomeExercicioDE == null) {
                                 flag += (await Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          TelaEspera(tempoEspera: 6),
+                                          TelaEspera(tempoEspera: 2),
                                     )))!;
-                                _controller!.notifyListeners();
                               } else {
                                 flag += (await Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          TelaEspera(tempoEspera: 2),
+                                          TelaEspera(tempoEspera: 1),
                                     )))!;
-                                _controller!.notifyListeners();
                               }
+                              _controller.notifyListeners();
                               if (widget.nomeExercicioDE != null) {
                                 if (flag == loop + 1) {
-                                  tempoEspera = 10;
+                                  tempoEspera = 2;
                                 }
 
                                 await Navigator.push(
@@ -214,9 +217,10 @@ class _VideoScreenState extends State<VideoScreen> {
                                               widget.nomeExercicioDE!,
                                           url: widget.urlDE!),
                                     ));
-
+                                //   _controller!.notifyListeners();
                                 if (flag == loop + 1) {
                                   //AQUI TERMINA O EXRCICIO
+
                                   if (mounted) {
                                     Navigator.pop(
                                       context,
@@ -226,6 +230,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                 if (flag < loop + 1) {
                                   if (mounted) {
                                     //circulatTimerControl.restart(duration: 10);
+
                                     setState(() {
                                       _circulatTimerControl!.reset();
                                       _circulatTimerControl!.start();
@@ -239,16 +244,17 @@ class _VideoScreenState extends State<VideoScreen> {
                                 //AQUI TERMINA O EXRCICIO
 
                                 if (mounted) {
-                                  setState(() {
-                                    Navigator.pop(
-                                      context,
-                                    );
-                                  });
+                                  setState(() {});
+                                  Navigator.pop(
+                                    context,
+                                  );
                                 }
                               }
                               if (flag < loop + 2 &&
                                   widget.nomeExercicioDE == null) {
                                 if (mounted) {
+                                  // _controller.notifyListeners();
+
                                   //circulatTimerControl.restart(duration: 10);
                                   setState(() {
                                     _circulatTimerControl!.reset();
@@ -260,14 +266,15 @@ class _VideoScreenState extends State<VideoScreen> {
                               debugPrint('Countdown Ended');
                             },
                             onChange: (String timeStamp) async {}),
-                      );
-                    } else
-                      return Positioned(
-                          top: MediaQuery.of(context).size.width * 0.5,
-                          left: MediaQuery.of(context).size.width * 0.5,
-                          child: CircularProgressIndicator());
-                  })
-            ])),
+                      ),
+                    ]);
+                  } else {
+                    return Positioned(
+                        top: MediaQuery.of(context).size.width * 0.5,
+                        left: MediaQuery.of(context).size.width * 0.5,
+                        child: CircularProgressIndicator());
+                  }
+                })),
         const SizedBox(
           height: 20,
         ),
@@ -275,10 +282,10 @@ class _VideoScreenState extends State<VideoScreen> {
           height: 10,
         ),
         MaterialButton(
-          child: CircleAvatar(
+          child: const CircleAvatar(
             backgroundColor: Color.fromARGB(255, 57, 56, 56),
             radius: 60,
-            child: const Text(
+            child: Text(
               'P A R A R',
               style: TextStyle(color: Colors.white),
             ),
@@ -311,6 +318,22 @@ class _VideoScreenState extends State<VideoScreen> {
                     MaterialPageRoute(
                       builder: (context) => TelaEspera(),
                     )))!;
+                if (widget.nomeExercicioDE != null) {
+                  if (flag == loop + 1) {
+                    tempoEspera = 10;
+                  }
+                  await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => VideoDirEsq(
+                            tempoEspera: tempoEspera,
+                            flag: flag - 1,
+                            tempo: tempo,
+                            loop: loop,
+                            nomeExercicio: widget.nomeExercicioDE!,
+                            url: widget.urlDE!),
+                      ));
+                }
               }
               if (flag == loop + 1) {
                 Navigator.of(context).pop();
@@ -341,6 +364,17 @@ class _VideoScreenState extends State<VideoScreen> {
           color: Colors.green,
         ),*/
       ]),
+    );
+  }
+
+  ClipRRect buildVideo() {
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(Radius.circular(30)),
+      child: AspectRatio(
+          child: VideoPlayer(
+            _controller,
+          ),
+          aspectRatio: _controller.value.aspectRatio),
     );
   }
 }
