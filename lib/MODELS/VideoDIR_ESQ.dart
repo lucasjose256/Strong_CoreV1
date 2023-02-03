@@ -34,15 +34,34 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
   int flag;
   VideoPlayerController? _controller;
   CountDownController? _circulatTimerControl;
+
+  late VoidCallback listener;
   _VideoDirEsqState(
       this.tempo, this.url, this.nomeExercicio, this.loop, this.flag);
+  void createVideo() {
+    _controller = VideoPlayerController.asset(
+      url,
+    )
+      ..addListener(listener)
+      ..setVolume(0)
+      ..setLooping(true);
+
+    _inicializeVideoPlayer = _controller!.initialize().then(
+      (value) {
+        setState(() {});
+        _controller!.play();
+      },
+    );
+  }
 
   @override
   void initState() {
     super.initState();
     _circulatTimerControl = CountDownController();
-    _controller = VideoPlayerController.asset(url);
-    _inicializeVideoPlayer = _controller!.initialize();
+    listener = () {
+      setState(() {});
+    };
+    createVideo();
   }
 
   @override
@@ -148,7 +167,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                             isTimerTextShown: true,
                             // autoStart: true,
                             onStart: () async {
-                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                              /*   WidgetsBinding.instance.addPostFrameCallback((_) {
                                 _controller!.addListener(() {
                                   setState(() {});
                                 });
@@ -160,7 +179,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                 _controller!.play();
                                 // Add Your Code here.
                               });
-
+*/
                               //   _controller!.setLooping(true);
                               print('sssssss');
                               //circulatTimerControl.reset()
@@ -183,7 +202,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                               Navigator.pop(
                                 context,
                               );
-                              _controller!.notifyListeners();
+                              //  _controller!.notifyListeners();
                               debugPrint('Countdown Ended');
                             },
                             onChange: (String timeStamp) async {}),
