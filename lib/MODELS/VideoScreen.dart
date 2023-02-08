@@ -9,6 +9,7 @@ import 'package:video_player/video_player.dart';
 import 'VideoTest.dart';
 
 class VideoScreen extends StatefulWidget {
+  String numSemana = '';
   final int tempo;
   final String url;
   final String nomeExercicio;
@@ -19,6 +20,7 @@ class VideoScreen extends StatefulWidget {
   bool? isLast;
   VideoScreen(
       {this.isLast,
+      required this.numSemana,
       this.urlDE,
       this.nomeSemLado,
       this.nomeExercicioDE,
@@ -43,6 +45,8 @@ class _VideoScreenState extends State<VideoScreen> {
   late VideoPlayerController _controller; //
   CountDownController? _circulatTimerControl;
   late VoidCallback listener;
+
+  bool islast = false;
   _VideoScreenState(this.tempo, this.url, this.nomeExercicio, this.loop);
   late Future<void> _inicializeVideoPlayer;
   bool showTimer = true;
@@ -54,21 +58,27 @@ class _VideoScreenState extends State<VideoScreen> {
       ..setVolume(0)
       ..setLooping(true);
 
-    _inicializeVideoPlayer = _controller!.initialize().then(
-      (value) {
-        setState(() {});
-        _controller.play();
-      },
-    );
+    _inicializeVideoPlayer = _controller.initialize()
+      ..then(
+        (value) async {
+          await _controller.play();
+          if (mounted) {
+            setState(() {});
+          }
+        },
+      );
   }
 
   @override
   void initState() {
     super.initState();
     listener = () {
-      setState(() {});
+      if (mounted) {
+        setState(() {});
+      }
     };
     createVideo();
+
     _circulatTimerControl = CountDownController();
   }
 
@@ -195,13 +205,24 @@ class _VideoScreenState extends State<VideoScreen> {
                           // Add Your Code here.
 
                           //   _controller!.setLooping(true);
-                          print('sssssss');
-                          //circulatTimerControl.reset()
 
-                          debugPrint('flag: $flag');
-                          debugPrint('Countdown Started');
+                          //circulatTimerControl.reset()
                         },
                         onComplete: () async {
+                          _circulatTimerControl!.pause();
+                          var documentReference = FirebaseFirestore.instance
+                              .collection('user')
+                              .doc(user!.uid);
+                          documentReference.update(
+                              //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                              {
+                                'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                                    _circulatTimerControl!.getTime()
+                              });
+
+                          _controller.removeListener(listener);
+                          _controller.dispose();
+
                           //  circulatTimerControl.reset();
                           //  circulatTimerControl.reset();
                           //   _controller!.notifyListeners();
@@ -213,8 +234,8 @@ class _VideoScreenState extends State<VideoScreen> {
                               flag += (await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        TelaEspera(tempoEspera: 5),
+                                    builder: (context) => TelaEspera(
+                                        tempoEspera: 5, istoShowButtun: true),
                                   )))!;
                             }
                             //  _controller.notifyListeners();
@@ -230,6 +251,7 @@ class _VideoScreenState extends State<VideoScreen> {
 
                           if (widget.nomeExercicioDE != null) {
                             if (flag == loop + 1) {
+                              islast = true;
                               tempoEspera = 3;
                             }
 
@@ -237,6 +259,8 @@ class _VideoScreenState extends State<VideoScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => VideoDirEsq(
+                                      numSemana: widget.numSemana,
+                                      isLastVideo: islast,
                                       tempoEspera: tempoEspera,
                                       flag: flag - 1,
                                       tempo: tempo,
@@ -247,7 +271,8 @@ class _VideoScreenState extends State<VideoScreen> {
                             //   _controller!.notifyListeners();
                             if (flag == loop + 1) {
                               //AQUI TERMINA O EXRCICIO
-
+                              /* _controller!.removeListener(listener);
+                              _controller.dispose();*/
                               Navigator.pop(
                                 context,
                               );
@@ -281,8 +306,6 @@ class _VideoScreenState extends State<VideoScreen> {
                               _circulatTimerControl!.start();
                             }
                           }
-                          _controller!.removeListener(listener);
-                          _controller.dispose();
 
                           createVideo();
                           /*  _inicializeVideoPlayer = _controller!.initialize();
@@ -312,8 +335,10 @@ class _VideoScreenState extends State<VideoScreen> {
             ),
           ),
           onPressed: () async {
-            _inicializeVideoPlayer = _controller!.initialize();
-            _controller!.play();
+            _controller!.removeListener(listener);
+            _controller.dispose();
+            //  _controller!.play();
+
             if (mounted) {
               _circulatTimerControl!.pause();
               DocumentReference documentReference =
@@ -326,14 +351,18 @@ class _VideoScreenState extends State<VideoScreen> {
                         _circulatTimerControl!.getTime()
                   });
 
-              if (flag == loop) {
+              if (flag == loop && widget.nomeExercicioDE == null) {
                 //AQUI TERMINA O EXRCICIO
-
-                flag += (await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TelaEspera(tempoEspera: 6),
-                    )))!;
+                if (widget.isLast == true) {
+                  Navigator.pop(context);
+                } else {
+                  flag += (await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            TelaEspera(tempoEspera: 6, istoShowButtun: true),
+                      )))!;
+                }
               } else {
                 flag += (await Navigator.push(
                     context,
@@ -348,6 +377,7 @@ class _VideoScreenState extends State<VideoScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => VideoDirEsq(
+                            numSemana: widget.numSemana,
                             tempoEspera: tempoEspera,
                             flag: flag - 1,
                             tempo: tempo,
@@ -362,7 +392,8 @@ class _VideoScreenState extends State<VideoScreen> {
               }
 
               _circulatTimerControl!.start();
-              setState(() {});
+              createVideo();
+              //setState(() {});
             }
           },
           //  color: const Color.fromARGB(255, 183, 183, 183),

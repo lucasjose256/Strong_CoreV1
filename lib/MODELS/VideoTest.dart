@@ -5,7 +5,9 @@ import 'package:spotify/spotify.dart';
 
 class TelaEspera extends StatefulWidget {
   int? tempoEspera;
-  TelaEspera({Key? key, this.tempoEspera}) : super(key: key);
+  bool? istoShowButtun = false;
+  TelaEspera({Key? key, this.tempoEspera, this.istoShowButtun})
+      : super(key: key);
 
   @override
   State<TelaEspera> createState() => _TelaEsperaState();
@@ -14,7 +16,7 @@ class TelaEspera extends StatefulWidget {
 class _TelaEsperaState extends State<TelaEspera> {
   Color? color = Color.fromARGB(255, 114, 114, 114);
   int tamRelogio = 5;
-
+  bool showButtun = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,9 +62,13 @@ class _TelaEsperaState extends State<TelaEspera> {
                 },
                 onComplete: () {
                   setState(() {
-                    color = Colors.red;
+                    if (widget.istoShowButtun == true) {
+                      showButtun = true;
+                    } else {
+                      Navigator.pop(context, 1);
+                    }
                   });
-                  Navigator.pop(context, 1);
+                  //  Navigator.pop(context, 1);
 
                   /*Navigator.push(
                     context,
@@ -85,6 +91,28 @@ class _TelaEsperaState extends State<TelaEspera> {
                   debugPrint('Countdown Changed $timeStamp');
                 }),
           ),
+          SizedBox(
+            height: 80,
+          ),
+          showButtun == true
+              ? MaterialButton(
+                  child: CircleAvatar(
+                    radius: 70,
+                    backgroundColor: Color.fromARGB(255, 70, 117, 71),
+                    child: FittedBox(
+                      child: Text(
+                        'CONTINUAR',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  onPressed: (() => Navigator.pop(context, 1)),
+                )
+              : Container()
         ],
       ),
     );

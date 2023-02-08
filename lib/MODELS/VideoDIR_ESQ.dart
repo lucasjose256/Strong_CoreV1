@@ -11,15 +11,23 @@ class VideoDirEsq extends VideoScreen {
   int? flag;
   bool? isLastVideo;
   int? tempoEspera;
+  String numSemana;
   VideoDirEsq(
       {this.tempoEspera,
+      required this.numSemana,
       required int tempo,
       this.flag,
       this.isLastVideo,
       required String url,
       required String nomeExercicio,
       required int loop})
-      : super(tempo: tempo, url: url, nomeExercicio: nomeExercicio, loop: loop);
+      : super(
+          numSemana: numSemana,
+          tempo: tempo,
+          url: url,
+          nomeExercicio: nomeExercicio,
+          loop: loop,
+        );
 
   State<VideoDirEsq> createState() =>
       _VideoDirEsqState(tempo, url, nomeExercicio, loop, flag!);
@@ -66,6 +74,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
 
   @override
   void dispose() {
+    _controller!.removeListener(listener);
     _controller!.dispose();
     super.dispose();
   }
@@ -89,40 +98,42 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
           decoration: const BoxDecoration(
               color: Color.fromARGB(169, 113, 112, 112),
               borderRadius: BorderRadius.all(Radius.circular(20))),
-          child: Row(
-            children: [
-              SizedBox(
-                width: 20,
-              ),
-              Center(
-                child: Container(
-                  /*   decoration: const BoxDecoration(
-                      color: Color.fromARGB(169, 113, 112, 112),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),*/
-                  child: Text(
-                    nomeExercicio,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 22),
+          child: FittedBox(
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 20,
+                ),
+                Center(
+                  child: Container(
+                    /*   decoration: const BoxDecoration(
+                        color: Color.fromARGB(169, 113, 112, 112),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),*/
+                    child: Text(
+                      nomeExercicio,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          fontSize: 22),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 35,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.19,
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(225, 69, 69, 69),
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: Text('${flag}/${loop}',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 32)),
-              )
-            ],
+                SizedBox(
+                  width: 35,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.19,
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(225, 69, 69, 69),
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: Text('${flag}/${loop}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          fontSize: 32)),
+                )
+              ],
+            ),
           ),
         ),
         const SizedBox(
@@ -189,6 +200,18 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                             },
                             onComplete: () async {
                               //  circulatTimerControl.reset();
+                              _circulatTimerControl!.pause();
+                              var documentReference = FirebaseFirestore.instance
+                                  .collection('user')
+                                  .doc(user!.uid)
+                                  .collection('exercicios');
+
+                              await documentReference.add(
+                                  //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                                  {
+                                    'EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                                        _circulatTimerControl!.getTime()
+                                  });
 
                               await Navigator.push(
                                   context,
@@ -198,7 +221,8 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                   ));
 
                               //AQUI TERMINA O EXRCICIO
-
+                              _controller!.removeListener(listener);
+                              _controller!.dispose();
                               Navigator.pop(
                                 context,
                               );
@@ -233,10 +257,12 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
           onPressed: () async {
             if (mounted) {
               _circulatTimerControl!.pause();
-              DocumentReference documentReference =
-                  FirebaseFirestore.instance.collection('user').doc(user!.uid);
+              var documentReference = FirebaseFirestore.instance
+                  .collection('user')
+                  .doc(user!.uid)
+                  .collection('exercicios');
 
-              await documentReference.update(
+              await documentReference.add(
                   //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                   {
                     'EXERCICIO_${widget.nomeExercicio + flag.toString()}':

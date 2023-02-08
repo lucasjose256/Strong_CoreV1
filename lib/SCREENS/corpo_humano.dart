@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,7 @@ import 'package:strong_core/MODELS/sequencial_buttun.dart';
 
 import '../MODELS/user_preferences.dart';
 import '../provider/colors2.dart';
+import '../style/hero_dialog_route.dart';
 
 class CorpoHumano extends StatefulWidget {
   const CorpoHumano({Key? key}) : super(key: key);
@@ -253,13 +255,28 @@ class _CorpoHumanoState extends State<CorpoHumano> {
               padding: EdgeInsets.only(top: 8, bottom: 8),
               color: ui.Color.fromARGB(255, 202, 43, 32),
               onPressed: () async {
-                grauDores = [
-                  regiaoCervical1.graudaDor,
-                  costasSuperior2.graudaDor,
-                  costasMedia3.graudaDor,
-                  data!.painDegreeRight,
-                  data.painDegreeleft
-                ];
+                try {
+                  grauDores = [
+                    regiaoCervical1.graudaDor,
+                    costasSuperior2.graudaDor,
+                    costasMedia3.graudaDor,
+                    data!.painDegreeRight,
+                    data.painDegreeleft
+                  ];
+                } catch (e) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      actions: [
+                        TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text('Ok'))
+                      ],
+                      title: Text('Anamnse'),
+                      content: Text('Selecione todos os campo do corpo humano'),
+                    ),
+                  );
+                }
                 await UserPreferences.setList(grauDores);
                 await UserPreferences.setBool(true);
 
@@ -269,7 +286,8 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                 firebase.update({
                   'PRIMEIRO_ACESSO_COMPLETO': true,
                 });
-                firebase.set({
+
+                await firebase.set({
                   /*'Regiao_cervical_SEM_0': regiaoCervical1.graudaDor != null
                       ? regiaoCervical1.graudaDor
                       : '0',
@@ -311,8 +329,14 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                   'ATUALIZOU_ANAMNSE_SEM4': false,
                   'ATUALIZOU_ANAMNSE_SEM6': false,
                   'ATUALIZOU_ANAMNSE_SEM8': false,
-                  'DATA DIREITO': data!.painDegreeRight,
-                  'DATA ESQUERDO': data.painDegreeleft
+                  'DATA DIREITO': data!.painDegreeRight ?? '10',
+                  'DATA ESQUERDO': data.painDegreeleft,
+                  'SEM_1_EXERCICIO_PRANCHA DORSAL_1': 100,
+                  'SEM_1_EXERCICIO_PRANCHA DORSAL_2': 100,
+                  'SEM_1_EXERCICIO_PRANCHA DORSAL_3': 100,
+                  'SEM_1_EXERCICIO_PRANCHA VENTRAL_1': 100,
+                  'SEM_1_EXERCICIO_PRANCHA VENTRAL_2': 100,
+                  'SEM_1_EXERCICIO_PRANCHA VENTRAL_3': 100,
                 });
 
                 Navigator.of(context).push(
