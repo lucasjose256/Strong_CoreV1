@@ -153,6 +153,7 @@ class _VideoScreenState extends State<VideoScreen> {
           height: 60,
         ),
         FutureBuilder(
+            //testar o create video aqui
             future: _inicializeVideoPlayer,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
@@ -316,7 +317,7 @@ class _VideoScreenState extends State<VideoScreen> {
                   ),
                 ]);
               } else {
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               }
             }),
         const SizedBox(

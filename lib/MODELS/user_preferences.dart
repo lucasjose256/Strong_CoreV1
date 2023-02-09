@@ -6,12 +6,12 @@ class UserPreferences {
   static const stps1 = 'stepsCont1';
   static const stps2 = 'stepsCont2';
   static const stps3 = 'stepsCont3';
-  static const stps4 = 'stepsCont3';
-  static const stps5 = 'stepsCont3';
-  static const stps6 = 'stepsCont3';
-  static const stps7 = 'stepsCont3';
-  static const stps8 = 'stepsCont3';
-  static const stps9 = 'stepsCont3';
+  static const stps4 = 'stepsCont4';
+  static const stps5 = 'stepsCont5';
+  static const stps6 = 'stepsCont6';
+  static const stps7 = 'stepsCont7';
+  static const stps8 = 'stepsCont8';
+  static const stps9 = 'stepsCont9';
 
   static const list = 'lista';
   static const flagPrimeiroAcesso = 'primeroAcesso';
@@ -49,9 +49,30 @@ class UserPreferences {
         await _preferences!.setInt(stps3, s);
 
         break;
+      case 4:
+        await _preferences!.setInt(stps4, s);
 
-      default:
-        await _preferences!.setInt(stps1, s);
+        break;
+      case 5:
+        await _preferences!.setInt(stps5, s);
+
+        break;
+      case 6:
+        await _preferences!.setInt(stps6, s);
+
+        break;
+      case 7:
+        await _preferences!.setInt(stps7, s);
+
+        break;
+      case 8:
+        await _preferences!.setInt(stps8, s);
+
+        break;
+      case 9:
+        await _preferences!.setInt(stps9, s);
+
+        break;
     }
   }
 
@@ -63,6 +84,21 @@ class UserPreferences {
         return _preferences!.getInt(stps2);
       case 3:
         return _preferences!.getInt(stps3);
+
+      case 4:
+        return _preferences!.getInt(stps4);
+
+      case 5:
+        return _preferences!.getInt(stps5);
+
+      case 6:
+        return _preferences!.getInt(stps6);
+      case 7:
+        return _preferences!.getInt(stps7);
+      case 8:
+        return _preferences!.getInt(stps8);
+      case 9:
+        return _preferences!.getInt(stps9);
 
       default:
     }

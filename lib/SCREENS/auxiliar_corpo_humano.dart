@@ -18,7 +18,8 @@ import '../MODELS/user_preferences.dart';
 import '../provider/colors2.dart';
 
 class AuxCorpoHumano extends StatefulWidget {
-  const AuxCorpoHumano({Key? key}) : super(key: key);
+  final String numSem;
+  const AuxCorpoHumano({Key? key, required this.numSem}) : super(key: key);
 
   @override
   State<AuxCorpoHumano> createState() => _AuxCorpoHumanoState();

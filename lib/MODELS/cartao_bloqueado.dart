@@ -69,7 +69,15 @@ class _CartaoBloqueadoState extends State<CartaoBloqueado> {
                 offset: Offset(5, 10),
               ),
             ],*/
-            color: widget.cor,
+            gradient: LinearGradient(
+              transform: GradientRotation(3.1475 / 4),
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                widget.cor.withOpacity(0.75),
+                widget.cor,
+              ],
+            ),
             borderRadius: BorderRadius.all(
               Radius.circular(isExpanded ? 20 : 20),
             ),

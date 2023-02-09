@@ -81,11 +81,11 @@ class _SemanasState extends State<Semanas> {
       user = userCreed;
     }
 
-    void servidor() async {
+    void servidor(int num) async {
       await FirebaseFirestore.instance
           .collection('user')
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .update({'ATUALIZOU_ANAMNSE_SEM2': true});
+          .update({'ATUALIZOU_ANAMNSE_SEM${num}': true});
     }
 
     Future<void> logOut() async {
@@ -107,9 +107,24 @@ class _SemanasState extends State<Semanas> {
                  ) */
               if (widget.horario2!.isAfter(DateTime.utc(1999, 1, 9)) &&
                   (widget.situacaoAnamnse2 == false)) {
-                servidor();
-
-                return AuxCorpoHumano();
+                servidor(2);
+                //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
+                return const AuxCorpoHumano(numSem: '2');
+              } else if (widget.horario4!.isAfter(DateTime.utc(1999, 1, 9)) &&
+                  (widget.situacaoAnamnse4 == false)) {
+                servidor(4);
+                //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
+                return const AuxCorpoHumano(numSem: '4');
+              } else if (widget.horario6!.isAfter(DateTime.utc(1999, 1, 9)) &&
+                  (widget.situacaoAnamnse6 == false)) {
+                servidor(6);
+                //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
+                return const AuxCorpoHumano(numSem: '6');
+              } else if (widget.horario8!.isAfter(DateTime.utc(1999, 1, 9)) &&
+                  (widget.situacaoAnamnse8 == false)) {
+                servidor(8);
+                //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
+                return const AuxCorpoHumano(numSem: '2');
               } else {
                 return Scaffold(
                   floatingActionButton: MaterialButton(
@@ -141,11 +156,6 @@ class _SemanasState extends State<Semanas> {
                           ),
                           child: Column(
                             children: [
-                              Text(
-                                'user!.email!',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
                               SizedBox(
                                 height: 6,
                               ),

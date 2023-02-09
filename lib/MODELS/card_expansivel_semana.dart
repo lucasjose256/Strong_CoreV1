@@ -366,6 +366,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                   MaterialPageRoute(builder: (context) {
                                 return element;
                               }));
+                              Future.delayed(Duration(seconds: 1));
                             }
                             setState(() {
                               stepBarControll++;
