@@ -55,15 +55,13 @@ class _BotaoDuploState extends State<BotaoDuplo> {
       corSemanaAnterior: widget.colorRight,
       number: widget.numberButtun,
       numberId: 'DIR',
-      nomeMembro:
-          'Selecione o grau da dor na região ${widget.phraseCard} DIREITO',
+      nomeMembro: '${widget.phraseCard} DIREITO',
     );
     AddTodoButton membroEsq = AddTodoButton(
       corSemanaAnterior: widget.colorleft,
       number: widget.numberButtun,
       numberId: 'ESQ',
-      nomeMembro:
-          'Selecione o grau da dor na região ${widget.phraseCard} ESQUERDO',
+      nomeMembro: '${widget.phraseCard} ESQUERDO',
     );
     const String _heroAddTodo = 'add-todo-hero';
     Map? temp;

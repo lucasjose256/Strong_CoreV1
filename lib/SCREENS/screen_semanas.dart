@@ -52,20 +52,20 @@ class _SemanasState extends State<Semanas> {
     widget.situacaoAnamnse4 =
         await dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM4') as bool;
     widget.situacaoAnamnse6 =
-        dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM6') as bool;
+        await dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM6') as bool;
     widget.situacaoAnamnse8 =
-        dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM8') as bool;
-    widget.horario2 = (dadosUsuario
+        await dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM8') as bool;
+    widget.horario2 = (await dadosUsuario
             .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_2') as Timestamp)
         .toDate();
-    widget.horario4 = (dadosUsuario
+    widget.horario4 = (await dadosUsuario
             .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_4') as Timestamp)
         .toDate();
-    widget.horario6 = (dadosUsuario
-            .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_2') as Timestamp)
+    widget.horario6 = (await dadosUsuario
+            .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_6') as Timestamp)
         .toDate();
-    widget.horario8 = (dadosUsuario
-            .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_2') as Timestamp)
+    widget.horario8 = (await dadosUsuario
+            .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_8') as Timestamp)
         .toDate();
   }
 
@@ -81,11 +81,11 @@ class _SemanasState extends State<Semanas> {
       user = userCreed;
     }
 
-    void servidor(int num) async {
+    Future<void> servidor(int num) async {
       await FirebaseFirestore.instance
           .collection('user')
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .update({'ATUALIZOU_ANAMNSE_SEM${num}': true});
+          .update({'ATUALIZOU_ANAMNSE_SEM$num': true});
     }
 
     Future<void> logOut() async {
@@ -106,12 +106,16 @@ class _SemanasState extends State<Semanas> {
                 widget.horario6!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse6 == false )|| widget.horario8!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse8 == false
                  ) */
               if (widget.horario2!.isAfter(DateTime.utc(1999, 1, 9)) &&
-                  (widget.situacaoAnamnse2 == false)) {
+                  widget.situacaoAnamnse2 == false) {
+                print('semana2');
+
                 servidor(2);
+
                 //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
-                return const AuxCorpoHumano(numSem: '2');
+                return AuxCorpoHumano(numSem: '2');
               } else if (widget.horario4!.isAfter(DateTime.utc(1999, 1, 9)) &&
                   (widget.situacaoAnamnse4 == false)) {
+                print('semana4');
                 servidor(4);
                 //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
                 return const AuxCorpoHumano(numSem: '4');
@@ -124,118 +128,132 @@ class _SemanasState extends State<Semanas> {
                   (widget.situacaoAnamnse8 == false)) {
                 servidor(8);
                 //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
-                return const AuxCorpoHumano(numSem: '2');
+                return const AuxCorpoHumano(numSem: '8');
               } else {
-                return Scaffold(
-                  floatingActionButton: MaterialButton(
-                      onPressed: (() async {
-                        await FirebaseFirestore.instance
-                            .collection('user')
-                            .doc(FirebaseAuth.instance.currentUser!.uid)
-                            .set({});
-                        for (int i = 1; i < 7; i++) {
-                          //    await UserPreferences.setSteps(i, 0);
-                        }
-                        await UserPreferences.setBool(false);
-                        logOut();
-                        //    setState(() {});
-                      }),
-                      child: Text('LIMPAR'),
-                      color: Colors.grey),
-                  drawer: Drawer(
-                    // Add a ListView to the drawer. This ensures the user can scroll
-                    // through the options in the drawer if there isn't enough vertical
-                    // space to fit everything.
-                    child: ListView(
-                      // Important: Remove any padding from the ListView.
-                      padding: EdgeInsets.zero,
-                      children: [
-                        DrawerHeader(
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(241, 186, 30, 22),
-                          ),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 6,
-                              ),
-                              user?.photoURL != null
-                                  ? CircleAvatar(
-                                      radius: 45,
-                                      backgroundImage:
-                                          NetworkImage(user!.photoURL!),
-                                    )
-                                  : Container(
-                                      color: Colors.pink,
-                                    )
-                            ],
-                          ),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.question_mark),
-                          title: Text('Ajuda'),
-                          onTap: () {
-                            // Update the state of the app.
-                            // ...
-                          },
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.settings),
-                          title: const Text('Configurações'),
-                          onTap: () {
-                            // Update the state of the app.
-                            // ...
-                          },
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.exit_to_app),
-                          title: const Text('Sair'),
-                          onTap: () {
-                            logOut();
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (constect) =>
-                                      MyHomePage(estadoAcesso!),
-                                  settings: const RouteSettings()),
-                            );
-                            // Update the state of the app.
-                            // ...
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  appBar: AppBar(
-                    //   automaticallyImplyLeading: false,
-
-                    centerTitle: true,
-                    // foregroundColor: Colors.orange,
-                    backgroundColor: Colors.red[800],
-                    title: const Text('Strong Core',
-                        style: TextStyle(
-                            fontSize: 21,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Comfortaa')),
-                  ),
-                  body: SingleChildScrollView(
-                    child: Column(
-                        children: LISTASEMANAS.map((e) {
-                      // print(horario!.hour.toString());
-                      //  print(horaDeInInicio['HORARIO_PRIMEIRO_ACESSO']);
-                      // print(horario == null ? horario!.day.toString() : 'null');
-
-                      return CartaoSemanas(
-                        vd: e.Conteudo,
-                        cor: e.backGroundColor,
-                        title: e.titulo,
-                        numeroSemana: e.numeroSem,
-                      );
-                    }).toList()),
-                  ),
-                );
+                return buildSemanas(user: user, estadoAcesso: estadoAcesso);
               }
             }
           }),
+    );
+  }
+}
+
+class buildSemanas extends StatelessWidget {
+  const buildSemanas({
+    Key? key,
+    required this.user,
+    required this.estadoAcesso,
+  }) : super(key: key);
+
+  final User? user;
+  final bool? estadoAcesso;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      floatingActionButton: MaterialButton(
+          onPressed: (() async {
+            await FirebaseFirestore.instance
+                .collection('user')
+                .doc(FirebaseAuth.instance.currentUser!.uid)
+                .set({});
+            for (int i = 1; i < 7; i++) {
+              //    await UserPreferences.setSteps(i, 0);
+            }
+            await UserPreferences.setBool(false);
+
+            //    setState(() {});
+          }),
+          child: Text('LIMPAR'),
+          color: Colors.grey),
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(241, 186, 30, 22),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 6,
+                  ),
+                  user?.photoURL != null
+                      ? CircleAvatar(
+                          radius: 45,
+                          backgroundImage: NetworkImage(user!.photoURL!),
+                        )
+                      : Container(
+                          color: Colors.pink,
+                        )
+                ],
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.question_mark),
+              title: Text('Ajuda'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: const Text('Configurações'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: const Text('Sair'),
+              onTap: () {
+                //   logOut();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (constect) => MyHomePage(estadoAcesso!),
+                      settings: const RouteSettings()),
+                );
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
+        ),
+      ),
+      appBar: AppBar(
+        //   automaticallyImplyLeading: false,
+
+        centerTitle: true,
+        // foregroundColor: Colors.orange,
+        backgroundColor: Colors.red[800],
+        title: const Text('Strong Core',
+            style: TextStyle(
+                fontSize: 21,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Comfortaa')),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+            children: LISTASEMANAS.map((e) {
+          // print(horario!.hour.toString());
+          //  print(horaDeInInicio['HORARIO_PRIMEIRO_ACESSO']);
+          // print(horario == null ? horario!.day.toString() : 'null');
+
+          return CartaoSemanas(
+            vd: e.Conteudo,
+            cor: e.backGroundColor,
+            title: e.titulo,
+            numeroSemana: e.numeroSem,
+          );
+        }).toList()),
+      ),
     );
   }
 }

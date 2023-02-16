@@ -31,8 +31,6 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    grauDores = UserPreferences.getList() ?? [''];
-    cores = transformaEmCor(grauDores);
   }
 
   List<String> grauDores = [];
@@ -88,7 +86,6 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                     right: 138,
                     top: 75,
                     child: regiaoCervical1 = AddTodoButton(
-                      corSemanaAnterior: cores[0],
                       number: '1',
                       numberId: '',
                       nomeMembro: 'na região cervical',
@@ -97,7 +94,6 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                     right: 138,
                     top: 130,
                     child: costasSuperior2 = AddTodoButton(
-                      corSemanaAnterior: cores[1],
                       number: '2',
                       numberId: '',
                       nomeMembro: 'na região da costas superior',
@@ -106,7 +102,6 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                     right: 138,
                     top: 177,
                     child: costasMedia3 = AddTodoButton(
-                      corSemanaAnterior: cores[2],
                       number: '3',
                       numberId: '',
                       nomeMembro: 'na região das costas média',
@@ -135,8 +130,6 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                     child: ChangeNotifierProvider<Cor1>(
                         create: (context) => Cor1(),
                         child: data = BotaoDuplo(
-                          colorRight: cores[3],
-                          colorleft: cores[4],
                           phraseCard: 'do OMBRO',
                           buttunDistance: 50,
                           numberButtun: '8',
@@ -275,6 +268,10 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                   'DATA DIREITO': data.painDegreeRight,
                   'DATA ESQUERDO': data.painDegreeleft
                 });
+                /*   await FirebaseFirestore.instance
+                    .collection('user')
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .update({'ATUALIZOU_ANAMNSE_SEM2': true});*/
                 Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (constect) => Semanas(),

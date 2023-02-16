@@ -49,7 +49,7 @@ class _VideoScreenState extends State<VideoScreen> {
   bool islast = false;
   _VideoScreenState(this.tempo, this.url, this.nomeExercicio, this.loop);
   late Future<void> _inicializeVideoPlayer;
-  bool showTimer = true;
+  bool showButtun = false;
   void createVideo() {
     _controller = VideoPlayerController.asset(
       url,
@@ -60,11 +60,11 @@ class _VideoScreenState extends State<VideoScreen> {
 
     _inicializeVideoPlayer = _controller.initialize()
       ..then(
-        (value) async {
-          await _controller.play();
+        (value) {
           if (mounted) {
             setState(() {});
           }
+          _controller.play();
         },
       );
   }
@@ -253,6 +253,7 @@ class _VideoScreenState extends State<VideoScreen> {
                           if (widget.nomeExercicioDE != null) {
                             if (flag == loop + 1) {
                               islast = true;
+                              showButtun = true;
                               tempoEspera = 3;
                             }
 
@@ -260,6 +261,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => VideoDirEsq(
+                                      showButtun: showButtun,
                                       numSemana: widget.numSemana,
                                       isLastVideo: islast,
                                       tempoEspera: tempoEspera,
@@ -344,11 +346,11 @@ class _VideoScreenState extends State<VideoScreen> {
               _circulatTimerControl!.pause();
               DocumentReference documentReference =
                   FirebaseFirestore.instance.collection('user').doc(user!.uid);
-
+//testar sem o await
               await documentReference.update(
                   //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                   {
-                    'EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                    'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
                         _circulatTimerControl!.getTime()
                   });
 
@@ -372,12 +374,14 @@ class _VideoScreenState extends State<VideoScreen> {
                     )))!;
                 if (widget.nomeExercicioDE != null) {
                   if (flag == loop + 1) {
-                    tempoEspera = 10;
+                    tempoEspera = 5;
+                    showButtun = true;
                   }
                   await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => VideoDirEsq(
+                            showButtun: showButtun,
                             numSemana: widget.numSemana,
                             tempoEspera: tempoEspera,
                             flag: flag - 1,

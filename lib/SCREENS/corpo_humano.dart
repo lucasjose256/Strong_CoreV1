@@ -124,7 +124,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                     child: ChangeNotifierProvider<Cor1>(
                         create: (context) => Cor1(),
                         child: data = BotaoDuplo(
-                          phraseCard: 'do OMBRO',
+                          phraseCard: 'no OMBRO',
                           buttunDistance: 50,
                           numberButtun: '8',
                         )),
@@ -273,11 +273,12 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                             child: Text('Ok'))
                       ],
                       title: Text('Anamnse'),
-                      content: Text('Selecione todos os campo do corpo humano'),
+                      content:
+                          Text('Selecione TODOS os campos do Corpo Humano'),
                     ),
                   );
                 }
-                await UserPreferences.setList(grauDores);
+
                 await UserPreferences.setBool(true);
 
                 var firebase = await FirebaseFirestore.instance
@@ -329,14 +330,20 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                   'ATUALIZOU_ANAMNSE_SEM4': false,
                   'ATUALIZOU_ANAMNSE_SEM6': false,
                   'ATUALIZOU_ANAMNSE_SEM8': false,
-                  'DATA DIREITO': data!.painDegreeRight ?? '10',
+                  'DATA DIREITO': data!.painDegreeRight,
                   'DATA ESQUERDO': data.painDegreeleft,
-                  'SEM_1_EXERCICIO_PRANCHA DORSAL_1': 100,
-                  'SEM_1_EXERCICIO_PRANCHA DORSAL_2': 100,
-                  'SEM_1_EXERCICIO_PRANCHA DORSAL_3': 100,
-                  'SEM_1_EXERCICIO_PRANCHA VENTRAL_1': 100,
-                  'SEM_1_EXERCICIO_PRANCHA VENTRAL_2': 100,
-                  'SEM_1_EXERCICIO_PRANCHA VENTRAL_3': 100,
+                  'SEM_1_EXERCICIO_PRANCHA DORSAL1': 100,
+                  'SEM_1_EXERCICIO_PRANCHA DORSAL2': 100,
+                  'SEM_1_EXERCICIO_PRANCHA DORSAL3': 100,
+                  'SEM_1_EXERCICIO_PRANCHA VENTRAL1': 100,
+                  'SEM_1_EXERCICIO_PRANCHA VENTRAL2': 100,
+                  'SEM_1_EXERCICIO_PRANCHA VENTRAL3': 100,
+                  'SEM_1_EXERCICIO_PRANCHA LATERAL ESQ1': 100,
+                  'SEM_1_EXERCICIO_PRANCHA LATERAL ESQ2': 100,
+                  'SEM_1_EXERCICIO_PRANCHA LATERAL ESQ3': 100,
+                  'SEM_1_EXERCICIO_PRANCHA LATERAL DIR1': 100,
+                  'SEM_1_EXERCICIO_PRANCHA LATERAL DIR2': 100,
+                  'SEM_1_EXERCICIO_PRANCHA LATERAL DIR3': 100,
                 });
 
                 Navigator.of(context).push(

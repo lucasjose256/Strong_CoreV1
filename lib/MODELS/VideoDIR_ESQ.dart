@@ -12,8 +12,10 @@ class VideoDirEsq extends VideoScreen {
   bool? isLastVideo;
   int? tempoEspera;
   String numSemana;
+  bool showButtun = false;
   VideoDirEsq(
       {this.tempoEspera,
+      required this.showButtun,
       required this.numSemana,
       required int tempo,
       this.flag,
@@ -201,7 +203,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                             onComplete: () async {
                               //  circulatTimerControl.reset();
                               _circulatTimerControl!.pause();
-                              var documentReference = FirebaseFirestore.instance
+                              /*    var documentReference = FirebaseFirestore.instance
                                   .collection('user')
                                   .doc(user!.uid)
                                   .collection('exercicios');
@@ -211,12 +213,23 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                   {
                                     'EXERCICIO_${widget.nomeExercicio + flag.toString()}':
                                         _circulatTimerControl!.getTime()
+                                  });*/
+                              var documentReference = FirebaseFirestore.instance
+                                  .collection('user')
+                                  .doc(user!.uid);
+
+                              await documentReference.update(
+                                  //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                                  {
+                                    'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                                        _circulatTimerControl!.getTime()
                                   });
 
                               await Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => TelaEspera(
+                                        istoShowButtun: widget.isLastVideo,
                                         tempoEspera: widget.tempoEspera),
                                   ));
 
@@ -257,23 +270,22 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
           onPressed: () async {
             if (mounted) {
               _circulatTimerControl!.pause();
-              var documentReference = FirebaseFirestore.instance
-                  .collection('user')
-                  .doc(user!.uid)
-                  .collection('exercicios');
+              var documentReference =
+                  FirebaseFirestore.instance.collection('user').doc(user!.uid);
 
-              await documentReference.add(
+              await documentReference.update(
                   //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                   {
-                    'EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                    'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
                         _circulatTimerControl!.getTime()
                   });
 
               flag += (await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        TelaEspera(tempoEspera: widget.tempoEspera!),
+                    builder: (context) => TelaEspera(
+                        tempoEspera: widget.tempoEspera!,
+                        istoShowButtun: widget.isLastVideo),
                   )))!;
 
               Navigator.of(context).pop();
