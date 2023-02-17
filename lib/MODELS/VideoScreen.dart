@@ -19,16 +19,17 @@ class VideoScreen extends StatefulWidget {
   String? nomeSemLado;
   bool? isLast;
   VideoScreen(
-      {this.isLast,
-      required this.numSemana,
-      this.urlDE,
-      this.nomeSemLado,
-      this.nomeExercicioDE,
-      required this.tempo,
-      required this.url,
-      required this.nomeExercicio,
-      required this.loop})
-      : super();
+    Key key, {
+    this.isLast,
+    required this.numSemana,
+    this.urlDE,
+    this.nomeSemLado,
+    this.nomeExercicioDE,
+    required this.tempo,
+    required this.url,
+    required this.nomeExercicio,
+    required this.loop,
+  }) : super(key: key);
 
   @override
   State<VideoScreen> createState() =>
@@ -50,23 +51,28 @@ class _VideoScreenState extends State<VideoScreen> {
   _VideoScreenState(this.tempo, this.url, this.nomeExercicio, this.loop);
   late Future<void> _inicializeVideoPlayer;
   bool showButtun = false;
-  void createVideo() {
+  void inicializaVideo(VideoPlayerController _controller) async {}
+
+  void createVideo() async {
     _controller = VideoPlayerController.asset(
       url,
     )
       ..addListener(listener)
       ..setVolume(0)
       ..setLooping(true);
+    _inicializeVideoPlayer = _controller.initialize().then(
+      (value) {
+        setState(() {});
+        return _controller.play();
+        //    setState(() {});
+      },
+    );
 
-    _inicializeVideoPlayer = _controller.initialize()
-      ..then(
-        (value) {
-          if (mounted) {
-            setState(() {});
-          }
-          _controller.play();
-        },
-      );
+    /* _controller.initialize().then(
+      (value) async {
+   await _controller.play();
+      },
+    );     */
   }
 
   @override
@@ -84,7 +90,7 @@ class _VideoScreenState extends State<VideoScreen> {
 
   @override
   void dispose() {
-    _controller!.removeListener(listener);
+    //_controller!.removeListene;
     _controller!.dispose();
 
     print('fechou');
@@ -185,6 +191,8 @@ class _VideoScreenState extends State<VideoScreen> {
                         isTimerTextShown: true,
                         autoStart: true,
                         onStart: () async {
+                          //     _controller.play();
+
                           /*    _controller!.addListener(() {
                               //     setState(() {});
                             });*/
@@ -211,17 +219,17 @@ class _VideoScreenState extends State<VideoScreen> {
                         },
                         onComplete: () async {
                           _circulatTimerControl!.pause();
-                          var documentReference = FirebaseFirestore.instance
+                          /*      var documentReference = FirebaseFirestore.instance
                               .collection('user')
                               .doc(user!.uid);
                           documentReference.update(
                               //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                               {
-                                'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                                'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio+ flag.toString()}':
                                     _circulatTimerControl!.getTime()
                               });
-
-                          _controller.removeListener(listener);
+*/
+                          //   _controller.removeListener(listener);
                           _controller.dispose();
 
                           //  circulatTimerControl.reset();
@@ -261,6 +269,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => VideoDirEsq(
+                                      ValueKey(widget.nomeExercicio),
                                       showButtun: showButtun,
                                       numSemana: widget.numSemana,
                                       isLastVideo: islast,
@@ -313,7 +322,6 @@ class _VideoScreenState extends State<VideoScreen> {
                           createVideo();
                           /*  _inicializeVideoPlayer = _controller!.initialize();
                           _controller!.play();*/
-                          debugPrint('Countdown Ended');
                         },
                         onChange: (String timeStamp) async {}),
                   ),
@@ -338,7 +346,7 @@ class _VideoScreenState extends State<VideoScreen> {
             ),
           ),
           onPressed: () async {
-            _controller!.removeListener(listener);
+            // _controller!.removeListener(listener);
             _controller.dispose();
             //  _controller!.play();
 
@@ -347,7 +355,7 @@ class _VideoScreenState extends State<VideoScreen> {
               DocumentReference documentReference =
                   FirebaseFirestore.instance.collection('user').doc(user!.uid);
 //testar sem o await
-              await documentReference.update(
+              documentReference.update(
                   //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                   {
                     'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
@@ -376,11 +384,14 @@ class _VideoScreenState extends State<VideoScreen> {
                   if (flag == loop + 1) {
                     tempoEspera = 5;
                     showButtun = true;
+                    islast = true;
                   }
                   await Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => VideoDirEsq(
+                            ValueKey(widget.nomeExercicio),
+                            isLastVideo: islast,
                             showButtun: showButtun,
                             numSemana: widget.numSemana,
                             tempoEspera: tempoEspera,

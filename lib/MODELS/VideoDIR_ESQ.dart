@@ -13,7 +13,7 @@ class VideoDirEsq extends VideoScreen {
   int? tempoEspera;
   String numSemana;
   bool showButtun = false;
-  VideoDirEsq(
+  VideoDirEsq(Key key,
       {this.tempoEspera,
       required this.showButtun,
       required this.numSemana,
@@ -24,6 +24,7 @@ class VideoDirEsq extends VideoScreen {
       required String nomeExercicio,
       required int loop})
       : super(
+          key,
           numSemana: numSemana,
           tempo: tempo,
           url: url,
@@ -52,7 +53,6 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
     _controller = VideoPlayerController.asset(
       url,
     )
-      ..addListener(listener)
       ..setVolume(0)
       ..setLooping(true);
 
@@ -68,15 +68,13 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
   void initState() {
     super.initState();
     _circulatTimerControl = CountDownController();
-    listener = () {
-      setState(() {});
-    };
+
     createVideo();
   }
 
   @override
   void dispose() {
-    _controller!.removeListener(listener);
+    //_controller!.removeListener(listener);
     _controller!.dispose();
     super.dispose();
   }
@@ -234,7 +232,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                   ));
 
                               //AQUI TERMINA O EXRCICIO
-                              _controller!.removeListener(listener);
+                              //     _controller!.removeListener(listener);
                               _controller!.dispose();
                               Navigator.pop(
                                 context,
@@ -268,6 +266,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
             ),
           ),
           onPressed: () async {
+            _controller!.dispose();
             if (mounted) {
               _circulatTimerControl!.pause();
               var documentReference =

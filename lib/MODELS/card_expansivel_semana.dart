@@ -253,17 +253,25 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                           // print(horario == null ? horario!.day.toString() : 'null');
                           return Align(
                             alignment: Alignment.centerLeft,
-                            child: Text(
-                              ' ' +
-                                  e.loop.toString() +
-                                  'X  ' +
-                                  '${e.nomeSemLado ?? e.nomeExercicio} ' +
+                            child: Column(
+                              children: [
+                                Text(
                                   ' ' +
-                                  '(${e.tempo.toString()}s)',
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                              ),
+                                      e.loop.toString() +
+                                      'X  ' +
+                                      '${e.nomeSemLado ?? e.nomeExercicio} ' +
+                                      ' ' +
+                                      '(${e.tempo.toString()}s)',
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Divider(
+                                  color: Color.fromARGB(255, 75, 75, 75),
+                                  height: 3,
+                                ),
+                              ],
                             ),
                           );
                         }).toList()),
