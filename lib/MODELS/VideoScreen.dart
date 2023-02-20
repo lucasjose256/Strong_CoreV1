@@ -18,8 +18,7 @@ class VideoScreen extends StatefulWidget {
   String? urlDE;
   String? nomeSemLado;
   bool? isLast;
-  VideoScreen(
-    Key key, {
+  VideoScreen({
     this.isLast,
     required this.numSemana,
     this.urlDE,
@@ -29,7 +28,7 @@ class VideoScreen extends StatefulWidget {
     required this.url,
     required this.nomeExercicio,
     required this.loop,
-  }) : super(key: key);
+  });
 
   @override
   State<VideoScreen> createState() =>
@@ -53,7 +52,7 @@ class _VideoScreenState extends State<VideoScreen> {
   bool showButtun = false;
   void inicializaVideo(VideoPlayerController _controller) async {}
 
-  void createVideo() async {
+  void createVideo() {
     _controller = VideoPlayerController.asset(
       url,
     )
@@ -62,12 +61,12 @@ class _VideoScreenState extends State<VideoScreen> {
       ..setLooping(true);
     _inicializeVideoPlayer = _controller.initialize().then(
       (value) {
-        setState(() {});
+        // setState(() {});
         return _controller.play();
         //    setState(() {});
       },
     );
-
+    _inicializeVideoPlayer.ignore();
     /* _controller.initialize().then(
       (value) async {
    await _controller.play();
@@ -406,9 +405,9 @@ class _VideoScreenState extends State<VideoScreen> {
               if (flag == loop + 1) {
                 Navigator.of(context).pop();
               }
-
-              _circulatTimerControl!.start();
               createVideo();
+              _circulatTimerControl!.start();
+
               //setState(() {});
             }
           },

@@ -9,6 +9,7 @@ import 'package:strong_core/MODELS/cartao_bloqueado.dart';
 import 'package:strong_core/MODELS/user_preferences.dart';
 import 'package:strong_core/MODELS/_____video_model.dart';
 import 'package:intl/intl.dart';
+import 'package:strong_core/MODELS/video_maneger.dart';
 import 'package:strong_core/SCREENS/corpo_humano.dart';
 
 import '../provider/check.dart';
@@ -18,10 +19,10 @@ class CartaoSemanas extends StatefulWidget {
   final Color cor;
   final String title;
   final int numeroSemana;
-  final List<VideoScreen>? vd;
+  final List<VideoScreen> vd;
   CartaoSemanas(
       {Key? key,
-      this.vd,
+      required this.vd,
       required this.cor,
       required this.title,
       required this.numeroSemana})
@@ -31,7 +32,7 @@ class CartaoSemanas extends StatefulWidget {
 
 class _CartaoSemanasState extends State<CartaoSemanas> {
   DateTime? horario;
-  List<VideoScreen>? videos;
+  final List<VideoScreen> videos;
   _CartaoSemanasState(this.videos);
   @override
   void initState() {
@@ -369,13 +370,16 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                           //AINDA PRECISA VER SE É O PRIMERO ACESSO DA PESSOA
                           if (horario == null ||
                               DateTime.now().isAfter(horario!)) {
-                            for (var element in videos!) {
+                            /*  for (var element in videos!) {
                               await Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
                                 return element;
                               }));
-                              Future.delayed(Duration(seconds: 1));
-                            }
+                            }*/
+                            await Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return VideoManeger(videos: videos!);
+                            }));
                             setState(() {
                               stepBarControll++;
                             });

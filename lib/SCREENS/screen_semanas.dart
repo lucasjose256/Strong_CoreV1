@@ -151,21 +151,6 @@ class buildSemanas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: MaterialButton(
-          onPressed: (() async {
-            await FirebaseFirestore.instance
-                .collection('user')
-                .doc(FirebaseAuth.instance.currentUser!.uid)
-                .set({});
-            for (int i = 1; i < 7; i++) {
-              //    await UserPreferences.setSteps(i, 0);
-            }
-            await UserPreferences.setBool(false);
-
-            //    setState(() {});
-          }),
-          child: Text('LIMPAR'),
-          color: Colors.grey),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical

@@ -10,11 +10,13 @@ import 'VideoTest.dart';
 class VideoDirEsq extends VideoScreen {
   int? flag;
   bool? isLastVideo;
+  bool? dontShowbuttun;
   int? tempoEspera;
   String numSemana;
   bool showButtun = false;
   VideoDirEsq(Key key,
       {this.tempoEspera,
+      this.dontShowbuttun,
       required this.showButtun,
       required this.numSemana,
       required int tempo,
@@ -24,7 +26,6 @@ class VideoDirEsq extends VideoScreen {
       required String nomeExercicio,
       required int loop})
       : super(
-          key,
           numSemana: numSemana,
           tempo: tempo,
           url: url,
@@ -50,7 +51,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
   _VideoDirEsqState(
       this.tempo, this.url, this.nomeExercicio, this.loop, this.flag);
   void createVideo() {
-    _controller = VideoPlayerController.asset(
+    /*   _controller = VideoPlayerController.asset(
       url,
     )
       ..setVolume(0)
@@ -61,12 +62,34 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
         setState(() {});
         _controller!.play();
       },
+    );*/
+    _controller = VideoPlayerController.asset(
+      url,
+    )
+      ..addListener(
+        () {
+          setState(() {});
+        },
+      )
+      ..setVolume(0)
+      ..setLooping(true);
+    _inicializeVideoPlayer = _controller!.initialize().then(
+      (value) {
+        setState(() {});
+        _controller!.play();
+        //    setState(() {});
+      },
     );
   }
 
   @override
   void initState() {
     super.initState();
+    listener = () {
+      if (mounted) {
+        setState(() {});
+      }
+    };
     _circulatTimerControl = CountDownController();
 
     createVideo();
@@ -211,7 +234,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                   {
                                     'EXERCICIO_${widget.nomeExercicio + flag.toString()}':
                                         _circulatTimerControl!.getTime()
-                                  });*/
+                           /*       });*/
                               var documentReference = FirebaseFirestore.instance
                                   .collection('user')
                                   .doc(user!.uid);
@@ -221,15 +244,17 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                   {
                                     'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
                                         _circulatTimerControl!.getTime()
-                                  });
-
-                              await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TelaEspera(
-                                        istoShowButtun: widget.isLastVideo,
-                                        tempoEspera: widget.tempoEspera),
-                                  ));
+                                  });*/
+//                            if(eUltimo){}
+                              if (widget.dontShowbuttun != true) {
+                                await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TelaEspera(
+                                          istoShowButtun: widget.showButtun,
+                                          tempoEspera: widget.tempoEspera),
+                                    ));
+                              }
 
                               //AQUI TERMINA O EXRCICIO
                               //     _controller!.removeListener(listener);
@@ -266,32 +291,29 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
             ),
           ),
           onPressed: () async {
+            _circulatTimerControl!.pause();
+            var documentReference =
+                FirebaseFirestore.instance.collection('user').doc(user!.uid);
+
+            await documentReference.update(
+                //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                {
+                  'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                      _circulatTimerControl!.getTime()
+                });
+
+            flag += (await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TelaEspera(
+                      tempoEspera: widget.tempoEspera!,
+                      istoShowButtun: widget.showButtun),
+                )))!;
             _controller!.dispose();
-            if (mounted) {
-              _circulatTimerControl!.pause();
-              var documentReference =
-                  FirebaseFirestore.instance.collection('user').doc(user!.uid);
+            Navigator.of(context).pop();
 
-              await documentReference.update(
-                  //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
-                  {
-                    'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
-                        _circulatTimerControl!.getTime()
-                  });
-
-              flag += (await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => TelaEspera(
-                        tempoEspera: widget.tempoEspera!,
-                        istoShowButtun: widget.isLastVideo),
-                  )))!;
-
-              Navigator.of(context).pop();
-
-              _circulatTimerControl!.start();
-              //   setState(() {});
-            }
+            _circulatTimerControl!.start();
+            //   setState(() {});
           },
           //  color: const Color.fromARGB(255, 183, 183, 183),
         ),
