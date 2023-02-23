@@ -60,6 +60,8 @@ dependencies:
   step_progress_indicator: ^1.0.2
   firebase_storage: ^10.3.8
   shared_preferences: ^2.0.15
+  multiselect: ^0.0.4
+  get: ^4.6.5
 
 
 flutter_native_splash:

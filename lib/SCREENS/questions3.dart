@@ -3,8 +3,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:multiselect/multiselect.dart';
+import 'package:provider/provider.dart';
+import 'package:strong_core/MODELS/multi_select_pain.dart';
 import 'package:strong_core/SCREENS/corpo_humano.dart';
 import 'package:strong_core/main.dart';
+
+import '../provider/information_forms.dart';
 
 //Configurar um tamanho dinâmico para o dropDownButton
 class Question3 extends StatefulWidget {
@@ -31,7 +36,7 @@ class _Question3State extends State<Question3> {
   final items2 = [
     'Nenhum dia',
     'Um dia',
-    'Dois sias',
+    'Dois dias',
     'Três dias',
     'Quatro dias',
     'Cinco dias',
@@ -47,9 +52,11 @@ class _Question3State extends State<Question3> {
     'Estresse extremamente elevado',
   ];
   String? answer3;
-
+  NameProblemController controller = NameProblemController();
   @override
   Widget build(BuildContext context) {
+    final InformationForms = Provider.of<Information>(context);
+
     return Column(
       // primary: false,//MOSTRA UMA COR AO TENTAR MOVER A LIST VIEW
       children: [
@@ -66,6 +73,24 @@ class _Question3State extends State<Question3> {
           height: 8,
         ),
         Center(
+          child: Container(
+            child: DropDownMultiSelect(
+              options: controller.options,
+              whenEmpty: 'Selecione uma das opções',
+              onChanged: (p0) {
+                controller.selectedOptionList.value = p0;
+                controller.selectedoption.value = '';
+                controller.selectedOptionList.value.forEach((element) {
+                  controller.selectedoption.value + '' + element;
+                });
+                InformationForms.setListDores(
+                    controller.selectedOptionList.value);
+              },
+              selectedValues: controller.selectedOptionList.value,
+            ),
+          ),
+        ),
+        /*    Center(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             width: 300,
@@ -85,7 +110,7 @@ class _Question3State extends State<Question3> {
               ),
             ),
           ),
-        ),
+        ),*/
         //////////////////////////////////////////////////////////2
         const SizedBox(
           height: 25,

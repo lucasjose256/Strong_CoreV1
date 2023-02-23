@@ -6,11 +6,11 @@ import 'package:strong_core/MODELS/info_semanas.dart';
 final LISTASEMANAS = [
   InfoSemanas(Color.fromARGB(255, 102, 132, 111), 'SEMANA 1', videos1, 1),
   InfoSemanas(Color.fromARGB(255, 36, 108, 14), 'SEMANA 2', videos2, 2),
-  InfoSemanas(Color.fromARGB(255, 109, 173, 41), 'SEMANA 3', videos3, 3),
+  InfoSemanas(Color.fromARGB(255, 109, 173, 41), 'SEMANA 3', videos7, 3),
   InfoSemanas(Color.fromARGB(255, 205, 208, 60), 'SEMANA 4', videos4, 4),
   InfoSemanas(Color.fromARGB(255, 193, 130, 41), 'SEMANA 5', videos5, 5),
-  InfoSemanas(Color.fromARGB(255, 183, 82, 82), 'SEMANA 6', videos1, 6),
-  InfoSemanas(Color.fromARGB(255, 187, 47, 47), 'SEMANA 7', videos1, 7),
+  InfoSemanas(Color.fromARGB(255, 183, 82, 82), 'SEMANA 6', videos6, 6),
+  InfoSemanas(Color.fromARGB(255, 187, 47, 47), 'SEMANA 7', videos7, 7),
   InfoSemanas(Color.fromARGB(255, 99, 29, 93), 'SEMANA 8', videos1, 8),
   InfoSemanas(Color.fromARGB(255, 87, 26, 54), 'SEMANA 9', videos1, 9),
 
@@ -216,7 +216,7 @@ List<VideoScreen> videos5 = [
 ];
 //////////////////////////////////
 ///////////// VIDEOS 6
-/*
+
 List<VideoScreen> videos6 = [
   VideoScreen(
       urlDE: 'Assets/video/SEM6/S6_prancha_superman_D_40.mp4',
@@ -243,7 +243,6 @@ List<VideoScreen> videos6 = [
     nomeExercicio: 'PRANCHA CANIVETE',
     loop: 2, numSemana: '6',
   ) //Video(20, nomeVideos),
-  ,
 ];
 //////////////////////
 ///VIDEOS 7
@@ -283,7 +282,7 @@ List<VideoScreen> videos7 = [
       nomeExercicio: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO ESQ',
       loop: 2) //Video(20, nomeVideos),
   ,
-];
+];/*
 /////////////////
 ///VIDEOS SEMANA 8=SEMANA 7
 List<VideoScreen> videos8 = [

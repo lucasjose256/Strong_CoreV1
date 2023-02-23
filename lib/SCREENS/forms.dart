@@ -53,7 +53,12 @@ class _FormsState extends State<Forms> {
 
   @override
   Widget build(BuildContext context) {
-    final nome = Provider.of<Information>(context);
+    final infoForms = Provider.of<Information>(context);
+    String dores = '';
+    String Aux = '';
+    for (int i = 0; i < infoForms.dores.length; i++) {
+      dores += infoForms.dores[i] + ',';
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Strong Core'),
@@ -68,7 +73,11 @@ class _FormsState extends State<Forms> {
             await FirebaseFirestore.instance
                 .collection('user')
                 .doc(FirebaseAuth.instance.currentUser!.uid)
-                .set({'seu nome é': nome.nome});
+                .set({
+              'seu nome é': infoForms.nome,
+              'Sexo': infoForms.sexo,
+              'Lista de Dores': dores
+            });
             await UserPreferences.setBool(false);
 
             Navigator.of(context).push(

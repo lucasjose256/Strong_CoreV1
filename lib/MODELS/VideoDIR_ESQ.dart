@@ -246,7 +246,13 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                         _circulatTimerControl!.getTime()
                                   });*/
 //                            if(eUltimo){}
-                              if (widget.dontShowbuttun != true) {
+                              _controller!.dispose();
+                              if (widget.dontShowbuttun == true &&
+                                  widget.showButtun == true) {
+                                Navigator.pop(
+                                  context,
+                                );
+                              } else {
                                 await Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -254,14 +260,14 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                           istoShowButtun: widget.showButtun,
                                           tempoEspera: widget.tempoEspera),
                                     ));
-                              }
 
-                              //AQUI TERMINA O EXRCICIO
-                              //     _controller!.removeListener(listener);
-                              _controller!.dispose();
-                              Navigator.pop(
-                                context,
-                              );
+                                //AQUI TERMINA O EXRCICIO
+                                //     _controller!.removeListener(listener);
+
+                                Navigator.pop(
+                                  context,
+                                );
+                              }
                               //  _controller!.notifyListeners();
                               debugPrint('Countdown Ended');
                             },
@@ -292,6 +298,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
           ),
           onPressed: () async {
             _circulatTimerControl!.pause();
+            /*      _circulatTimerControl!.pause();
             var documentReference =
                 FirebaseFirestore.instance.collection('user').doc(user!.uid);
 
@@ -300,19 +307,28 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                 {
                   'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
                       _circulatTimerControl!.getTime()
-                });
-
-            flag += (await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TelaEspera(
-                      tempoEspera: widget.tempoEspera!,
-                      istoShowButtun: widget.showButtun),
-                )))!;
+                });*/
             _controller!.dispose();
-            Navigator.of(context).pop();
+            if (widget.dontShowbuttun == true && widget.showButtun == true) {
+              Navigator.pop(
+                context,
+              );
+            } else {
+              await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TelaEspera(
+                        istoShowButtun: widget.showButtun,
+                        tempoEspera: widget.tempoEspera),
+                  ));
 
-            _circulatTimerControl!.start();
+              //AQUI TERMINA O EXRCICIO
+              //     _controller!.removeListener(listener);
+
+              Navigator.pop(
+                context,
+              );
+            }
             //   setState(() {});
           },
           //  color: const Color.fromARGB(255, 183, 183, 183),

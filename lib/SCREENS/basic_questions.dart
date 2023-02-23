@@ -27,7 +27,7 @@ class _BasicQuestionsState extends State<BasicQuestions> {
   @override
   Widget build(BuildContext context) {
     //final TextEditingController _nome = TextEditingController();
-    final nome = Provider.of<Information>(context);
+    final InformationForms = Provider.of<Information>(context);
     return Container(
       child: Column(
         //padding: const EdgeInsets.only(left: 12),
@@ -49,7 +49,7 @@ class _BasicQuestionsState extends State<BasicQuestions> {
                 width: 300,
                 child: TextFormField(
                   onChanged: (value) {
-                    nome.setName(value);
+                    InformationForms.setName(value);
                   },
 
                   decoration: const InputDecoration(
@@ -90,6 +90,7 @@ class _BasicQuestionsState extends State<BasicQuestions> {
                       hint: const Text('Sexo'),
                       items: items.map(buildMenuItem).toList(),
                       onChanged: (value) => setState(() {
+                        InformationForms.setSexo(value!);
                         this.answer = value;
                       }),
                     ),

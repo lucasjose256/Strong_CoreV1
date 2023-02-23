@@ -34,13 +34,13 @@ class _VideoManegerState extends State<VideoManeger> {
       videos[index].url,
     )
       ..addListener(() {
-        setState(() {});
+        if (mounted) setState(() {});
       })
       ..setVolume(0)
       ..setLooping(true);
     _inicializeVideoPlayer = _controller.initialize().then(
       (value) {
-        setState(() {});
+        if (mounted) setState(() {});
         _controller.play();
         //    setState(() {});
       },
@@ -70,34 +70,39 @@ class _VideoManegerState extends State<VideoManeger> {
           height: 60,
         ),
         Container(
+          // height: 50,
           width: MediaQuery.of(context).size.width * 0.9,
           decoration: const BoxDecoration(
               color: Color.fromARGB(169, 113, 112, 112),
               borderRadius: BorderRadius.all(Radius.circular(20))),
-          child: FittedBox(
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 20,
-                ),
-                Center(
-                  child: Container(
+          child: Row(
+            children: [
+              SizedBox(
+                width: 20,
+              ),
+              Container(
+                child:
                     /*   decoration: const BoxDecoration(
                         color: Color.fromARGB(169, 113, 112, 112),
                         borderRadius: BorderRadius.all(Radius.circular(20))),*/
-                    child: Text(
-                      videos[index].nomeExercicio,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 22),
-                    ),
+
+                    Expanded(
+                  child: Text(
+                    videos[index].nomeExercicio,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 22),
+                    maxLines: 2,
                   ),
                 ),
-                SizedBox(
-                  width: 35,
-                ),
-                Container(
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Container(
                   width: MediaQuery.of(context).size.width * 0.19,
                   decoration: BoxDecoration(
                       color: Color.fromARGB(225, 69, 69, 69),
@@ -107,9 +112,9 @@ class _VideoManegerState extends State<VideoManeger> {
                       style: TextStyle(
                           color: Color.fromARGB(255, 255, 255, 255),
                           fontSize: 32)),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ),
         const SizedBox(
@@ -235,12 +240,17 @@ class _VideoManegerState extends State<VideoManeger> {
                             //  Navigator.of(context).pop();
                             if (index == videos.length - 1) {
                               Navigator.pop(context);
+                            } else {
+                              flag = 1;
+                              tempoEspera = 2;
+                              showButtun = false;
+                              islast = false;
+                              if (mounted) {
+                                setState(() {
+                                  index++;
+                                });
+                              }
                             }
-
-                            flag = 1;
-                            setState(() {
-                              index++;
-                            });
                           }
                           createVideo();
                           _circulatTimerControl.start();
@@ -268,6 +278,7 @@ class _VideoManegerState extends State<VideoManeger> {
               ),
             ),
             onPressed: () async {
+              _circulatTimerControl!.pause();
               // _controller!.removeListener(listener);
               _controller.dispose();
               //  _controller!.play();
@@ -334,10 +345,19 @@ class _VideoManegerState extends State<VideoManeger> {
                   Navigator.pop(context);
                 }*/
 
-                flag = 1;
-                setState(() {
-                  index++;
-                });
+                if (index == videos.length - 1) {
+                  Navigator.pop(context);
+                } else {
+                  flag = 1;
+                  tempoEspera = 2;
+                  showButtun = false;
+                  islast = false;
+                  if (mounted) {
+                    setState(() {
+                      index++;
+                    });
+                  }
+                }
               }
               createVideo();
               _circulatTimerControl.start();

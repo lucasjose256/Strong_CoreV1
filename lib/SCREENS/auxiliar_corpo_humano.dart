@@ -66,7 +66,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context);
-        return false;
+        return true;
       },
       child: Scaffold(
         appBar: AppBar(
