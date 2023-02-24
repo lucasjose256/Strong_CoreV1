@@ -208,7 +208,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                     children: [
                       Container(
                         padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             boxShadow: [
                               BoxShadow(
                                   color: Color.fromARGB(255, 100, 100, 100),
@@ -222,7 +222,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                               Radius.circular(2),
                             )),
                         // color: Colors.black,
-                        child: Text(
+                        child: const Text(
                           ' EXERCÍCIOS DA SEMANA ',
                           style: TextStyle(
                             color: Colors.white,
@@ -269,8 +269,8 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                   ),
                                 ),
                                 Divider(
-                                  color: Color.fromARGB(255, 75, 75, 75),
-                                  height: 3,
+                                  // color: Color.fromARGB(255, 75, 75, 75),
+                                  height: 5,
                                 ),
                               ],
                             ),

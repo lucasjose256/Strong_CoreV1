@@ -3,8 +3,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:strong_core/SCREENS/corpo_humano.dart';
 import 'package:strong_core/main.dart';
+
+import '../provider/information_forms.dart';
 
 //Configurar um tamanho dinâmico para o dropDownButton
 class Question2 extends StatefulWidget {
@@ -52,6 +55,7 @@ class _Question2State extends State<Question2> {
 
   @override
   Widget build(BuildContext context) {
+    final infoForms = Provider.of<Information>(context);
     return Column(
       // primary: false,//MOSTRA UMA COR AO TENTAR MOVER A LIST VIEW
       children: [
@@ -82,6 +86,7 @@ class _Question2State extends State<Question2> {
                 value: answer1,
                 items: items1.map(buildMenuItem).toList(),
                 onChanged: (value) => setState(() {
+                  infoForms.setQuestion1(value!);
                   answer1 = value;
                 }),
               ),
@@ -120,6 +125,7 @@ class _Question2State extends State<Question2> {
                 value: answer2,
                 items: items2.map(buildMenuItem).toList(),
                 onChanged: (value) => setState(() {
+                  infoForms.setQuestion2(value!);
                   answer2 = value;
                 }),
               ),
@@ -158,6 +164,7 @@ class _Question2State extends State<Question2> {
                 value: answer3,
                 items: items3.map(buildMenuItem).toList(),
                 onChanged: (value) => setState(() {
+                  infoForms.setQuestion3(value!);
                   answer3 = value;
                 }),
               ),

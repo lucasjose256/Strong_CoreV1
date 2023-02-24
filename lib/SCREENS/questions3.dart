@@ -142,6 +142,7 @@ class _Question3State extends State<Question3> {
                 value: answer2,
                 items: items2.map(buildMenuItem).toList(),
                 onChanged: (value) => setState(() {
+                  InformationForms.setQuestion4(value!);
                   answer2 = value;
                 }),
               ),
@@ -180,6 +181,7 @@ class _Question3State extends State<Question3> {
                 value: answer3,
                 items: items3.map(buildMenuItem).toList(),
                 onChanged: (value) => setState(() {
+                  InformationForms.setQuestion5(value!);
                   answer3 = value;
                 }),
               ),

@@ -3,8 +3,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:strong_core/SCREENS/corpo_humano.dart';
 import 'package:strong_core/main.dart';
+
+import '../provider/information_forms.dart';
 
 //Configurar um tamanho dinâmico para o dropDownButton
 class Question extends StatefulWidget {
@@ -57,7 +60,7 @@ class _QuestionState extends State<Question> {
   final items4 = [
     'Nenhum dia',
     'Um dia',
-    'Dois sias',
+    'Dois dias',
     'Três dias',
     'Quatro dias',
     'Cinco Dias ou mais',
@@ -65,7 +68,7 @@ class _QuestionState extends State<Question> {
   String? answer4;
   TextEditingController c = TextEditingController();
   Widget buildDateAdmissao() => TextFormField(
-        keyboardType: TextInputType.datetime,
+        keyboardType: TextInputType.number,
         decoration: const InputDecoration(
             focusColor: Colors.red,
             // labelText: 'Date de Admissão',
@@ -88,6 +91,7 @@ class _QuestionState extends State<Question> {
 
   @override
   Widget build(BuildContext context) {
+    final infoForms = Provider.of<Information>(context);
     return Column(
       /*  addRepaintBoundaries: false,
         shrinkWrap: false,
@@ -159,6 +163,7 @@ class _QuestionState extends State<Question> {
                 value: answer2,
                 items: items2.map(buildMenuItem).toList(),
                 onChanged: (value) => setState(() {
+                  infoForms.setPosto(value!);
                   answer2 = value;
                 }),
               ),
@@ -195,6 +200,7 @@ class _QuestionState extends State<Question> {
                 value: answer3,
                 items: items3.map(buildMenuItem).toList(),
                 onChanged: (value) => setState(() {
+                  infoForms.setCargo(value!);
                   answer3 = value;
                 }),
               ),
@@ -218,7 +224,18 @@ class _QuestionState extends State<Question> {
         ),
         Center(
             child: Container(
-          child: buildDateAdmissao(),
+          child: TextFormField(
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+                focusColor: Colors.red,
+                // labelText: 'Date de Admissão',
+                border: OutlineInputBorder(),
+                hintText: 'mm/aaaa'),
+            onChanged: (value) {
+              infoForms.setDataAdmissao(value);
+            },
+            // controller: _nome,
+          ),
           width: 300,
         )),
 

@@ -28,6 +28,7 @@ class _BasicQuestionsState extends State<BasicQuestions> {
   Widget build(BuildContext context) {
     //final TextEditingController _nome = TextEditingController();
     final InformationForms = Provider.of<Information>(context);
+    TextEditingController dateController = TextEditingController();
     return Container(
       child: Column(
         //padding: const EdgeInsets.only(left: 12),
@@ -106,7 +107,18 @@ class _BasicQuestionsState extends State<BasicQuestions> {
             children: [
               Container(
                 width: 130,
-                child: buildPeso(),
+                child: TextFormField(
+                  onChanged: ((value) {
+                    InformationForms.setPeso(value);
+                  }),
+                  keyboardType: TextInputType.datetime,
+                  decoration: const InputDecoration(
+                    focusColor: Colors.red,
+                    labelText: 'Peso(Kg)',
+                    hintText: 'Kg',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
               ),
               SizedBox(
                 width: 10,
@@ -114,7 +126,18 @@ class _BasicQuestionsState extends State<BasicQuestions> {
               Container(
                 width: 130,
                 //margin: const EdgeInsets.only(right: 150),
-                child: buildAltura(),
+                child: TextFormField(
+                  onChanged: (value) {
+                    InformationForms.setAltura(value);
+                  },
+                  keyboardType: TextInputType.datetime,
+                  decoration: const InputDecoration(
+                    focusColor: Colors.red,
+                    labelText: 'Altura(cm)',
+                    hintText: 'cm',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
               ),
             ],
           ),
@@ -124,10 +147,10 @@ class _BasicQuestionsState extends State<BasicQuestions> {
           Row(
             children: [
               Container(
-                width: 200,
-                // margin: const EdgeInsets.only(right: 150),
-                child: buildDate(),
-              ),
+                  width: 200,
+                  // margin: const EdgeInsets.only(right: 150),
+                  child:
+                      buildDataNascimento(InformationForms: InformationForms)),
             ],
           ),
           /*   SizedBox(
@@ -185,16 +208,43 @@ class _BasicQuestionsState extends State<BasicQuestions> {
   }
 }
 
+class buildDataNascimento extends StatelessWidget {
+  const buildDataNascimento({
+    Key? key,
+    required this.InformationForms,
+  }) : super(key: key);
+
+  final Information InformationForms;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      onChanged: ((value) {
+        InformationForms.setNascimento(value);
+      }),
+      keyboardType: TextInputType.number,
+      decoration: const InputDecoration(
+        hintText: ('dd/mm/aaaa'),
+        focusColor: Colors.red,
+        labelText: 'Data de nascimento',
+        border: OutlineInputBorder(),
+      ),
+    );
+  }
+}
+
 //lembrar de fazer as verificações se as informações foram preenchidas corretamentes
-Widget buildDate() => TextFormField(
-      keyboardType: TextInputType.datetime,
+/*Widget buildDate() => TextFormField(onChanged: (value) {
+  
+},controller: dateController,
+      keyboardType: TextInputType.number,
       decoration: const InputDecoration(
         focusColor: Colors.red,
         labelText: 'Data de nascimento',
         border: OutlineInputBorder(),
       ),
     );
-
+*/
 Widget buildPeso() => TextFormField(
       keyboardType: TextInputType.number,
       decoration: const InputDecoration(

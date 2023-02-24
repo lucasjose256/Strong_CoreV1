@@ -74,9 +74,20 @@ class _FormsState extends State<Forms> {
                 .collection('user')
                 .doc(FirebaseAuth.instance.currentUser!.uid)
                 .set({
-              'seu nome é': infoForms.nome,
+              'Nome': infoForms.nome,
               'Sexo': infoForms.sexo,
-              'Lista de Dores': dores
+              'Peso': infoForms.peso,
+              'Altura': infoForms.altura,
+              'Data de Nascimento': infoForms.dataNascimento,
+              'Posto': infoForms.posto,
+              'Cargo': infoForms.cargo,
+              'DataAdmissao': infoForms.dataAdmissao,
+              'P1_exercicio_na_semana': infoForms.question1,
+              'P2_intrucao_exercicio': infoForms.question2,
+              'P3_orientacoes_exercicio': infoForms.question3,
+              'P4_Lista_problemas_saude': dores,
+              'P5_dormir_suficiente': infoForms.question4,
+              'P6_estresse': infoForms.question5
             });
             await UserPreferences.setBool(false);
 
@@ -86,6 +97,8 @@ class _FormsState extends State<Forms> {
                   settings: const RouteSettings()),
             );
           } else {
+            //AQUI SERIA ADIOCIONADO AS VERIFICAÇÕES NOS CAMPOS ANSWERS PARA
+            //CONFERIR SE TODOS OS CAMPO FORAM PREENCHIDOS
             setState(() {
               stepCounter++;
             });
