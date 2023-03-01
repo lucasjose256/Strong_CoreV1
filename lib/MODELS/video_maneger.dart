@@ -1,6 +1,9 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:strong_core/MODELS/lista_semanas.dart';
+import 'package:strong_core/MODELS/user_preferences.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
 import 'package:video_player/video_player.dart';
 
@@ -10,7 +13,9 @@ import 'VideoTest.dart';
 
 class VideoManeger extends StatefulWidget {
   List<VideoScreen> videos;
-  VideoManeger({Key? key, required this.videos}) : super(key: key);
+  final int numSemana;
+  VideoManeger({Key? key, required this.videos, required this.numSemana})
+      : super(key: key);
 
   @override
   State<VideoManeger> createState() => _VideoManegerState(this.videos);
@@ -63,8 +68,11 @@ class _VideoManegerState extends State<VideoManeger> {
     super.dispose();
   }
 
+  var user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
+    int dia = UserPreferences.getSteps(widget.numSemana) as int ?? 0;
+
     return WillPopScope(
       onWillPop: (() async {
         final value = await showDialog<bool>(
@@ -72,7 +80,7 @@ class _VideoManegerState extends State<VideoManeger> {
             builder: (context) {
               return AlertDialog(
                 title: Text(
-                  'Exercios',
+                  'Exercicios',
                 ),
                 content: Text('Você realmente quer sair? \n' +
                     '(Se você sair o progresso desses exercícios será perdido)'),
@@ -121,8 +129,8 @@ class _VideoManegerState extends State<VideoManeger> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 22),
-                      maxLines: 2,
+                          fontSize: 15),
+                      maxLines: 4,
                     ),
                   ),
                 ),
@@ -194,16 +202,18 @@ class _VideoManegerState extends State<VideoManeger> {
                           onStart: () async {},
                           onComplete: () async {
                             _circulatTimerControl!.pause();
-                            /*      var documentReference = FirebaseFirestore.instance
+                            var documentReference = FirebaseFirestore.instance
                                 .collection('user')
                                 .doc(user!.uid);
-                            documentReference.update(
+                            await documentReference.update(
                                 //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                                 {
-                                  'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio+ flag.toString()}':
+                                  'SEM_${videos[index].numSemana}_DIA_${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
                                       _circulatTimerControl!.getTime()
                                 });
-    */
+                            print(
+                                'SEM_${videos[index].numSemana}_DIA_${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}');
+
                             _controller.dispose();
                             //  _controller!.play();
 

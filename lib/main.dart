@@ -149,7 +149,7 @@ class MyHomePage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 50.0),
                 child: const Text(
-                  'Seja bem vindo ao Strong Core!',
+                  'Seja bem-vindo ao Strong Core!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,

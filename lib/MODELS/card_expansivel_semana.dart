@@ -84,6 +84,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
   String tempBotao = 'I N I C I A R ';
   @override
   Widget build(BuildContext context) {
+    int dia = UserPreferences.getSteps(widget.numeroSemana) as int ?? 0;
     List<String> nomeVideos = [
       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
       'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
@@ -95,7 +96,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
     }
 
     DateTime? horarioAgora = DateTime.now();
-    int dia;
+
     /*var letsgo = FirebaseFirestore.instance
         .collection('user')
         .doc(FirebaseAuth.instance.currentUser!.displayName!)
@@ -270,7 +271,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                 ),
                                 Divider(
                                   // color: Color.fromARGB(255, 75, 75, 75),
-                                  height: 5,
+                                  height: 3,
                                 ),
                               ],
                             ),
@@ -378,7 +379,10 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                             }*/
                             await Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return VideoManeger(videos: videos!);
+                              return VideoManeger(
+                                videos: videos!,
+                                numSemana: widget.numeroSemana,
+                              );
                             }));
                             setState(() {
                               stepBarControll++;

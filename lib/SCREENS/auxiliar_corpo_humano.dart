@@ -64,10 +64,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
     AddTodoButton;
     BotaoDuplo data;
     return WillPopScope(
-      onWillPop: () async {
-        Navigator.pop(context);
-        return true;
-      },
+      onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,

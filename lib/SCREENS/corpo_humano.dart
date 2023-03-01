@@ -68,14 +68,14 @@ class _CorpoHumanoState extends State<CorpoHumano> {
           title: Text('Strong Core'),
           centerTitle: true,
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+        body: ListView(
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //      mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
               child:
                   Stack(alignment: AlignmentDirectional.topCenter, children: [
-                Image.asset('Assets/images/corpoHumano.png'),
+                Image.asset('Assets/images/corpo_humano_2.jpeg'),
                 Positioned(
                     right: 138,
                     top: 75,
@@ -332,18 +332,58 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                   'ATUALIZOU_ANAMNSE_SEM8': false,
                   'DATA DIREITO': data!.painDegreeRight,
                   'DATA ESQUERDO': data.painDegreeleft,
-                  'SEM_1_EXERCICIO_PRANCHA DORSAL1': 100,
-                  'SEM_1_EXERCICIO_PRANCHA DORSAL2': 100,
-                  'SEM_1_EXERCICIO_PRANCHA DORSAL3': 100,
-                  'SEM_1_EXERCICIO_PRANCHA VENTRAL1': 100,
-                  'SEM_1_EXERCICIO_PRANCHA VENTRAL2': 100,
-                  'SEM_1_EXERCICIO_PRANCHA VENTRAL3': 100,
-                  'SEM_1_EXERCICIO_PRANCHA LATERAL ESQ1': 100,
-                  'SEM_1_EXERCICIO_PRANCHA LATERAL ESQ2': 100,
-                  'SEM_1_EXERCICIO_PRANCHA LATERAL ESQ3': 100,
-                  'SEM_1_EXERCICIO_PRANCHA LATERAL DIR1': 100,
-                  'SEM_1_EXERCICIO_PRANCHA LATERAL DIR2': 100,
-                  'SEM_1_EXERCICIO_PRANCHA LATERAL DIR3': 100,
+                  //SEMANA 1 DIA 1
+                  'SEM_1_DIA1_EXERCICIO_PRANCHA DORSAL1': 100,
+                  'SEM_1_DIA1_EXERCICIO_PRANCHA DORSAL2': 100,
+                  'SEM_1_DIA1_EXERCICIO_PRANCHA DORSAL3': 100,
+                  'SEM_1_DIA1_EXERCICIO_PRANCHA VENTRAL1': 100,
+                  'SEM_1_DIA1_EXERCICIO_PRANCHA VENTRAL2': 100,
+                  'SEM_1_DIA1_EXERCICIO_PRANCHA VENTRAL3': 100,
+                  'SEM_1_DIA1_EXERCICIO_PRANCHA LATERAL ESQ1': 100,
+                  'SEM_1_DIA1_EXERCICIO_PRANCHA LATERAL ESQ2': 100,
+                  'SEM_1_DIA1_EXERCICIO_PRANCHA LATERAL ESQ3': 100,
+                  'SEM_1_DIA1_EXERCICIO_PRANCHA LATERAL DIR1': 100,
+                  'SEM_1_DIA1_EXERCICIO_PRANCHA LATERAL DIR2': 100,
+                  'SEM_1_DIA1_EXERCICIO_PRANCHA LATERAL DIR3': 100,
+                  //SEMANA 1 DIA 2
+                  'SEM_1_DIA2_EXERCICIO_PRANCHA DORSAL1': 100,
+                  'SEM_1_DIA2_EXERCICIO_PRANCHA DORSAL2': 100,
+                  'SEM_1_DIA2_EXERCICIO_PRANCHA DORSAL3': 100,
+                  'SEM_1_DIA2_EXERCICIO_PRANCHA VENTRAL1': 100,
+                  'SEM_1_DIA2_EXERCICIO_PRANCHA VENTRAL2': 100,
+                  'SEM_1_DIA2_EXERCICIO_PRANCHA VENTRAL3': 100,
+                  'SEM_1_DIA2_EXERCICIO_PRANCHA LATERAL ESQ1': 100,
+                  'SEM_1_DIA2_EXERCICIO_PRANCHA LATERAL ESQ2': 100,
+                  'SEM_1_DIA2_EXERCICIO_PRANCHA LATERAL ESQ3': 100,
+                  'SEM_1_DIA2_EXERCICIO_PRANCHA LATERAL DIR1': 100,
+                  'SEM_1_DIA2_EXERCICIO_PRANCHA LATERAL DIR2': 100,
+                  'SEM_1_DIA2_EXERCICIO_PRANCHA LATERAL DIR3': 100,
+                  //SEMANA 1 DIA 3
+                  'SEM_1_DIA3_EXERCICIO_PRANCHA DORSAL1': 100,
+                  'SEM_1_DIA3_EXERCICIO_PRANCHA DORSAL2': 100,
+                  'SEM_1_DIA3_EXERCICIO_PRANCHA DORSAL3': 100,
+                  'SEM_1_DIA3_EXERCICIO_PRANCHA VENTRAL1': 100,
+                  'SEM_1_DIA3_EXERCICIO_PRANCHA VENTRAL2': 100,
+                  'SEM_1_DIA3_EXERCICIO_PRANCHA VENTRAL3': 100,
+                  'SEM_1_DIA3_EXERCICIO_PRANCHA LATERAL ESQ1': 100,
+                  'SEM_1_DIA3_EXERCICIO_PRANCHA LATERAL ESQ2': 100,
+                  'SEM_1_DIA3_EXERCICIO_PRANCHA LATERAL ESQ3': 100,
+                  'SEM_1_DIA3_EXERCICIO_PRANCHA LATERAL DIR1': 100,
+                  'SEM_1_DIA3_EXERCICIO_PRANCHA LATERAL DIR2': 100,
+                  'SEM_1_DIA3_EXERCICIO_PRANCHA LATERAL DIR3': 100,
+
+                  //SEMANA 2 DIA 1
+                  'SEM_2_DIA1_EXERCICIO_PRANCHA VENTRAL1': 100,
+                  'SEM_2_DIA1_EXERCICIO_PRANCHA VENTRAL2': 100,
+                  'SEM_2_DIA1_EXERCICIO_PRANCHA VENTRAL3': 100,
+                  'SEM_2_DIA1_EXERCICIO_PRANCHA VENTRAL4': 100,
+                  'SEM_2_DIA1_EXERCICIO_PRANCHA VENTRAL5': 100,
+
+                  'SEM_2_DIA1_EXERCICIO_PRANCHA DORSAL1': 100,
+                  'SEM_2_DIA1_EXERCICIO_PRANCHA DORSAL2': 100,
+                  'SEM_2_DIA1_EXERCICIO_PRANCHA DORSAL3': 100,
+                  'SEM_2_DIA1_EXERCICIO_PRANCHA DORSAL4': 100,
+                  'SEM_2_DIA1_EXERCICIO_PRANCHA DORSAL5': 100,
                 });
 
                 Navigator.of(context).push(
@@ -367,3 +407,10 @@ class _CorpoHumanoState extends State<CorpoHumano> {
     );
   }
 }
+
+Map<String, int> listaExercicios = {
+  'SEM_2_DIA1_EXERCICIO_PRANCHA DORSAL2': 100,
+  'SEM_2_DIA1_EXERCICIO_PRANCHA DORSAL3': 100,
+  'SEM_2_DIA1_EXERCICIO_PRANCHA DORSAL4': 100,
+  'SEM_2_DIA1_EXERCICIO_PRANCHA DORSAL5': 100,
+};

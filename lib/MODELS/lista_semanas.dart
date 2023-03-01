@@ -6,13 +6,13 @@ import 'package:strong_core/MODELS/info_semanas.dart';
 final LISTASEMANAS = [
   InfoSemanas(Color.fromARGB(255, 102, 132, 111), 'SEMANA 1', videos1, 1),
   InfoSemanas(Color.fromARGB(255, 36, 108, 14), 'SEMANA 2', videos2, 2),
-  InfoSemanas(Color.fromARGB(255, 109, 173, 41), 'SEMANA 3', videos7, 3),
+  InfoSemanas(Color.fromARGB(255, 109, 173, 41), 'SEMANA 3', videos3, 3),
   InfoSemanas(Color.fromARGB(255, 205, 208, 60), 'SEMANA 4', videos4, 4),
   InfoSemanas(Color.fromARGB(255, 193, 130, 41), 'SEMANA 5', videos5, 5),
   InfoSemanas(Color.fromARGB(255, 183, 82, 82), 'SEMANA 6', videos6, 6),
   InfoSemanas(Color.fromARGB(255, 187, 47, 47), 'SEMANA 7', videos7, 7),
-  InfoSemanas(Color.fromARGB(255, 99, 29, 93), 'SEMANA 8', videos1, 8),
-  InfoSemanas(Color.fromARGB(255, 87, 26, 54), 'SEMANA 9', videos1, 9),
+  InfoSemanas(Color.fromARGB(255, 99, 29, 93), 'SEMANA 8', videos8, 8),
+  InfoSemanas(Color.fromARGB(255, 87, 26, 54), 'SEMANA 9', videos9, 9),
 
   /*
   InfoSemanas(Color.fromARGB(255, 220, 151, 49), 'SEMANA 1', videos, 1),
@@ -24,34 +24,11 @@ final LISTASEMANAS = [
   InfoSemanas(Color.fromARGB(255, 111, 64, 91), 'SEMANA 7', videos, 7),*/
 ];
 List<VideoScreen> videos1 = [
-  /* VideoScreen(
-    nomeSemLado: 'PRANCHA LATERAL',
-    nomeExercicioDE: 'PRANCHA LATERAL DIR',
-    urlDE: 'Assets/video/SEM1/pranchaESQ.mp4',
-    tempo: 5,
-    url: 'Assets/video/SEM1/pranchaDIR.mp4', //'Assets/video/prancha.mp4',
-    nomeExercicio: 'PRANCHA LATERAL ESQ',
-    loop: 3, numSemana: '1',
-  ) //Video(20, nomeVideos),
-  ,*/
-  /*VideoScreen(
-    //TA ERRADO O EXERCICIO
-    tempo: 5,
-    url:
-        'Assets/video/SEM4/prancha_dorsal_c_elevacao_de_calcanhar.mp4', //'Assets/video/prancha.mp4',
-    nomeExercicio: 'PRANCHA DORSAL COM ELEVAÇÃO DO calcanhar',
-    loop: 2, numSemana: '4',
-  ) //Vi,deo(20, nomeVideos),
-  ,*/
   VideoScreen(
-      //ValueKey('sem2ex3'),
-      nomeExercicioDE: 'PRANCHA LATERAL DIREITA',
-      urlDE: 'Assets/video/SEM2/pranchaD_40.mp4',
-      numSemana: '2',
-      nomeSemLado: 'PRANCHA LATERAL',
-      tempo: 3,
-      url: 'Assets/video/SEM2/pranchaE_40.mp4',
-      nomeExercicio: 'PRANCHA LATERAL ESQUERDA',
+      numSemana: '1',
+      tempo: 1,
+      url: 'Assets/video/SEM1/pranchaNORM.mp4',
+      nomeExercicio: 'PRANCHA VENTRAL',
       loop: 2) //Video(20, nomeVideos),
   ,
   VideoScreen(
@@ -63,12 +40,17 @@ List<VideoScreen> videos1 = [
   ,
   VideoScreen(
       isLast: true,
-      numSemana: '1',
-      tempo: 1,
-      url: 'Assets/video/SEM1/pranchaNORM.mp4',
-      nomeExercicio: 'PRANCHA VENTRAL',
+      //ValueKey('sem2ex3'),
+      nomeExercicioDE: 'PRANCHA LATERAL DIREITA',
+      urlDE: 'Assets/video/SEM2/pranchaD_40.mp4',
+      numSemana: '2',
+      nomeSemLado: 'PRANCHA LATERAL',
+      tempo: 10,
+      url: 'Assets/video/SEM2/pranchaE_40.mp4',
+      nomeExercicio: 'PRANCHA LATERAL ESQUERDA',
       loop: 2) //Video(20, nomeVideos),
   ,
+
   /* VideoScreen(
     isLast: true,
     tempo: 5,
@@ -82,19 +64,19 @@ List<VideoScreen> videos1 = [
 /////////////////////////////////////
 List<VideoScreen> videos2 = [
   VideoScreen(
-    tempo: 1,
-    url: 'Assets/video/SEM2/ponte_dorsal_40.mp4', //'Assets/video/prancha.mp4',
-    nomeExercicio: 'PRANCHA DORSAL',
-    loop: 2, numSemana: '2',
-  ) //Video(20, nomeVideos),
-  ,
-  VideoScreen(
       //ValueKey('sem2ex2'),
       numSemana: '2',
       tempo: 1,
       url: 'Assets/video/SEM2/pranchaS2.mp4',
       nomeExercicio: 'PRANCHA VENTRAL',
       loop: 2) //Video(20, nomeVideos),
+  ,
+  VideoScreen(
+    tempo: 1,
+    url: 'Assets/video/SEM2/ponte_dorsal_40.mp4', //'Assets/video/prancha.mp4',
+    nomeExercicio: 'PRANCHA DORSAL',
+    loop: 2, numSemana: '2',
+  ) //Video(20, nomeVideos),
   ,
   VideoScreen(
       //ValueKey('sem2ex3'),
@@ -187,12 +169,12 @@ List<VideoScreen> videos5 = [
   VideoScreen(
       //ValueKey('sem5ex1'),
       urlDE: 'Assets/video/SEM5/prancha_superman_30_BD.mp4',
-      nomeExercicioDE: 'PRANCHA SUPERMAN BRAÇO DIREITO',
+      nomeExercicioDE: 'PRANCHA SUPERMAN LADO DIREITO',
       nomeSemLado: 'PRANCHA SUPERMAN',
       numSemana: '5',
       tempo: 7,
       url: 'Assets/video/SEM5/prancha_superman_30_BE.mp4',
-      nomeExercicio: 'PRANCHA SUPERMAN BRAÇO ESQUERDO',
+      nomeExercicio: 'PRANCHA SUPERMAN LADO ESQUERDO',
       loop: 2) //Video(20, nomeVideos),
   ,
   VideoScreen(
@@ -209,7 +191,7 @@ List<VideoScreen> videos5 = [
     tempo: 5,
     url:
         'Assets/video/SEM5/prancha_isometrica_canoa_30.mp4', //'Assets/video/prancha.mp4',
-    nomeExercicio: 'PRANCHA CANIVETE',
+    nomeExercicio: 'PRANCHA CANOA',
     loop: 2, numSemana: '5',
   ) //Video(20, nomeVideos),
   ,
@@ -220,12 +202,12 @@ List<VideoScreen> videos5 = [
 List<VideoScreen> videos6 = [
   VideoScreen(
       urlDE: 'Assets/video/SEM6/S6_prancha_superman_D_40.mp4',
-      nomeExercicioDE: 'PRANCHA SUPERMAN BRAÇO DIREITO',
+      nomeExercicioDE: 'PRANCHA SUPERMAN LADO DIREITO',
       nomeSemLado: 'PRANCHA SUPERMAN',
       numSemana: '6',
       tempo: 7,
       url: 'Assets/video/SEM6/S6_prancha_superman_E_40.mp4',
-      nomeExercicio: 'PRANCHA SUPERMAN BRAÇO ESQUERDO',
+      nomeExercicio: 'PRANCHA SUPERMAN LADO ESQUERDO',
       loop: 2) //Video(20, nomeVideos),
   ,
   VideoScreen(
@@ -248,9 +230,10 @@ List<VideoScreen> videos6 = [
 ///VIDEOS 7
 List<VideoScreen> videos7 = [
   VideoScreen(
+      //CONFERIR OS VIDEOS
       urlDE:
           'Assets/video/SEM7/S7_prancha_alta_c_elevacao_de_braco_e_pernaD_contralateral.mp4',
-      nomeExercicioDE: 'PRANCHA ALTA ELEV BRAÇO E PERNA DIR',
+      nomeExercicioDE: 'PRANCHA COM E BRAÇO E PERNA ',
       nomeSemLado: 'PRANCHA COM ELEVAÇÃO DA PERNA',
       numSemana: '7',
       tempo: 2,
@@ -282,7 +265,7 @@ List<VideoScreen> videos7 = [
       nomeExercicio: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO ESQ',
       loop: 2) //Video(20, nomeVideos),
   ,
-];/*
+];
 /////////////////
 ///VIDEOS SEMANA 8=SEMANA 7
 List<VideoScreen> videos8 = [
@@ -359,4 +342,4 @@ List<VideoScreen> videos9 = [
       nomeExercicio: 'PRANCHA LATERAL ELEVAÇÃO DO BRAÇO ESQ',
       loop: 2) //Video(20, nomeVideos),
   ,
-];*/
+];

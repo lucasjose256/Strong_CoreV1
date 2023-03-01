@@ -127,18 +127,19 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                 SizedBox(
                   width: 20,
                 ),
-                Center(
-                  child: Container(
-                    /*   decoration: const BoxDecoration(
-                        color: Color.fromARGB(169, 113, 112, 112),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),*/
-                    child: Text(
-                      nomeExercicio,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 22),
-                    ),
+
+                /*   decoration: const BoxDecoration(
+                          color: Color.fromARGB(169, 113, 112, 112),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),*/
+
+                Expanded(
+                  child: Text(
+                    nomeExercicio,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 15),
+                    maxLines: 4,
                   ),
                 ),
                 SizedBox(
@@ -234,7 +235,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                   {
                                     'EXERCICIO_${widget.nomeExercicio + flag.toString()}':
                                         _circulatTimerControl!.getTime()
-                           /*       });*/
+                           /      });*/
                               var documentReference = FirebaseFirestore.instance
                                   .collection('user')
                                   .doc(user!.uid);
@@ -244,7 +245,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                   {
                                     'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
                                         _circulatTimerControl!.getTime()
-                                  });*/
+                                  });
 //                            if(eUltimo){}
                               _controller!.dispose();
                               if (widget.dontShowbuttun == true &&
