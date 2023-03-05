@@ -2,8 +2,11 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:strong_core/SCREENS/basic_questions.dart';
 import 'package:strong_core/SCREENS/forms.dart';
+
+import '../provider/information_forms.dart';
 
 class SingUpPage extends StatefulWidget {
   SingUpPage({Key? key}) : super(key: key);
@@ -136,7 +139,10 @@ class _SingUpPageState extends State<SingUpPage> {
                         password: _passwordControler.text);
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (constect) => Forms(),
+                          builder: (constect) =>
+                              ChangeNotifierProvider<Information>(
+                                  create: (context) => Information(),
+                                  child: Forms()),
                           settings: const RouteSettings()),
                     );
                   },

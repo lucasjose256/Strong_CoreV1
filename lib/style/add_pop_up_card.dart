@@ -21,7 +21,7 @@ class AddTodoButton extends StatefulWidget {
   final String? number; //number o fbuttun
   Color? newColor = Colors.grey;
   String numberId = ''; //if the buttun has a duplicate
-  String graudaDor = '';
+  String? graudaDor = null;
   final String nomeMembro;
   Color? corSemanaAnterior = null;
   // ignore: avoid_init_to_null
@@ -59,12 +59,20 @@ class _AddTodoButtonState extends State<AddTodoButton> {
                         const RouteSettings(arguments: null, name: null)));
             // settings: RouteSettings(arguments: null, name: null)
 
-            widget.graudaDor = temp["numero"];
+            try {
+              widget.graudaDor = temp["numero"];
+            } catch (e) {
+              print(e);
+            }
             setState(() {
               //    widget.newColor = Colors.purple;
               // widget.onChange(temp["color"]);
-              widget.newColor = temp["color"];
-              widget.corSemanaAnterior = temp["color"];
+              try {
+                widget.newColor = temp["color"];
+                widget.corSemanaAnterior = temp["color"];
+              } catch (e) {
+                print(e);
+              }
             });
           },
           child: Hero(

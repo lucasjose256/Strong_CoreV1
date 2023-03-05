@@ -13,9 +13,11 @@ class VideoDirEsq extends VideoScreen {
   bool? dontShowbuttun;
   int? tempoEspera;
   String numSemana;
+  int dia;
   bool showButtun = false;
   VideoDirEsq(Key key,
       {this.tempoEspera,
+      required this.dia,
       this.dontShowbuttun,
       required this.showButtun,
       required this.numSemana,
@@ -121,43 +123,40 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
           decoration: const BoxDecoration(
               color: Color.fromARGB(169, 113, 112, 112),
               borderRadius: BorderRadius.all(Radius.circular(20))),
-          child: FittedBox(
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 20,
-                ),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 20,
+              ),
 
-                /*   decoration: const BoxDecoration(
+              /*   decoration: const BoxDecoration(
                           color: Color.fromARGB(169, 113, 112, 112),
                           borderRadius: BorderRadius.all(Radius.circular(20))),*/
 
-                Expanded(
-                  child: Text(
-                    nomeExercicio,
+              Expanded(
+                child: Text(
+                  nomeExercicio,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255), fontSize: 15),
+                  maxLines: 4,
+                ),
+              ),
+              SizedBox(
+                width: 35,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.19,
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(225, 69, 69, 69),
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: Text('${flag}/${loop}',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 15),
-                    maxLines: 4,
-                  ),
-                ),
-                SizedBox(
-                  width: 35,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.19,
-                  decoration: BoxDecoration(
-                      color: Color.fromARGB(225, 69, 69, 69),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: Text('${flag}/${loop}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 32)),
-                )
-              ],
-            ),
+                        fontSize: 32)),
+              )
+            ],
           ),
         ),
         const SizedBox(
@@ -243,7 +242,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                               await documentReference.update(
                                   //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                                   {
-                                    'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                                    'SEM_${widget.numSemana}_DIA${widget.dia + 1}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
                                         _circulatTimerControl!.getTime()
                                   });
 //                            if(eUltimo){}
@@ -299,16 +298,17 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
           ),
           onPressed: () async {
             _circulatTimerControl!.pause();
-            /*      _circulatTimerControl!.pause();
+            _controller!.pause();
+
             var documentReference =
                 FirebaseFirestore.instance.collection('user').doc(user!.uid);
 
             await documentReference.update(
                 //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                 {
-                  'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                  'SEM_${widget.numSemana}_DIA${widget.dia + 1}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
                       _circulatTimerControl!.getTime()
-                });*/
+                });
             _controller!.dispose();
             if (widget.dontShowbuttun == true && widget.showButtun == true) {
               Navigator.pop(

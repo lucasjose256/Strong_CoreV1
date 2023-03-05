@@ -93,15 +93,36 @@ class _FormsState extends State<Forms> {
 
             Navigator.of(context).push(
               MaterialPageRoute(
-                  builder: (constect) => const CorpoHumano(),
+                  builder: (constect) => ChangeNotifierProvider<Information>(
+                      create: ((context) => Information()),
+                      child: const CorpoHumano()),
                   settings: const RouteSettings()),
             );
           } else {
             //AQUI SERIA ADIOCIONADO AS VERIFICAÇÕES NOS CAMPOS ANSWERS PARA
             //CONFERIR SE TODOS OS CAMPO FORAM PREENCHIDOS
-            setState(() {
-              stepCounter++;
-            });
+            if (stepCounter == 0 &&
+                (infoForms.nome == '' ||
+                    infoForms.sexo == '' ||
+                    infoForms.peso == '')) {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  actions: [
+                    TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text('Ok'))
+                  ],
+                  title: Text('Formulário'),
+                  content: Text(
+                      'Por favor, preencha TODOS os CAMPOS para prosseguir!'),
+                ),
+              );
+            } else {
+              setState(() {
+                stepCounter++;
+              });
+            }
           }
         },
         onStepCancel: stepCounter == 0

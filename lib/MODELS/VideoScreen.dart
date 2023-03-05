@@ -1,5 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:strong_core/MODELS/VideoDIR_ESQ.dart';
@@ -269,6 +270,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                 MaterialPageRoute(
                                   builder: (context) => VideoDirEsq(
                                       ValueKey(widget.nomeExercicio),
+                                      dia: 2,
                                       showButtun: showButtun,
                                       numSemana: widget.numSemana,
                                       isLastVideo: islast,
@@ -390,6 +392,7 @@ class _VideoScreenState extends State<VideoScreen> {
                       MaterialPageRoute(
                         builder: (context) => VideoDirEsq(
                             ValueKey(widget.nomeExercicio),
+                            dia: 2,
                             isLastVideo: islast,
                             showButtun: showButtun,
                             numSemana: widget.numSemana,

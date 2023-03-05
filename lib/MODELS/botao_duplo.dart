@@ -90,7 +90,7 @@ class _BotaoDuploState extends State<BotaoDuplo> {
 
                   corProvider.changeColor(temp["color"]);
                   membroEsq.graudaDor = temp["numero"];
-                  widget.painDegreeleft = membroEsq.graudaDor;
+                  widget.painDegreeleft = membroEsq.graudaDor!;
                   if (cor2Provider.cor == null && widget.colorRight == null) {
                     Map temp2 = await Navigator.push(
                         context,
@@ -224,7 +224,7 @@ class _BotaoDuploState extends State<BotaoDuplo> {
                 )),
           ),
         ],
-        crossAxisAlignment: CrossAxisAlignment.center,
+        //crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
       ),
     );

@@ -94,46 +94,45 @@ class _SemanasState extends State<Semanas> {
       onRefrash(null);
     }
 
-    return Scaffold(
-      body: FutureBuilder(
-          future: caregaMap(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            } else {
-              /* if ((widget.horario2!.isAfter(DateTime.utc(1999, 1, 9)) &&
-                 ( widget.situacaoAnamnse2 == false)|| (   widget.horario4!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse4 == false)||
-                widget.horario6!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse6 == false )|| widget.horario8!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse8 == false
-                 ) */
-              if (widget.horario2!.isAfter(DateTime.utc(1999, 1, 9)) &&
-                  widget.situacaoAnamnse2 == false) {
-                print('semana2');
-
-                servidor(2);
-
-                //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
-                return AuxCorpoHumano(numSem: '2');
-              } else if (widget.horario4!.isAfter(DateTime.utc(1999, 1, 9)) &&
-                  (widget.situacaoAnamnse4 == false)) {
-                print('semana4');
-                servidor(4);
-                //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
-                return const AuxCorpoHumano(numSem: '4');
-              } else if (widget.horario6!.isAfter(DateTime.utc(1999, 1, 9)) &&
-                  (widget.situacaoAnamnse6 == false)) {
-                servidor(6);
-                //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
-                return const AuxCorpoHumano(numSem: '6');
-              } else if (widget.horario8!.isAfter(DateTime.utc(1999, 1, 9)) &&
-                  (widget.situacaoAnamnse8 == false)) {
-                servidor(8);
-                //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
-                return const AuxCorpoHumano(numSem: '8');
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: FutureBuilder(
+            future: caregaMap(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
               } else {
-                return buildSemanas(user: user, estadoAcesso: estadoAcesso);
+                /* if ((widget.horario2!.isAfter(DateTime.utc(1999, 1, 9)) &&
+                   ( widget.situacaoAnamnse2 == false)|| (   widget.horario4!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse4 == false)||
+                  widget.horario6!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse6 == false )|| widget.horario8!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse8 == false
+                   ) */
+                if (widget.horario2!.isAfter(DateTime.utc(1999, 1, 9)) &&
+                    widget.situacaoAnamnse2 == false) {
+                  print('semana2');
+
+                  //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
+                  return AuxCorpoHumano(numSem: '2');
+                } else if (widget.horario4!.isAfter(DateTime.utc(1999, 1, 9)) &&
+                    (widget.situacaoAnamnse4 == false)) {
+                  print('semana4');
+
+                  //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
+                  return const AuxCorpoHumano(numSem: '4');
+                } else if (widget.horario6!.isAfter(DateTime.utc(1999, 1, 9)) &&
+                    (widget.situacaoAnamnse6 == false)) {
+                  //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
+                  return const AuxCorpoHumano(numSem: '6');
+                } else if (widget.horario8!.isAfter(DateTime.utc(1999, 1, 9)) &&
+                    (widget.situacaoAnamnse8 == false)) {
+                  //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
+                  return const AuxCorpoHumano(numSem: '8');
+                } else {
+                  return buildSemanas(user: user, estadoAcesso: estadoAcesso);
+                }
               }
-            }
-          }),
+            }),
+      ),
     );
   }
 }

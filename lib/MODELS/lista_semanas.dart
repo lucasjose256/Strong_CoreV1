@@ -26,29 +26,29 @@ final LISTASEMANAS = [
 List<VideoScreen> videos1 = [
   VideoScreen(
       numSemana: '1',
-      tempo: 1,
+      tempo: 5,
       url: 'Assets/video/SEM1/pranchaNORM.mp4',
       nomeExercicio: 'PRANCHA VENTRAL',
-      loop: 2) //Video(20, nomeVideos),
+      loop: 3) //Video(20, nomeVideos),
   ,
   VideoScreen(
       numSemana: '1',
       tempo: 1,
       url: 'Assets/video/SEM1/ponte.mp4',
       nomeExercicio: 'PRANCHA DORSAL',
-      loop: 2) //Video(20, nomeVideos),
+      loop: 3) //Video(20, nomeVideos),
   ,
   VideoScreen(
       isLast: true,
       //ValueKey('sem2ex3'),
       nomeExercicioDE: 'PRANCHA LATERAL DIREITA',
       urlDE: 'Assets/video/SEM2/pranchaD_40.mp4',
-      numSemana: '2',
+      numSemana: '1',
       nomeSemLado: 'PRANCHA LATERAL',
       tempo: 10,
       url: 'Assets/video/SEM2/pranchaE_40.mp4',
       nomeExercicio: 'PRANCHA LATERAL ESQUERDA',
-      loop: 2) //Video(20, nomeVideos),
+      loop: 3) //Video(20, nomeVideos),
   ,
 
   /* VideoScreen(
@@ -64,22 +64,19 @@ List<VideoScreen> videos1 = [
 /////////////////////////////////////
 List<VideoScreen> videos2 = [
   VideoScreen(
-      //ValueKey('sem2ex2'),
       numSemana: '2',
       tempo: 1,
       url: 'Assets/video/SEM2/pranchaS2.mp4',
       nomeExercicio: 'PRANCHA VENTRAL',
-      loop: 2) //Video(20, nomeVideos),
-  ,
+      loop: 5),
   VideoScreen(
     tempo: 1,
-    url: 'Assets/video/SEM2/ponte_dorsal_40.mp4', //'Assets/video/prancha.mp4',
+    url: 'Assets/video/SEM2/ponte_dorsal_40.mp4',
     nomeExercicio: 'PRANCHA DORSAL',
-    loop: 2, numSemana: '2',
-  ) //Video(20, nomeVideos),
-  ,
+    loop: 5,
+    numSemana: '2',
+  ),
   VideoScreen(
-      //ValueKey('sem2ex3'),
       nomeExercicioDE: 'PRANCHA LATERAL DIREITA',
       urlDE: 'Assets/video/SEM2/pranchaD_40.mp4',
       numSemana: '2',
@@ -88,7 +85,7 @@ List<VideoScreen> videos2 = [
       tempo: 3,
       url: 'Assets/video/SEM2/pranchaE_40.mp4',
       nomeExercicio: 'PRANCHA LATERAL ESQUERDA',
-      loop: 2) //Video(20, nomeVideos),
+      loop: 5) //Video(20, nomeVideos),
   ,
 ];
 //////////////////////////////
