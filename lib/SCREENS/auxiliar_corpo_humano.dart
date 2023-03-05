@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -37,32 +38,37 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
   Uint8List? bytes;
   GlobalKey _globalKey = GlobalKey();
   bool loading = false;
+  Future<void> servidor(String num) async {
+    await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({'ATUALIZOU_ANAMNSE_SEM$num': true});
+  }
 
   @override
   Widget build(BuildContext context) {
-    Stack dataCorpo;
-    AddTodoButton pescoco1;
-    AddTodoButton pescoco2;
-    Color color = Colors.black;
-
-    AddTodoButton ombroDir = AddTodoButton(
-      number: '6',
-      numberId: 'DIR',
-      nomeMembro: 'na região do ombro DIREITO',
-    );
-    AddTodoButton ombroEsq;
-
     AddTodoButton regiaoCervical1;
-
-    AddTodoButton;
+    AddTodoButton pescoco0;
     AddTodoButton costasSuperior2;
     AddTodoButton costasMedia3;
     AddTodoButton costasInferior4;
     AddTodoButton bacia5;
-    AddTodoButton;
-    AddTodoButton;
-    AddTodoButton;
-    BotaoDuplo data;
+    BotaoDuplo? data;
+    BotaoDuplo? ombro6;
+    BotaoDuplo braco7;
+    BotaoDuplo cotovelo8;
+    BotaoDuplo antebraco9;
+    BotaoDuplo punho10;
+    BotaoDuplo mao11;
+    BotaoDuplo perna12;
+    BotaoDuplo joelho13;
+    BotaoDuplo panturrilha14;
+    BotaoDuplo tornozelo15;
+    BotaoDuplo pe16;
+    Stack dataCorpo;
+    AddTodoButton pescoco1;
+    AddTodoButton pescoco2;
+
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -71,220 +77,343 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
           title: Text('Strong Core'),
           centerTitle: true,
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child:
+        body: SingleChildScrollView(
+          //controller:  scrollController.jumpTo(0),
+          child: Center(
+            child: Container(
+              //    alignment: AlignmentDirectional.topStart,
+              width: 350,
+              height: 730,
+              child: Column(
+                //        crossAxisAlignment: CrossAxisAlignment.center,
+                //mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Stack(alignment: AlignmentDirectional.topCenter, children: [
-                Image.asset('Assets/images/corpoHumano.png'),
-                Positioned(
-                    right: 138,
-                    top: 75,
-                    child: regiaoCervical1 = AddTodoButton(
-                      number: '1',
-                      numberId: '',
-                      nomeMembro: 'na região cervical',
-                    )),
-                Positioned(
-                    right: 138,
-                    top: 130,
-                    child: costasSuperior2 = AddTodoButton(
-                      number: '2',
-                      numberId: '',
-                      nomeMembro: 'na região da costas superior',
-                    )),
-                Positioned(
-                    right: 138,
-                    top: 177,
-                    child: costasMedia3 = AddTodoButton(
-                      number: '3',
-                      numberId: '',
-                      nomeMembro: 'na região das costas média',
-                    )),
-
-                /*  Positioned(
-                    right: 79,
-                    top: 90,
-                    child: ombroDir = AddTodoButton(
-                      number: '6',
-                      numberId: 'DIR',
-                      nomeMembro: 'na região do ombro DIREITO',
-                    )),
-                Positioned(
-                    right: 200,
-                    top: 90,
-                    child: ombroEsq = AddTodoButton(
-                      number: '6',
-                      numberId: 'ESQ',
-                      nomeMembro: 'na região do ombro ESQUERDO',
-                    )),*/
-                Positioned(
-                  //   top: ,
-                  child: ChangeNotifierProvider<Cor2>(
-                    create: (context) => Cor2(),
-                    child: ChangeNotifierProvider<Cor1>(
-                        create: (context) => Cor1(),
-                        child: data = BotaoDuplo(
-                          phraseCard: 'do OMBRO',
-                          buttunDistance: 50,
-                          numberButtun: '8',
-                        )),
-                  ),
-                ),
-
-                // Positioned(right: 230, top: 175, child: ombroDir),
-                /* Positioned(
-                  right: 48,
-                  top: 175,
-                  child: ChangeNotifierProvider<Cor1>(
-                    create: ((context) => Cor1()),
-                    child: AddTodoButtonSeq(
-                      botaoEsqDir: ombroDir,
-                      nomeMembro: 'na região do ombro ESQUERDO',
-                      number: '6',
-                      numberId: 'ESQ',
-                      onchange: (newvalue) {
-                        setState(() {
-                          ombroDir.newColor = newvalue;
-                        });
-                      },
+                    Image.asset(
+                      //      'Assets/images/corpo_humano_2.jpeg',
+                      'Assets/images/corpo_humano_2.jpeg', height: 620,
                     ),
+                    Positioned(
+                        right: 151,
+                        top: 55,
+                        child: pescoco0 = AddTodoButton(
+                          number: '0',
+                          numberId: '',
+                          nomeMembro: 'na região do PESCOÇO',
+                        )),
+                    Positioned(
+                        right: 151,
+                        top: 88,
+                        child: regiaoCervical1 = AddTodoButton(
+                          number: '1',
+                          numberId: '',
+                          nomeMembro: 'na região CERVICAL',
+                        )),
+                    Positioned(
+                        right: 151,
+                        top: 145,
+                        child: costasSuperior2 = AddTodoButton(
+                          number: '2',
+                          numberId: '',
+                          nomeMembro: 'na região DAS COSTAS SUPERIOR',
+                        )),
+                    Positioned(
+                        right: 151,
+                        top: 190,
+                        child: costasMedia3 = AddTodoButton(
+                          number: '3',
+                          numberId: '',
+                          nomeMembro: 'na região das costas média',
+                        )),
+                    Positioned(
+                      top: 105,
+                      child: ChangeNotifierProvider<Cor2>(
+                        create: (context) => Cor2(),
+                        child: ChangeNotifierProvider<Cor1>(
+                            create: (context) => Cor1(),
+                            child: ombro6 = BotaoDuplo(
+                              phraseCard: 'no OMBRO',
+                              buttunDistance: 85,
+                              numberButtun: '6',
+                            )),
+                      ),
+                    ),
+                    Positioned(
+                        right: 151,
+                        top: 225,
+                        child: costasInferior4 = AddTodoButton(
+                          number: '4',
+                          numberId: '',
+                          nomeMembro: 'na região DAS COSTAS INFERIOR',
+                        )),
+                    Positioned(
+                        right: 151,
+                        top: 275,
+                        child: bacia5 = AddTodoButton(
+                          number: '5',
+                          numberId: '',
+                          nomeMembro: 'na região DA BACIA',
+                        )),
+                    Positioned(
+                      top: 150,
+                      child: ChangeNotifierProvider<Cor2>(
+                        create: (context) => Cor2(),
+                        child: ChangeNotifierProvider<Cor1>(
+                            create: (context) => Cor1(),
+                            child: braco7 = BotaoDuplo(
+                              phraseCard: 'no BRAÇO',
+                              buttunDistance: 110,
+                              numberButtun: '7',
+                            )),
+                      ),
+                    ),
+                    Positioned(
+                      top: 185,
+                      child: ChangeNotifierProvider<Cor2>(
+                        create: (context) => Cor2(),
+                        child: ChangeNotifierProvider<Cor1>(
+                            create: (context) => Cor1(),
+                            child: cotovelo8 = BotaoDuplo(
+                              phraseCard: 'no COTOVELO',
+                              buttunDistance: 122,
+                              numberButtun: '8',
+                            )),
+                      ),
+                    ),
+                    Positioned(
+                      top: 220,
+                      child: ChangeNotifierProvider<Cor2>(
+                        create: (context) => Cor2(),
+                        child: ChangeNotifierProvider<Cor1>(
+                            create: (context) => Cor1(),
+                            child: antebraco9 = BotaoDuplo(
+                              phraseCard: 'no ANTEBRAÇO',
+                              buttunDistance: 138,
+                              numberButtun: '9',
+                            )),
+                      ),
+                    ),
+                    Positioned(
+                      top: 255,
+                      child: ChangeNotifierProvider<Cor2>(
+                        create: (context) => Cor2(),
+                        child: ChangeNotifierProvider<Cor1>(
+                            create: (context) => Cor1(),
+                            child: punho10 = BotaoDuplo(
+                              phraseCard: 'no PUNHO',
+                              buttunDistance: 150,
+                              numberButtun: '10',
+                            )),
+                      ),
+                    ),
+                    Positioned(
+                      top: 290,
+                      child: ChangeNotifierProvider<Cor2>(
+                        create: (context) => Cor2(),
+                        child: ChangeNotifierProvider<Cor1>(
+                            create: (context) => Cor1(),
+                            child: mao11 = BotaoDuplo(
+                              phraseCard: 'na MÃO',
+                              buttunDistance: 170,
+                              numberButtun: '11',
+                            )),
+                      ),
+                    ),
+                    Positioned(
+                      top: 354,
+                      child: ChangeNotifierProvider<Cor2>(
+                        create: (context) => Cor2(),
+                        child: ChangeNotifierProvider<Cor1>(
+                            create: (context) => Cor1(),
+                            child: perna12 = BotaoDuplo(
+                              phraseCard: 'na PERNA',
+                              buttunDistance: 14,
+                              numberButtun: '12',
+                            )),
+                      ),
+                    ),
+                    Positioned(
+                      top: 428,
+                      child: ChangeNotifierProvider<Cor2>(
+                        create: (context) => Cor2(),
+                        child: ChangeNotifierProvider<Cor1>(
+                            create: (context) => Cor1(),
+                            child: joelho13 = BotaoDuplo(
+                              phraseCard: 'no JOELHO',
+                              buttunDistance: 10,
+                              numberButtun: '13',
+                            )),
+                      ),
+                    ),
+                    Positioned(
+                      top: 485,
+                      child: ChangeNotifierProvider<Cor2>(
+                        create: (context) => Cor2(),
+                        child: ChangeNotifierProvider<Cor1>(
+                            create: (context) => Cor1(),
+                            child: panturrilha14 = BotaoDuplo(
+                              phraseCard: 'na PANTURRILHA',
+                              buttunDistance: 8,
+                              numberButtun: '14',
+                            )),
+                      ),
+                    ),
+                    Positioned(
+                      top: 550,
+                      child: ChangeNotifierProvider<Cor2>(
+                        create: (context) => Cor2(),
+                        child: ChangeNotifierProvider<Cor1>(
+                            create: (context) => Cor1(),
+                            child: tornozelo15 = BotaoDuplo(
+                              phraseCard: 'no TORNOZELO',
+                              buttunDistance: 0,
+                              numberButtun: '15',
+                            )),
+                      ),
+                    ),
+                    Positioned(
+                      top: 579,
+                      child: ChangeNotifierProvider<Cor2>(
+                        create: (context) => Cor2(),
+                        child: ChangeNotifierProvider<Cor1>(
+                            create: (context) => Cor1(),
+                            child: pe16 = BotaoDuplo(
+                              phraseCard: 'no PÉ',
+                              buttunDistance: 0,
+                              numberButtun: '16',
+                            )),
+                      ),
+                    ),
+                  ]),
+                  const SizedBox(
+                    height: 15,
                   ),
-                ),
-                Positioned(
-                  right: 230,
-                  top: 175,
-                  child: ChangeNotifierProvider<Cor1>(
-                      create: ((context) => Cor1()),
-                      child: AddTodoButtonSeq(
-                        botaoEsqDir: ombroDir,
-                        nomeMembro: 'na região do ombro ',
-                        number: '6-',
-                        numberId: 'DIR',
-                      )),
-                ),
-*/
-                /*  AddTodoButton(
-                  number: '6',
-                  numberId: 'ESQ',
-                  nomeMembro: 'na região do ombro ESQUERDO',
-                ),*/
+                  /* MaterialButton(
+                      onPressed: (() => setState(() {})), child: Text('atualizar')),*/
+                  MaterialButton(
+                    minWidth: 100,
+                    padding: EdgeInsets.only(top: 8, bottom: 8),
+                    color: ui.Color.fromARGB(255, 202, 43, 32),
+                    onPressed: () async {
+                      if (pescoco0.graudaDor == null ||
+                              regiaoCervical1.graudaDor == null ||
+                              costasSuperior2.graudaDor == null ||
+                              costasMedia3.graudaDor == null ||
+                              costasInferior4.graudaDor == null ||
+                              bacia5.graudaDor == null
+                          /*  ombro6!.painDegreeRight== null||
+                        ombro6.painDegreeleft== null||*/
+                          )
 
-                /*
-                Positioned(
-                    right: 138,
-                    top: 211,
-                    child: costasInferior4 =
-                        AddTodoButton(number: '4', numberId: '')),
-                Positioned(
-                    right: 138,
-                    top: 247,
-                    child: bacia5 = AddTodoButton(number: '5', numberId: '')),
-      
-                Positioned(
-                    right: 60,
-                    top: 140,
-                    child: AddTodoButton(number: '7', numberId: '1')),
-                Positioned(
-                    right: 220,
-                    top: 140,
-                    child: AddTodoButton(number: '7', numberId: '2')),
-                Positioned(
-                    right: 48,
-                    top: 175,
-                    child: AddTodoButton(number: '8', numberId: '1')),
-                Positioned(
-                    right: 230,
-                    top: 175,
-                    child: AddTodoButton(number: '8', numberId: '2')),
-                Positioned(
-                    right: 240,
-                    top: 208,
-                    child: AddTodoButton(number: '9', numberId: '1')),
-                Positioned(
-                    right: 38,
-                    top: 208,
-                    child: AddTodoButton(number: '9', numberId: '2')),
-                Positioned(
-                    right: 250,
-                    top: 250,
-                    child: AddTodoButton(number: '10', numberId: '1')),
-                Positioned(
-                    right: 20,
-                    top: 250,
-                    child: AddTodoButton(number: '10', numberId: '2')),
-                Positioned(
-                    right: 172,
-                    top: 331,
-                    child: AddTodoButton(number: '12', numberId: '1')),
-                Positioned(
-                    right: 105,
-                    top: 331,
-                    child: AddTodoButton(number: '12', numberId: '2')),
-                Positioned(
-                    right: 172,
-                    top: 390,
-                    child: AddTodoButton(number: '13', numberId: '1')),
-                Positioned(
-                    right: 102,
-                    top: 390,
-                    child: AddTodoButton(number: '13', numberId: '2')),
-                Positioned(
-                    right: 175,
-                    top: 443,
-                    child: AddTodoButton(number: '14', numberId: '1')),
-                Positioned(
-                    right: 100,
-                    top: 443,
-                    child: AddTodoButton(number: '14', numberId: '2')),*/
-                /* Positioned(
-                  right: 5,
-                  top: 90,
-                  child: AddTodoButtonDouble(
-                    numberId: '',
-                    number: '8',
-                  ))*/
-              ]),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            /* MaterialButton(
-                onPressed: (() => setState(() {})), child: Text('atualizar')),*/
-            MaterialButton(
-              minWidth: 100,
-              padding: EdgeInsets.only(top: 8, bottom: 8),
-              color: ui.Color.fromARGB(255, 202, 43, 32),
-              onPressed: () async {
-                await FirebaseFirestore.instance
-                    .collection('user')
-                    .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .update({
-                  'DATA DIREITO': data.painDegreeRight,
-                  'DATA ESQUERDO': data.painDegreeleft
-                });
-                /*   await FirebaseFirestore.instance
-                    .collection('user')
-                    .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .update({'ATUALIZOU_ANAMNSE_SEM2': true});*/
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (constect) => Semanas(),
-                      settings: const RouteSettings()),
-                );
-              },
-              child: Text(
-                'Finalizar',
-                style: TextStyle(color: Colors.white, fontSize: 20),
+                      /* grauDores = [
+                        //     pescoco0!.graudaDor!,
+                        /*   pescoco0.graudaDor!,
+                          regiaoCervical1.graudaDor!,
+                          costasSuperior2.graudaDor!,
+                          costasMedia3.graudaDor!,
+                          costasInferior4.graudaDor!,
+                          bacia5.graudaDor!,*/
+                        ombro6!.painDegreeRight!,
+                        ombro6.painDegreeleft,
+                      ];*/
+                      {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            actions: [
+                              TextButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: Text('Ok'))
+                            ],
+                            title: const Text('Anamnse'),
+                            content: const Text(
+                                'Selecione TODOS os campos do Corpo Humano'),
+                          ),
+                        );
+                      } else {
+                        await UserPreferences.setBool(true);
+
+                        var firebase = await FirebaseFirestore.instance
+                            .collection('user')
+                            .doc(FirebaseAuth.instance.currentUser!.uid);
+
+                        await firebase.update({
+                          'Pescoço0_SEM_${widget.numSem}': pescoco0.graudaDor,
+                          'Regiao_cervical1_SEM_${widget.numSem}':
+                              regiaoCervical1.graudaDor,
+                          'Costas_superior2_SEM_${widget.numSem}':
+                              costasSuperior2.graudaDor,
+                          'Costas_média3_SEM_${widget.numSem}':
+                              costasMedia3.graudaDor,
+                          'Costas_inferior4_SEM_${widget.numSem}':
+                              costasInferior4.graudaDor,
+                          'Bacia5_SEM_${widget.numSem}': bacia5.graudaDor,
+                          'Ombro6_DIREITO_SEM_${widget.numSem}':
+                              ombro6!.painDegreeRight,
+                          'Ombro6_ESQUERDO_SEM_${widget.numSem}':
+                              ombro6!.painDegreeleft,
+                          'Braço7_DIREITO_SEM_${widget.numSem}':
+                              braco7.painDegreeRight,
+                          'Braço7_ESQUERDO_SEM_${widget.numSem}':
+                              braco7.painDegreeleft,
+                          'Cotovelo8_DIREITO_SEM_${widget.numSem}':
+                              cotovelo8.painDegreeRight,
+                          'Cotovelo8_ESQUERDO_SEM_${widget.numSem}':
+                              cotovelo8.painDegreeleft,
+                          'Antebraço9_DIREITO_SEM_${widget.numSem}':
+                              antebraco9.painDegreeRight,
+                          'Antebraço9_ESQUERDO_SEM_${widget.numSem}':
+                              antebraco9.painDegreeleft,
+                          'Punho10_DIREITO_SEM_${widget.numSem}':
+                              punho10.painDegreeRight,
+                          'Punho10_ESQUERDO_SEM_${widget.numSem}':
+                              punho10.painDegreeleft,
+                          'Mao11_DIREITA_SEM_${widget.numSem}':
+                              mao11.painDegreeRight,
+                          'Mao11_ESQUERDA_SEM_${widget.numSem}':
+                              mao11.painDegreeleft,
+                          'Perna12_DIREITA_SEM_${widget.numSem}':
+                              perna12.painDegreeRight,
+                          'Perna12_ESQUERDA_SEM_${widget.numSem}':
+                              perna12.painDegreeleft,
+                          'Joelho13_DIREITO_SEM_${widget.numSem}':
+                              joelho13.painDegreeRight,
+                          'Joelho13_ESQUERDO_SEM_${widget.numSem}':
+                              joelho13.painDegreeleft,
+                          'Panturrilha14_DIREITA_SEM_${widget.numSem}':
+                              panturrilha14.painDegreeRight,
+                          'Panturrilha14_ESQUERDA_SEM_${widget.numSem}':
+                              panturrilha14.painDegreeleft,
+                          'Tornozelo15_DIREITO_SEM_${widget.numSem}':
+                              tornozelo15.painDegreeleft,
+                          'Tornozelo15_ESQUERDO_SEM_${widget.numSem}':
+                              tornozelo15.painDegreeleft,
+                          'Pe16_DIREITO_SEM_${widget.numSem}':
+                              pe16.painDegreeRight,
+                          'Pe16_ESQUERDO_SEM_${widget.numSem}':
+                              pe16.painDegreeleft,
+                        });
+                        servidor(widget.numSem);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (constect) => Semanas(),
+                              settings: const RouteSettings()),
+                        );
+                      }
+                    },
+                    child: Text(
+                      'Finalizar',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      side: BorderSide(color: Theme.of(context).primaryColor),
+                    ),
+                  )
+                ],
               ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-                side: BorderSide(color: Theme.of(context).primaryColor),
-              ),
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );
