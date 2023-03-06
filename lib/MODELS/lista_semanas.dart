@@ -143,7 +143,7 @@ List<VideoScreen> videos4 = [
     tempo: 5,
     url:
         'Assets/video/SEM4/prancha_dorsal_c_elevacao_de_calcanhar.mp4', //'Assets/video/prancha.mp4',
-    nomeExercicio: 'PRANCHA DORSAL COM ELEVAÇÃO DO calcanhar',
+    nomeExercicio: 'PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR',
     loop: 2, numSemana: '4',
   ) //Video(20, nomeVideos),
   ,

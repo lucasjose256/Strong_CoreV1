@@ -598,8 +598,304 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_2_DIA1_EXERCICIO_PRANCHA LATERAL DIREITA3': 100,
                           'SEM_2_DIA1_EXERCICIO_PRANCHA LATERAL DIREITA4': 100,
                           'SEM_2_DIA1_EXERCICIO_PRANCHA LATERAL DIREITA5': 100,
+                          //SEM2 DIA 2
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA VENTRAL1': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA VENTRAL2': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA VENTRAL3': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA VENTRAL4': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA VENTRAL5': 100,
+
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA DORSAL1': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA DORSAL2': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA DORSAL3': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA DORSAL4': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA DORSAL5': 100,
+
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL ESQUERDA1': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL ESQUERDA2': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL ESQUERDA3': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL ESQUERDA4': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL ESQUERDA5': 100,
+
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA1': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA2': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA3': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA4': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA5': 100,
                           ///////
-                          ///SEM 2
+                          ///SEM 3 DIA 1
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR1':
+                              100,
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR2':
+                              100,
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR3':
+                              100,
+
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO1':
+                              100,
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO2':
+                              100,
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO3':
+                              100,
+
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO1':
+                              100,
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO2':
+                              100,
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO3':
+                              100,
+                          ///////SEM 3 DIA 2
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR1':
+                              100,
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR2':
+                              100,
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR3':
+                              100,
+
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO1':
+                              100,
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO2':
+                              100,
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO3':
+                              100,
+
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO1':
+                              100,
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO2':
+                              100,
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO3':
+                              100,
+                          //////////SEM 3 DIA3
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR1':
+                              100,
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR2':
+                              100,
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR3':
+                              100,
+
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO1':
+                              100,
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO2':
+                              100,
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO3':
+                              100,
+
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO1':
+                              100,
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO2':
+                              100,
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO3':
+                              100,
+
+                          ///SEMANA 4
+                          ///DIA 1
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA4':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA5':
+                              100,
+
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                              100,
+
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR1':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR2':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR3':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR4':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR5':
+                              100,
+
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO1':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO2':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO3':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO4':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO5':
+                              100,
+
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO1':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO2':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO3':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO4':
+                              100,
+                          'SEM_4_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO5':
+                              100,
+                          ///////////SEMANA 4 DIA 2
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA4':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA5':
+                              100,
+
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                              100,
+
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR1':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR2':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR3':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR4':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR5':
+                              100,
+
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO1':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO2':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO3':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO4':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO5':
+                              100,
+
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO1':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO2':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO3':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO4':
+                              100,
+                          'SEM_4_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO5':
+                              100,
+                          ///// SEMANA 4 DIA 3
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA4':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA5':
+                              100,
+
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                              100,
+
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR1':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR2':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR3':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR4':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR5':
+                              100,
+
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO1':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO2':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO3':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO4':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO5':
+                              100,
+
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO1':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO2':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO3':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO4':
+                              100,
+                          'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO5':
+                              100,
+                          ////////////////SEMANA 5 DIA 1
                         });
 
                         Navigator.of(context).push(
