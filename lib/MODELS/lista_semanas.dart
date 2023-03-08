@@ -4,7 +4,7 @@ import 'package:strong_core/MODELS/VideoScreen.dart';
 import 'package:strong_core/MODELS/info_semanas.dart';
 
 final LISTASEMANAS = [
-  InfoSemanas(Color.fromARGB(255, 102, 132, 111), 'SEMANA 1', videos1, 1),
+  InfoSemanas(Color.fromARGB(255, 102, 132, 111), 'SEMANA 1', videos7, 1),
   InfoSemanas(Color.fromARGB(255, 36, 108, 14), 'SEMANA 2', videos2, 2),
   InfoSemanas(Color.fromARGB(255, 109, 173, 41), 'SEMANA 3', videos3, 3),
   InfoSemanas(Color.fromARGB(255, 205, 208, 60), 'SEMANA 4', videos4, 4),
@@ -142,7 +142,7 @@ List<VideoScreen> videos4 = [
     //TA ERRADO O EXERCICIO
     tempo: 5,
     url:
-        'Assets/video/SEM4/prancha_dorsal_c_elevacao_de_calcanhar.mp4', //'Assets/video/prancha.mp4',
+        'Assets/video/SEM4/prancha_dorsal_com_elevacao_calcanhares.mp4', //'Assets/video/prancha.mp4',
     nomeExercicio: 'PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR',
     loop: 2, numSemana: '4',
   ) //Video(20, nomeVideos),
@@ -219,7 +219,7 @@ List<VideoScreen> videos6 = [
     tempo: 5,
     url:
         'Assets/video/SEM6/S6_prancha_isometrica_canoa.mp4', //'Assets/video/prancha.mp4',
-    nomeExercicio: 'PRANCHA CANIVETE',
+    nomeExercicio: 'PRANCHA CANOA',
     loop: 2, numSemana: '6',
   ) //Video(20, nomeVideos),
 ];
@@ -230,36 +230,38 @@ List<VideoScreen> videos7 = [
       //CONFERIR OS VIDEOS
       urlDE:
           'Assets/video/SEM7/S7_prancha_alta_c_elevacao_de_braco_e_pernaD_contralateral.mp4',
-      nomeExercicioDE: 'PRANCHA COM E BRAÇO E PERNA ',
-      nomeSemLado: 'PRANCHA COM ELEVAÇÃO DA PERNA',
+      nomeExercicioDE:
+          'PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)',
+      nomeSemLado: 'PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL',
       numSemana: '7',
       tempo: 2,
       url:
           'Assets/video/SEM7/S7_prancha_alta_c_elevacao_de_braco_e_pernaE_contralateral.mp4',
-      nomeExercicio: 'PRANCHA ALTA ELEV BRAÇO E PERNA ESQ',
+      nomeExercicio:
+          'PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)',
       loop: 2) //Video(20, nomeVideos),
   ,
   VideoScreen(
       urlDE: 'Assets/video/SEM7/S7_ponte_c_elevacao_da_perna_D_30.mp4',
-      nomeExercicioDE: 'PONTE COM ELEVAÇÃO DA PERNA DIR',
+      nomeExercicioDE: 'PONTE COM ELEVAÇÃO DA PERNA DIREITA',
       nomeSemLado: 'PRANCHA COM ELEVAÇÃO DA PERNA',
       numSemana: '7',
       tempo: 2,
       url: 'Assets/video/SEM7/S7_ponte_elevacao_da_perna_E_30.mp4',
-      nomeExercicio: 'PONTE COM ELEVAÇÃO DA PERNA ESQ',
+      nomeExercicio: 'PONTE COM ELEVAÇÃO DA PERNA ESQUERDA',
       loop: 2) //Video(20, nomeVideos),
   ,
   VideoScreen(
       isLast: true,
       urlDE:
           'Assets/video/SEM7/S7_prancha_lateral_com_elevacao_do_braco_e_pernaD.mp4',
-      nomeExercicioDE: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO DIR',
+      nomeExercicioDE: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA',
       nomeSemLado: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA',
       numSemana: '7',
       tempo: 2,
       url:
           'Assets/video/SEM7/S7_prancha_lateral_com_elevacao_do_braco_e_pernaE.mp4',
-      nomeExercicio: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO ESQ',
+      nomeExercicio: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQERDA',
       loop: 2) //Video(20, nomeVideos),
   ,
 ];
