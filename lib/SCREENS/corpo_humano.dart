@@ -41,7 +41,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
             TextButton(
                 onPressed: () => Navigator.of(context).pop(), child: Text('Ok'))
           ],
-          title: Text('Anamnse'),
+          title: Text('Anamnese'),
           content: const Text(
               'Selecione TODOS os campos do Corpo Humano com o grau de dor correspondente na região'),
         ),
@@ -125,7 +125,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: costasSuperior2 = AddTodoButton(
                           number: '2',
                           numberId: '',
-                          nomeMembro: 'na região DAS COSTAS SUPERIOR',
+                          nomeMembro: 'na região COSTAS SUPERIOR',
                         )),
                     Positioned(
                         right: 151,
@@ -133,7 +133,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: costasMedia3 = AddTodoButton(
                           number: '3',
                           numberId: '',
-                          nomeMembro: 'na região das costas média',
+                          nomeMembro: 'na região COSTAS MÉDIA',
                         )),
                     Positioned(
                       top: 105,
@@ -142,6 +142,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: ombro6 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no OMBRO',
                               buttunDistance: 85,
                               numberButtun: '6',
@@ -154,7 +155,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: costasInferior4 = AddTodoButton(
                           number: '4',
                           numberId: '',
-                          nomeMembro: 'na região DAS COSTAS INFERIOR',
+                          nomeMembro: 'na região COSTAS INFERIOR',
                         )),
                     Positioned(
                         right: 151,
@@ -162,7 +163,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: bacia5 = AddTodoButton(
                           number: '5',
                           numberId: '',
-                          nomeMembro: 'na região DA BACIA',
+                          nomeMembro: 'na região do QUADRIL',
                         )),
                     Positioned(
                       top: 150,
@@ -171,6 +172,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: braco7 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no BRAÇO',
                               buttunDistance: 110,
                               numberButtun: '7',
@@ -184,6 +186,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: cotovelo8 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no COTOVELO',
                               buttunDistance: 122,
                               numberButtun: '8',
@@ -197,6 +200,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: antebraco9 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no ANTEBRAÇO',
                               buttunDistance: 138,
                               numberButtun: '9',
@@ -210,7 +214,8 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: punho10 = BotaoDuplo(
-                              phraseCard: 'no PUNHOO',
+                              palavraFeminino: false,
+                              phraseCard: 'no PUNHO',
                               buttunDistance: 150,
                               numberButtun: '10',
                             )),
@@ -223,6 +228,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: mao11 = BotaoDuplo(
+                              palavraFeminino: true,
                               phraseCard: 'na MÃO',
                               buttunDistance: 170,
                               numberButtun: '11',
@@ -236,6 +242,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: perna12 = BotaoDuplo(
+                              palavraFeminino: true,
                               phraseCard: 'na PERNA',
                               buttunDistance: 14,
                               numberButtun: '12',
@@ -249,6 +256,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: joelho13 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no JOELHO',
                               buttunDistance: 10,
                               numberButtun: '13',
@@ -262,6 +270,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: panturrilha14 = BotaoDuplo(
+                              palavraFeminino: true,
                               phraseCard: 'na PANTURRILHA',
                               buttunDistance: 8,
                               numberButtun: '14',
@@ -275,6 +284,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: tornozelo15 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no TORNOZELO',
                               buttunDistance: 0,
                               numberButtun: '15',
@@ -288,6 +298,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: pe16 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no PÉ',
                               buttunDistance: 0,
                               numberButtun: '16',
@@ -335,7 +346,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                                   onPressed: () => Navigator.of(context).pop(),
                                   child: Text('Ok'))
                             ],
-                            title: Text('Anamnse'),
+                            title: Text('Anamnese'),
                             content: Text(
                                 'Selecione TODOS os campos do Corpo Humano'),
                           ),
@@ -896,6 +907,698 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_4_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO5':
                               100,
                           ////////////////SEMANA 5 DIA 1
+                          'SEM_5_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO1':
+                              100,
+                          'SEM_5_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO2':
+                              100,
+                          'SEM_5_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO3':
+                              100,
+
+                          'SEM_5_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO1':
+                              100,
+                          'SEM_5_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO2':
+                              100,
+                          'SEM_5_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO3':
+                              100,
+
+                          'SEM_5_DIA1_EXERCICIO_PRANCHA PARAQUEDISTA1': 100,
+                          'SEM_5_DIA1_EXERCICIO_PRANCHA PARAQUEDISTA2': 100,
+                          'SEM_5_DIA1_EXERCICIO_PRANCHA PARAQUEDISTA3': 100,
+
+                          'SEM_5_DIA1_EXERCICIO_PRANCHA CANOA1': 100,
+                          'SEM_5_DIA1_EXERCICIO_PRANCHA CANOA2': 100,
+                          'SEM_5_DIA1_EXERCICIO_PRANCHA CANOA3': 100,
+                          ////////////////////////////////////////////
+////                  SEMANA 5 DIA 2
+                          'SEM_5_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO1':
+                              100,
+                          'SEM_5_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO2':
+                              100,
+                          'SEM_5_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO3':
+                              100,
+
+                          'SEM_5_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO1':
+                              100,
+                          'SEM_5_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO2':
+                              100,
+                          'SEM_5_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO3':
+                              100,
+
+                          'SEM_5_DIA2_EXERCICIO_PRANCHA PARAQUEDISTA1': 100,
+                          'SEM_5_DIA2_EXERCICIO_PRANCHA PARAQUEDISTA2': 100,
+                          'SEM_5_DIA2_EXERCICIO_PRANCHA PARAQUEDISTA3': 100,
+
+                          'SEM_5_DIA2_EXERCICIO_PRANCHA CANOA1': 100,
+                          'SEM_5_DIA2_EXERCICIO_PRANCHA CANOA2': 100,
+                          'SEM_5_DIA2_EXERCICIO_PRANCHA CANOA3': 100,
+                          ////////////////////////////////////
+                          /////// SEMANA 5 DIA 3
+                          'SEM_5_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO1':
+                              100,
+                          'SEM_5_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO2':
+                              100,
+                          'SEM_5_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO3':
+                              100,
+
+                          'SEM_5_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO1':
+                              100,
+                          'SEM_5_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO2':
+                              100,
+                          'SEM_5_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO3':
+                              100,
+
+                          'SEM_5_DIA3_EXERCICIO_PRANCHA PARAQUEDISTA1': 100,
+                          'SEM_5_DIA3_EXERCICIO_PRANCHA PARAQUEDISTA2': 100,
+                          'SEM_5_DIA3_EXERCICIO_PRANCHA PARAQUEDISTA3': 100,
+
+                          'SEM_5_DIA3_EXERCICIO_PRANCHA CANOA1': 100,
+                          'SEM_5_DIA3_EXERCICIO_PRANCHA CANOA2': 100,
+                          'SEM_5_DIA3_EXERCICIO_PRANCHA CANOA3': 100,
+                          ///////////SEMANA 6 DIA 1
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO1':
+                              100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO2':
+                              100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO3':
+                              100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO4':
+                              100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO5':
+                              100,
+
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO1':
+                              100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO2':
+                              100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO3':
+                              100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO4':
+                              100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO5':
+                              100,
+
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA PARAQUEDISTA1': 100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA PARAQUEDISTA2': 100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA PARAQUEDISTA3': 100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA PARAQUEDISTA4': 100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA PARAQUEDISTA5': 100,
+
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA CANOA1': 100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA CANOA2': 100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA CANOA3': 100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA CANOA4': 100,
+                          'SEM_6_DIA1_EXERCICIO_PRANCHA CANOA5': 100,
+                          ////////SEMANA 6 DIA2
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO1':
+                              100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO2':
+                              100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO3':
+                              100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO4':
+                              100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO5':
+                              100,
+
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO1':
+                              100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO2':
+                              100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO3':
+                              100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO4':
+                              100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO5':
+                              100,
+
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA PARAQUEDISTA1': 100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA PARAQUEDISTA2': 100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA PARAQUEDISTA3': 100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA PARAQUEDISTA4': 100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA PARAQUEDISTA5': 100,
+
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA CANOA1': 100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA CANOA2': 100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA CANOA3': 100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA CANOA4': 100,
+                          'SEM_6_DIA2_EXERCICIO_PRANCHA CANOA5': 100,
+
+                          ///SEMANA 6 DIA 3
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO1':
+                              100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO2':
+                              100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO3':
+                              100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO4':
+                              100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO5':
+                              100,
+
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO1':
+                              100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO2':
+                              100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO3':
+                              100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO4':
+                              100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA SUPERMAN LADO ESQUERDO5':
+                              100,
+
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA PARAQUEDISTA1': 100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA PARAQUEDISTA2': 100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA PARAQUEDISTA3': 100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA PARAQUEDISTA4': 100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA PARAQUEDISTA5': 100,
+
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA CANOA1': 100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA CANOA2': 100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA CANOA3': 100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA CANOA4': 100,
+                          'SEM_6_DIA3_EXERCICIO_PRANCHA CANOA5': 100,
+
+                          ///////////SEMANA 7 DIA 1
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)1':
+                              100,
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)2':
+                              100,
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)3':
+                              100,
+
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)1':
+                              100,
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)2':
+                              100,
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)3':
+                              100,
+
+                          'SEM_7_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_7_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_7_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+
+                          'SEM_7_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_7_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_7_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
+                              100,
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA2':
+                              100,
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA3':
+                              100,
+
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA1':
+                              100,
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
+                              100,
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA3':
+                              100,
+
+                          ///SEMANA 7 DIA 2
+
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)1':
+                              100,
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)2':
+                              100,
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)3':
+                              100,
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)1':
+                              100,
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)2':
+                              100,
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)3':
+                              100,
+
+                          'SEM_7_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_7_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_7_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+
+                          'SEM_7_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_7_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_7_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
+                              100,
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA2':
+                              100,
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA3':
+                              100,
+
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA1':
+                              100,
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
+                              100,
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA3':
+                              100,
+                          ////////////////////// SEMANA 7 DIA 3
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)1':
+                              100,
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)2':
+                              100,
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)3':
+                              100,
+
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)1':
+                              100,
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)2':
+                              100,
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)3':
+                              100,
+                          'SEM_7_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_7_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_7_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+
+                          'SEM_7_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_7_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_7_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
+                              100,
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA2':
+                              100,
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA3':
+                              100,
+
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA1':
+                              100,
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
+                              100,
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA3':
+                              100,
+                          ///////////SEMANA 8 DIA 1
+                          ///
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)1':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)2':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)3':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)4':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)5':
+                              100,
+
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)1':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)2':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)3':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)4':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)5':
+                              100,
+
+                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA4':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA5':
+                              100,
+
+                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                              100,
+
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA2':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA3':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA4':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA5':
+                              100,
+
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA1':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA3':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA4':
+                              100,
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA5':
+                              100,
+                          /////////////SEMANA 8 DIA 2
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)1':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)2':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)3':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)4':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)5':
+                              100,
+
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)1':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)2':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)3':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)4':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)5':
+                              100,
+
+                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA4':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA5':
+                              100,
+
+                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                              100,
+
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA2':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA3':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA4':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA5':
+                              100,
+
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA1':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA3':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA4':
+                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA5':
+                              100,
+
+                          //////SEMANA 8 DIA 3
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)1':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)2':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)3':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)4':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)5':
+                              100,
+
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)1':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)2':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)3':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)4':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)5':
+                              100,
+
+                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA4':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA5':
+                              100,
+
+                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                              100,
+
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA2':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA3':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA4':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA5':
+                              100,
+
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA1':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA3':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA4':
+                              100,
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA5':
+                              100,
+                          /////SEMANA 9 DIA 1
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)1':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)2':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)3':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)4':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)5':
+                              100,
+
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)1':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)2':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)3':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)4':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)5':
+                              100,
+
+                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA4':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA5':
+                              100,
+
+                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                              100,
+
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA2':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA3':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA4':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA5':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA1':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA3':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA4':
+                              100,
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA5':
+                              100,
+////////////////////SEMANA 9 DIA 2
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)1':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)2':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)3':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)4':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)5':
+                              100,
+
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)1':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)2':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)3':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)4':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)5':
+                              100,
+
+                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA4':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA5':
+                              100,
+
+                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                              100,
+
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA2':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA3':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA4':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA5':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA1':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA3':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA4':
+                              100,
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA5':
+                              100,
+                          ////////////////SEMANA 9 DIA 3
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)1':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)2':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)3':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)4':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)5':
+                              100,
+
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)1':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)2':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)3':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)4':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)5':
+                              100,
+
+                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA4':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA5':
+                              100,
+
+                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                              100,
+
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA2':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA3':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA4':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA5':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA1':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA3':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA4':
+                              100,
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA5':
+                              100,
                         });
 
                         Navigator.of(context).push(

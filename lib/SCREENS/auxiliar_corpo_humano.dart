@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
@@ -132,6 +133,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: ombro6 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no OMBRO',
                               buttunDistance: 85,
                               numberButtun: '6',
@@ -161,6 +163,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: braco7 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no BRAÇO',
                               buttunDistance: 110,
                               numberButtun: '7',
@@ -174,6 +177,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: cotovelo8 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no COTOVELO',
                               buttunDistance: 122,
                               numberButtun: '8',
@@ -187,6 +191,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: antebraco9 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no ANTEBRAÇO',
                               buttunDistance: 138,
                               numberButtun: '9',
@@ -200,6 +205,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: punho10 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no PUNHO',
                               buttunDistance: 150,
                               numberButtun: '10',
@@ -213,6 +219,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: mao11 = BotaoDuplo(
+                              palavraFeminino: true,
                               phraseCard: 'na MÃO',
                               buttunDistance: 170,
                               numberButtun: '11',
@@ -226,6 +233,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: perna12 = BotaoDuplo(
+                              palavraFeminino: true,
                               phraseCard: 'na PERNA',
                               buttunDistance: 14,
                               numberButtun: '12',
@@ -239,6 +247,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: joelho13 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no JOELHO',
                               buttunDistance: 10,
                               numberButtun: '13',
@@ -252,6 +261,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: panturrilha14 = BotaoDuplo(
+                              palavraFeminino: true,
                               phraseCard: 'na PANTURRILHA',
                               buttunDistance: 8,
                               numberButtun: '14',
@@ -265,6 +275,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: tornozelo15 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no TORNOZELO',
                               buttunDistance: 0,
                               numberButtun: '15',
@@ -278,6 +289,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         child: ChangeNotifierProvider<Cor1>(
                             create: (context) => Cor1(),
                             child: pe16 = BotaoDuplo(
+                              palavraFeminino: false,
                               phraseCard: 'no PÉ',
                               buttunDistance: 0,
                               numberButtun: '16',
@@ -325,7 +337,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                                   onPressed: () => Navigator.of(context).pop(),
                                   child: Text('Ok'))
                             ],
-                            title: const Text('Anamnse'),
+                            title: const Text('Anamnese'),
                             content: const Text(
                                 'Selecione TODOS os campos do Corpo Humano'),
                           ),

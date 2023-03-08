@@ -75,8 +75,12 @@ class _Question3State extends State<Question3> {
         Center(
           child: Container(
             child: DropDownMultiSelect(
+              menuItembuilder: (option) =>
+                  Text(option, style: TextStyle(fontSize: 18)),
               options: controller.options,
-              whenEmpty: 'Selecione uma das opções',
+              hint: Text('Selecione uma das opções',
+                  style: TextStyle(fontSize: 18)),
+              //whenEmpty: 'Selecione uma das opções',
               onChanged: (p0) {
                 controller.selectedOptionList.value = p0;
                 controller.selectedoption.value = '';
@@ -197,7 +201,7 @@ DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
       value: item,
       child: Text(
         item,
-        style: const TextStyle(fontSize: 17),
+        style: const TextStyle(fontSize: 18),
       ),
     );
 //floating action button

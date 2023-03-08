@@ -107,13 +107,13 @@ class _SemanasState extends State<Semanas> {
                    ( widget.situacaoAnamnse2 == false)|| (   widget.horario4!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse4 == false)||
                   widget.horario6!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse6 == false )|| widget.horario8!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse8 == false
                    ) */
-                if (widget.horario2!.isAfter(DateTime.utc(1999, 1, 9)) &&
+                /*   if (widget.horario2!.isAfter(DateTime.utc(1999, 1, 9)) &&
                     widget.situacaoAnamnse2 == false) {
                   print('semana2');
 
                   //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
-                  return AuxCorpoHumano(numSem: '2');
-                } else if (widget.horario4!.isAfter(DateTime.utc(1999, 1, 9)) &&
+                  return AuxCorpoHumano(numSem: '2');*/
+                if (widget.horario4!.isAfter(DateTime.utc(1999, 1, 9)) &&
                     (widget.situacaoAnamnse4 == false)) {
                   print('semana4');
 

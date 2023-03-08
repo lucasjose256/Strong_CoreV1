@@ -29,8 +29,10 @@ class BotaoDuplo extends StatefulWidget {
   late String painDegreeleft;
   Color? colorRight;
   Color? colorleft;
+  bool palavraFeminino;
 
   BotaoDuplo({
+    required this.palavraFeminino,
     this.colorRight,
     this.colorleft,
     this.buttunDistance,
@@ -48,21 +50,38 @@ class _BotaoDuploState extends State<BotaoDuplo> {
     // widget.newColor=Navigator.of(context).push();
     //Color? newButtunColor = Provider.of<newColorForCard>(context).color;
     //  bool flag = false;
-
+    AddTodoButton membroDir = AddTodoButton(nomeMembro: '', numberId: '');
+    AddTodoButton membroEsq = AddTodoButton(nomeMembro: '', numberId: '');
     final corProvider = Provider.of<Cor1>(context);
     final cor2Provider = Provider.of<Cor2>(context);
-    AddTodoButton membroDir = AddTodoButton(
-      corSemanaAnterior: widget.colorRight,
-      number: widget.numberButtun,
-      numberId: 'DIR',
-      nomeMembro: '${widget.phraseCard} DIREITO',
-    );
-    AddTodoButton membroEsq = AddTodoButton(
-      corSemanaAnterior: widget.colorleft,
-      number: widget.numberButtun,
-      numberId: 'ESQ',
-      nomeMembro: '${widget.phraseCard} ESQUERDO',
-    );
+    if (widget.palavraFeminino == true) {
+      membroDir = AddTodoButton(
+        corSemanaAnterior: widget.colorRight,
+        number: widget.numberButtun,
+        numberId: 'DIR',
+        nomeMembro: '${widget.phraseCard} DIREITA',
+      );
+      membroEsq = AddTodoButton(
+        corSemanaAnterior: widget.colorleft,
+        number: widget.numberButtun,
+        numberId: 'ESQ',
+        nomeMembro: '${widget.phraseCard} ESQUERDA',
+      );
+    } else {
+      membroDir = AddTodoButton(
+        corSemanaAnterior: widget.colorRight,
+        number: widget.numberButtun,
+        numberId: 'DIR',
+        nomeMembro: '${widget.phraseCard} DIREITO',
+      );
+      membroEsq = AddTodoButton(
+        corSemanaAnterior: widget.colorleft,
+        number: widget.numberButtun,
+        numberId: 'ESQ',
+        nomeMembro: '${widget.phraseCard} ESQUERDO',
+      );
+    }
+
     const String _heroAddTodo = 'add-todo-hero';
     Map? temp;
     Color? color;

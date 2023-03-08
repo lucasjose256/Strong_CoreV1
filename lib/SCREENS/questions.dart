@@ -157,10 +157,10 @@ class _QuestionState extends State<Question> {
                 border: Border.all(color: Colors.black, width: 0.7)),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
-                focusColor: Colors.red,
                 isExpanded: true,
                 dropdownColor: Colors.red[200],
                 value: answer2,
+                hint: Text('Selecione uma das opções abaixo'),
                 items: items2.map(buildMenuItem).toList(),
                 onChanged: (value) => setState(() {
                   infoForms.setPosto(value!);
@@ -194,8 +194,10 @@ class _QuestionState extends State<Question> {
                 border: Border.all(color: Colors.black, width: 0.7)),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
-                focusColor: Colors.red,
+                autofocus: true,
+                //focusColor: Colors.red,
                 isExpanded: true,
+                hint: Text('Selecione uma das opções abaixo'),
                 dropdownColor: Colors.red[200],
                 value: answer3,
                 items: items3.map(buildMenuItem).toList(),
@@ -282,7 +284,7 @@ DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
       value: item,
       child: Text(
         item,
-        style: const TextStyle(fontSize: 17),
+        style: const TextStyle(fontSize: 18),
       ),
     );
 //floating action button

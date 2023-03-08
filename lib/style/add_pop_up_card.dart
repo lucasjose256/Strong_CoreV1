@@ -185,7 +185,7 @@ class AddTodoPopupCard extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  MarcarRegiao('5', 'Muito Forte',
+                  MarcarRegiao('5', 'Intolerável',
                       const Color.fromARGB(222, 238, 39, 29), context),
                   const SizedBox(
                     height: 20,
