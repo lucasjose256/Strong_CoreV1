@@ -316,12 +316,13 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                     padding: EdgeInsets.only(top: 8, bottom: 8),
                     color: ui.Color.fromARGB(255, 202, 43, 32),
                     onPressed: () async {
-                      if (pescoco0.graudaDor == null ||
+                      if (pescoco0.graudaDor ==
+                              null /*||
                               regiaoCervical1.graudaDor == null ||
                               costasSuperior2.graudaDor == null ||
                               costasMedia3.graudaDor == null ||
                               costasInferior4.graudaDor == null ||
-                              bacia5.graudaDor == null
+                              bacia5.graudaDor == null*/
                           /*  ombro6!.painDegreeRight== null||
                         ombro6.painDegreeleft== null||*/
                           )
@@ -371,7 +372,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'Cargo': infoForms.cargo,
                           'DataAdmissao': infoForms.dataAdmissao,
                           ////////////////////////
-                          'Pescoço0_SEM_0': pescoco0.graudaDor,
+                          /*    'Pescoço0_SEM_0': pescoco0.graudaDor,
                           'Pescoço0_SEM_4': '',
                           'Pescoço0_SEM_6': '',
                           'Pescoço0_SEM_8': '',
@@ -515,7 +516,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'Pe16_ESQUERDO_SEM_0': pe16.painDegreeleft,
                           'Pe16_ESQUERDO_SEM_4': '',
                           'Pe16_ESQUERDO_SEM_6': '',
-                          'Pe16_ESQUERDO_SEM_8': '',
+                          'Pe16_ESQUERDO_SEM_8': '',*/
 
                           '_HORARIO_PRIMEIRO_ACESSO':
                               DateFormat.yMMMEd().format(DateTime.now()),
@@ -1093,18 +1094,18 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_7_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)3':
                               100,
 
-                          'SEM_7_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA1':
                               100,
-                          'SEM_7_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA2':
                               100,
-                          'SEM_7_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA3':
                               100,
 
-                          'SEM_7_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA1':
                               100,
-                          'SEM_7_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA2':
                               100,
-                          'SEM_7_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                          'SEM_7_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA3':
                               100,
 
                           'SEM_7_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
@@ -1136,18 +1137,18 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_7_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)3':
                               100,
 
-                          'SEM_7_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA1':
                               100,
-                          'SEM_7_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA2':
                               100,
-                          'SEM_7_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA3':
                               100,
 
-                          'SEM_7_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA1':
                               100,
-                          'SEM_7_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA2':
                               100,
-                          'SEM_7_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                          'SEM_7_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA3':
                               100,
 
                           'SEM_7_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
@@ -1177,18 +1178,19 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                               100,
                           'SEM_7_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)3':
                               100,
-                          'SEM_7_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA1':
                               100,
-                          'SEM_7_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA2':
                               100,
-                          'SEM_7_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA3':
                               100,
 
-                          'SEM_7_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA1':
                               100,
-                          'SEM_7_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA2':
                               100,
-                          'SEM_7_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                          'SEM_7_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA3':
                               100,
 
                           'SEM_7_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
@@ -1228,26 +1230,26 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_8_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)5':
                               100,
 
-                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA1':
                               100,
-                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA2':
                               100,
-                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA3':
                               100,
-                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA4':
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA4':
                               100,
-                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA5':
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA5':
                               100,
 
-                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA1':
                               100,
-                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA2':
                               100,
-                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA3':
                               100,
-                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA4':
                               100,
-                          'SEM_8_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA5':
                               100,
 
                           'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
@@ -1294,26 +1296,26 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_8_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)5':
                               100,
 
-                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA1':
                               100,
-                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA2':
                               100,
-                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA3':
                               100,
-                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA4':
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA4':
                               100,
-                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA5':
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA5':
                               100,
 
-                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA1':
                               100,
-                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA2':
                               100,
-                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA3':
                               100,
-                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA4':
                               100,
-                          'SEM_8_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA5':
                               100,
 
                           'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
@@ -1361,26 +1363,26 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_8_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)5':
                               100,
 
-                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA1':
                               100,
-                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA2':
                               100,
-                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA3':
                               100,
-                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA4':
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA4':
                               100,
-                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA5':
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA5':
                               100,
 
-                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA1':
                               100,
-                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA2':
                               100,
-                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA3':
                               100,
-                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA4':
                               100,
-                          'SEM_8_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA5':
                               100,
 
                           'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
@@ -1427,26 +1429,26 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_9_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)5':
                               100,
 
-                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA1':
                               100,
-                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA2':
                               100,
-                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA3':
                               100,
-                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA4':
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA4':
                               100,
-                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA5':
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA5':
                               100,
 
-                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA1':
                               100,
-                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA2':
                               100,
-                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA3':
                               100,
-                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA4':
                               100,
-                          'SEM_9_DIA1_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA5':
                               100,
 
                           'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
@@ -1492,26 +1494,26 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_9_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)5':
                               100,
 
-                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA1':
                               100,
-                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA2':
                               100,
-                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA3':
                               100,
-                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA4':
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA4':
                               100,
-                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA5':
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA5':
                               100,
 
-                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA1':
                               100,
-                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA2':
                               100,
-                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA3':
                               100,
-                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA4':
                               100,
-                          'SEM_9_DIA2_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA5':
                               100,
 
                           'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':
@@ -1557,26 +1559,26 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_9_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)5':
                               100,
 
-                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA1':
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA1':
                               100,
-                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA2':
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA2':
                               100,
-                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA3':
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA3':
                               100,
-                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA4':
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA4':
                               100,
-                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA DIREITA5':
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA5':
                               100,
 
-                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA1':
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA1':
                               100,
-                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA2':
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA2':
                               100,
-                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA3':
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA3':
                               100,
-                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA4':
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA4':
                               100,
-                          'SEM_9_DIA3_EXERCICIO_PONTE COM ELEVAÇÃO DA PERNA ESQUERDA5':
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA5':
                               100,
 
                           'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA1':

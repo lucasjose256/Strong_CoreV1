@@ -188,8 +188,13 @@ class buildSemanas extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.settings),
-              title: const Text('Configurações'),
-              onTap: () {
+              title: const Text('Corpo HUmano'),
+              onTap: () async {
+                await Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (constect) => AuxCorpoHumano(numSem: '10'),
+                      settings: const RouteSettings()),
+                );
                 // Update the state of the app.
                 // ...
               },

@@ -39,8 +39,7 @@ class _Question3State extends State<Question3> {
     'Dois dias',
     'Três dias',
     'Quatro dias',
-    'Cinco dias',
-    'Seis dias ou mais'
+    'Cinco dias ou +',
   ];
   String? answer2;
 
@@ -140,6 +139,7 @@ class _Question3State extends State<Question3> {
                 border: Border.all(color: Colors.black, width: 0.7)),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
+                hint: Text('Selecione uma das opções'),
                 focusColor: Colors.red,
                 isExpanded: true,
                 dropdownColor: Colors.red[200],
@@ -178,6 +178,7 @@ class _Question3State extends State<Question3> {
                 border: Border.all(color: Colors.black, width: 0.7)),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
+                hint: Text('Selecione uma das opções'),
                 itemHeight: 70,
                 focusColor: Colors.red,
                 isExpanded: true,

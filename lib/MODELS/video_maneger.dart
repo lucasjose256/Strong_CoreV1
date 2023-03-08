@@ -31,7 +31,9 @@ class _VideoManegerState extends State<VideoManeger> {
 
   bool showButtun = false;
   //lembrar de adiconar ele no construtor
-  int tempoEspera = 2;
+  int tempoEspera = 30;
+  int tempoProxExercicio = 45;
+
   List<VideoScreen> videos;
   _VideoManegerState(this.videos);
 
@@ -79,6 +81,10 @@ class _VideoManegerState extends State<VideoManeger> {
         final value = await showDialog<bool>(
             context: context,
             builder: (context) {
+              _circulatTimerControl.pause();
+              WidgetsBinding.instance?.addPostFrameCallback((_) {
+                _controller.pause();
+              });
               return AlertDialog(
                 title: Text(
                   'Exercicios',
@@ -87,12 +93,22 @@ class _VideoManegerState extends State<VideoManeger> {
                     '(Se você sair o progresso desses exercícios será perdido)'),
                 actions: [
                   ElevatedButton(
-                      onPressed: (() => Navigator.pop(context)),
+                      onPressed: (() {
+                        _circulatTimerControl.resume();
+                        WidgetsBinding.instance?.addPostFrameCallback((_) {
+                          _controller.play();
+                        });
+
+                        Navigator.pop(context);
+                      }),
                       child: Text('Continuar')),
-                  ElevatedButton(
+                  MaterialButton(
                     onPressed: (() => Navigator.push(context,
                         MaterialPageRoute(builder: ((context) => Semanas())))),
-                    child: Text('Sair'),
+                    child: Text(
+                      'Sair',
+                      style: TextStyle(color: Colors.red),
+                    ),
                   )
                 ],
               );
@@ -131,7 +147,7 @@ class _VideoManegerState extends State<VideoManeger> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 15),
+                          fontSize: 20),
                       maxLines: 4,
                     ),
                   ),
@@ -207,7 +223,7 @@ class _VideoManegerState extends State<VideoManeger> {
                             var documentReference = FirebaseFirestore.instance
                                 .collection('user')
                                 .doc(user!.uid);
-                            await documentReference.update(
+                            documentReference.update(
                                 //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                                 {
                                   'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
@@ -238,22 +254,25 @@ class _VideoManegerState extends State<VideoManeger> {
                                   flag == videos[index].loop) {
                                 Navigator.pop(context);
                               } else {
+                                //tempo longo
                                 flag += (await Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => TelaEspera(
-                                          tempoEspera: 6, istoShowButtun: true),
+                                          tempoEspera: tempoProxExercicio,
+                                          istoShowButtun: true),
                                     )))!;
                               }
                             } else {
                               flag += (await Navigator.push(
                                   context,
                                   MaterialPageRoute(
+                                    //tempo curto
                                     builder: (context) => TelaEspera(),
                                   )))!;
                               if (videos[index].nomeExercicioDE != null) {
                                 if (flag == videos[index].loop + 1) {
-                                  tempoEspera = 5;
+                                  tempoEspera = tempoProxExercicio;
                                   showButtun = true;
                                   islast = true;
                                 }
@@ -261,7 +280,7 @@ class _VideoManegerState extends State<VideoManeger> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => VideoDirEsq(
-                                          ValueKey(videos[index].nomeExercicio),
+                                          //   ValueKey(videos[index].nomeExercicio),
                                           dia: dia,
                                           //   isLastVideo: islast,
                                           dontShowbuttun: videos[index].isLast,
@@ -284,7 +303,7 @@ class _VideoManegerState extends State<VideoManeger> {
                                 Navigator.pop(context);
                               } else {
                                 flag = 1;
-                                tempoEspera = 2;
+                                tempoEspera = 30;
                                 showButtun = false;
                                 islast = false;
                                 if (mounted) {
@@ -376,10 +395,11 @@ class _VideoManegerState extends State<VideoManeger> {
                           Navigator.pop(context);
                         } else {
                           flag += (await Navigator.push(
-                              context,
+                              context, //tempo longo
                               MaterialPageRoute(
                                 builder: (context) => TelaEspera(
-                                    tempoEspera: 6, istoShowButtun: true),
+                                    tempoEspera: tempoProxExercicio,
+                                    istoShowButtun: true),
                               )))!;
                         }
                       } else {
@@ -390,7 +410,7 @@ class _VideoManegerState extends State<VideoManeger> {
                             )))!;
                         if (videos[index].nomeExercicioDE != null) {
                           if (flag == videos[index].loop + 1) {
-                            tempoEspera = 5;
+                            tempoEspera = 45;
                             showButtun = true;
                             islast = true;
                           }
@@ -398,7 +418,7 @@ class _VideoManegerState extends State<VideoManeger> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => VideoDirEsq(
-                                    ValueKey(videos[index].nomeExercicio),
+                                    //    ValueKey(videos[index].nomeExercicio),
                                     dia: dia,
                                     dontShowbuttun: videos[index].isLast,
                                     showButtun: showButtun,
@@ -424,7 +444,7 @@ class _VideoManegerState extends State<VideoManeger> {
                           Navigator.pop(context);
                         } else {
                           flag = 1;
-                          tempoEspera = 2;
+                          tempoEspera = 30;
                           showButtun = false;
                           islast = false;
                           if (mounted) {

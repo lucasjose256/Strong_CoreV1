@@ -269,7 +269,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => VideoDirEsq(
-                                      ValueKey(widget.nomeExercicio),
+                                      //         ValueKey(widget.nomeExercicio),
                                       dia: 2,
                                       showButtun: showButtun,
                                       numSemana: widget.numSemana,
@@ -347,12 +347,12 @@ class _VideoScreenState extends State<VideoScreen> {
             ),
           ),
           onPressed: () async {
+            _circulatTimerControl!.pause();
             // _controller!.removeListener(listener);
             _controller.dispose();
             //  _controller!.play();
 
             if (mounted) {
-              _circulatTimerControl!.pause();
               DocumentReference documentReference =
                   FirebaseFirestore.instance.collection('user').doc(user!.uid);
 //testar sem o await
@@ -391,7 +391,7 @@ class _VideoScreenState extends State<VideoScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => VideoDirEsq(
-                            ValueKey(widget.nomeExercicio),
+                            //    ValueKey(widget.nomeExercicio),
                             dia: 2,
                             isLastVideo: islast,
                             showButtun: showButtun,

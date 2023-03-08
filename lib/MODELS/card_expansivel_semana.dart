@@ -134,7 +134,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
               vertical: 20,
             ),
             padding: EdgeInsets.all(20),
-            height: isExpanded ? 100 : 450,
+            height: isExpanded ? 100 : 480,
             curve: Curves.fastLinearToSlowEaseIn,
             duration: Duration(milliseconds: 1200),
             decoration: BoxDecoration(
