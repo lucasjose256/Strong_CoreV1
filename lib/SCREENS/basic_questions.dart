@@ -1,8 +1,12 @@
 // ignore_for_file: avoid_unnecessary_containers, sized_box_for_whitespace, unnecessary_this, prefer_const_constructors
 
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
 import 'package:strong_core/SCREENS/questions.dart';
 import 'package:strong_core/SCREENS/questions2.dart';
@@ -19,16 +23,37 @@ class BasicQuestions extends StatefulWidget {
 class _BasicQuestionsState extends State<BasicQuestions> {
   //lista de opções para a seleção do sexo
   final items = ['Feminino', 'Masculino'];
+  final dateController = TextEditingController();
+
   //variável para armazenar a resposta escolhida,que será
   //usada para renderizar na tela a mesma
   String? answer;
+  DateTime? curretnDate;
   CollectionReference basicQuestionsData =
       FirebaseFirestore.instance.collection('user');
   @override
   Widget build(BuildContext context) {
-    //final TextEditingController _nome = TextEditingController();
     final InformationForms = Provider.of<Information>(context);
-    TextEditingController dateController = TextEditingController();
+    void _showDatePicker() {
+      DatePicker.showDatePicker(
+        context,
+        showTitleActions: true,
+        currentTime: curretnDate,
+        minTime: DateTime(1950),
+        maxTime: DateTime(2023),
+        theme: DatePickerTheme(),
+        onConfirm: (date) {
+          setState(() {
+            curretnDate = date;
+            dateController.text = DateFormat('dd/MM/yyyy').format(date);
+            InformationForms.setNascimento(dateController.text);
+          });
+        },
+      );
+    }
+    //final TextEditingController _nome = TextEditingController();
+
+    // TextEditingController dateController = TextEditingController();
     return Container(
       child: Column(
         //padding: const EdgeInsets.only(left: 12),
@@ -149,8 +174,19 @@ class _BasicQuestionsState extends State<BasicQuestions> {
               Container(
                   width: 200,
                   // margin: const EdgeInsets.only(right: 150),
-                  child:
-                      buildDataNascimento(InformationForms: InformationForms)),
+                  child: TextFormField(
+                    expands: false,
+                    keyboardType: TextInputType.none,
+                    controller: dateController,
+                    onTap: _showDatePicker,
+                    decoration: InputDecoration(
+                      suffixIcon: Icon(Icons.calendar_month),
+                      hintText: ('dd/mm/aaaa'),
+                      //   focusColor: Colors.red,
+                      labelText: 'Data de nascimento',
+                      //  border: OutlineInputBorder(),
+                    ),
+                  )),
             ],
           ),
           /*   SizedBox(
@@ -220,6 +256,9 @@ class buildDataNascimento extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       onChanged: ((value) {
+        if (value.length == 2) {
+          value = value + '/';
+        }
         InformationForms.setNascimento(value);
       }),
       keyboardType: TextInputType.number,

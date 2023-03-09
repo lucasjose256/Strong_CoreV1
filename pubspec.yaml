@@ -62,7 +62,10 @@ dependencies:
   shared_preferences: ^2.0.15
   multiselect: ^0.0.4
   get: ^4.6.5
-
+  fluttertoast: ^8.2.1
+  brasil_fields: ^1.9.1
+  flutter_datetime_picker: ^1.5.1
+  intl: ^0.17.0
 
 flutter_native_splash:
    color: "#eb3e31"

@@ -182,7 +182,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 20),
+                        fontSize: nomeExercicio.length > 40 ? 17 : 20),
                     maxLines: 4,
                   ),
                 ),
