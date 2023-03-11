@@ -22,14 +22,18 @@ import '../provider/information_forms.dart';
 import '../style/hero_dialog_route.dart';
 
 class CorpoHumano extends StatefulWidget {
-  const CorpoHumano({Key? key}) : super(key: key);
+  final infoForms;
+  const CorpoHumano({Key? key, this.infoForms}) : super(key: key);
 
   @override
-  State<CorpoHumano> createState() => _CorpoHumanoState();
+  State<CorpoHumano> createState() => _CorpoHumanoState(infoForms);
 }
 
 @override
 class _CorpoHumanoState extends State<CorpoHumano> {
+  final infoForms;
+  _CorpoHumanoState(this.infoForms);
+
   @override
   void initState() {
     super.initState();
@@ -75,7 +79,11 @@ class _CorpoHumanoState extends State<CorpoHumano> {
     BotaoDuplo panturrilha14;
     BotaoDuplo tornozelo15;
     BotaoDuplo pe16;
-    final infoForms = Provider.of<Information>(context);
+    String dores = '';
+    String Aux = '';
+    for (int i = 0; i < infoForms.dores.length; i++) {
+      dores += infoForms.dores[i] + ',';
+    }
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context);
@@ -371,8 +379,14 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'Posto': infoForms.posto,
                           'Cargo': infoForms.cargo,
                           'DataAdmissao': infoForms.dataAdmissao,
+                          'P1_exercicio_na_semana': infoForms.question1,
+                          'P2_intrucao_exercicio': infoForms.question2,
+                          'P3_orientacoes_exercicio': infoForms.question3,
+                          'P4_Lista_problemas_saude': dores,
+                          'P5_dormir_suficiente': infoForms.question4,
+                          'P6_estresse': infoForms.question5,
                           ////////////////////////
-                          /*    'Pescoço0_SEM_0': pescoco0.graudaDor,
+                          'Pescoço0_SEM_0': pescoco0.graudaDor,
                           'Pescoço0_SEM_4': '',
                           'Pescoço0_SEM_6': '',
                           'Pescoço0_SEM_8': '',
@@ -516,7 +530,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'Pe16_ESQUERDO_SEM_0': pe16.painDegreeleft,
                           'Pe16_ESQUERDO_SEM_4': '',
                           'Pe16_ESQUERDO_SEM_6': '',
-                          'Pe16_ESQUERDO_SEM_8': '',*/
+                          'Pe16_ESQUERDO_SEM_8': '',
 
                           '_HORARIO_PRIMEIRO_ACESSO':
                               DateFormat.yMMMEd().format(DateTime.now()),
@@ -635,6 +649,31 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA4': 100,
                           'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA5': 100,
                           ///////
+                          ///SEMANA 2 DIA 3
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA VENTRAL1': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA VENTRAL2': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA VENTRAL3': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA VENTRAL4': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA VENTRAL5': 100,
+
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA DORSAL1': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA DORSAL2': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA DORSAL3': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA DORSAL4': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA DORSAL5': 100,
+
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA LATERAL ESQUERDA1': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA LATERAL ESQUERDA2': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA LATERAL ESQUERDA3': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA LATERAL ESQUERDA4': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA LATERAL ESQUERDA5': 100,
+
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA1': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA2': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA3': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA4': 100,
+                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA5': 100,
+
                           ///SEM 3 DIA 1
                           'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA1':
                               100,
@@ -650,11 +689,11 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA3':
                               100,
 
-                          'SEM_3_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR1':
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DOS CALCANHARES1':
                               100,
-                          'SEM_3_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR2':
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DOS CALCANHARES2':
                               100,
-                          'SEM_3_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR3':
+                          'SEM_3_DIA1_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DOS CALCANHARES3':
                               100,
 
                           'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO1':
@@ -685,11 +724,11 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA3':
                               100,
 
-                          'SEM_3_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR1':
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DOS CALCANHARES1':
                               100,
-                          'SEM_3_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR2':
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DSO CALCANHARES2':
                               100,
-                          'SEM_3_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR3':
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DOS CALCANHARES3':
                               100,
 
                           'SEM_3_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO1':
@@ -720,11 +759,11 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA3':
                               100,
 
-                          'SEM_3_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR1':
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DOS CALCANHARES1':
                               100,
-                          'SEM_3_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR2':
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DOS CALCANHARES2':
                               100,
-                          'SEM_3_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR3':
+                          'SEM_3_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DOS CALCANHARES3':
                               100,
 
                           'SEM_3_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO1':
@@ -930,7 +969,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_5_DIA1_EXERCICIO_PRANCHA CANOA2': 100,
                           'SEM_5_DIA1_EXERCICIO_PRANCHA CANOA3': 100,
                           ////////////////////////////////////////////
-////                  SEMANA 5 DIA 2
+                          ////                  SEMANA 5 DIA 2
                           'SEM_5_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO1':
                               100,
                           'SEM_5_DIA2_EXERCICIO_PRANCHA SUPERMAN LADO DIREITO2':
@@ -1267,9 +1306,9 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                               100,
                           'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
                               100,
-                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA3':
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA3':
                               100,
-                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA4':
+                          'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA4':
                               100,
                           'SEM_8_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA5':
                               100,
@@ -1333,10 +1372,11 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                               100,
                           'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
                               100,
-                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA3':
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA3':
                               100,
-                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA4':
-                              100,
+                          'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA4':
+                              100, //           'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA
+                          //SEM_8_DIA3_EXERCICIO_PPRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2
                           'SEM_8_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA5':
                               100,
 
@@ -1400,9 +1440,9 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                               100,
                           'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
                               100,
-                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA3':
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA3':
                               100,
-                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA4':
+                          'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA4':
                               100,
                           'SEM_8_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA5':
                               100,
@@ -1471,7 +1511,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                               100,
                           'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA5':
                               100,
-////////////////////SEMANA 9 DIA 2
+                          ////////////////////SEMANA 9 DIA 2
                           'SEM_9_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)1':
                               100,
                           'SEM_9_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)2':
@@ -1530,9 +1570,9 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                               100,
                           'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
                               100,
-                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA3':
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA3':
                               100,
-                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA4':
+                          'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA4':
                               100,
                           'SEM_9_DIA2_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA5':
                               100,
@@ -1558,7 +1598,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                               100,
                           'SEM_9_DIA3_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)5':
                               100,
-
+//                                              PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA
                           'SEM_9_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA1':
                               100,
                           'SEM_9_DIA3_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA2':
