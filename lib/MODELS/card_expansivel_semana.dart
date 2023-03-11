@@ -134,7 +134,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
               vertical: 20,
             ),
             padding: EdgeInsets.all(20),
-            height: isExpanded ? 100 : 480,
+            height: isExpanded ? 100 : 500,
             curve: Curves.fastLinearToSlowEaseIn,
             duration: Duration(milliseconds: 1200),
             decoration: BoxDecoration(
@@ -234,50 +234,52 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                       SizedBox(
                         height: 10,
                       ),
-                      Container(
-                        //   color: Color.fromARGB(255, 194, 183, 183),
-                        decoration: const BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Color.fromARGB(255, 220, 213, 213),
-                                  spreadRadius: 1,
-                                  blurRadius: 2,
-                                  blurStyle: BlurStyle.solid,
-                                  offset: Offset(0, 0))
-                            ],
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            )),
-                        child: Column(
-                            children: videos!.map((e) {
-                          // print(horario!.hour.toString());
-                          //  print(horaDeInInicio['HORARIO_PRIMEIRO_ACESSO']);
-                          // print(horario == null ? horario!.day.toString() : 'null');
-                          return Align(
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              children: [
-                                Text(
-                                  ' ' +
-                                      e.loop.toString() +
-                                      'X  ' +
-                                      '${e.nomeSemLado ?? e.nomeExercicio} ' +
+
+                      //   color: Color.fromARGB(255, 194, 183, 183),
+
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: videos!.map((e) {
+                            // print(horario!.hour.toString());
+                            //  print(horaDeInInicio['HORARIO_PRIMEIRO_ACESSO']);
+                            // print(horario == null ? horario!.day.toString() : 'null');
+                            return Container(
+                              margin: EdgeInsets.all(5),
+                              decoration: const BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color:
+                                            Color.fromARGB(255, 220, 213, 213),
+                                        spreadRadius: 2,
+                                        blurRadius: 3,
+                                        blurStyle: BlurStyle.solid,
+                                        offset: Offset(1, 3))
+                                  ],
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  )),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Column(
+                                  children: [
+                                    Text(
                                       ' ' +
-                                      '(${e.tempo.toString()}s)',
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                          e.loop.toString() +
+                                          'X  ' +
+                                          '${e.nomeSemLado ?? e.nomeExercicio} ' +
+                                          ' ' +
+                                          '(${e.tempo.toString()}s)',
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Divider(
-                                  // color: Color.fromARGB(255, 75, 75, 75),
-                                  height: 3,
-                                ),
-                              ],
-                            ),
-                          );
-                        }).toList()),
-                      ),
+                              ),
+                            );
+                          }).toList()),
+
                       SizedBox(
                         height: 10,
                       ),

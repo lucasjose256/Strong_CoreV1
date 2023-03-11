@@ -351,7 +351,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                             .doc(FirebaseAuth.instance.currentUser!.uid);
 
                         await firebase.update({
-                          /* 'Pescoço0_SEM_${widget.numSem}': pescoco0.graudaDor,
+                          'Pescoço0_SEM_${widget.numSem}': pescoco0.graudaDor,
                           'Regiao_cervical1_SEM_${widget.numSem}':
                               regiaoCervical1.graudaDor,
                           'Costas_superior2_SEM_${widget.numSem}':
@@ -404,7 +404,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                           'Pe16_DIREITO_SEM_${widget.numSem}':
                               pe16.painDegreeRight,
                           'Pe16_ESQUERDO_SEM_${widget.numSem}':
-                              pe16.painDegreeleft,*/
+                              pe16.painDegreeleft,
                         });
                         servidor(widget.numSem);
                         Navigator.of(context).push(

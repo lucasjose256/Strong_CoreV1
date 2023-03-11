@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,9 @@ Future<void> main() async {
   await UserPreferences.init();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => Information()),
+  ], child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -84,7 +88,7 @@ class _MyAppState extends State<MyApp> {
       } //Question();
       //firstWidget = Semanas();
     } else {
-      firstWidget = SingUpPage(); //MyHomePage(primeiroAcessoCompleto!);
+      firstWidget = MyHomePage(primeiroAcessoCompleto!);
     }
     return ChangeNotifierProvider(
         create: (context) => GoogleSignInProvider(),

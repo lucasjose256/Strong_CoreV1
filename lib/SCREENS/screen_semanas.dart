@@ -202,7 +202,8 @@ class buildSemanas extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: const Text('Sair'),
-              onTap: () {
+              onTap: () async {
+                await UserPreferences.setBool(false);
                 //   logOut();
                 Navigator.of(context).push(
                   MaterialPageRoute(

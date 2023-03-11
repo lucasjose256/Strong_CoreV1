@@ -24,7 +24,7 @@ class _SingUpPageState extends State<SingUpPage> {
   TextEditingController _passwordConfirmControler = TextEditingController();
 
   bool _obscureText = true;
-  bool _obscureText2 = true;
+  bool _obscureText2 = false;
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
