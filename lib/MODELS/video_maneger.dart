@@ -44,7 +44,7 @@ class _VideoManegerState extends State<VideoManeger> {
       ..addListener(() {
         if (mounted) setState(() {});
       })
-      ..setVolume(0)
+      ..setVolume(1)
       ..setLooping(true);
     _inicializeVideoPlayer = _controller.initialize().then(
       (value) {
@@ -147,7 +147,9 @@ class _VideoManegerState extends State<VideoManeger> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 20),
+                          fontSize: videos[index].nomeExercicio.length > 40
+                              ? 15
+                              : 20),
                       maxLines: 4,
                     ),
                   ),
@@ -223,14 +225,16 @@ class _VideoManegerState extends State<VideoManeger> {
                             var documentReference = FirebaseFirestore.instance
                                 .collection('user')
                                 .doc(user!.uid);
-                            documentReference.update(
-                                //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
-                                {
-                                  'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
-                                      _circulatTimerControl!.getTime()
-                                });
-                            print(
-                                'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}');
+                            if (dia > 3) {
+                              documentReference.update(
+                                  //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                                  {
+                                    'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
+                                        _circulatTimerControl!.getTime()
+                                  });
+                              print(
+                                  'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}');
+                            }
 
                             _controller.dispose();
                             //  _controller!.play();

@@ -26,14 +26,14 @@ final LISTASEMANAS = [
 List<VideoScreen> videos1 = [
   VideoScreen(
       numSemana: '1',
-      tempo: 5,
+      tempo: 30,
       url: 'Assets/video/SEM1/pranchaNORM.mp4',
       nomeExercicio: 'PRANCHA VENTRAL',
       loop: 3) //Video(20, nomeVideos),
   ,
   VideoScreen(
       numSemana: '1',
-      tempo: 1,
+      tempo: 30,
       url: 'Assets/video/SEM1/ponte.mp4',
       nomeExercicio: 'PRANCHA DORSAL',
       loop: 3) //Video(20, nomeVideos),

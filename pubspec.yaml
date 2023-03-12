@@ -66,7 +66,7 @@ dependencies:
   brasil_fields: ^1.9.1
   flutter_datetime_picker: ^1.5.1
   intl: ^0.17.0
-
+  audioplayers: ^0.20.1
 flutter_native_splash:
    color: "#eb3e31"
    image: "Assets/images/ball.png"
@@ -120,8 +120,7 @@ flutter:
   - Assets/video/SEM7/
   - Assets/video/SEM8/
   - Assets/video/SEM9/
-  - Assets/video/ponte.mp4
-  - Assets/video/pranchaNORM.mp4
+  - Assets/songs/
 
     
 

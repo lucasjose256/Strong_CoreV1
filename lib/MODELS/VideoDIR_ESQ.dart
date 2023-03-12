@@ -74,7 +74,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
           setState(() {});
         },
       )
-      ..setVolume(0)
+      ..setVolume(1)
       ..setLooping(true);
     _inicializeVideoPlayer = _controller!.initialize().then(
       (value) {
@@ -182,7 +182,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: nomeExercicio.length > 40 ? 17 : 20),
+                        fontSize: nomeExercicio.length > 40 ? 15 : 20),
                     maxLines: 4,
                   ),
                 ),

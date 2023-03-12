@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -123,6 +124,7 @@ class _TelaEsperaState extends State<TelaEspera> {
                       if (timeStamp.toString() == '3') {
                         setState(() {
                           build(context);
+                          //   AudioCache().play('som_intervalo.mp3');
                           tamRelogio = 4;
                           color = Colors.red;
                         });

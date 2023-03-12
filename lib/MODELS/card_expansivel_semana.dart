@@ -263,12 +263,12 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                 child: Column(
                                   children: [
                                     Text(
-                                      ' ' +
+                                      '  ${e.nomeSemLado ?? e.nomeExercicio} ' +
+                                          '   ' +
                                           e.loop.toString() +
-                                          'X  ' +
-                                          '${e.nomeSemLado ?? e.nomeExercicio} ' +
-                                          ' ' +
-                                          '(${e.tempo.toString()}s)',
+                                          'x' +
+                                          e.tempo.toString() +
+                                          's',
                                       style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w500,

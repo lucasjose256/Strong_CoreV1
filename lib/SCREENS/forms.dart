@@ -60,118 +60,142 @@ class _FormsState extends State<Forms> {
     for (int i = 0; i < infoForms.dores.length; i++) {
       dores += infoForms.dores[i] + ',';
     }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Strong Core'),
-      ),
-      body: Stepper(
-        steps: stepsList(),
-        elevation: 5,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Strong Core'),
+        ),
+        body: Stepper(
+          steps: stepsList(),
+          elevation: 5,
 
-        onStepContinue: () async {
-          final isLastStep = stepCounter == stepsList().length - 1;
-          if (isLastStep) {
-            /* await FirebaseFirestore.instance
-                .collection('user')
-                .doc(FirebaseAuth.instance.currentUser!.uid)
-                .set({
-              'Nome': infoForms.nome,
-              'Sexo': infoForms.sexo,
-              'Peso': infoForms.peso,
-              'Altura': infoForms.altura,
-              'Data de Nascimento': infoForms.dataNascimento,
-              'Posto': infoForms.posto,
-              'Cargo': infoForms.cargo,
-              'DataAdmissao': infoForms.dataAdmissao,
-              'P1_exercicio_na_semana': infoForms.question1,
-              'P2_intrucao_exercicio': infoForms.question2,
-              'P3_orientacoes_exercicio': infoForms.question3,
-              'P4_Lista_problemas_saude': dores,
-              'P5_dormir_suficiente': infoForms.question4,
-              'P6_estresse': infoForms.question5
-            });*/
-            await UserPreferences.setBool(false);
+          onStepContinue: () async {
+            final isLastStep = stepCounter == stepsList().length - 1;
+            if (isLastStep) {
+              /* await FirebaseFirestore.instance
+                  .collection('user')
+                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                  .set({
+                'Nome': infoForms.nome,
+                'Sexo': infoForms.sexo,
+                'Peso': infoForms.peso,
+                'Altura': infoForms.altura,
+                'Data de Nascimento': infoForms.dataNascimento,
+                'Posto': infoForms.posto,
+                'Cargo': infoForms.cargo,
+                'DataAdmissao': infoForms.dataAdmissao,
+                'P1_exercicio_na_semana': infoForms.question1,
+                'P2_intrucao_exercicio': infoForms.question2,
+                'P3_orientacoes_exercicio': infoForms.question3,
+                'P4_Lista_problemas_saude': dores,
+                'P5_dormir_suficiente': infoForms.question4,
+                'P6_estresse': infoForms.question5
+              });*/
+              await UserPreferences.setBool(false);
 
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                  builder: (constect) => ChangeNotifierProvider<Information>(
-                      create: (context) => Information(),
-                      child: CorpoHumano(infoForms: infoForms)),
-                  settings: RouteSettings()),
-            );
-          } else {
-            //AQUI SERIA ADIOCIONADO AS VERIFICAÇÕES NOS CAMPOS ANSWERS PARA
-            //CONFERIR SE TODOS OS CAMPO FORAM PREENCHIDOS
-            if (stepCounter == 0 &&
-                (infoForms.nome == '' ||
-                    infoForms.sexo == '' ||
-                    infoForms.peso == '')) {
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  actions: [
-                    TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Text('Ok'))
-                  ],
-                  title: Text('Formulário'),
-                  content: Text(
-                      'Por favor, preencha TODOS os CAMPOS para prosseguir!'),
-                ),
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (constect) => ChangeNotifierProvider<Information>(
+                        create: (context) => Information(),
+                        child: CorpoHumano(infoForms: infoForms)),
+                    settings: RouteSettings()),
               );
             } else {
-              setState(() {
-                stepCounter++;
-              });
-            }
-          }
-        },
-        onStepCancel: stepCounter == 0
-            ? null
-            : (() {
+              //AQUI SERIA ADIOCIONADO AS VERIFICAÇÕES NOS CAMPOS ANSWERS PARA
+              //CONFERIR SE TODOS OS CAMPO FORAM PREENCHIDOS
+              if (stepCounter == 0 &&
+                  (infoForms.nome == '' ||
+                      infoForms.sexo == '' ||
+                      infoForms.peso == '' ||
+                      infoForms.dataNascimento == '' ||
+                      infoForms.altura == '')) {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    actions: [
+                      TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text('Ok'))
+                    ],
+                    title: Text('Formulário'),
+                    content: Text(
+                        'Por favor, preencha TODOS os CAMPOS para prosseguir!'),
+                  ),
+                );
+              } else if (stepCounter == 1 &&
+                  (infoForms.cargo == '' ||
+                      infoForms.posto == '' ||
+                      infoForms.peso == '' ||
+                      infoForms.dataNascimento == '' ||
+                      infoForms.altura == '')) {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    actions: [
+                      TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text('Ok'))
+                    ],
+                    title: Text('Formulário'),
+                    content: Text(
+                        'Por favor, preencha TODOS os CAMPOS para prosseguir!'),
+                  ),
+                );
+              } else {
                 setState(() {
-                  stepCounter--;
-                  if (stepCounter < 0) {
-                    stepCounter++;
-                  }
+                  stepCounter++;
                 });
-              }),
-        // type: StepperType.horizontal,
-        controlsBuilder: (BuildContext context, ControlsDetails details) {
-          return Row(
-            children: <Widget>[
-              stepCounter == stepsList().length - 1
-                  ? Expanded(
-                      child: MaterialButton(
-                        onPressed: details.onStepContinue,
-                        child: const Text(
-                          'ENVIAR',
-                          style: TextStyle(color: Colors.red, fontSize: 15),
-                        ),
-                      ),
-                    )
-                  : Expanded(
-                      child: MaterialButton(
+              }
+            }
+          },
+          onStepCancel: stepCounter == 0
+              ? null
+              : (() {
+                  setState(() {
+                    stepCounter--;
+                    if (stepCounter < 0) {
+                      stepCounter++;
+                    }
+                  });
+                }),
+          // type: StepperType.horizontal,
+          controlsBuilder: (BuildContext context, ControlsDetails details) {
+            return Row(
+              children: <Widget>[
+                stepCounter == stepsList().length - 1
+                    ? Expanded(
+                        child: MaterialButton(
                           onPressed: details.onStepContinue,
                           child: const Text(
-                            'PROXIMO',
+                            'ENVIAR',
                             style: TextStyle(color: Colors.red, fontSize: 15),
-                          )),
+                          ),
+                        ),
+                      )
+                    : Expanded(
+                        child: MaterialButton(
+                            onPressed: details.onStepContinue,
+                            child: const Text(
+                              'PROXIMO',
+                              style: TextStyle(color: Colors.red, fontSize: 15),
+                            )),
+                      ),
+                Expanded(
+                  child: MaterialButton(
+                    onPressed: details.onStepCancel,
+                    child: const Text(
+                      'VOLTAR',
+                      style: TextStyle(fontSize: 15),
                     ),
-              Expanded(
-                child: MaterialButton(
-                  onPressed: details.onStepCancel,
-                  child: const Text(
-                    'VOLTAR',
-                    style: TextStyle(fontSize: 15),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
-        currentStep: stepCounter,
-        type: StepperType.horizontal,
+              ],
+            );
+          },
+          currentStep: stepCounter,
+          type: StepperType.horizontal,
+        ),
       ),
     );
   }

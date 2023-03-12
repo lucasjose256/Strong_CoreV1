@@ -88,7 +88,7 @@ class _MyAppState extends State<MyApp> {
       } //Question();
       //firstWidget = Semanas();
     } else {
-      firstWidget = MyHomePage(primeiroAcessoCompleto!);
+      firstWidget = SingUpPage(); //MyHomePage(primeiroAcessoCompleto!);
     }
     return ChangeNotifierProvider(
         create: (context) => GoogleSignInProvider(),

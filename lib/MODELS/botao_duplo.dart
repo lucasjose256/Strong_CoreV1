@@ -25,8 +25,8 @@ class BotaoDuplo extends StatefulWidget {
   final double? buttunDistance;
   final String? numberButtun;
   final String? phraseCard;
-  late String painDegreeRight;
-  late String painDegreeleft;
+  String painDegreeRight = '';
+  String painDegreeleft = '';
   Color? colorRight;
   Color? colorleft;
   bool palavraFeminino;

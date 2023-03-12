@@ -133,7 +133,7 @@ class _VideoScreenState extends State<VideoScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 22),
+                          fontSize: nomeExercicio.length > 40 ? 15 : 20),
                     ),
                   ),
                 ),

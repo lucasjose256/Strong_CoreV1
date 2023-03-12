@@ -324,16 +324,14 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                     padding: EdgeInsets.only(top: 8, bottom: 8),
                     color: ui.Color.fromARGB(255, 202, 43, 32),
                     onPressed: () async {
-                      if (pescoco0.graudaDor ==
-                              null /*||
-                              regiaoCervical1.graudaDor == null ||
-                              costasSuperior2.graudaDor == null ||
-                              costasMedia3.graudaDor == null ||
-                              costasInferior4.graudaDor == null ||
-                              bacia5.graudaDor == null*/
-                          /*  ombro6!.painDegreeRight== null||
-                        ombro6.painDegreeleft== null||*/
-                          )
+                      if (pescoco0.graudaDor == null ||
+                          regiaoCervical1.graudaDor == null ||
+                          costasSuperior2.graudaDor == null ||
+                          costasMedia3.graudaDor == null ||
+                          costasInferior4.graudaDor == null ||
+                          bacia5.graudaDor == null ||
+                          ombro6!.painDegreeRight == '' ||
+                          ombro6.painDegreeleft == '')
 
                       /* grauDores = [
                         //     pescoco0!.graudaDor!,
