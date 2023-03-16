@@ -3,6 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:strong_core/SCREENS/corpo_humano.dart';
 import 'package:strong_core/main.dart';
@@ -89,9 +91,30 @@ class _QuestionState extends State<Question> {
     onRefrash(null);
   }
 
+  DateTime? curretnDate;
+  final dateController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final infoForms = Provider.of<Information>(context);
+    void _showDatePicker() {
+      DatePicker.showDatePicker(
+        context,
+        showTitleActions: true,
+        currentTime: curretnDate,
+        minTime: DateTime(1930),
+        locale: LocaleType.pt,
+        maxTime: DateTime(2023),
+        theme: DatePickerTheme(),
+        onConfirm: (date) {
+          setState(() {
+            curretnDate = date;
+            dateController.text = DateFormat('dd/MM/yyyy').format(date);
+            infoForms.setDataAdmissao(dateController.text);
+          });
+        },
+      );
+    }
+
     return Column(
       /*  addRepaintBoundaries: false,
         shrinkWrap: false,
@@ -225,21 +248,23 @@ class _QuestionState extends State<Question> {
           height: 10,
         ),
         Center(
-            child: Container(
-          child: TextFormField(
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-                focusColor: Colors.red,
-                // labelText: 'Date de Admissão',
-                border: OutlineInputBorder(),
-                hintText: 'mm/aaaa'),
-            onChanged: (value) {
-              infoForms.setDataAdmissao(value);
-            },
-            // controller: _nome,
-          ),
-          width: 300,
-        )),
+          child: Container(
+              width: 200,
+              // margin: const EdgeInsets.only(right: 150),
+              child: TextFormField(
+                expands: false,
+                keyboardType: TextInputType.none,
+                controller: dateController,
+                onTap: _showDatePicker,
+                decoration: InputDecoration(
+                  suffixIcon: Icon(Icons.calendar_month),
+                  // hintText: ('dd/mm/aaaa'),
+                  //   focusColor: Colors.red,
+
+                  //  border: OutlineInputBorder(),
+                ),
+              )),
+        ),
 
         /*   const Text(
             'No último mês, durante o horário de plantão quantos dias' +

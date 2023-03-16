@@ -45,7 +45,7 @@ List<VideoScreen> videos1 = [
       urlDE: 'Assets/video/SEM2/pranchaD_40.mp4',
       numSemana: '1',
       nomeSemLado: 'PRANCHA LATERAL',
-      tempo: 1,
+      tempo: 30,
       url: 'Assets/video/SEM2/pranchaE_40.mp4',
       nomeExercicio: 'PRANCHA LATERAL ESQUERDA',
       loop: 3) //Video(20, nomeVideos),

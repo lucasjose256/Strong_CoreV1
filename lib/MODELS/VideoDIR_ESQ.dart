@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -48,11 +50,14 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
   final int loop;
   int flag;
   VideoPlayerController? _controller;
-  CountDownController? _circulatTimerControl;
+  late CountDownController _circulatTimerControl = CountDownController();
 
   late VoidCallback listener;
+
   _VideoDirEsqState(
       this.tempo, this.url, this.nomeExercicio, this.loop, this.flag);
+  bool delayVideo = false;
+  Timer? timerDelay;
   void createVideo() {
     /*   _controller = VideoPlayerController.asset(
       url,
@@ -66,6 +71,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
         _controller!.play();
       },
     );*/
+
     _controller = VideoPlayerController.asset(
       url,
     )
@@ -83,17 +89,30 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
         //    setState(() {});
       },
     );
+
+    timerDelay = Timer(Duration(seconds: 4), () {
+      delayVideo = true;
+      _circulatTimerControl!.start();
+    });
+
+    Timer(
+      const Duration(seconds: 3),
+      () {
+        delayVideo = true;
+        _circulatTimerControl.start();
+      },
+    );
   }
 
   @override
   void initState() {
     super.initState();
-    listener = () {
+    /*  listener = () {
       if (mounted) {
         setState(() {});
       }
-    };
-    _circulatTimerControl = CountDownController();
+    };*/
+    // _circulatTimerControl = CountDownController();
 
     createVideo();
   }
@@ -222,9 +241,11 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                         return Positioned(
                           left: MediaQuery.of(context).size.width * 0.78,
                           child: CircularCountDownTimer(
-                              duration: widget.tempo + 1,
+                              autoStart: delayVideo,
+                              duration: widget.tempo,
                               initialDuration: 0,
-                              controller: _circulatTimerControl,
+                              controller:
+                                  delayVideo ? null : _circulatTimerControl,
                               width: MediaQuery.of(context).size.width / 8.8,
                               height: MediaQuery.of(context).size.height / 8.8,
                               ringColor: Colors.grey[300]!,
@@ -236,7 +257,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                               strokeWidth: 20.0,
                               strokeCap: StrokeCap.round,
                               textStyle: TextStyle(
-                                  fontSize: 33.0,
+                                  fontSize: 30,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                               textFormat: CountdownTextFormat.S,
@@ -266,8 +287,10 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                 debugPrint('Countdown Started');
                               },
                               onComplete: () async {
-                                //  circulatTimerControl.reset();
                                 _circulatTimerControl!.pause();
+                                //  circulatTimerControl.reset();
+                                delayVideo = false;
+
                                 _controller!.pause();
                                 /*    var documentReference = FirebaseFirestore.instance
                                     .collection('user')

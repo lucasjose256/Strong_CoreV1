@@ -307,16 +307,32 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                     padding: EdgeInsets.only(top: 8, bottom: 8),
                     color: ui.Color.fromARGB(255, 202, 43, 32),
                     onPressed: () async {
-                      if (pescoco0.graudaDor ==
-                              null /*||
-                              regiaoCervical1.graudaDor == null ||
-                              costasSuperior2.graudaDor == null ||
-                              costasMedia3.graudaDor == null ||
-                              costasInferior4.graudaDor == null ||
-                              bacia5.graudaDor == null*/
-                          /*  ombro6!.painDegreeRight== null||
-                        ombro6.painDegreeleft== null||*/
-                          )
+                      if (pescoco0.graudaDor == null ||
+                          regiaoCervical1.graudaDor == null ||
+                          costasSuperior2.graudaDor == null ||
+                          costasMedia3.graudaDor == null ||
+                          costasInferior4.graudaDor == null ||
+                          bacia5.graudaDor == null ||
+                          ombro6!.painDegreeRight == '' ||
+                          ombro6.painDegreeleft == '' ||
+                          braco7.painDegreeRight == '' ||
+                          braco7.painDegreeleft == '' ||
+                          cotovelo8.painDegreeRight == '' ||
+                          cotovelo8.painDegreeleft == '' ||
+                          antebraco9.painDegreeRight == '' ||
+                          antebraco9.painDegreeleft == '' ||
+                          punho10.painDegreeRight == '' ||
+                          punho10.painDegreeleft == '' ||
+                          mao11.painDegreeRight == '' ||
+                          mao11.painDegreeleft == '' ||
+                          perna12.painDegreeRight == '' ||
+                          perna12.painDegreeleft == '' ||
+                          joelho13.painDegreeRight == '' ||
+                          joelho13.painDegreeleft == '' ||
+                          panturrilha14.painDegreeRight == '' ||
+                          panturrilha14.painDegreeleft == '' ||
+                          tornozelo15.painDegreeRight == '' ||
+                          tornozelo15.painDegreeleft == '')
 
                       /* grauDores = [
                         //     pescoco0!.graudaDor!,

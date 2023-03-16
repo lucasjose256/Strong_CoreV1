@@ -30,7 +30,7 @@ class _Question2State extends State<Question2> {
     'Dois dias',
     'Três dias',
     'Quatro dias',
-    'Cinco Dias ou +',
+    'Cinco dias ou +',
   ];
   String? answer1;
 
@@ -40,7 +40,7 @@ class _Question2State extends State<Question2> {
     'Dois dias',
     'Três dias',
     'Quatro dias',
-    'Cinco Dias ou +',
+    'Cinco dias ou +',
   ];
   String? answer2;
 

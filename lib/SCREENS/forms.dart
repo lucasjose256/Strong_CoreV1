@@ -73,7 +73,7 @@ class _FormsState extends State<Forms> {
           onStepContinue: () async {
             final isLastStep = stepCounter == stepsList().length - 1;
             if (isLastStep) {
-              /* await FirebaseFirestore.instance
+              await FirebaseFirestore.instance
                   .collection('user')
                   .doc(FirebaseAuth.instance.currentUser!.uid)
                   .set({
@@ -91,7 +91,7 @@ class _FormsState extends State<Forms> {
                 'P4_Lista_problemas_saude': dores,
                 'P5_dormir_suficiente': infoForms.question4,
                 'P6_estresse': infoForms.question5
-              });*/
+              });
               await UserPreferences.setBool(false);
 
               Navigator.of(context).push(

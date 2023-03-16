@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -23,7 +25,7 @@ class VideoManeger extends StatefulWidget {
 
 class _VideoManegerState extends State<VideoManeger> {
   late VideoPlayerController _controller;
-  final CountDownController _circulatTimerControl = CountDownController();
+
   int index = 0;
   late Future<void> _inicializeVideoPlayer;
 
@@ -35,9 +37,12 @@ class _VideoManegerState extends State<VideoManeger> {
   int tempoProxExercicio = 45;
 
   List<VideoScreen> videos;
+  late CountDownController circulatTimerControl = CountDownController();
+  bool delayVideo = false;
   _VideoManegerState(this.videos);
-
-  void createVideo() {
+  Timer? delayTimer;
+  void createVideo() async {
+    delayVideo = false;
     _controller = VideoPlayerController.asset(
       videos[index].url,
     )
@@ -50,6 +55,15 @@ class _VideoManegerState extends State<VideoManeger> {
       (value) {
         if (mounted) setState(() {});
         _controller.play();
+        delayTimer = Timer(
+          const Duration(seconds: 3),
+          () {
+            WidgetsBinding.instance?.addPostFrameCallback((_) {
+              delayVideo = true;
+              circulatTimerControl.start();
+            });
+          },
+        );
         //    setState(() {});
       },
     );
@@ -81,7 +95,7 @@ class _VideoManegerState extends State<VideoManeger> {
         final value = await showDialog<bool>(
             context: context,
             builder: (context) {
-              _circulatTimerControl.pause();
+              circulatTimerControl.pause();
               WidgetsBinding.instance?.addPostFrameCallback((_) {
                 _controller.pause();
               });
@@ -94,7 +108,7 @@ class _VideoManegerState extends State<VideoManeger> {
                 actions: [
                   ElevatedButton(
                       onPressed: (() {
-                        _circulatTimerControl.resume();
+                        circulatTimerControl.resume();
                         WidgetsBinding.instance?.addPostFrameCallback((_) {
                           _controller.play();
                         });
@@ -197,9 +211,9 @@ class _VideoManegerState extends State<VideoManeger> {
                     Positioned(
                       left: MediaQuery.of(context).size.width * 0.78,
                       child: CircularCountDownTimer(
-                          duration: videos[index].tempo + 1,
+                          duration: videos[index].tempo,
                           initialDuration: 0,
-                          controller: _circulatTimerControl,
+                          controller: delayVideo ? null : circulatTimerControl,
                           width: MediaQuery.of(context).size.width / 8.8,
                           height: MediaQuery.of(context).size.height / 8.8,
                           ringColor: Colors.grey[300]!,
@@ -211,17 +225,21 @@ class _VideoManegerState extends State<VideoManeger> {
                           strokeWidth: 20.0,
                           strokeCap: StrokeCap.round,
                           textStyle: TextStyle(
-                              fontSize: 33.0,
+                              fontSize: 30,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                           textFormat: CountdownTextFormat.S,
                           isReverse: true,
                           isReverseAnimation: true,
                           isTimerTextShown: true,
-                          //   autoStart: true,
+                          autoStart: delayVideo,
                           onStart: () async {},
                           onComplete: () async {
-                            _circulatTimerControl!.pause();
+                            circulatTimerControl!.pause();
+                            /*   setState(() {
+                              delayVideo = false;
+                            });*/
+
                             var documentReference = FirebaseFirestore.instance
                                 .collection('user')
                                 .doc(user!.uid);
@@ -230,7 +248,7 @@ class _VideoManegerState extends State<VideoManeger> {
                                   //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                                   {
                                     'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
-                                        _circulatTimerControl!.getTime()
+                                        circulatTimerControl!.getTime()
                                   });
                               print(
                                   'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}');
@@ -318,7 +336,7 @@ class _VideoManegerState extends State<VideoManeger> {
                               }
                             }
                             createVideo();
-                            _circulatTimerControl.start();
+                            // circulatTimerControl.start();
                           },
                           onChange: (String timeStamp) async {}),
                     ),
@@ -344,10 +362,12 @@ class _VideoManegerState extends State<VideoManeger> {
               ),
               onPressed: unableStopButtun
                   ? () async {
+                      circulatTimerControl!.pause();
                       setState(() {
                         unableStopButtun = false;
+                        //     delayVideo = false;
                       });
-                      _circulatTimerControl!.pause();
+
                       // _controller!.removeListener(listener);
                       _controller.dispose();
                       var documentReference = FirebaseFirestore.instance
@@ -358,7 +378,7 @@ class _VideoManegerState extends State<VideoManeger> {
                             //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                             {
                               'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
-                                  _circulatTimerControl.getTime(),
+                                  circulatTimerControl.getTime(),
                             });
                       } catch (e) {
                         showDialog(
@@ -459,7 +479,7 @@ class _VideoManegerState extends State<VideoManeger> {
                         }
                       }
                       createVideo();
-                      _circulatTimerControl.start();
+                      //   circulatTimerControl.start();
 
                       //setState(() {});
                     }

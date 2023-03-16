@@ -23,14 +23,14 @@ class Information extends ChangeNotifier {
   String question5 = '';
   String question6 = '';
 
-  List<String> dores = [];
+  List<dynamic> dores = [];
 
   void setName(String s) {
     nome = s;
     notifyListeners();
   }
 
-  void setListDores(List<String> l) {
+  void setListDores(List<dynamic> l) {
     dores = l;
     notifyListeners();
   }

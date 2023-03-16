@@ -3,6 +3,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:multi_select_flutter/bottom_sheet/multi_select_bottom_sheet_field.dart';
+import 'package:multi_select_flutter/chip_display/multi_select_chip_display.dart';
+import 'package:multi_select_flutter/dialog/mult_select_dialog.dart';
+import 'package:multi_select_flutter/dialog/multi_select_dialog_field.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
+import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 import 'package:multiselect/multiselect.dart';
 import 'package:provider/provider.dart';
 import 'package:strong_core/MODELS/multi_select_pain.dart';
@@ -25,13 +31,13 @@ class _Question3State extends State<Question3> {
   CollectionReference questionData =
       FirebaseFirestore.instance.collection('user');
 
-  final items1 = [
+  final List<String> items1 = [
     'Dores Oteomusculares',
     'Entorse Articular',
     'Fratura Óssea',
     'Enxaqueca',
   ];
-  String? answer1;
+  List<String> answer1 = [''];
 
   final items2 = [
     'Nenhum dia',
@@ -55,6 +61,17 @@ class _Question3State extends State<Question3> {
   @override
   Widget build(BuildContext context) {
     final InformationForms = Provider.of<Information>(context);
+    void _showMultiSelectDialog(BuildContext context) async {
+      await showDialog(
+        context: context,
+        builder: (ctx) {
+          return MultiSelectDialog(
+            items: items1.map((e) => MultiSelectItem(e, e)).toList(),
+            initialValue: answer1,
+          );
+        },
+      );
+    }
 
     return Column(
       // primary: false,//MOSTRA UMA COR AO TENTAR MOVER A LIST VIEW
@@ -73,19 +90,29 @@ class _Question3State extends State<Question3> {
         ),
         Center(
           child: Container(
-            child: DropDownMultiSelect(
-              options: controller.options,
-              whenEmpty: 'Selecione uma das opções',
-              onChanged: (p0) {
-                controller.selectedOptionList.value = p0;
-                controller.selectedoption.value = '';
-                controller.selectedOptionList.value.forEach((element) {
-                  controller.selectedoption.value + '' + element;
-                });
-                InformationForms.setListDores(
-                    controller.selectedOptionList.value);
+            child: MultiSelectDialogField(
+              onSaved: (newValue) =>
+                  InformationForms.setListDores(newValue as List<String>),
+              title: Text(''),
+              cancelText: Text('CANCELAR',
+                  style: TextStyle(color: Color.fromARGB(255, 53, 53, 53))),
+              confirmText: Text(
+                'OK',
+              ),
+              buttonText: Text('Selecione uma das opções'),
+              buttonIcon: Icon(Icons.arrow_drop_down),
+              dialogHeight: 300,
+              selectedColor: Colors.red,
+              items: items1.map((e) => MultiSelectItem(e, e)).toList(),
+              listType: MultiSelectListType.LIST,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(color: Colors.black, width: 1)),
+              onConfirm: (values) {
+                InformationForms.setListDores(values);
+                print(values[1]);
               },
-              selectedValues: controller.selectedOptionList.value,
+              chipDisplay: MultiSelectChipDisplay(),
             ),
           ),
         ),
@@ -155,7 +182,7 @@ class _Question3State extends State<Question3> {
         ),
 
         const Text(
-          'Nos últimos 6 meses como você classifica o seu estresse geral?*',
+          'Nos últimos 6 meses como você classifica o seu estresse geral?',
           style: TextStyle(
             fontFamily: 'Comfortaa',
             fontSize: 19,

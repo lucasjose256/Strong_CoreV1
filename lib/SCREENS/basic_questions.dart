@@ -38,10 +38,13 @@ class _BasicQuestionsState extends State<BasicQuestions> {
       DatePicker.showDatePicker(
         context,
         showTitleActions: true,
+        locale: LocaleType.pt,
         currentTime: curretnDate,
-        minTime: DateTime(1950),
+        minTime: DateTime(1930),
         maxTime: DateTime(2023),
-        theme: DatePickerTheme(),
+        theme: DatePickerTheme(
+          doneStyle: TextStyle(decorationColor: Colors.red),
+        ),
         onConfirm: (date) {
           setState(() {
             curretnDate = date;

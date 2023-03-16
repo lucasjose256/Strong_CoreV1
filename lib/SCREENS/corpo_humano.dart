@@ -331,7 +331,25 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           costasInferior4.graudaDor == null ||
                           bacia5.graudaDor == null ||
                           ombro6!.painDegreeRight == '' ||
-                          ombro6.painDegreeleft == '')
+                          ombro6.painDegreeleft == '' ||
+                          braco7.painDegreeRight == '' ||
+                          braco7.painDegreeleft == '' ||
+                          cotovelo8.painDegreeRight == '' ||
+                          cotovelo8.painDegreeleft == '' ||
+                          antebraco9.painDegreeRight == '' ||
+                          antebraco9.painDegreeleft == '' ||
+                          punho10.painDegreeRight == '' ||
+                          punho10.painDegreeleft == '' ||
+                          mao11.painDegreeRight == '' ||
+                          mao11.painDegreeleft == '' ||
+                          perna12.painDegreeRight == '' ||
+                          perna12.painDegreeleft == '' ||
+                          joelho13.painDegreeRight == '' ||
+                          joelho13.painDegreeleft == '' ||
+                          panturrilha14.painDegreeRight == '' ||
+                          panturrilha14.painDegreeleft == '' ||
+                          tornozelo15.painDegreeRight == '' ||
+                          tornozelo15.painDegreeleft == '')
 
                       /* grauDores = [
                         //     pescoco0!.graudaDor!,
@@ -394,10 +412,10 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'Regiao_cervical1_SEM_6': '',
                           'Regiao_cervical1_SEM_8': '',
                           //////
-                          'Costas2_superior2_SEM_0': costasSuperior2.graudaDor,
-                          'Costas2_superior2_SEM_4': '',
-                          'Costas2_superior2_SEM_6': '',
-                          'Costas2_superior2_SEM_8': '',
+                          'Costas_superior2_SEM_0': costasSuperior2.graudaDor,
+                          'Costas_superior2_SEM_4': '',
+                          'Costas_superior2_SEM_6': '',
+                          'Costas_superior2_SEM_8': '',
                           ///////////
                           'Costas_média3_SEM_0': costasMedia3.graudaDor,
                           'Costas_média3_SEM_4': '',
