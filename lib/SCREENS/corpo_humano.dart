@@ -1178,7 +1178,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                               100,
 
                           ///SEMANA 7 DIA 2
-
+//
                           'SEM_7_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)1':
                               100,
                           'SEM_7_DIA2_EXERCICIO_PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)2':

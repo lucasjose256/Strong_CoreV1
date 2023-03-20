@@ -101,10 +101,16 @@ class _QuestionState extends State<Question> {
         context,
         showTitleActions: true,
         currentTime: curretnDate,
-        minTime: DateTime(1930),
+        minTime: DateTime.utc(
+          1990,
+        ),
         locale: LocaleType.pt,
-        maxTime: DateTime(2023),
-        theme: DatePickerTheme(),
+        maxTime: DateTime(
+          2023,
+        ),
+        theme: DatePickerTheme(
+          doneStyle: TextStyle(decorationColor: Colors.red),
+        ),
         onConfirm: (date) {
           setState(() {
             curretnDate = date;

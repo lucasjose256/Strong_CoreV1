@@ -23,8 +23,10 @@ final LISTASEMANAS = [
   InfoSemanas(Color.fromARGB(255, 199, 98, 98), 'SEMANA 6', videos, 6),
   InfoSemanas(Color.fromARGB(255, 111, 64, 91), 'SEMANA 7', videos, 7),*/
 ];
+
 List<VideoScreen> videos1 = [
   VideoScreen(
+      delay: 5,
       numSemana: '1',
       tempo: 30,
       url: 'Assets/video/SEM1/pranchaNORM.mp4',
@@ -32,6 +34,7 @@ List<VideoScreen> videos1 = [
       loop: 3) //Video(20, nomeVideos),
   ,
   VideoScreen(
+      delay: 1,
       numSemana: '1',
       tempo: 30,
       url: 'Assets/video/SEM1/ponte.mp4',
@@ -39,14 +42,15 @@ List<VideoScreen> videos1 = [
       loop: 3) //Video(20, nomeVideos),
   ,
   VideoScreen(
+      delay: 1,
       isLast: true,
       //ValueKey('sem2ex3'),
       nomeExercicioDE: 'PRANCHA LATERAL DIREITA',
-      urlDE: 'Assets/video/SEM2/pranchaD_40.mp4',
+      urlDE: 'Assets/video/SEM1/pranchaDIR.mp4',
       numSemana: '1',
       nomeSemLado: 'PRANCHA LATERAL',
       tempo: 30,
-      url: 'Assets/video/SEM2/pranchaE_40.mp4',
+      url: 'Assets/video/SEM1/pranchaESQ.mp4',
       nomeExercicio: 'PRANCHA LATERAL ESQUERDA',
       loop: 3) //Video(20, nomeVideos),
   ,
@@ -64,25 +68,28 @@ List<VideoScreen> videos1 = [
 /////////////////////////////////////
 List<VideoScreen> videos2 = [
   VideoScreen(
+      delay: 4,
       numSemana: '2',
-      tempo: 1,
+      tempo: 40,
       url: 'Assets/video/SEM2/pranchaS2.mp4',
       nomeExercicio: 'PRANCHA VENTRAL',
       loop: 5),
   VideoScreen(
-    tempo: 1,
+    delay: 1,
+    tempo: 40,
     url: 'Assets/video/SEM2/ponte_dorsal_40.mp4',
     nomeExercicio: 'PRANCHA DORSAL',
     loop: 5,
     numSemana: '2',
   ),
   VideoScreen(
+      delay: 1,
       nomeExercicioDE: 'PRANCHA LATERAL DIREITA',
       urlDE: 'Assets/video/SEM2/pranchaD_40.mp4',
       numSemana: '2',
       nomeSemLado: 'PRANCHA LATERAL',
       isLast: true,
-      tempo: 1,
+      tempo: 40,
       url: 'Assets/video/SEM2/pranchaE_40.mp4',
       nomeExercicio: 'PRANCHA LATERAL ESQUERDA',
       loop: 5) //Video(20, nomeVideos),
@@ -91,19 +98,21 @@ List<VideoScreen> videos2 = [
 //////////////////////////////
 List<VideoScreen> videos3 = [
   VideoScreen(
+      delay: 5,
       //ValueKey('sem3ex1'),
       urlDE: 'Assets/video/SEM3/prancha_com_elevacao_da_perna_D_30.mp4',
       nomeExercicioDE: 'PRANCHA COM ELEVAÇÃO DA PERNA DIREITA',
       nomeSemLado: 'PRANCHA COM ELEVAÇÃO DA PERNA',
       numSemana: '3',
-      tempo: 1,
+      tempo: 30,
       url: 'Assets/video/SEM3/prancha_com_elevacao_da_perna_E_30.mp4',
       nomeExercicio: 'PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA',
       loop: 3) //Video(20, nomeVideos),
   ,
   VideoScreen(
+    delay: 1,
     //  ValueKey('sem3ex2'),
-    tempo: 1,
+    tempo: 30,
     url:
         'Assets/video/SEM3/ponte_dorsal_com_elevacao_dos_calcanhares.mp4', //'Assets/video/prancha.mp4',
     nomeExercicio: 'PRANCHA DORSAL COM ELEVAÇÃO DOS CALCANHARES',
@@ -111,13 +120,14 @@ List<VideoScreen> videos3 = [
   ) //Video(20, nomeVideos),
   ,
   VideoScreen(
+      delay: 2,
       //ValueKey('sem3ex3'),
       isLast: true,
       urlDE: 'Assets/video/SEM3/prancha_lateral_elevacao_do_braco_D_30.mp4',
       nomeExercicioDE: 'PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO',
       nomeSemLado: 'PRANCHA COM ELEVAÇÃO DO BRAÇO',
       numSemana: '3',
-      tempo: 1,
+      tempo: 30,
       url: 'Assets/video/SEM3/prancha_lateral_elevacao_do_braco_E_30.mp4',
       nomeExercicio: 'PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO',
       loop: 3) //Video(20, nomeVideos),
@@ -127,20 +137,22 @@ List<VideoScreen> videos3 = [
 /////VIDEO 4
 List<VideoScreen> videos4 = [
   VideoScreen(
+      delay: 5,
       //ValueKey('sem4ex1'),
       urlDE: 'Assets/video/SEM4/prancha_elevacao_da_perna_D_40_.mp4',
       nomeExercicioDE: 'PRANCHA COM ELEVAÇÃO DA PERNA DIREITA',
       nomeSemLado: 'PRANCHA COM ELEVAÇÃO DA PERNA',
       numSemana: '4',
-      tempo: 1,
+      tempo: 40,
       url: 'Assets/video/SEM4/prancha_elevacao_da_perna_E_40.mp4',
       nomeExercicio: 'PRANCHA COM ELEVAÇÃO DA PERNA ESQUERDA',
       loop: 5) //Video(20, nomeVideos),
   ,
   VideoScreen(
+    delay: 1,
     // ValueKey('sem4ex2'),
     //TA ERRADO O EXERCICIO
-    tempo: 1,
+    tempo: 40,
     url:
         'Assets/video/SEM4/prancha_dorsal_com_elevacao_calcanhares.mp4', //'Assets/video/prancha.mp4',
     nomeExercicio: 'PRANCHA DORSAL COM ELEVAÇÃO DO CALCANHAR',
@@ -148,13 +160,14 @@ List<VideoScreen> videos4 = [
   ) //Video(20, nomeVideos),
   ,
   VideoScreen(
+      delay: 2,
       //ValueKey('sem4ex3'),
       isLast: true,
       urlDE: 'Assets/video/SEM4/prancha_latera_elevacao_do_bracoD40.mp4',
       nomeExercicioDE: 'PRANCHA COM ELEVAÇÃO DO BRAÇO DIREITO',
       nomeSemLado: 'PRANCHA COM ELEVAÇÃO DA PERNA',
       numSemana: '4',
-      tempo: 1,
+      tempo: 40,
       url: 'Assets/video/SEM4/prancha_lateral_elevacao_do_braco_E_40.mp4',
       nomeExercicio: 'PRANCHA COM ELEVAÇÃO DO BRAÇO ESQUERDO',
       loop: 5) //Video(20, nomeVideos),
@@ -164,28 +177,31 @@ List<VideoScreen> videos4 = [
 ///VIDEOS 5
 List<VideoScreen> videos5 = [
   VideoScreen(
+      delay: 1,
       //ValueKey('sem5ex1'),
       urlDE: 'Assets/video/SEM5/prancha_superman_30_BD.mp4',
       nomeExercicioDE: 'PRANCHA SUPERMAN LADO DIREITO',
       nomeSemLado: 'PRANCHA SUPERMAN',
       numSemana: '5',
-      tempo: 1,
+      tempo: 30,
       url: 'Assets/video/SEM5/prancha_superman_30_BE.mp4',
       nomeExercicio: 'PRANCHA SUPERMAN LADO ESQUERDO',
       loop: 3) //Video(20, nomeVideos),
   ,
   VideoScreen(
+      delay: 1,
       //ValueKey('sem5ex2'),
       numSemana: '5',
-      tempo: 1,
+      tempo: 30,
       url: 'Assets/video/SEM5/elevacao_dorsal_paraquedista_30.mp4',
       nomeExercicio: 'PRANCHA PARAQUEDISTA',
       loop: 3) //Video(20, nomeVideos),
   ,
   VideoScreen(
+    delay: 1,
     // ValueKey('sem5ex3'),
     isLast: true,
-    tempo: 1,
+    tempo: 30,
     url:
         'Assets/video/SEM5/prancha_isometrica_canoa_30.mp4', //'Assets/video/prancha.mp4',
     nomeExercicio: 'PRANCHA CANOA',
@@ -198,25 +214,28 @@ List<VideoScreen> videos5 = [
 
 List<VideoScreen> videos6 = [
   VideoScreen(
+      delay: 1,
       urlDE: 'Assets/video/SEM6/S6_prancha_superman_D_40.mp4',
       nomeExercicioDE: 'PRANCHA SUPERMAN LADO DIREITO',
       nomeSemLado: 'PRANCHA SUPERMAN',
       numSemana: '6',
-      tempo: 1,
+      tempo: 40,
       url: 'Assets/video/SEM6/S6_prancha_superman_E_40.mp4',
       nomeExercicio: 'PRANCHA SUPERMAN LADO ESQUERDO',
       loop: 5) //Video(20, nomeVideos),
   ,
   VideoScreen(
+      delay: 1,
       numSemana: '6',
-      tempo: 1,
+      tempo: 40,
       url: 'Assets/video/SEM6/S6_Elevacao_dorsal_paraquedista_40.mp4',
       nomeExercicio: 'PRANCHA PARAQUEDISTA',
       loop: 5) //Video(20, nomeVideos),
   ,
   VideoScreen(
+    delay: 1,
     isLast: true,
-    tempo: 1,
+    tempo: 40,
     url:
         'Assets/video/SEM6/S6_prancha_isometrica_canoa.mp4', //'Assets/video/prancha.mp4',
     nomeExercicio: 'PRANCHA CANOA',
@@ -227,6 +246,7 @@ List<VideoScreen> videos6 = [
 ///VIDEOS 7
 List<VideoScreen> videos7 = [
   VideoScreen(
+      delay: 1,
       //CONFERIR OS VIDEOS
       urlDE:
           'Assets/video/SEM7/S7_prancha_alta_c_elevacao_de_braco_e_pernaD_contralateral.mp4',
@@ -234,7 +254,7 @@ List<VideoScreen> videos7 = [
           'PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)',
       nomeSemLado: 'PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL',
       numSemana: '7',
-      tempo: 1,
+      tempo: 30,
       url:
           'Assets/video/SEM7/S7_prancha_alta_c_elevacao_de_braco_e_pernaE_contralateral.mp4',
       nomeExercicio:
@@ -242,23 +262,25 @@ List<VideoScreen> videos7 = [
       loop: 3) //Video(20, nomeVideos),
   ,
   VideoScreen(
+      delay: 2,
       urlDE: 'Assets/video/SEM7/S7_ponte_c_elevacao_da_perna_D_30.mp4',
       nomeExercicioDE: 'PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA',
       nomeSemLado: 'PRANCHA DORSAL COM ELEVAÇÃO DA PERNA',
       numSemana: '7',
-      tempo: 2,
+      tempo: 30,
       url: 'Assets/video/SEM7/S7_ponte_elevacao_da_perna_E_30.mp4',
       nomeExercicio: 'PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA',
       loop: 3) //Video(20, nomeVideos),
   ,
   VideoScreen(
+      delay: 2,
       isLast: true,
       urlDE:
           'Assets/video/SEM7/S7_prancha_lateral_com_elevacao_do_braco_e_pernaD.mp4',
       nomeExercicioDE: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA',
       nomeSemLado: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA',
       numSemana: '7',
-      tempo: 1,
+      tempo: 30,
       url:
           'Assets/video/SEM7/S7_prancha_lateral_com_elevacao_do_braco_e_pernaE.mp4',
       nomeExercicio: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA',
@@ -269,13 +291,14 @@ List<VideoScreen> videos7 = [
 ///VIDEOS SEMANA 8=SEMANA 7
 List<VideoScreen> videos8 = [
   VideoScreen(
+      delay: 1,
       urlDE:
           'Assets/video/SEM7/S7_prancha_alta_c_elevacao_de_braco_e_pernaD_contralateral.mp4',
       nomeExercicioDE:
           'PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)',
-      nomeSemLado: 'PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA ',
+      nomeSemLado: 'PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL',
       numSemana: '8',
-      tempo: 1,
+      tempo: 30,
       url:
           'Assets/video/SEM7/S7_prancha_alta_c_elevacao_de_braco_e_pernaE_contralateral.mp4',
       nomeExercicio:
@@ -283,23 +306,25 @@ List<VideoScreen> videos8 = [
       loop: 5) //Video(20, nomeVideos),
   ,
   VideoScreen(
+      delay: 2,
       urlDE: 'Assets/video/SEM7/S7_ponte_c_elevacao_da_perna_D_30.mp4',
       nomeExercicioDE: 'PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA',
       nomeSemLado: 'PRANCHA DORSAL COM ELEVAÇÃO DA PERNA',
       numSemana: '8',
-      tempo: 1,
+      tempo: 30,
       url: 'Assets/video/SEM7/S7_ponte_elevacao_da_perna_E_30.mp4',
       nomeExercicio: 'PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA',
       loop: 5) //Video(20, nomeVideos),
   ,
   VideoScreen(
+      delay: 2,
       isLast: true,
       urlDE:
           'Assets/video/SEM7/S7_prancha_lateral_com_elevacao_do_braco_e_pernaD.mp4',
       nomeExercicioDE: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA',
       nomeSemLado: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA',
       numSemana: '8',
-      tempo: 1,
+      tempo: 30,
       url:
           'Assets/video/SEM7/S7_prancha_lateral_com_elevacao_do_braco_e_pernaE.mp4',
       nomeExercicio: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA',
@@ -310,36 +335,39 @@ List<VideoScreen> videos8 = [
 ///VIDEOS 9
 List<VideoScreen> videos9 = [
   VideoScreen(
+      delay: 1,
       urlDE:
           'Assets/video/SEM9/S9_Prancha_lateral_com_elevacao_dos_bracos_e_perna_D.mp4',
       nomeExercicioDE:
           'PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(DIR|ESQ)',
-      nomeSemLado: 'PRANCHA COM ELEVAÇÃO DA PERNA',
+      nomeSemLado: 'PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL',
       numSemana: '9',
-      tempo: 2,
+      tempo: 40,
       url: 'Assets/video/SEM9/S9_Prancha_alta_c_elevacao_do_braco_e_pernaE.mp4',
       nomeExercicio:
           'PRANCHA COM ELEVAÇÃO DO BRAÇO E PERNA CONTRALATERAL(ESQ|DIR)',
       loop: 5) //Video(20, nomeVideos),
   ,
   VideoScreen(
+      delay: 2,
       urlDE: 'Assets/video/SEM9/S9_ponte_dorsal_elevacao_da_pernaD.mp4',
       nomeExercicioDE: 'PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA',
       nomeSemLado: 'PRANCHA COM ELEVAÇÃO DA PERNA',
       numSemana: '9',
-      tempo: 1,
+      tempo: 40,
       url: 'Assets/video/SEM9/S9_ponte_c_elevacao_da_pernaE.mp4',
       nomeExercicio: 'PRANCHA DORSAL COM ELEVAÇÃO DA PERNA ESQUERDA',
       loop: 5) //Video(20, nomeVideos),
   ,
   VideoScreen(
+      delay: 2,
       isLast: true,
       urlDE:
           'Assets/video/SEM9/S9_Prancha_lateral_com_elevacao_dos_bracos_e_perna_D.mp4',
       nomeExercicioDE: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA DIREITA',
       nomeSemLado: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA',
       numSemana: '9',
-      tempo: 1,
+      tempo: 40,
       url:
           'Assets/video/SEM9/S9_Prancha_lateral_com_elevacao_dos_bracos_e_perna_E.mp4',
       nomeExercicio: 'PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA',

@@ -19,7 +19,10 @@ class VideoScreen extends StatefulWidget {
   String? urlDE;
   String? nomeSemLado;
   bool? isLast;
+
+  int delay;
   VideoScreen({
+    required this.delay,
     this.isLast,
     required this.numSemana,
     this.urlDE,
@@ -269,6 +272,7 @@ class _VideoScreenState extends State<VideoScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => VideoDirEsq(
+                                      delay: widget.delay,
                                       //         ValueKey(widget.nomeExercicio),
                                       dia: 2,
                                       showButtun: showButtun,
@@ -391,6 +395,7 @@ class _VideoScreenState extends State<VideoScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => VideoDirEsq(
+                            delay: widget.delay,
                             //    ValueKey(widget.nomeExercicio),
                             dia: 2,
                             isLastVideo: islast,

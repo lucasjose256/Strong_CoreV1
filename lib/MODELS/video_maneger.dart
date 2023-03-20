@@ -56,12 +56,14 @@ class _VideoManegerState extends State<VideoManeger> {
         if (mounted) setState(() {});
         _controller.play();
         delayTimer = Timer(
-          const Duration(seconds: 3),
+          Duration(seconds: videos[index].delay),
           () {
-            WidgetsBinding.instance?.addPostFrameCallback((_) {
-              delayVideo = true;
+            delayVideo = true;
+            try {
               circulatTimerControl.start();
-            });
+            } catch (e) {
+              print(e);
+            }
           },
         );
         //    setState(() {});
@@ -243,12 +245,14 @@ class _VideoManegerState extends State<VideoManeger> {
                             var documentReference = FirebaseFirestore.instance
                                 .collection('user')
                                 .doc(user!.uid);
-                            if (dia > 3) {
+                            if (dia < 3) {
                               documentReference.update(
                                   //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                                   {
                                     'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
-                                        circulatTimerControl!.getTime()
+                                        delayVideo
+                                            ? circulatTimerControl!.getTime()
+                                            : videos[index].tempo
                                   });
                               print(
                                   'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}');
@@ -302,6 +306,7 @@ class _VideoManegerState extends State<VideoManeger> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => VideoDirEsq(
+                                          delay: videos[index].delay,
                                           //   ValueKey(videos[index].nomeExercicio),
                                           dia: dia,
                                           //   isLastVideo: islast,
@@ -362,6 +367,10 @@ class _VideoManegerState extends State<VideoManeger> {
               ),
               onPressed: unableStopButtun
                   ? () async {
+                      delayTimer!.cancel();
+                      /* if (delayVideo == false) {
+                        circulatTimerControl.start();
+                      }*/
                       circulatTimerControl!.pause();
                       setState(() {
                         unableStopButtun = false;
@@ -378,8 +387,12 @@ class _VideoManegerState extends State<VideoManeger> {
                             //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                             {
                               'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
-                                  circulatTimerControl.getTime(),
+                                  delayVideo
+                                      ? circulatTimerControl!.getTime()
+                                      : videos[index].tempo
                             });
+                        print(
+                            'KILL: ${delayVideo ? circulatTimerControl!.getTime() : videos[index].tempo}');
                       } catch (e) {
                         showDialog(
                           context: context,
@@ -442,6 +455,7 @@ class _VideoManegerState extends State<VideoManeger> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => VideoDirEsq(
+                                    delay: videos[index].delay,
                                     //    ValueKey(videos[index].nomeExercicio),
                                     dia: dia,
                                     dontShowbuttun: videos[index].isLast,
@@ -481,7 +495,7 @@ class _VideoManegerState extends State<VideoManeger> {
                       createVideo();
                       //   circulatTimerControl.start();
 
-                      //setState(() {});
+                      //setState(() {});*/
                     }
                   : null),
 

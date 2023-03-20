@@ -9,6 +9,7 @@ import 'package:strong_core/MODELS/cartao_bloqueado.dart';
 
 import 'package:strong_core/MODELS/lista_semanas.dart';
 import 'package:strong_core/SCREENS/auxiliar_corpo_humano.dart';
+import 'package:strong_core/RELATORIO/relatorio.dart';
 
 import '../MODELS/user_preferences.dart';
 import '../main.dart';
@@ -149,100 +150,107 @@ class buildSemanas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(241, 186, 30, 22),
+    return RefreshIndicator(
+      onRefresh: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Semanas(),
+          )),
+      child: Scaffold(
+        drawer: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(241, 186, 30, 22),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 6,
+                    ),
+                    user?.photoURL != null
+                        ? CircleAvatar(
+                            radius: 45,
+                            backgroundImage: NetworkImage(user!.photoURL!),
+                          )
+                        : Container(
+                            color: Colors.pink,
+                          )
+                  ],
+                ),
               ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 6,
-                  ),
-                  user?.photoURL != null
-                      ? CircleAvatar(
-                          radius: 45,
-                          backgroundImage: NetworkImage(user!.photoURL!),
-                        )
-                      : Container(
-                          color: Colors.pink,
-                        )
-                ],
+              ListTile(
+                leading: Icon(Icons.question_mark),
+                title: Text('Ajuda'),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
               ),
-            ),
-            ListTile(
-              leading: Icon(Icons.question_mark),
-              title: Text('Ajuda'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: const Text('Corpo HUmano'),
-              onTap: () async {
-                await Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (constect) => AuxCorpoHumano(numSem: '10'),
-                      settings: const RouteSettings()),
-                );
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: const Text('Sair'),
-              onTap: () async {
-                await UserPreferences.setBool(false);
-                //   logOut();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (constect) => MyHomePage(estadoAcesso!),
-                      settings: const RouteSettings()),
-                );
-                // Update the state of the app.
-                // ...
-              },
-            ),
-          ],
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: const Text('RELATÓRIO'),
+                onTap: () async {
+                  await Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (constect) => Relatorio(videoSem1: videos1),
+                        settings: const RouteSettings()),
+                  );
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: const Text('Sair'),
+                onTap: () async {
+                  await UserPreferences.setBool(false);
+                  //   logOut();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (constect) => MyHomePage(estadoAcesso!),
+                        settings: const RouteSettings()),
+                  );
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+            ],
+          ),
         ),
-      ),
-      appBar: AppBar(
-        //   automaticallyImplyLeading: false,
+        appBar: AppBar(
+          //   automaticallyImplyLeading: false,
 
-        centerTitle: true,
-        // foregroundColor: Colors.orange,
-        backgroundColor: Colors.red[800],
-        title: const Text('Strong Core',
-            style: TextStyle(
-                fontSize: 21,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Comfortaa')),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-            children: LISTASEMANAS.map((e) {
-          // print(horario!.hour.toString());
-          //  print(horaDeInInicio['HORARIO_PRIMEIRO_ACESSO']);
-          // print(horario == null ? horario!.day.toString() : 'null');
+          centerTitle: true,
+          // foregroundColor: Colors.orange,
+          backgroundColor: Colors.red[800],
+          title: const Text('Strong Core',
+              style: TextStyle(
+                  fontSize: 21,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Comfortaa')),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+              children: LISTASEMANAS.map((e) {
+            // print(horario!.hour.toString());
+            //  print(horaDeInInicio['HORARIO_PRIMEIRO_ACESSO']);
+            // print(horario == null ? horario!.day.toString() : 'null');
 
-          return CartaoSemanas(
-            vd: e.Conteudo,
-            cor: e.backGroundColor,
-            title: e.titulo,
-            numeroSemana: e.numeroSem,
-          );
-        }).toList()),
+            return CartaoSemanas(
+              vd: e.Conteudo,
+              cor: e.backGroundColor,
+              title: e.titulo,
+              numeroSemana: e.numeroSem,
+            );
+          }).toList()),
+        ),
       ),
     );
   }

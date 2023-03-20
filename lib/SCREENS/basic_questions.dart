@@ -31,6 +31,8 @@ class _BasicQuestionsState extends State<BasicQuestions> {
   DateTime? curretnDate;
   CollectionReference basicQuestionsData =
       FirebaseFirestore.instance.collection('user');
+
+  var _pesoKey;
   @override
   Widget build(BuildContext context) {
     final InformationForms = Provider.of<Information>(context);
@@ -40,8 +42,8 @@ class _BasicQuestionsState extends State<BasicQuestions> {
         showTitleActions: true,
         locale: LocaleType.pt,
         currentTime: curretnDate,
-        minTime: DateTime(1930),
-        maxTime: DateTime(2023),
+        minTime: DateTime(1970),
+        maxTime: DateTime(2005),
         theme: DatePickerTheme(
           doneStyle: TextStyle(decorationColor: Colors.red),
         ),
@@ -136,6 +138,14 @@ class _BasicQuestionsState extends State<BasicQuestions> {
               Container(
                 width: 130,
                 child: TextFormField(
+                  key: _pesoKey,
+                  validator: (value) {
+                    if (value!.length > 2) {
+                      return 'cccccc';
+                    }
+                  },
+                  //minLines: 2,
+                  maxLength: 3,
                   onChanged: ((value) {
                     InformationForms.setPeso(value);
                   }),
@@ -155,6 +165,7 @@ class _BasicQuestionsState extends State<BasicQuestions> {
                 width: 130,
                 //margin: const EdgeInsets.only(right: 150),
                 child: TextFormField(
+                  maxLength: 3,
                   onChanged: (value) {
                     InformationForms.setAltura(value);
                   },

@@ -17,9 +17,13 @@ class VideoDirEsq extends VideoScreen {
   int? tempoEspera;
   String numSemana;
   int dia;
+  @override
   bool showButtun = false;
+
+  int delay;
   VideoDirEsq(
       {this.tempoEspera,
+      required this.delay,
       required this.dia,
       this.dontShowbuttun,
       required this.showButtun,
@@ -31,6 +35,7 @@ class VideoDirEsq extends VideoScreen {
       required String nomeExercicio,
       required int loop})
       : super(
+          delay: delay,
           numSemana: numSemana,
           tempo: tempo,
           url: url,
@@ -57,49 +62,29 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
   _VideoDirEsqState(
       this.tempo, this.url, this.nomeExercicio, this.loop, this.flag);
   bool delayVideo = false;
-  Timer? timerDelay;
+  Timer? delayTimer;
   void createVideo() {
-    /*   _controller = VideoPlayerController.asset(
-      url,
-    )
-      ..setVolume(0)
-      ..setLooping(true);
-
-    _inicializeVideoPlayer = _controller!.initialize().then(
-      (value) {
-        setState(() {});
-        _controller!.play();
-      },
-    );*/
-
+    delayVideo = false;
     _controller = VideoPlayerController.asset(
       url,
     )
-      ..addListener(
-        () {
-          setState(() {});
-        },
-      )
+      ..addListener(() {
+        if (mounted) setState(() {});
+      })
       ..setVolume(1)
       ..setLooping(true);
     _inicializeVideoPlayer = _controller!.initialize().then(
       (value) {
-        setState(() {});
+        if (mounted) setState(() {});
         _controller!.play();
+        delayTimer = Timer(
+          Duration(seconds: widget.delay),
+          () {
+            delayVideo = true;
+            _circulatTimerControl.start();
+          },
+        );
         //    setState(() {});
-      },
-    );
-
-    timerDelay = Timer(Duration(seconds: 4), () {
-      delayVideo = true;
-      _circulatTimerControl!.start();
-    });
-
-    Timer(
-      const Duration(seconds: 3),
-      () {
-        delayVideo = true;
-        _circulatTimerControl.start();
       },
     );
   }
@@ -244,8 +229,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                               autoStart: delayVideo,
                               duration: widget.tempo,
                               initialDuration: 0,
-                              controller:
-                                  delayVideo ? null : _circulatTimerControl,
+                              controller: _circulatTimerControl,
                               width: MediaQuery.of(context).size.width / 8.8,
                               height: MediaQuery.of(context).size.height / 8.8,
                               ringColor: Colors.grey[300]!,
@@ -278,7 +262,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                   _controller!.play();
                                   // Add Your Code here.
                                 });
-    */
+        */
                                 //   _controller!.setLooping(true);
                                 print('sssssss');
                                 //circulatTimerControl.reset()
@@ -296,7 +280,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                     .collection('user')
                                     .doc(user!.uid)
                                     .collection('exercicios');
-    
+        
                                 await documentReference.add(
                                     //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
                                     {
@@ -366,7 +350,9 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
               ),
             ),
             onPressed: () async {
-              _circulatTimerControl!.pause();
+              delayTimer!.cancel();
+              _circulatTimerControl.pause();
+
               _controller!.pause();
 
               var documentReference =
