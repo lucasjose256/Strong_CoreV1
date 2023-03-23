@@ -166,6 +166,7 @@ class _TelaEsperaState extends State<TelaEspera> {
                     ),
                     child: Text(
                       'P U L A R',
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
           ],

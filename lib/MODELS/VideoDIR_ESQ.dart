@@ -245,7 +245,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
                               textFormat: CountdownTextFormat.S,
-                              isReverse: true,
+                              //   isReverse: true,
                               isReverseAnimation: true,
                               isTimerTextShown: true,
                               // autoStart: true,
@@ -292,12 +292,14 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                     .collection('user')
                                     .doc(user!.uid);
 
-                                documentReference.update(
-                                    //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
-                                    {
-                                      'SEM_${widget.numSemana}_DIA${widget.dia + 1}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
-                                          _circulatTimerControl!.getTime()
-                                    });
+                                if (widget.dia < 3) {
+                                  documentReference.update(
+                                      //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                                      {
+                                        'SEM_${widget.numSemana}_DIA${widget.dia + 1}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                                            _circulatTimerControl!.getTime()
+                                      });
+                                }
                                 //                            if(eUltimo){}
                                 _controller!.dispose();
                                 if (widget.dontShowbuttun == true &&
@@ -358,12 +360,14 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
               var documentReference =
                   FirebaseFirestore.instance.collection('user').doc(user!.uid);
 
-              documentReference.update(
-                  //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
-                  {
-                    'SEM_${widget.numSemana}_DIA${widget.dia + 1}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
-                        _circulatTimerControl!.getTime()
-                  });
+              if (widget.dia < 3) {
+                documentReference.update(
+                    //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                    {
+                      'SEM_${widget.numSemana}_DIA${widget.dia + 1}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                          delayVideo ? _circulatTimerControl!.getTime() : 0
+                    });
+              }
               _controller!.dispose();
               if (widget.dontShowbuttun == true && widget.showButtun == true) {
                 Navigator.pop(

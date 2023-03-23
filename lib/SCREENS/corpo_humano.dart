@@ -163,7 +163,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         child: costasInferior4 = AddTodoButton(
                           number: '4',
                           numberId: '',
-                          nomeMembro: 'na região COSTAS INFERIOR',
+                          nomeMembro: 'na região LOMBAR',
                         )),
                     Positioned(
                         right: 151,
@@ -387,20 +387,20 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                         });
 
                         await firebase.set({
-                          'Nome': infoForms.nome,
-                          'Sexo': infoForms.sexo,
-                          'Peso': infoForms.peso,
-                          'Altura': infoForms.altura,
-                          'Data de Nascimento': infoForms.dataNascimento,
-                          'Posto': infoForms.posto,
-                          'Cargo': infoForms.cargo,
-                          'DataAdmissao': infoForms.dataAdmissao,
-                          'P1_exercicio_na_semana': infoForms.question1,
-                          'P2_intrucao_exercicio': infoForms.question2,
-                          'P3_orientacoes_exercicio': infoForms.question3,
-                          'P4_Lista_problemas_saude': dores,
-                          'P5_dormir_suficiente': infoForms.question4,
-                          'P6_estresse': infoForms.question5,
+                          'forms_Nome': infoForms.nome,
+                          'forms_Sexo': infoForms.sexo,
+                          'forms_Peso': infoForms.peso,
+                          'forms_Altura': infoForms.altura,
+                          'forms_Data de Nascimento': infoForms.dataNascimento,
+                          'forms_Posto': infoForms.posto,
+                          'forms_Cargo': infoForms.cargo,
+                          'forms_DataAdmissao': infoForms.dataAdmissao,
+                          'forms_P1_exercicio_na_semana': infoForms.question1,
+                          'forms_P2_intrucao_exercicio': infoForms.question2,
+                          'forms_P3_orientacoes_exercicio': infoForms.question3,
+                          'forms_P4_Lista_problemas_saude': dores,
+                          'forms_P5_dormir_suficiente': infoForms.question4,
+                          'forms_P6_estresse': infoForms.question5,
                           ////////////////////////
                           'Pescoço0_SEM_0': pescoco0.graudaDor,
                           'Pescoço0_SEM_4': '',
@@ -742,7 +742,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
 
                           'SEM_3_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DOS CALCANHARES1':
                               100,
-                          'SEM_3_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DSO CALCANHARES2':
+                          'SEM_3_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DOS CALCANHARES2':
                               100,
                           'SEM_3_DIA2_EXERCICIO_PRANCHA DORSAL COM ELEVAÇÃO DOS CALCANHARES3':
                               100,
@@ -1521,9 +1521,9 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                               100,
                           'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
                               100,
-                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA3':
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA3':
                               100,
-                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA4':
+                          'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA4':
                               100,
                           'SEM_9_DIA1_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA5':
                               100,
@@ -1651,9 +1651,9 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                               100,
                           'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA2':
                               100,
-                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA3':
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA3':
                               100,
-                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESUQERDA4':
+                          'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA4':
                               100,
                           'SEM_9_DIA3_EXERCICIO_PRANCHA LATERAL COM ELEVAÇÃO DO BRAÇO E PERNA ESQUERDA5':
                               100,

@@ -146,7 +146,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         child: costasInferior4 = AddTodoButton(
                           number: '4',
                           numberId: '',
-                          nomeMembro: 'na região DAS COSTAS INFERIOR',
+                          nomeMembro: 'na região LOMBAR',
                         )),
                     Positioned(
                         right: 151,

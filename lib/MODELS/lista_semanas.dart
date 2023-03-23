@@ -4,15 +4,15 @@ import 'package:strong_core/MODELS/VideoScreen.dart';
 import 'package:strong_core/MODELS/info_semanas.dart';
 
 final LISTASEMANAS = [
-  InfoSemanas(Color.fromARGB(255, 102, 132, 111), 'SEMANA 1', videos1, 1),
-  InfoSemanas(Color.fromARGB(255, 36, 108, 14), 'SEMANA 2', videos2, 2),
-  InfoSemanas(Color.fromARGB(255, 109, 173, 41), 'SEMANA 3', videos3, 3),
-  InfoSemanas(Color.fromARGB(255, 205, 208, 60), 'SEMANA 4', videos4, 4),
-  InfoSemanas(Color.fromARGB(255, 193, 130, 41), 'SEMANA 5', videos5, 5),
-  InfoSemanas(Color.fromARGB(255, 183, 82, 82), 'SEMANA 6', videos6, 6),
-  InfoSemanas(Color.fromARGB(255, 187, 47, 47), 'SEMANA 7', videos7, 7),
-  InfoSemanas(Color.fromARGB(255, 99, 29, 93), 'SEMANA 8', videos8, 8),
-  InfoSemanas(Color.fromARGB(255, 87, 26, 54), 'SEMANA 9', videos9, 9),
+  InfoSemanas(Color.fromARGB(255, 102, 132, 111), 'SEMANA 1', videos1, 1, 410),
+  InfoSemanas(Color.fromARGB(255, 36, 108, 14), 'SEMANA 2', videos2, 2, 410),
+  InfoSemanas(Color.fromARGB(255, 109, 173, 41), 'SEMANA 3', videos3, 3, 500),
+  InfoSemanas(Color.fromARGB(255, 205, 208, 60), 'SEMANA 4', videos4, 4, 500),
+  InfoSemanas(Color.fromARGB(255, 193, 130, 41), 'SEMANA 5', videos5, 5, 410),
+  InfoSemanas(Color.fromARGB(255, 183, 82, 82), 'SEMANA 6', videos6, 6, 410),
+  InfoSemanas(Color.fromARGB(255, 187, 47, 47), 'SEMANA 7', videos7, 7, 500),
+  InfoSemanas(Color.fromARGB(255, 99, 29, 93), 'SEMANA 8', videos8, 8, 500),
+  InfoSemanas(Color.fromARGB(255, 74, 28, 49), 'SEMANA 9', videos9, 9, 500),
 
   /*
   InfoSemanas(Color.fromARGB(255, 220, 151, 49), 'SEMANA 1', videos, 1),
@@ -352,7 +352,7 @@ List<VideoScreen> videos9 = [
       delay: 2,
       urlDE: 'Assets/video/SEM9/S9_ponte_dorsal_elevacao_da_pernaD.mp4',
       nomeExercicioDE: 'PRANCHA DORSAL COM ELEVAÇÃO DA PERNA DIREITA',
-      nomeSemLado: 'PRANCHA COM ELEVAÇÃO DA PERNA',
+      nomeSemLado: 'PRANCHA DORSAL COM ELEVAÇÃO DA PERNA',
       numSemana: '9',
       tempo: 40,
       url: 'Assets/video/SEM9/S9_ponte_c_elevacao_da_pernaE.mp4',

@@ -145,11 +145,14 @@ class _BasicQuestionsState extends State<BasicQuestions> {
                     }
                   },
                   //minLines: 2,
-                  maxLength: 3,
+                  //  maxLength: 3,
                   onChanged: ((value) {
                     InformationForms.setPeso(value);
                   }),
-                  keyboardType: TextInputType.datetime,
+                  inputFormatters: [
+                    new LengthLimitingTextInputFormatter(3),
+                  ],
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     focusColor: Colors.red,
                     labelText: 'Peso(Kg)',
@@ -165,11 +168,14 @@ class _BasicQuestionsState extends State<BasicQuestions> {
                 width: 130,
                 //margin: const EdgeInsets.only(right: 150),
                 child: TextFormField(
-                  maxLength: 3,
+                  //  maxLength: 3,
                   onChanged: (value) {
                     InformationForms.setAltura(value);
                   },
-                  keyboardType: TextInputType.datetime,
+                  inputFormatters: [
+                    new LengthLimitingTextInputFormatter(3),
+                  ],
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     focusColor: Colors.red,
                     labelText: 'Altura(cm)',

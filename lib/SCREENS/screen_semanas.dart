@@ -157,74 +157,70 @@ class buildSemanas extends StatelessWidget {
             builder: (context) => Semanas(),
           )),
       child: Scaffold(
-        drawer: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(241, 186, 30, 22),
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 6,
-                    ),
-                    user?.photoURL != null
-                        ? CircleAvatar(
-                            radius: 45,
-                            backgroundImage: NetworkImage(user!.photoURL!),
-                          )
-                        : Container(
-                            color: Colors.pink,
-                          )
-                  ],
-                ),
+        /* drawer: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(241, 186, 30, 22),
               ),
-              ListTile(
-                leading: Icon(Icons.question_mark),
-                title: Text('Ajuda'),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 6,
+                  ),
+                  user?.photoURL != null
+                      ? CircleAvatar(
+                          radius: 45,
+                          backgroundImage: NetworkImage(user!.photoURL!),
+                        )
+                      : Container(
+                          color: Colors.pink,
+                        )
+                ],
               ),
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: const Text('RELATÓRIO'),
-                onTap: () async {
-                  await Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (constect) => Relatorio(videoSem1: videos1),
-                        settings: const RouteSettings()),
-                  );
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.exit_to_app),
-                title: const Text('Sair'),
-                onTap: () async {
-                  await UserPreferences.setBool(false);
-                  //   logOut();
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (constect) => MyHomePage(estadoAcesso!),
-                        settings: const RouteSettings()),
-                  );
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-            ],
-          ),
-        ),
+            ),
+            ListTile(
+              leading: Icon(Icons.question_mark),
+              title: Text('Ajuda'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: const Text('RELATÓRIO'),
+              onTap: () async {
+                await Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (constect) => Relatorio(videoSem1: videos1),
+                      settings: const RouteSettings()),
+                );
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: const Text('Sair'),
+              onTap: () async {
+                await UserPreferences.setBool(false);
+                //   logOut();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (constect) => MyHomePage(estadoAcesso!),
+                      settings: const RouteSettings()),
+                );
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
+        ),*/
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           //   automaticallyImplyLeading: false,
 
           centerTitle: true,
@@ -248,6 +244,7 @@ class buildSemanas extends StatelessWidget {
               cor: e.backGroundColor,
               title: e.titulo,
               numeroSemana: e.numeroSem,
+              height: e.height,
             );
           }).toList()),
         ),

@@ -68,11 +68,15 @@ dependencies:
   intl: ^0.17.0
   audioplayers: ^0.20.1
   multi_select_flutter: ^4.1.3
-flutter_native_splash:
-   color: "#eb3e31"
-   image: "Assets/images/ball.png"
-   android: true
-   ios: true
+
+ 
+flutter_icons:  
+  image_path: "Assets/images/logo.png"
+  android: "launcher_icon"
+  adaptative_icon_background: "FFFFF"
+  adaptative_icon_foreground: "Assets/images/logo.png"
+
+ 
 
    # plugins para a UI
    
@@ -121,8 +125,7 @@ flutter:
   - Assets/video/SEM7/
   - Assets/video/SEM8/
   - Assets/video/SEM9/
-  - Assets/songs/
-
+  - Assets/images/logo.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -20,12 +20,14 @@ class CartaoSemanas extends StatefulWidget {
   final String title;
   final int numeroSemana;
   final List<VideoScreen> vd;
+  final double height;
   CartaoSemanas(
       {Key? key,
       required this.vd,
       required this.cor,
       required this.title,
-      required this.numeroSemana})
+      required this.numeroSemana,
+      required this.height})
       : super(key: key);
   _CartaoSemanasState createState() => _CartaoSemanasState(vd);
 }
@@ -59,15 +61,8 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
               as Timestamp)
           .toDate();
     });
-    print('chocolater');
-    print(horario!.year);
   }
 
-  String TapToExpandIt = 'SEMANA 4';
-  String Sentence = 'EXERCICIOS DA SEMANA:\n'
-      '3X PRANCHA(30s)\n'
-      '3X ABDOMINAL(30s)\n'
-      '3X FLEXÃO(30s)';
   bool isExpanded = true;
   bool isExpanded2 = true;
 //flags para checkbox
@@ -134,7 +129,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
               vertical: 20,
             ),
             padding: EdgeInsets.all(20),
-            height: isExpanded ? 100 : 500,
+            height: isExpanded ? 100 : widget.height,
             curve: Curves.fastLinearToSlowEaseIn,
             duration: Duration(milliseconds: 1200),
             decoration: BoxDecoration(
@@ -399,7 +394,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                   .update({
                                 '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana + 1}':
                                     horario = DateTime.now().add(Duration(
-                                  seconds: 4, /*days: 2*/
+                                  hours: 24, /*days: 2*/
                                 )),
                               });
                             } else {
@@ -410,7 +405,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                 //verificar se o update apaga os dados dos formularios
                                 '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}':
                                     horario = DateTime.now().add(const Duration(
-                                  seconds: 4, /*days: 2*/
+                                  hours: 24, /*days: 2*/
                                 )),
                               });
                             }

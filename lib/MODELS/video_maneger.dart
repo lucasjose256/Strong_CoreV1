@@ -231,7 +231,7 @@ class _VideoManegerState extends State<VideoManeger> {
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                           textFormat: CountdownTextFormat.S,
-                          isReverse: true,
+                          // isReverse: true,
                           isReverseAnimation: true,
                           isTimerTextShown: true,
                           autoStart: delayVideo,
@@ -383,14 +383,16 @@ class _VideoManegerState extends State<VideoManeger> {
                           .collection('user')
                           .doc(user!.uid);
                       try {
-                        documentReference.update(
-                            //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
-                            {
-                              'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
-                                  delayVideo
-                                      ? circulatTimerControl!.getTime()
-                                      : videos[index].tempo
-                            });
+                        if (dia < 3) {
+                          documentReference.update(
+                              //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                              {
+                                'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
+                                    delayVideo
+                                        ? circulatTimerControl!.getTime()
+                                        : 0
+                              });
+                        }
                         print(
                             'KILL: ${delayVideo ? circulatTimerControl!.getTime() : videos[index].tempo}');
                       } catch (e) {
