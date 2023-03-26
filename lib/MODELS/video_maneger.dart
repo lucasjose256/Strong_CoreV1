@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:strong_core/MODELS/lista_semanas.dart';
 import 'package:strong_core/MODELS/user_preferences.dart';
 import 'package:strong_core/SCREENS/screen_semanas.dart';
@@ -39,15 +41,25 @@ class _VideoManegerState extends State<VideoManeger> {
   List<VideoScreen> videos;
   late CountDownController circulatTimerControl = CountDownController();
   bool delayVideo = false;
+
+  bool isDeviceConnected = false;
+
+  late StreamSubscription subscription;
+
+  var isAlertSet = false;
+
   _VideoManegerState(this.videos);
+
   Timer? delayTimer;
   void createVideo() async {
     delayVideo = false;
     _controller = VideoPlayerController.asset(
       videos[index].url,
     )
-      ..addListener(() {
-        if (mounted) setState(() {});
+      ..addListener(() async {
+        if (mounted) {
+          setState(() {});
+        }
       })
       ..setVolume(1)
       ..setLooping(true);
@@ -75,8 +87,25 @@ class _VideoManegerState extends State<VideoManeger> {
   @override
   void initState() {
     super.initState();
+    getConnectivity();
     createVideo();
   }
+
+  getConnectivity() =>
+      subscription = Connectivity().onConnectivityChanged.listen((event) async {
+        isDeviceConnected = await InternetConnectionChecker().hasConnection;
+        if (!isDeviceConnected && isAlertSet == false) {
+          circulatTimerControl.pause();
+          _controller.pause();
+          showDialgBox();
+          setState(() {
+            isAlertSet = true;
+          });
+        } else {
+          circulatTimerControl.resume();
+          _controller.play();
+        }
+      });
 
   @override
   void dispose() {
@@ -238,30 +267,41 @@ class _VideoManegerState extends State<VideoManeger> {
                           onStart: () async {},
                           onComplete: () async {
                             circulatTimerControl!.pause();
+                            _controller.pause();
                             /*   setState(() {
                               delayVideo = false;
                             });*/
 
-                            var documentReference = FirebaseFirestore.instance
-                                .collection('user')
-                                .doc(user!.uid);
-                            if (dia < 3) {
-                              documentReference.update(
-                                  //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
-                                  {
-                                    'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
-                                        delayVideo
-                                            ? circulatTimerControl!.getTime()
-                                            : videos[index].tempo
-                                  });
-                              print(
-                                  'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}');
-                            }
+                            var connectivityResult =
+                                await (Connectivity().checkConnectivity());
+                            if (connectivityResult == ConnectivityResult.none) {
+                              showDialgBox();
+                            } else if (connectivityResult ==
+                                    ConnectivityResult.wifi ||
+                                connectivityResult ==
+                                    ConnectivityResult.mobile) {
+                              // I am connected to a mobile network.
 
-                            _controller.dispose();
-                            //  _controller!.play();
+                              var documentReference = FirebaseFirestore.instance
+                                  .collection('user')
+                                  .doc(user!.uid);
+                              if (dia < 3) {
+                                documentReference.update(
+                                    //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                                    {
+                                      'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
+                                          delayVideo
+                                              ? circulatTimerControl!.getTime()
+                                              : videos[index].tempo
+                                    });
+                                print(
+                                    'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}');
+                              }
 
-                            /*  if (mounted) {
+                              _controller.dispose();
+                              //  _controller!.play();
+
+                              /*  if (mounted) {
                 _circulatTimerControl!.pause();
                 DocumentReference documentReference =
                     FirebaseFirestore.instance.collection('user').doc(user!.uid);
@@ -273,74 +313,76 @@ class _VideoManegerState extends State<VideoManeger> {
                           _circulatTimerControl!.getTime()
                     });
     */
-                            if (flag == videos[index].loop &&
-                                videos[index].nomeExercicioDE == null) {
-                              //AQUI TERMINA O EXRCICIO
-                              if (videos[index].isLast == true &&
-                                  flag == videos[index].loop) {
-                                Navigator.pop(context);
+                              if (flag == videos[index].loop &&
+                                  videos[index].nomeExercicioDE == null) {
+                                //AQUI TERMINA O EXRCICIO
+                                if (videos[index].isLast == true &&
+                                    flag == videos[index].loop) {
+                                  Navigator.pop(context);
+                                } else {
+                                  //tempo longo
+                                  flag += (await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => TelaEspera(
+                                            tempoEspera: tempoProxExercicio,
+                                            istoShowButtun: true),
+                                      )))!;
+                                }
                               } else {
-                                //tempo longo
                                 flag += (await Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => TelaEspera(
-                                          tempoEspera: tempoProxExercicio,
-                                          istoShowButtun: true),
+                                      //tempo curto
+                                      builder: (context) => TelaEspera(),
                                     )))!;
-                              }
-                            } else {
-                              flag += (await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    //tempo curto
-                                    builder: (context) => TelaEspera(),
-                                  )))!;
-                              if (videos[index].nomeExercicioDE != null) {
-                                if (flag == videos[index].loop + 1) {
-                                  tempoEspera = tempoProxExercicio;
-                                  showButtun = true;
-                                  islast = true;
+                                if (videos[index].nomeExercicioDE != null) {
+                                  if (flag == videos[index].loop + 1) {
+                                    tempoEspera = tempoProxExercicio;
+                                    showButtun = true;
+                                    islast = true;
+                                  }
+                                  await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => VideoDirEsq(
+                                            delay: videos[index].delay,
+                                            //   ValueKey(videos[index].nomeExercicio),
+                                            dia: dia,
+                                            //   isLastVideo: islast,
+                                            dontShowbuttun:
+                                                videos[index].isLast,
+                                            showButtun: showButtun,
+                                            numSemana: videos[index].numSemana,
+                                            tempoEspera: tempoEspera,
+                                            flag: flag - 1,
+                                            tempo: videos[index].tempo,
+                                            loop: videos[index].loop,
+                                            nomeExercicio:
+                                                videos[index].nomeExercicioDE!,
+                                            url: videos[index].urlDE!),
+                                      ));
                                 }
-                                await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => VideoDirEsq(
-                                          delay: videos[index].delay,
-                                          //   ValueKey(videos[index].nomeExercicio),
-                                          dia: dia,
-                                          //   isLastVideo: islast,
-                                          dontShowbuttun: videos[index].isLast,
-                                          showButtun: showButtun,
-                                          numSemana: videos[index].numSemana,
-                                          tempoEspera: tempoEspera,
-                                          flag: flag - 1,
-                                          tempo: videos[index].tempo,
-                                          loop: videos[index].loop,
-                                          nomeExercicio:
-                                              videos[index].nomeExercicioDE!,
-                                          url: videos[index].urlDE!),
-                                    ));
                               }
-                            }
 
-                            if (flag == videos[index].loop + 1) {
-                              //  Navigator.of(context).pop();
-                              if (index == videos.length - 1) {
-                                Navigator.pop(context);
-                              } else {
-                                flag = 1;
-                                tempoEspera = 30;
-                                showButtun = false;
-                                islast = false;
-                                if (mounted) {
-                                  setState(() {
-                                    index++;
-                                  });
+                              if (flag == videos[index].loop + 1) {
+                                //  Navigator.of(context).pop();
+                                if (index == videos.length - 1) {
+                                  Navigator.pop(context);
+                                } else {
+                                  flag = 1;
+                                  tempoEspera = 30;
+                                  showButtun = false;
+                                  islast = false;
+                                  if (mounted) {
+                                    setState(() {
+                                      index++;
+                                    });
+                                  }
                                 }
                               }
+                              createVideo();
                             }
-                            createVideo();
                             // circulatTimerControl.start();
                           },
                           onChange: (String timeStamp) async {}),
@@ -376,45 +418,52 @@ class _VideoManegerState extends State<VideoManeger> {
                         unableStopButtun = false;
                         //     delayVideo = false;
                       });
-
-                      // _controller!.removeListener(listener);
-                      _controller.dispose();
-                      var documentReference = FirebaseFirestore.instance
-                          .collection('user')
-                          .doc(user!.uid);
-                      try {
-                        if (dia < 3) {
-                          documentReference.update(
-                              //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
-                              {
-                                'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
-                                    delayVideo
-                                        ? circulatTimerControl!.getTime()
-                                        : 0
-                              });
+                      var connectivityResult =
+                          await (Connectivity().checkConnectivity());
+                      if (connectivityResult == ConnectivityResult.none) {
+                        showDialgBox();
+                      } else if (connectivityResult ==
+                              ConnectivityResult.wifi ||
+                          connectivityResult == ConnectivityResult.mobile) {
+                        // _controller!.removeListener(listener);
+                        _controller.dispose();
+                        var documentReference = FirebaseFirestore.instance
+                            .collection('user')
+                            .doc(user!.uid);
+                        try {
+                          if (dia < 3) {
+                            documentReference.update(
+                                //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                                {
+                                  'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
+                                      delayVideo
+                                          ? circulatTimerControl!.getTime()
+                                          : 0
+                                });
+                          }
+                          print(
+                              'KILL: ${delayVideo ? circulatTimerControl!.getTime() : videos[index].tempo}');
+                        } catch (e) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              actions: [
+                                TextButton(
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(),
+                                    child: Text('Ok'))
+                              ],
+                              title: Text('Anamnse'),
+                              content: Text(e.toString()),
+                            ),
+                          );
                         }
                         print(
-                            'KILL: ${delayVideo ? circulatTimerControl!.getTime() : videos[index].tempo}');
-                      } catch (e) {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            actions: [
-                              TextButton(
-                                  onPressed: () => Navigator.of(context).pop(),
-                                  child: Text('Ok'))
-                            ],
-                            title: Text('Anamnse'),
-                            content: Text(e.toString()),
-                          ),
-                        );
-                      }
-                      print(
-                          'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}');
+                            'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}');
 
-                      //  _controller!.play();
+                        //  _controller!.play();
 
-                      /*  if (mounted) {
+                        /*  if (mounted) {
                 _circulatTimerControl!.pause();
                 DocumentReference documentReference =
                     FirebaseFirestore.instance.collection('user').doc(user!.uid);
@@ -426,78 +475,79 @@ class _VideoManegerState extends State<VideoManeger> {
                           _circulatTimerControl!.getTime()
                     });
     */
-                      if (flag == videos[index].loop &&
-                          videos[index].nomeExercicioDE == null) {
-                        //AQUI TERMINA O EXRCICIO
-                        if (videos[index].isLast == true &&
-                            flag == videos[index].loop) {
-                          Navigator.pop(context);
+                        if (flag == videos[index].loop &&
+                            videos[index].nomeExercicioDE == null) {
+                          //AQUI TERMINA O EXRCICIO
+                          if (videos[index].isLast == true &&
+                              flag == videos[index].loop) {
+                            Navigator.pop(context);
+                          } else {
+                            flag += (await Navigator.push(
+                                context, //tempo longo
+                                MaterialPageRoute(
+                                  builder: (context) => TelaEspera(
+                                      tempoEspera: tempoProxExercicio,
+                                      istoShowButtun: true),
+                                )))!;
+                          }
                         } else {
                           flag += (await Navigator.push(
-                              context, //tempo longo
-                              MaterialPageRoute(
-                                builder: (context) => TelaEspera(
-                                    tempoEspera: tempoProxExercicio,
-                                    istoShowButtun: true),
-                              )))!;
-                        }
-                      } else {
-                        flag += (await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => TelaEspera(),
-                            )))!;
-                        if (videos[index].nomeExercicioDE != null) {
-                          if (flag == videos[index].loop + 1) {
-                            tempoEspera = 45;
-                            showButtun = true;
-                            islast = true;
-                          }
-                          await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => VideoDirEsq(
-                                    delay: videos[index].delay,
-                                    //    ValueKey(videos[index].nomeExercicio),
-                                    dia: dia,
-                                    dontShowbuttun: videos[index].isLast,
-                                    showButtun: showButtun,
-                                    numSemana: videos[index].numSemana,
-                                    tempoEspera: tempoEspera,
-                                    flag: flag - 1,
-                                    tempo: videos[index].tempo,
-                                    loop: videos[index].loop,
-                                    nomeExercicio:
-                                        videos[index].nomeExercicioDE!,
-                                    url: videos[index].urlDE!),
-                              ));
+                                builder: (context) => TelaEspera(),
+                              )))!;
+                          if (videos[index].nomeExercicioDE != null) {
+                            if (flag == videos[index].loop + 1) {
+                              tempoEspera = 45;
+                              showButtun = true;
+                              islast = true;
+                            }
+                            await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => VideoDirEsq(
+                                      delay: videos[index].delay,
+                                      //    ValueKey(videos[index].nomeExercicio),
+                                      dia: dia,
+                                      dontShowbuttun: videos[index].isLast,
+                                      showButtun: showButtun,
+                                      numSemana: videos[index].numSemana,
+                                      tempoEspera: tempoEspera,
+                                      flag: flag - 1,
+                                      tempo: videos[index].tempo,
+                                      loop: videos[index].loop,
+                                      nomeExercicio:
+                                          videos[index].nomeExercicioDE!,
+                                      url: videos[index].urlDE!),
+                                ));
+                          }
                         }
-                      }
 
-                      if (flag == videos[index].loop + 1) {
-                        //  Navigator.of(context).pop();
-                        /*if (index == videos.length - 1) {
+                        if (flag == videos[index].loop + 1) {
+                          //  Navigator.of(context).pop();
+                          /*if (index == videos.length - 1) {
                     Navigator.pop(context);
                   }*/
 
-                        if (index == videos.length - 1) {
-                          Navigator.pop(context);
-                        } else {
-                          flag = 1;
-                          tempoEspera = 30;
-                          showButtun = false;
-                          islast = false;
-                          if (mounted) {
-                            setState(() {
-                              index++;
-                            });
+                          if (index == videos.length - 1) {
+                            Navigator.pop(context);
+                          } else {
+                            flag = 1;
+                            tempoEspera = 30;
+                            showButtun = false;
+                            islast = false;
+                            if (mounted) {
+                              setState(() {
+                                index++;
+                              });
+                            }
                           }
                         }
-                      }
-                      createVideo();
-                      //   circulatTimerControl.start();
+                        createVideo();
+                        //   circulatTimerControl.start();
 
-                      //setState(() {});*/
+                        //setState(() {});*/
+                      }
                     }
                   : null),
 
@@ -510,4 +560,31 @@ class _VideoManegerState extends State<VideoManeger> {
       ),
     );
   }
+
+  void showDialgBox() => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          actions: [
+            TextButton(
+                onPressed: () async {
+                  Navigator.of(context).pop();
+
+                  setState(() {
+                    isAlertSet = false;
+                  });
+                  isDeviceConnected =
+                      await InternetConnectionChecker().hasConnection;
+                  if (!isDeviceConnected) {
+                    showDialgBox();
+                    setState(() {
+                      isAlertSet = true;
+                    });
+                  }
+                },
+                child: Text('Ok'))
+          ],
+          title: const Text('Sem Conexão'),
+          content: const Text('Por favor confira a sua conexão com a internet'),
+        ),
+      );
 }

@@ -338,7 +338,7 @@ This privacy policy page was created at privacypolicytemplate.net and modified/g
                                   ));
                         } on FirebaseAuthException catch (e) {
                           var message =
-                              'Algo deu Errado!\ Preencha novamente os campos';
+                              'Algo deu Errado!\ Preencha novamente os campos, ou verifique a sua conexão com a internet';
                           if (e.code == 'email-already-in-use') {
                             message =
                                 'Esse email já está sendo usado. Por favor digite outro';

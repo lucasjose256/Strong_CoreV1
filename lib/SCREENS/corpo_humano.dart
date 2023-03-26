@@ -104,7 +104,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
               height: 730,
               child: Column(
                 //        crossAxisAlignment: CrossAxisAlignment.center,
-                //mainAxisAlignment: MainAxisAlignment.center,
+                //mainAxisAlignment: MainAxisA lignment.center,
                 children: [
                   Stack(alignment: AlignmentDirectional.topCenter, children: [
                     Image.asset(
@@ -568,7 +568,7 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                               DateTime.utc(1900, 1, 9),
                           '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_9':
                               DateTime.utc(1900, 1, 9),
-                          'LUCAS': 'LUCAS',
+
                           'ATUALIZOU_ANAMNSE_SEM2': false,
                           'ATUALIZOU_ANAMNSE_SEM4': false,
                           'ATUALIZOU_ANAMNSE_SEM6': false,

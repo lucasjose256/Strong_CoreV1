@@ -410,12 +410,13 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                               });
                             }
                             setState(() {
-                              if (horario != null)
+                              if (horario != null) {
                                 tempBotao = horario!
                                         .difference(DateTime.now())
                                         .inHours
                                         .toString() +
                                     ' HORAS';
+                              }
                             });
                             print(tempBotao);
                           }

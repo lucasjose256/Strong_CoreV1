@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:date_format/date_format.dart';
 import 'package:expansion_card/expansion_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:strong_core/MODELS/card_expansivel_semana.dart';
 import 'package:strong_core/MODELS/cartao_bloqueado.dart';
@@ -32,15 +36,34 @@ class Semanas extends StatefulWidget {
 
 class _SemanasState extends State<Semanas> {
   bool? estadoAcesso;
-
+  late StreamSubscription subscription;
+  var isDeviceConnected = false;
+  var isAlertSet = false;
   @override
   void initState() {
     // TODO: implement initState
+
     super.initState();
 
     //caregaMap();
     estadoAcesso = UserPreferences.getBool() as bool ?? false;
   }
+
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
+  }
+
+  getConnectivity() =>
+      subscription = Connectivity().onConnectivityChanged.listen((event) async {
+        isDeviceConnected = await InternetConnectionChecker().hasConnection;
+        if (!isDeviceConnected && isAlertSet == false) {
+          showDialgBox();
+          setState(() {
+            isAlertSet = true;
+          });
+        }
+      });
 
   Future<void> caregaMap() async {
     final DocumentSnapshot dadosUsuario = await FirebaseFirestore.instance
@@ -74,7 +97,7 @@ class _SemanasState extends State<Semanas> {
   Widget build(BuildContext context) {
     /* 
 */
-
+    //getConnectivity();
     User? user = FirebaseAuth.instance.currentUser;
     // DateTime? horario = DateTime.utc(1500, 10, 2);
     Map mapSemanas;
@@ -136,6 +159,32 @@ class _SemanasState extends State<Semanas> {
       ),
     );
   }
+
+  void showDialgBox() => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          actions: [
+            TextButton(
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                  setState(() {
+                    isAlertSet = false;
+                  });
+                  isDeviceConnected =
+                      await InternetConnectionChecker().hasConnection;
+                  if (!isDeviceConnected) {
+                    showDialgBox();
+                    setState(() {
+                      isAlertSet = true;
+                    });
+                  }
+                },
+                child: Text('Ok'))
+          ],
+          title: const Text('Sem Conexão'),
+          content: const Text('Por favor confira a sua conexão com a internet'),
+        ),
+      );
 }
 
 class buildSemanas extends StatelessWidget {

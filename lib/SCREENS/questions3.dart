@@ -110,7 +110,6 @@ class _Question3State extends State<Question3> {
                   border: Border.all(color: Colors.black, width: 1)),
               onConfirm: (values) {
                 InformationForms.setListDores(values);
-                print(values[1]);
               },
               chipDisplay: MultiSelectChipDisplay(),
             ),
