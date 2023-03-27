@@ -7,8 +7,9 @@ import 'package:strong_core/RELATORIO/DIA_relatorio.dart';
 import 'cria_relatorio_exercicio.dart';
 
 class Relatorio extends StatefulWidget {
-  List<VideoScreen> videoSem1;
-  Relatorio({Key? key, required this.videoSem1}) : super(key: key);
+  Relatorio({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Relatorio> createState() => _RelatorioState();

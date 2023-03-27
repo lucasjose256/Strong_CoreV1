@@ -29,18 +29,13 @@ class InfoRelatorio extends StatelessWidget {
             if (e.nomeSemLado != null) {
               exercicios_por_loop_DIR_ESQ.add(Text(dadosUsuario!
                       .get(
-                        'SEM_${vds[1].numSemana}_DIA${dia.toString()}_EXERCICIO_${e.nomeExercicioDE}${loop.toString()}'
-                                ' ' ??
-                            Text(''),
-                      )
+                          'SEM_${vds[1].numSemana}_DIA${dia.toString()}_EXERCICIO_${e.nomeExercicioDE}${loop.toString()}')
                       .toString() +
                   ' '));
             }
             exercicios_por_loop.add(Text(dadosUsuario!
                     .get(
-                      'SEM_${vds[1].numSemana}_DIA${dia.toString()}_EXERCICIO_${e.nomeExercicio}${loop.toString()}' ??
-                          Text(''),
-                    )
+                        'SEM_${vds[1].numSemana}_DIA${dia.toString()}_EXERCICIO_${e.nomeExercicio}${loop.toString()}')
                     .toString() +
                 ' '));
           } catch (e) {

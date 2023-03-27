@@ -684,11 +684,11 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                           'SEM_2_DIA3_EXERCICIO_PRANCHA LATERAL ESQUERDA4': 100,
                           'SEM_2_DIA3_EXERCICIO_PRANCHA LATERAL ESQUERDA5': 100,
 
-                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA1': 100,
-                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA2': 100,
-                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA3': 100,
-                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA4': 100,
-                          'SEM_2_DIA2_EXERCICIO_PRANCHA LATERAL DIREITA5': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA LATERAL DIREITA1': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA LATERAL DIREITA2': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA LATERAL DIREITA3': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA LATERAL DIREITA4': 100,
+                          'SEM_2_DIA3_EXERCICIO_PRANCHA LATERAL DIREITA5': 100,
 
                           ///SEM 3 DIA 1
                           'SEM_3_DIA1_EXERCICIO_PRANCHA COM ELEVAÇÃO DA PERNA DIREITA1':

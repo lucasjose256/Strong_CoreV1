@@ -12,6 +12,7 @@ import 'package:strong_core/MODELS/card_expansivel_semana.dart';
 import 'package:strong_core/MODELS/cartao_bloqueado.dart';
 
 import 'package:strong_core/MODELS/lista_semanas.dart';
+import 'package:strong_core/RELATORIO/cria_relatorio_exercicio.dart';
 import 'package:strong_core/SCREENS/auxiliar_corpo_humano.dart';
 import 'package:strong_core/RELATORIO/relatorio.dart';
 
@@ -187,7 +188,7 @@ class _SemanasState extends State<Semanas> {
       );
 }
 
-class buildSemanas extends StatelessWidget {
+class buildSemanas extends StatefulWidget {
   const buildSemanas({
     Key? key,
     required this.user,
@@ -198,7 +199,13 @@ class buildSemanas extends StatelessWidget {
   final bool? estadoAcesso;
 
   @override
+  State<buildSemanas> createState() => _buildSemanasState();
+}
+
+class _buildSemanasState extends State<buildSemanas> {
+  @override
   Widget build(BuildContext context) {
+    int currentPageIndex = 0;
     return RefreshIndicator(
       onRefresh: () => Navigator.push(
           context,
@@ -206,70 +213,49 @@ class buildSemanas extends StatelessWidget {
             builder: (context) => Semanas(),
           )),
       child: Scaffold(
-        /* drawer: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Color.fromARGB(241, 186, 30, 22),
+        drawer: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(241, 186, 30, 22),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 6,
+                    ),
+                  ],
+                ),
               ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 6,
-                  ),
-                  user?.photoURL != null
-                      ? CircleAvatar(
-                          radius: 45,
-                          backgroundImage: NetworkImage(user!.photoURL!),
-                        )
-                      : Container(
-                          color: Colors.pink,
-                        )
-                ],
+              ListTile(
+                leading: Icon(Icons.question_mark),
+                title: Text('Ajuda'),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
               ),
-            ),
-            ListTile(
-              leading: Icon(Icons.question_mark),
-              title: Text('Ajuda'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: const Text('RELATÓRIO'),
-              onTap: () async {
-                await Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (constect) => Relatorio(videoSem1: videos1),
-                      settings: const RouteSettings()),
-                );
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: const Text('Sair'),
-              onTap: () async {
-                await UserPreferences.setBool(false);
-                //   logOut();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (constect) => MyHomePage(estadoAcesso!),
-                      settings: const RouteSettings()),
-                );
-                // Update the state of the app.
-                // ...
-              },
-            ),
-          ],
-        ),*/
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: const Text('RELATÓRIO'),
+                onTap: () async {
+                  await Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (constect) => Relatorio(),
+                        settings: const RouteSettings()),
+                  );
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+            ],
+          ),
+        ),
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          //  automaticallyImplyLeading: false,
           //   automaticallyImplyLeading: false,
 
           centerTitle: true,

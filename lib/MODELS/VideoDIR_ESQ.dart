@@ -202,7 +202,7 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                     decoration: BoxDecoration(
                         color: Color.fromARGB(225, 69, 69, 69),
                         borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Text('${flag}/$loop}',
+                    child: Text('${flag}/$loop',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Color.fromARGB(255, 255, 255, 255),
