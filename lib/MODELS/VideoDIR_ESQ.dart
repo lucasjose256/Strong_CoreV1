@@ -175,34 +175,39 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                 SizedBox(
                   width: 20,
                 ),
-
-                /*   decoration: const BoxDecoration(
-                            color: Color.fromARGB(169, 113, 112, 112),
-                            borderRadius: BorderRadius.all(Radius.circular(20))),*/
-
-                Expanded(
-                  child: Text(
-                    nomeExercicio,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: nomeExercicio.length > 40 ? 15 : 20),
-                    maxLines: 4,
-                  ),
-                ),
-                SizedBox(
-                  width: 35,
-                ),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.19,
-                  decoration: BoxDecoration(
-                      color: Color.fromARGB(225, 69, 69, 69),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: Text('${flag}/${loop}',
+                  child:
+                      /*   decoration: const BoxDecoration(
+                          color: Color.fromARGB(169, 113, 112, 112),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),*/
+
+                      Expanded(
+                    child: Text(
+                      nomeExercicio,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: 32)),
+                          fontSize: nomeExercicio.length > 40 ? 15 : 20),
+                      maxLines: 4,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.19,
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(225, 69, 69, 69),
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: Text('${flag}/$loop}',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 32)),
+                  ),
                 )
               ],
             ),
