@@ -44,21 +44,25 @@ class _RelatorioState extends State<Relatorio> {
           } else {
             return Scaffold(
               body: ListView(children: [
-                Text(
-                  'RELATORIO',
+                /*   Text(
+                  'RELATÓRIO',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 25),
-                ),
+                ),*/
                 Column(
                     children: VIDEOS_SEMANAS.map((e) {
-                  return Container(
-                    child: Column(
+                  return Card(
+                    color: Color.fromARGB(255, 209, 62, 40),
+                    child: ExpansionTile(
+                      collapsedIconColor: Colors.white,
+                      textColor: Color.fromARGB(255, 255, 255, 255),
+                      iconColor: Color.fromARGB(255, 255, 255, 255),
+                      title: Text(
+                        'SEMANA ' + e[i].numSemana,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
                       children: [
-                        Text(
-                          'SEMANA ' + e[i].numSemana,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20),
-                        ),
                         SizedBox(
                           height: 10,
                         ),

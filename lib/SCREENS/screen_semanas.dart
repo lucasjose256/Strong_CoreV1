@@ -202,10 +202,28 @@ class buildSemanas extends StatefulWidget {
   State<buildSemanas> createState() => _buildSemanasState();
 }
 
+var singleChildScrollView = SingleChildScrollView(
+  child: Column(
+      children: LISTASEMANAS.map((e) {
+    // print(horario!.hour.toString());
+    //  print(horaDeInInicio['HORARIO_PRIMEIRO_ACESSO']);
+    // print(horario == null ? horario!.day.toString() : 'null');
+
+    return CartaoSemanas(
+      vd: e.Conteudo,
+      cor: e.backGroundColor,
+      title: e.titulo,
+      numeroSemana: e.numeroSem,
+      height: e.height,
+    );
+  }).toList()),
+);
+int currentPageIndex = 0;
+List<Widget> body = [singleChildScrollView, Relatorio()];
+
 class _buildSemanasState extends State<buildSemanas> {
   @override
   Widget build(BuildContext context) {
-    int currentPageIndex = 0;
     return RefreshIndicator(
       onRefresh: () => Navigator.push(
           context,
@@ -213,53 +231,25 @@ class _buildSemanasState extends State<buildSemanas> {
             builder: (context) => Semanas(),
           )),
       child: Scaffold(
-        drawer: Drawer(
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(241, 186, 30, 22),
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 6,
-                    ),
-                  ],
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.question_mark),
-                title: Text('Ajuda'),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: const Text('RELATÓRIO'),
-                onTap: () async {
-                  await Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (constect) => Relatorio(),
-                        settings: const RouteSettings()),
-                  );
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-            ],
-          ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: currentPageIndex,
+          onTap: (value) {
+            setState(() {
+              currentPageIndex = value;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.paste), label: 'Relatório'),
+          ],
         ),
         appBar: AppBar(
-          //  automaticallyImplyLeading: false,
-          //   automaticallyImplyLeading: false,
-
+          automaticallyImplyLeading: false,
           centerTitle: true,
-          // foregroundColor: Colors.orange,
           backgroundColor: Colors.red[800],
           title: const Text('Strong Core',
               style: TextStyle(
@@ -267,22 +257,7 @@ class _buildSemanasState extends State<buildSemanas> {
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Comfortaa')),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-              children: LISTASEMANAS.map((e) {
-            // print(horario!.hour.toString());
-            //  print(horaDeInInicio['HORARIO_PRIMEIRO_ACESSO']);
-            // print(horario == null ? horario!.day.toString() : 'null');
-
-            return CartaoSemanas(
-              vd: e.Conteudo,
-              cor: e.backGroundColor,
-              title: e.titulo,
-              numeroSemana: e.numeroSem,
-              height: e.height,
-            );
-          }).toList()),
-        ),
+        body: body[currentPageIndex],
       ),
     );
   }

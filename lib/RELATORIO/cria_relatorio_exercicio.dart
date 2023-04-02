@@ -27,17 +27,35 @@ class InfoRelatorio extends StatelessWidget {
         for (int loop = 1; loop <= e.loop; loop++) {
           try {
             if (e.nomeSemLado != null) {
-              exercicios_por_loop_DIR_ESQ.add(Text(dadosUsuario!
-                      .get(
-                          'SEM_${vds[1].numSemana}_DIA${dia.toString()}_EXERCICIO_${e.nomeExercicioDE}${loop.toString()}')
-                      .toString() +
-                  ' '));
+              exercicios_por_loop_DIR_ESQ.add(
+                Text(
+                    dadosUsuario!
+                                .get(
+                                    'SEM_${vds[1].numSemana}_DIA${dia.toString()}_EXERCICIO_${e.nomeExercicioDE}${loop.toString()}')
+                                .toString() !=
+                            '100'
+                        ? dadosUsuario!
+                                .get(
+                                    'SEM_${vds[1].numSemana}_DIA${dia.toString()}_EXERCICIO_${e.nomeExercicioDE}${loop.toString()}')
+                                .toString() +
+                            ' '
+                        : '',
+                    style: TextStyle(color: Colors.white)),
+              );
             }
-            exercicios_por_loop.add(Text(dadosUsuario!
-                    .get(
-                        'SEM_${vds[1].numSemana}_DIA${dia.toString()}_EXERCICIO_${e.nomeExercicio}${loop.toString()}')
-                    .toString() +
-                ' '));
+            exercicios_por_loop.add(Text(
+                dadosUsuario!
+                            .get(
+                                'SEM_${vds[1].numSemana}_DIA${dia.toString()}_EXERCICIO_${e.nomeExercicio}${loop.toString()}')
+                            .toString() !=
+                        '100'
+                    ? dadosUsuario!
+                            .get(
+                                'SEM_${vds[1].numSemana}_DIA${dia.toString()}_EXERCICIO_${e.nomeExercicio}${loop.toString()}')
+                            .toString() +
+                        ' '
+                    : ' ',
+                style: TextStyle(color: Colors.white)));
           } catch (e) {
             print(e);
           }
@@ -48,12 +66,13 @@ class InfoRelatorio extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  SizedBox(
+                    width: 5,
+                  ),
                   Expanded(
                       child: Text(
                     e.nomeExercicio,
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
+                    style: TextStyle(fontSize: 15, color: Colors.white),
                     maxLines: 4,
                   )),
                   SizedBox(
@@ -64,15 +83,21 @@ class InfoRelatorio extends StatelessWidget {
                   ),
                 ],
               ),
+              Divider(
+                color: Colors.white,
+                thickness: 2,
+                height: 10,
+              ),
               e.nomeExercicioDE != null
                   ? Row(
                       children: [
+                        SizedBox(
+                          width: 5,
+                        ),
                         Expanded(
                           child: Text(
                             e.nomeExercicioDE!,
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
+                            style: TextStyle(fontSize: 15, color: Colors.white),
                             maxLines: 4,
                           ),
                         ),
@@ -85,7 +110,10 @@ class InfoRelatorio extends StatelessWidget {
                         ),
                       ],
                     )
-                  : Container()
+                  : Container(),
+              SizedBox(
+                height: 5,
+              )
             ],
           ),
         );

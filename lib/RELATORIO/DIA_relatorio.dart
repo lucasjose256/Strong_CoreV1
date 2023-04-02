@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:strong_core/MODELS/VideoScreen.dart';
 import 'package:expansion_card/expansion_card.dart';
 import 'cria_relatorio_exercicio.dart';
 
-class RelatorioDia extends StatelessWidget {
+class RelatorioDia extends StatefulWidget {
   final List<VideoScreen> videos;
 
   DocumentSnapshot dadosUsuario;
@@ -12,42 +13,103 @@ class RelatorioDia extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<RelatorioDia> createState() => _RelatorioDiaState();
+}
+
+class _RelatorioDiaState extends State<RelatorioDia> {
+  DateTime? horario;
+  @override
+  void initState() {
+    super.initState();
+    caregaMap();
+  }
+
+  void caregaMap() async {
+    horario = (widget.dadosUsuario.get(
+                '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.videos[0].numSemana}')
+            as Timestamp)
+        .toDate();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(children: [
-        ExpansionCard(
-          title:
-              Container(height: 20, color: Colors.grey, child: Text('DIA 1')),
-          children: [
-            InfoRelatorio(
-              dia: 1,
-              dadosUsuario: dadosUsuario!,
-              vds: videos,
-            ),
-          ],
+    if (horario == null ||
+        horario!.isBefore(
+          DateTime.utc(1999, 1, 9),
+        )) {
+      return Container(
+        child: Text(
+          'Ainda não temos informação sobre os exercícios dessa semana',
+          style: TextStyle(fontSize: 15),
         ),
-        ExpansionCard(
-            title:
-                Container(height: 20, color: Colors.grey, child: Text('DIA 2')),
-            children: [
-              InfoRelatorio(
-                dia: 2,
-                dadosUsuario: dadosUsuario!,
-                vds: videos,
+        color: Color.fromARGB(255, 247, 247, 247),
+      );
+    } else {
+      return Container(
+        child: Column(children: [
+          Card(
+            elevation: 4,
+            color: Colors.grey,
+            child: ExpansionTile(
+              title: Text(
+                'DIA 1',
+                style: TextStyle(color: Colors.white),
               ),
-            ]),
-        ExpansionCard(
-          title:
-              Container(height: 20, color: Colors.grey, child: Text('DIA 3')),
-          children: [
-            InfoRelatorio(
-              dia: 3,
-              dadosUsuario: dadosUsuario!,
-              vds: videos,
+              collapsedIconColor: Colors.white,
+              iconColor: Colors.white,
+              backgroundColor: Colors.grey,
+              children: [
+                InfoRelatorio(
+                  dia: 1,
+                  dadosUsuario: widget.dadosUsuario!,
+                  vds: widget.videos,
+                ),
+              ],
             ),
-          ],
-        ),
-      ]),
-    );
+          ),
+          Card(
+            elevation: 4,
+            color: Colors.grey,
+            child: ExpansionTile(
+              title: Text(
+                'DIA 2',
+                style: TextStyle(color: Colors.white),
+              ),
+              collapsedIconColor: Colors.white,
+              iconColor: Colors.white,
+              backgroundColor: Colors.grey,
+              children: [
+                InfoRelatorio(
+                  dia: 2,
+                  dadosUsuario: widget.dadosUsuario!,
+                  vds: widget.videos,
+                ),
+              ],
+            ),
+          ),
+          Card(
+            elevation: 4,
+            color: Colors.grey,
+            child: ExpansionTile(
+              title: Text(
+                'DIA 3',
+                style: TextStyle(color: Colors.white),
+              ),
+              collapsedIconColor: Colors.white,
+              iconColor: Colors.white,
+              backgroundColor: Colors.grey,
+              children: [
+                //   Row(children: [Text('EXERCICIO'), Text('   loops 1 2 3 4 5  ')]),
+                InfoRelatorio(
+                  dia: 3,
+                  dadosUsuario: widget.dadosUsuario!,
+                  vds: widget.videos,
+                ),
+              ],
+            ),
+          ),
+        ]),
+      );
+    }
   }
 }
