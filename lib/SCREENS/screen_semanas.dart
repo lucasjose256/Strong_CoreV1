@@ -72,8 +72,6 @@ class _SemanasState extends State<Semanas> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
 
-    widget.situacaoAnamnse2 =
-        await dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM2') as bool;
     widget.situacaoAnamnse4 =
         await dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM4') as bool;
     widget.situacaoAnamnse6 =
