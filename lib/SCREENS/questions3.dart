@@ -50,11 +50,10 @@ class _Question3State extends State<Question3> {
   String? answer2;
 
   final items3 = [
-    'Nenhum estresse',
-    'Estresse abaixo do normal',
+    'Estresse abaixo',
     'Estresse normal',
-    'Estresse acima do normal',
-    'Estresse extremamente elevado',
+    'Estresse alto',
+    
   ];
   String? answer3;
   NameProblemController controller = NameProblemController();
