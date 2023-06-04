@@ -20,10 +20,9 @@ import '../MODELS/user_preferences.dart';
 import '../main.dart';
 
 class Semanas extends StatefulWidget {
-  DateTime? horario2;
-  DateTime? horario4;
-  DateTime? horario6;
-  DateTime? horario8;
+  late DateTime horario4;
+  late DateTime horario6;
+  late DateTime horario8;
 
   bool? situacaoAnamnse2;
   bool? situacaoAnamnse4;
@@ -36,6 +35,7 @@ class Semanas extends StatefulWidget {
 }
 
 class _SemanasState extends State<Semanas> {
+  late var tempoProximaSemana;
   bool? estadoAcesso;
   late StreamSubscription subscription;
   var isDeviceConnected = false;
@@ -68,7 +68,7 @@ class _SemanasState extends State<Semanas> {
 
   Future<void> caregaMap() async {
     final DocumentSnapshot dadosUsuario = await FirebaseFirestore.instance
-        .collection('user')
+        .collection('demo')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
 
@@ -78,18 +78,26 @@ class _SemanasState extends State<Semanas> {
         await dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM6') as bool;
     widget.situacaoAnamnse8 =
         await dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM8') as bool;
-    widget.horario2 = (await dadosUsuario
-            .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_2') as Timestamp)
-        .toDate();
-    widget.horario4 = (await dadosUsuario
+
+    widget.horario4 = await (dadosUsuario
             .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_4') as Timestamp)
         .toDate();
+
     widget.horario6 = (await dadosUsuario
             .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_6') as Timestamp)
         .toDate();
+
     widget.horario8 = (await dadosUsuario
             .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_8') as Timestamp)
         .toDate();
+
+    if (widget.situacaoAnamnse4 == false) {
+      tempoProximaSemana = widget.horario4.difference(DateTime.now()).inDays;
+    } else if (widget.situacaoAnamnse6 == false) {
+      tempoProximaSemana = widget.horario6.difference(DateTime.now()).inDays;
+    } else {
+      tempoProximaSemana = widget.horario8.difference(DateTime.now()).inDays;
+    }
   }
 
   @override
@@ -106,7 +114,7 @@ class _SemanasState extends State<Semanas> {
 
     Future<void> servidor(int num) async {
       await FirebaseFirestore.instance
-          .collection('user')
+          .collection('demo')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({'ATUALIZOU_ANAMNSE_SEM$num': true});
     }
@@ -126,32 +134,25 @@ class _SemanasState extends State<Semanas> {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
               } else {
-                /* if ((widget.horario2!.isAfter(DateTime.utc(1999, 1, 9)) &&
-                   ( widget.situacaoAnamnse2 == false)|| (   widget.horario4!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse4 == false)||
-                  widget.horario6!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse6 == false )|| widget.horario8!.isAfter(DateTime.utc(1999, 1, 9)) && widget.situacaoAnamnse8 == false
-                   ) */
-                /*   if (widget.horario2!.isAfter(DateTime.utc(1999, 1, 9)) &&
-                    widget.situacaoAnamnse2 == false) {
-                  print('semana2');
-
-                  //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
-                  return AuxCorpoHumano(numSem: '2');*/
-                if (widget.horario4!.isAfter(DateTime.utc(1999, 1, 9)) &&
+                if (widget.horario4!.isBefore(DateTime.now()) &&
                     (widget.situacaoAnamnse4 == false)) {
                   print('semana4');
 
                   //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
                   return const AuxCorpoHumano(numSem: '4');
-                } else if (widget.horario6!.isAfter(DateTime.utc(1999, 1, 9)) &&
+                } else if (widget.horario6!.isBefore(DateTime.now()) &&
                     (widget.situacaoAnamnse6 == false)) {
                   //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
                   return const AuxCorpoHumano(numSem: '6');
-                } else if (widget.horario8!.isAfter(DateTime.utc(1999, 1, 9)) &&
+                } else if (widget.horario8!.isBefore(DateTime.now()) &&
                     (widget.situacaoAnamnse8 == false)) {
                   //precisa adiconar um campo indicando qual semana o AuxCorpo está se referindo
                   return const AuxCorpoHumano(numSem: '8');
                 } else {
-                  return buildSemanas(user: user, estadoAcesso: estadoAcesso);
+                  return AppDemo(
+                    tempo: tempoProximaSemana,
+                    isEnd: widget.situacaoAnamnse8!,
+                  );
                 }
               }
             }),
@@ -184,6 +185,47 @@ class _SemanasState extends State<Semanas> {
           content: const Text('Por favor confira a sua conexão com a internet'),
         ),
       );
+}
+
+class AppDemo extends StatelessWidget {
+  int tempo;
+  bool isEnd;
+  AppDemo({Key? key, required this.tempo, required this.isEnd})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            height: 250,
+            color: Color.fromARGB(255, 255, 96, 78),
+            width: 300,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.timer,
+                    size: 70,
+                  ),
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: isEnd
+                        ? Text('Terminou!', style: TextStyle(fontSize: 25))
+                        : Text(
+                            'Em ${tempo} dias você poderá responder novamente a anamnese',
+                            style: TextStyle(fontSize: 25))),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class buildSemanas extends StatefulWidget {

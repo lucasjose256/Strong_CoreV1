@@ -41,7 +41,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
   bool loading = false;
   Future<void> servidor(String num) async {
     await FirebaseFirestore.instance
-        .collection('user')
+        .collection('demo')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .update({'ATUALIZOU_ANAMNSE_SEM$num': true});
   }
@@ -363,7 +363,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         await UserPreferences.setBool(true);
 
                         var firebase = await FirebaseFirestore.instance
-                            .collection('user')
+                            .collection('demo')
                             .doc(FirebaseAuth.instance.currentUser!.uid);
 
                         await firebase.update({

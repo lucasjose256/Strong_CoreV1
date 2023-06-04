@@ -30,7 +30,7 @@ class _BasicQuestionsState extends State<BasicQuestions> {
   String? answer;
   DateTime? curretnDate;
   CollectionReference basicQuestionsData =
-      FirebaseFirestore.instance.collection('user');
+      FirebaseFirestore.instance.collection('demo');
 
   var _pesoKey;
   @override

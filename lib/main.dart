@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
 
   void caregaMap() async {
     final DocumentSnapshot dadosUsuario = await FirebaseFirestore.instance
-        .collection('user')
+        .collection('demo')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
     //mudar para um provider
@@ -288,7 +288,7 @@ class MyHomePage extends StatelessWidget {
                       landingWidget = Semanas();
                     } else {
                       await FirebaseFirestore.instance
-                          .collection('user')
+                          .collection('demo')
                           .doc(FirebaseAuth.instance.currentUser!.uid)
                           .set({
                         'PRIMEIRO_ACESSO_COMPLETO': false,

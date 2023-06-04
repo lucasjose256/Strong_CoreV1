@@ -29,10 +29,10 @@ class Question3 extends StatefulWidget {
 class _Question3State extends State<Question3> {
   var user = FirebaseAuth.instance.currentUser;
   CollectionReference questionData =
-      FirebaseFirestore.instance.collection('user');
+      FirebaseFirestore.instance.collection('demo');
 
   final List<String> items1 = [
-    'Dores Oteomusculares',
+    'Dores musculoesqueléticas',
     'Entorse Articular',
     'Fratura Óssea',
     'Enxaqueca',
@@ -50,11 +50,9 @@ class _Question3State extends State<Question3> {
   String? answer2;
 
   final items3 = [
-    'Nenhum estresse',
-    'Estresse abaixo do normal',
+    'Estresse baixo',
     'Estresse normal',
-    'Estresse acima do normal',
-    'Estresse extremamente elevado',
+    'Estresse alto',
   ];
   String? answer3;
   NameProblemController controller = NameProblemController();

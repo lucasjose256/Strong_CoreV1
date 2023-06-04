@@ -36,11 +36,11 @@ class _Question2State extends State<Question2> {
 
   final items2 = [
     'Nenhum dia',
-    'Um dia',
-    'Dois dias',
-    'Três dias',
-    'Quatro dias',
-    'Cinco dias ou +',
+    '1 dia',
+    '2 a 4 dias',
+    '5 a 8 dias',
+    '9 a 12 dias',
+    'Mais de 15 dias',
   ];
   String? answer2;
 
@@ -49,7 +49,6 @@ class _Question2State extends State<Question2> {
     'Não recebo, mas considero essa informação importante para meu trabalho.',
     'Recebo, mas considero desnecessária essa informação para o meu trabalho.',
     'Recebo, e considero essa informação importante para meu trabalho.',
-    'Recebo, mas as informações passadas não auxiliam no meu trabalho.',
   ];
   String? answer3;
 
