@@ -36,7 +36,7 @@ class _QuestionState extends State<Question> {
   String? answer1;
   final items2 = [
     'Soldado 2º Classe',
-    'Soldado 1º Clase',
+    'Soldado 1º Classe',
     'Cabo',
     '3º Sargento',
     '2º Sargento',
