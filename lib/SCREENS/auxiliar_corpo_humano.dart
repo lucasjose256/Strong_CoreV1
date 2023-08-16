@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -360,74 +361,82 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                           ),
                         );
                       } else {
-                        await UserPreferences.setBool(true);
+                        try {
+                          await UserPreferences.setBool(true);
 
-                        var firebase = await FirebaseFirestore.instance
-                            .collection('user')
-                            .doc(FirebaseAuth.instance.currentUser!.uid);
+                          var firebase = await FirebaseFirestore.instance
+                              .collection('user')
+                              .doc(FirebaseAuth.instance.currentUser!.uid);
 
-                        await firebase.update({
-                          'Pescoço0_SEM_${widget.numSem}': pescoco0.graudaDor,
-                          'Regiao_cervical1_SEM_${widget.numSem}':
-                              regiaoCervical1.graudaDor,
-                          'Costas_superior2_SEM_${widget.numSem}':
-                              costasSuperior2.graudaDor,
-                          'Costas_média3_SEM_${widget.numSem}':
-                              costasMedia3.graudaDor,
-                          'Costas_inferior4_SEM_${widget.numSem}':
-                              costasInferior4.graudaDor,
-                          'Bacia5_SEM_${widget.numSem}': bacia5.graudaDor,
-                          'Ombro6_DIREITO_SEM_${widget.numSem}':
-                              ombro6!.painDegreeRight,
-                          'Ombro6_ESQUERDO_SEM_${widget.numSem}':
-                              ombro6!.painDegreeleft,
-                          'Braço7_DIREITO_SEM_${widget.numSem}':
-                              braco7.painDegreeRight,
-                          'Braço7_ESQUERDO_SEM_${widget.numSem}':
-                              braco7.painDegreeleft,
-                          'Cotovelo8_DIREITO_SEM_${widget.numSem}':
-                              cotovelo8.painDegreeRight,
-                          'Cotovelo8_ESQUERDO_SEM_${widget.numSem}':
-                              cotovelo8.painDegreeleft,
-                          'Antebraço9_DIREITO_SEM_${widget.numSem}':
-                              antebraco9.painDegreeRight,
-                          'Antebraço9_ESQUERDO_SEM_${widget.numSem}':
-                              antebraco9.painDegreeleft,
-                          'Punho10_DIREITO_SEM_${widget.numSem}':
-                              punho10.painDegreeRight,
-                          'Punho10_ESQUERDO_SEM_${widget.numSem}':
-                              punho10.painDegreeleft,
-                          'Mao11_DIREITA_SEM_${widget.numSem}':
-                              mao11.painDegreeRight,
-                          'Mao11_ESQUERDA_SEM_${widget.numSem}':
-                              mao11.painDegreeleft,
-                          'Perna12_DIREITA_SEM_${widget.numSem}':
-                              perna12.painDegreeRight,
-                          'Perna12_ESQUERDA_SEM_${widget.numSem}':
-                              perna12.painDegreeleft,
-                          'Joelho13_DIREITO_SEM_${widget.numSem}':
-                              joelho13.painDegreeRight,
-                          'Joelho13_ESQUERDO_SEM_${widget.numSem}':
-                              joelho13.painDegreeleft,
-                          'Panturrilha14_DIREITA_SEM_${widget.numSem}':
-                              panturrilha14.painDegreeRight,
-                          'Panturrilha14_ESQUERDA_SEM_${widget.numSem}':
-                              panturrilha14.painDegreeleft,
-                          'Tornozelo15_DIREITO_SEM_${widget.numSem}':
-                              tornozelo15.painDegreeleft,
-                          'Tornozelo15_ESQUERDO_SEM_${widget.numSem}':
-                              tornozelo15.painDegreeleft,
-                          'Pe16_DIREITO_SEM_${widget.numSem}':
-                              pe16.painDegreeRight,
-                          'Pe16_ESQUERDO_SEM_${widget.numSem}':
-                              pe16.painDegreeleft,
-                        });
-                        servidor(widget.numSem);
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (constect) => Semanas(),
-                              settings: const RouteSettings()),
-                        );
+                          await firebase.update({
+                            '00Pescoço_SEM_${widget.numSem}':
+                                pescoco0.graudaDor,
+                            '01Regiao_cervical_SEM_${widget.numSem}':
+                                regiaoCervical1.graudaDor,
+                            '02Costas_superior_SEM_${widget.numSem}':
+                                costasSuperior2.graudaDor,
+                            '03Costas_média_SEM_${widget.numSem}':
+                                costasMedia3.graudaDor,
+                            '04Costas_inferior_SEM_${widget.numSem}':
+                                costasInferior4.graudaDor,
+                            '05Bacia_SEM_${widget.numSem}': bacia5.graudaDor,
+                            '06Ombro_DIREITO_SEM_${widget.numSem}':
+                                ombro6!.painDegreeRight,
+                            '06Ombro6_ESQUERDO_SEM_${widget.numSem}':
+                                ombro6!.painDegreeleft,
+                            '07Braço_DIREITO_SEM_${widget.numSem}':
+                                braco7.painDegreeRight,
+                            '07Braço_ESQUERDO_SEM_${widget.numSem}':
+                                braco7.painDegreeleft,
+                            '08Cotovelo_DIREITO_SEM_${widget.numSem}':
+                                cotovelo8.painDegreeRight,
+                            '08Cotovelo_ESQUERDO_SEM_${widget.numSem}':
+                                cotovelo8.painDegreeleft,
+                            '09Antebraço_DIREITO_SEM_${widget.numSem}':
+                                antebraco9.painDegreeRight,
+                            '09Antebraço_ESQUERDO_SEM_${widget.numSem}':
+                                antebraco9.painDegreeleft,
+                            '10Punho_DIREITO_SEM_${widget.numSem}':
+                                punho10.painDegreeRight,
+                            '10Punho_ESQUERDO_SEM_${widget.numSem}':
+                                punho10.painDegreeleft,
+                            '11Mao_DIREITA_SEM_${widget.numSem}':
+                                mao11.painDegreeRight,
+                            '11Mao_ESQUERDA_SEM_${widget.numSem}':
+                                mao11.painDegreeleft,
+                            '12Perna_DIREITA_SEM_${widget.numSem}':
+                                perna12.painDegreeRight,
+                            '12Perna_ESQUERDA_SEM_${widget.numSem}':
+                                perna12.painDegreeleft,
+                            '13Joelho_DIREITO_SEM_${widget.numSem}':
+                                joelho13.painDegreeRight,
+                            '13Joelho_ESQUERDO_SEM_${widget.numSem}':
+                                joelho13.painDegreeleft,
+                            '14Panturrilha_DIREITA_SEM_${widget.numSem}':
+                                panturrilha14.painDegreeRight,
+                            '14Panturrilha_ESQUERDA_SEM_${widget.numSem}':
+                                panturrilha14.painDegreeleft,
+                            '15Tornozelo_DIREITO_SEM_${widget.numSem}':
+                                tornozelo15.painDegreeleft,
+                            '15Tornozelo_ESQUERDO_SEM_${widget.numSem}':
+                                tornozelo15.painDegreeleft,
+                            '16Pe_DIREITO_SEM_${widget.numSem}':
+                                pe16.painDegreeRight,
+                            '16Pe_ESQUERDO_SEM_${widget.numSem}':
+                                pe16.painDegreeleft,
+                          });
+                          servidor(widget.numSem);
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (constect) => Semanas(),
+                                settings: const RouteSettings()),
+                          );
+                        } catch (error) {
+                          ScaffoldMessenger.of(context).clearSnackBars();
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                  'Algo deu errado ao ATUALIZAR OS DADOS DO CORPO HUMANO!')));
+                        }
                       }
                     },
                     child: Text(

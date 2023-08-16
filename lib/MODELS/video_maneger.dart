@@ -282,20 +282,30 @@ class _VideoManegerState extends State<VideoManeger> {
                                     ConnectivityResult.mobile) {
                               // I am connected to a mobile network.
 
-                              var documentReference = FirebaseFirestore.instance
-                                  .collection('user')
-                                  .doc(user!.uid);
-                              if (dia < 3) {
-                                documentReference.update(
-                                    //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
-                                    {
-                                      'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
-                                          delayVideo
-                                              ? circulatTimerControl!.getTime()
-                                              : videos[index].tempo
-                                    });
-                                print(
-                                    'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}');
+                              try {
+                                var documentReference = FirebaseFirestore
+                                    .instance
+                                    .collection('user')
+                                    .doc(user!.uid);
+                                if (dia < 3) {
+                                  documentReference.update(
+                                      //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                                      {
+                                        'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
+                                            delayVideo
+                                                ? circulatTimerControl!
+                                                    .getTime()
+                                                : videos[index].tempo
+                                      });
+                                  print(
+                                      'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}');
+                                }
+                              } catch (e) {
+                                ScaffoldMessenger.of(context).clearSnackBars();
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    duration: Duration(seconds: 10),
+                                    content: Text(
+                                        'Erro ao enviar os dados do video${_controller.dataSource}')));
                               }
 
                               _controller.dispose();
@@ -427,10 +437,11 @@ class _VideoManegerState extends State<VideoManeger> {
                           connectivityResult == ConnectivityResult.mobile) {
                         // _controller!.removeListener(listener);
                         _controller.dispose();
-                        var documentReference = FirebaseFirestore.instance
-                            .collection('user')
-                            .doc(user!.uid);
+
                         try {
+                          var documentReference = FirebaseFirestore.instance
+                              .collection('user')
+                              .doc(user!.uid);
                           if (dia < 3) {
                             documentReference.update(
                                 //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
@@ -444,19 +455,11 @@ class _VideoManegerState extends State<VideoManeger> {
                           print(
                               'KILL: ${delayVideo ? circulatTimerControl!.getTime() : videos[index].tempo}');
                         } catch (e) {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              actions: [
-                                TextButton(
-                                    onPressed: () =>
-                                        Navigator.of(context).pop(),
-                                    child: Text('Ok'))
-                              ],
-                              title: Text('Anamnse'),
-                              content: Text(e.toString()),
-                            ),
-                          );
+                          ScaffoldMessenger.of(context).clearSnackBars();
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              duration: Duration(seconds: 10),
+                              content: Text(
+                                  'Erro ao enviar os dados do video${_controller.dataSource}')));
                         }
                         print(
                             'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}');
