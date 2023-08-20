@@ -246,7 +246,7 @@ List<VideoScreen> videos6 = [
 ///VIDEOS 7
 List<VideoScreen> videos7 = [
   VideoScreen(
-      delay: 1,
+      delay: 3,
       //CONFERIR OS VIDEOS
       urlDE:
           'Assets/video/SEM7/S7_prancha_alta_c_elevacao_de_braco_e_pernaD_contralateral.mp4',
@@ -291,7 +291,7 @@ List<VideoScreen> videos7 = [
 ///VIDEOS SEMANA 8=SEMANA 7
 List<VideoScreen> videos8 = [
   VideoScreen(
-      delay: 1,
+      delay: 3,
       urlDE:
           'Assets/video/SEM7/S7_prancha_alta_c_elevacao_de_braco_e_pernaD_contralateral.mp4',
       nomeExercicioDE:

@@ -292,18 +292,26 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
                                       'EXERCICIO_${widget.nomeExercicio + flag.toString()}':
                                           _circulatTimerControl!.getTime()
                              /      });*/
-                                var documentReference = FirebaseFirestore
-                                    .instance
-                                    .collection('user')
-                                    .doc(user!.uid);
+                                try {
+                                  var documentReference = FirebaseFirestore
+                                      .instance
+                                      .collection('user')
+                                      .doc(user!.uid);
 
-                                if (widget.dia < 3) {
-                                  documentReference.update(
-                                      //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
-                                      {
-                                        'SEM_${widget.numSemana}_DIA${widget.dia + 1}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
-                                            _circulatTimerControl!.getTime()
-                                      });
+                                  if (widget.dia < 3) {
+                                    documentReference.update(
+                                        //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                                        {
+                                          'SEM_${widget.numSemana}_DIA${widget.dia + 1}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                                              _circulatTimerControl!.getTime()
+                                        });
+                                  }
+                                } catch (e) {
+                                  ScaffoldMessenger.of(context)
+                                      .clearSnackBars();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text('Algo deu errado!')));
                                 }
                                 //                            if(eUltimo){}
                                 _controller!.dispose();
@@ -362,16 +370,23 @@ class _VideoDirEsqState extends State<VideoDirEsq> {
 
               _controller!.pause();
 
-              var documentReference =
-                  FirebaseFirestore.instance.collection('user').doc(user!.uid);
+              try {
+                var documentReference = FirebaseFirestore.instance
+                    .collection('user')
+                    .doc(user!.uid);
 
-              if (widget.dia < 3) {
-                documentReference.update(
-                    //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
-                    {
-                      'SEM_${widget.numSemana}_DIA${widget.dia + 1}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
-                          delayVideo ? _circulatTimerControl!.getTime() : 0
-                    });
+                if (widget.dia < 3) {
+                  documentReference.update(
+                      //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                      {
+                        'SEM_${widget.numSemana}_DIA${widget.dia + 1}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                            delayVideo ? _circulatTimerControl!.getTime() : 0
+                      });
+                }
+              } catch (e) {
+                ScaffoldMessenger.of(context).clearSnackBars();
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text('Algo deu errado!')));
               }
               _controller!.dispose();
               if (widget.dontShowbuttun == true && widget.showButtun == true) {

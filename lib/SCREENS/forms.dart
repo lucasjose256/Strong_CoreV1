@@ -64,6 +64,7 @@ class _FormsState extends State<Forms> {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text('Strong Core'),
         ),
         body: Stepper(

@@ -357,15 +357,22 @@ class _VideoScreenState extends State<VideoScreen> {
             //  _controller!.play();
 
             if (mounted) {
-              DocumentReference documentReference =
-                  FirebaseFirestore.instance.collection('user').doc(user!.uid);
+              try {
+                DocumentReference documentReference = FirebaseFirestore.instance
+                    .collection('user')
+                    .doc(user!.uid);
 //testar sem o await
-              documentReference.update(
-                  //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
-                  {
-                    'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
-                        _circulatTimerControl!.getTime()
-                  });
+                documentReference.update(
+                    //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                    {
+                      'SEM_${widget.numSemana}_EXERCICIO_${widget.nomeExercicio + flag.toString()}':
+                          _circulatTimerControl!.getTime()
+                    });
+              } catch (e) {
+                ScaffoldMessenger.of(context).clearSnackBars();
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text('Algo deu errado!')));
+              }
 
               if (flag == loop && widget.nomeExercicioDE == null) {
                 //AQUI TERMINA O EXRCICIO

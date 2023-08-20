@@ -25,6 +25,7 @@ class _SingUpPageState extends State<SingUpPage> {
 
   bool _obscureText = true;
   bool _obscureText2 = true;
+  bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -285,49 +286,55 @@ This privacy policy page was created at privacypolicytemplate.net and modified/g
               const SizedBox(
                 height: 25,
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width / 2,
-                height: 50,
-                child: MaterialButton(
-                    color: Colors.red,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50)),
-                    child: const Text(
-                      'Registrar',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                    onPressed: () async {
-                      if (_passwordConfirmControler.text !=
-                          _passwordControler.text) {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            actions: [
-                              TextButton(
-                                  onPressed: () => Navigator.of(context).pop(),
-                                  child: Text('Ok'))
-                            ],
-                            title: const Text('Senha',
-                                style: TextStyle(fontSize: 25)),
-                            content: Text(
-                              'As senhas não são iguais',
-                              style: TextStyle(fontSize: 20),
-                            ),
+              !_isLoading
+                  ? SizedBox(
+                      width: MediaQuery.of(context).size.width / 2,
+                      height: 50,
+                      child: MaterialButton(
+                          color: Colors.red,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          child: const Text(
+                            'Registrar',
+                            style: TextStyle(color: Colors.white, fontSize: 16),
                           ),
-                        );
-                      } else if (isActive != false) {
-                        // Unhandled Exception:
-                        //[firebase_auth/email-already-in-use] The email address is already in use by another account.
+                          onPressed: () async {
+                            if (_passwordConfirmControler.text !=
+                                _passwordControler.text) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                        child: Text('Ok'))
+                                  ],
+                                  title: const Text('Senha',
+                                      style: TextStyle(fontSize: 25)),
+                                  content: Text(
+                                    'As senhas não são iguais',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                              );
+                            } else if (isActive != false) {
+                              // Unhandled Exception:
+                              //[firebase_auth/email-already-in-use] The email address is already in use by another account.
 
-                        print(_emailControler.text);
-                        if (_passwordControler.text != '' ||
-                            _passwordControler.text.length > 5) {}
-                        try {
-                          await _firebaseAuth
-                              .createUserWithEmailAndPassword(
-                                  email: _emailControler.text,
-                                  password: _passwordControler.text)
-                              .then((value) => Navigator.of(context).push(
+                              print(_emailControler.text);
+                              if (_passwordControler.text != '' ||
+                                  _passwordControler.text.length > 5) {}
+                              try {
+                                setState(() {
+                                  _isLoading = true;
+                                });
+                                await _firebaseAuth
+                                    .createUserWithEmailAndPassword(
+                                        email: _emailControler.text,
+                                        password: _passwordControler.text)
+                                    .then((value) {
+                                  Navigator.of(context).push(
                                     MaterialPageRoute(
                                         builder: (constect) =>
                                             ChangeNotifierProvider<Information>(
@@ -335,59 +342,62 @@ This privacy policy page was created at privacypolicytemplate.net and modified/g
                                                     Information(),
                                                 child: Forms()),
                                         settings: const RouteSettings()),
-                                  ));
-                        } on FirebaseAuthException catch (e) {
-                          var message =
-                              'Algo deu Errado!\ Preencha novamente os campos, ou verifique a sua conexão com a internet';
-                          if (e.code == 'email-already-in-use') {
-                            message =
-                                'Esse email já está sendo usado. Por favor digite outro';
-                          } else if (e.code == 'invalid-email') {
-                            message = 'Esse email não é válido!';
-                          } else if (e.code == 'operation-not-allowed') {
-                            message = 'Operação não permitida!';
-                          } else if (e.code == 'weak-password') {
-                            message =
-                                'Senha Fraca. Por favor crie uma senha com no mínimo 6 caracteres';
-                          }
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              actions: [
-                                TextButton(
-                                    onPressed: () =>
-                                        Navigator.of(context).pop(),
-                                    child: Text('Ok'))
-                              ],
-                              title: const Text('Erro',
-                                  style: TextStyle(fontSize: 25)),
-                              content: Text(
-                                message,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ),
-                          );
-                        }
-                      } else {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            actions: [
-                              TextButton(
-                                  onPressed: () => Navigator.of(context).pop(),
-                                  child: Text('Ok'))
-                            ],
-                            title: const Text('Termos de Uso',
-                                style: TextStyle(fontSize: 25)),
-                            content: Text(
-                              'Para proseguir é necessário concordar com os termos de uso',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                        );
-                      }
-                    }),
-              ),
+                                  );
+                                });
+                              } on FirebaseAuthException catch (e) {
+                                _isLoading = false;
+                                var message =
+                                    'Algo deu Errado!\ Preencha novamente os campos, ou verifique a sua conexão com a internet';
+                                if (e.code == 'email-already-in-use') {
+                                  message =
+                                      'Esse email já está sendo usado. Por favor digite outro';
+                                } else if (e.code == 'invalid-email') {
+                                  message = 'Esse email não é válido!';
+                                } else if (e.code == 'operation-not-allowed') {
+                                  message = 'Operação não permitida!';
+                                } else if (e.code == 'weak-password') {
+                                  message =
+                                      'Senha Fraca. Por favor crie uma senha com no mínimo 6 caracteres';
+                                }
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () =>
+                                              Navigator.of(context).pop(),
+                                          child: Text('Ok'))
+                                    ],
+                                    title: const Text('Erro',
+                                        style: TextStyle(fontSize: 25)),
+                                    content: Text(
+                                      message,
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                );
+                              }
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                        child: Text('Ok'))
+                                  ],
+                                  title: const Text('Termos de Uso',
+                                      style: TextStyle(fontSize: 25)),
+                                  content: Text(
+                                    'Para proseguir é necessário concordar com os termos de uso',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ),
+                              );
+                            }
+                          }))
+                  : Container(child: CircularProgressIndicator()),
               const SizedBox(
                 height: 50,
               ),

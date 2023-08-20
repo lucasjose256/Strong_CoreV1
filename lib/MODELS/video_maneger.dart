@@ -455,11 +455,36 @@ class _VideoManegerState extends State<VideoManeger> {
                           print(
                               'KILL: ${delayVideo ? circulatTimerControl!.getTime() : videos[index].tempo}');
                         } catch (e) {
-                          ScaffoldMessenger.of(context).clearSnackBars();
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              duration: Duration(seconds: 10),
+                          await showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              actions: [
+                                TextButton(
+                                    onPressed: () async {
+                                      var documentReference = FirebaseFirestore
+                                          .instance
+                                          .collection('user')
+                                          .doc(user!.uid);
+                                      if (dia < 3) {
+                                        await documentReference.update(
+                                            //COMUNICA PARA O FIREBASE QUAL INSTANTE O INDIVIDUO ENCERROU O VIDEO
+                                            {
+                                              'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}':
+                                                  delayVideo
+                                                      ? circulatTimerControl!
+                                                          .getTime()
+                                                      : 0
+                                            });
+                                      }
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Tentar novamente'))
+                              ],
+                              title: const Text('Exercício'),
                               content: Text(
-                                  'Erro ao enviar os dados do video${_controller.dataSource}')));
+                                  'Erro ao enviar os dados do exercício${_controller.dataSource}'),
+                            ),
+                          );
                         }
                         print(
                             'SEM_${videos[index].numSemana}_DIA${dia + 1}_EXERCICIO_${videos[index].nomeExercicio + flag.toString()}');

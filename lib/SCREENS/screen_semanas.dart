@@ -7,6 +7,7 @@ import 'package:expansion_card/expansion_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:strong_core/MODELS/card_expansivel_semana.dart';
 import 'package:strong_core/MODELS/cartao_bloqueado.dart';
@@ -67,29 +68,50 @@ class _SemanasState extends State<Semanas> {
       });
 
   Future<void> caregaMap() async {
-    final DocumentSnapshot dadosUsuario = await FirebaseFirestore.instance
-        .collection('user')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
+    try {
+      final DocumentSnapshot dadosUsuario = await FirebaseFirestore.instance
+          .collection('user')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get();
 
-    widget.situacaoAnamnse4 =
-        await dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM4') as bool;
-    widget.situacaoAnamnse6 =
-        await dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM6') as bool;
-    widget.situacaoAnamnse8 =
-        await dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM8') as bool;
-    widget.horario2 = (await dadosUsuario
-            .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_2') as Timestamp)
-        .toDate();
-    widget.horario4 = (await dadosUsuario
-            .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_4') as Timestamp)
-        .toDate();
-    widget.horario6 = (await dadosUsuario
-            .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_6') as Timestamp)
-        .toDate();
-    widget.horario8 = (await dadosUsuario
-            .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_8') as Timestamp)
-        .toDate();
+      widget.situacaoAnamnse4 =
+          await dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM4') as bool;
+      widget.situacaoAnamnse6 =
+          await dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM6') as bool;
+      widget.situacaoAnamnse8 =
+          await dadosUsuario.get('ATUALIZOU_ANAMNSE_SEM8') as bool;
+      widget.horario2 = (await dadosUsuario
+              .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_2') as Timestamp)
+          .toDate();
+      widget.horario4 = (await dadosUsuario
+              .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_5') as Timestamp)
+          .toDate();
+      widget.horario6 = (await dadosUsuario
+              .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_7') as Timestamp)
+          .toDate();
+      //horario 8 é referente a semana 9, ou seja, quando o usuário terminar a sem 9
+      //a anamse aparecerá.
+      widget.horario8 = (await dadosUsuario
+              .get('_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_10') as Timestamp)
+          .toDate();
+    } catch (e) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Erro'),
+              content: Text('Algo deu errado ao carregar os DADOS das SEMANAS'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Fecha o alerta
+                  },
+                  child: Text('Fechar'),
+                ),
+              ],
+            );
+          });
+    }
   }
 
   @override
@@ -105,10 +127,30 @@ class _SemanasState extends State<Semanas> {
     }
 
     Future<void> servidor(int num) async {
-      await FirebaseFirestore.instance
-          .collection('user')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .update({'ATUALIZOU_ANAMNSE_SEM$num': true});
+      try {
+        await FirebaseFirestore.instance
+            .collection('user')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .update({'ATUALIZOU_ANAMNSE_SEM$num': true});
+      } catch (e) {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Erro'),
+                content: Text(
+                    'Algo deu errado ao atualizar a ANAMNESE da sem${num}'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Fecha o alerta
+                    },
+                    child: Text('Fechar'),
+                  ),
+                ],
+              );
+            });
+      }
     }
 
     Future<void> logOut() async {
