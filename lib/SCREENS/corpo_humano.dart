@@ -444,10 +444,10 @@ class _CorpoHumanoState extends State<CorpoHumano> {
                                   '04Costas_inferior_SEM_6': '',
                                   '04Costas_inferior_SEM_8': '',
                                   /////
-                                  '05Bacia5_SEM_0': bacia5.graudaDor,
-                                  '05Bacia5_SEM_4': '',
-                                  '05Bacia5_SEM_6': '',
-                                  '05Bacia5_SEM_8': '',
+                                  '05Bacia_SEM_0': bacia5.graudaDor,
+                                  '05Bacia_SEM_4': '',
+                                  '05Bacia_SEM_6': '',
+                                  '05Bacia_SEM_8': '',
                                   /////
                                   '06Ombro_DIREITO_SEM_0':
                                       ombro6!.painDegreeRight,

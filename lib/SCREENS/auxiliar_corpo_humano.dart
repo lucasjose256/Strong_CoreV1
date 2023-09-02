@@ -390,7 +390,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                                       bacia5.graudaDor,
                                   '06Ombro_DIREITO_SEM_${widget.numSem}':
                                       ombro6!.painDegreeRight,
-                                  '06Ombro6_ESQUERDO_SEM_${widget.numSem}':
+                                  '06Ombro_ESQUERDO_SEM_${widget.numSem}':
                                       ombro6!.painDegreeleft,
                                   '07Braço_DIREITO_SEM_${widget.numSem}':
                                       braco7.painDegreeRight,
