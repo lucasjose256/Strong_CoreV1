@@ -35,6 +35,7 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
     super.initState();
   }
 
+  bool _isloading = false;
   List<String> grauDores = [];
   Uint8List? bytes;
   GlobalKey _globalKey = GlobalKey();
@@ -302,39 +303,40 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                   ),
                   /* MaterialButton(
                       onPressed: (() => setState(() {})), child: Text('atualizar')),*/
-                  MaterialButton(
-                    minWidth: 100,
-                    padding: EdgeInsets.only(top: 8, bottom: 8),
-                    color: ui.Color.fromARGB(255, 202, 43, 32),
-                    onPressed: () async {
-                      if (pescoco0.graudaDor == null ||
-                          regiaoCervical1.graudaDor == null ||
-                          costasSuperior2.graudaDor == null ||
-                          costasMedia3.graudaDor == null ||
-                          costasInferior4.graudaDor == null ||
-                          bacia5.graudaDor == null ||
-                          ombro6!.painDegreeRight == '' ||
-                          ombro6.painDegreeleft == '' ||
-                          braco7.painDegreeRight == '' ||
-                          braco7.painDegreeleft == '' ||
-                          cotovelo8.painDegreeRight == '' ||
-                          cotovelo8.painDegreeleft == '' ||
-                          antebraco9.painDegreeRight == '' ||
-                          antebraco9.painDegreeleft == '' ||
-                          punho10.painDegreeRight == '' ||
-                          punho10.painDegreeleft == '' ||
-                          mao11.painDegreeRight == '' ||
-                          mao11.painDegreeleft == '' ||
-                          perna12.painDegreeRight == '' ||
-                          perna12.painDegreeleft == '' ||
-                          joelho13.painDegreeRight == '' ||
-                          joelho13.painDegreeleft == '' ||
-                          panturrilha14.painDegreeRight == '' ||
-                          panturrilha14.painDegreeleft == '' ||
-                          tornozelo15.painDegreeRight == '' ||
-                          tornozelo15.painDegreeleft == '')
+                  !_isloading
+                      ? MaterialButton(
+                          minWidth: 100,
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
+                          color: ui.Color.fromARGB(255, 202, 43, 32),
+                          onPressed: () async {
+                            if (pescoco0.graudaDor == null ||
+                                regiaoCervical1.graudaDor == null ||
+                                costasSuperior2.graudaDor == null ||
+                                costasMedia3.graudaDor == null ||
+                                costasInferior4.graudaDor == null ||
+                                bacia5.graudaDor == null ||
+                                ombro6!.painDegreeRight == '' ||
+                                ombro6.painDegreeleft == '' ||
+                                braco7.painDegreeRight == '' ||
+                                braco7.painDegreeleft == '' ||
+                                cotovelo8.painDegreeRight == '' ||
+                                cotovelo8.painDegreeleft == '' ||
+                                antebraco9.painDegreeRight == '' ||
+                                antebraco9.painDegreeleft == '' ||
+                                punho10.painDegreeRight == '' ||
+                                punho10.painDegreeleft == '' ||
+                                mao11.painDegreeRight == '' ||
+                                mao11.painDegreeleft == '' ||
+                                perna12.painDegreeRight == '' ||
+                                perna12.painDegreeleft == '' ||
+                                joelho13.painDegreeRight == '' ||
+                                joelho13.painDegreeleft == '' ||
+                                panturrilha14.painDegreeRight == '' ||
+                                panturrilha14.painDegreeleft == '' ||
+                                tornozelo15.painDegreeRight == '' ||
+                                tornozelo15.painDegreeleft == '')
 
-                      /* grauDores = [
+                            /* grauDores = [
                         //     pescoco0!.graudaDor!,
                         /*   pescoco0.graudaDor!,
                           regiaoCervical1.graudaDor!,
@@ -345,100 +347,120 @@ class _AuxCorpoHumanoState extends State<AuxCorpoHumano> {
                         ombro6!.painDegreeRight!,
                         ombro6.painDegreeleft,
                       ];*/
-                      {
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            actions: [
-                              TextButton(
-                                  onPressed: () => Navigator.of(context).pop(),
-                                  child: Text('Ok'))
-                            ],
-                            title: const Text('Anamnese'),
-                            content: const Text(
-                                'Selecione TODOS os campos do Corpo Humano'),
+                            {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                        child: Text('Ok'))
+                                  ],
+                                  title: const Text('Anamnese'),
+                                  content: const Text(
+                                      'Selecione TODOS os campos do Corpo Humano'),
+                                ),
+                              );
+                            } else {
+                              await UserPreferences.setBool(true);
+                              try {
+                                setState(() {
+                                  _isloading = true;
+                                });
+                                var firebase = await FirebaseFirestore.instance
+                                    .collection('demo')
+                                    .doc(
+                                        FirebaseAuth.instance.currentUser!.uid);
+
+                                await firebase.update({
+                                  '00Pescoço_SEM_${widget.numSem}':
+                                      pescoco0.graudaDor,
+                                  '01Regiao_cervical_SEM_${widget.numSem}':
+                                      regiaoCervical1.graudaDor,
+                                  '02Costas_superior_SEM_${widget.numSem}':
+                                      costasSuperior2.graudaDor,
+                                  '03Costas_média_SEM_${widget.numSem}':
+                                      costasMedia3.graudaDor,
+                                  '04Costas_inferior_SEM_${widget.numSem}':
+                                      costasInferior4.graudaDor,
+                                  '05Bacia_SEM_${widget.numSem}':
+                                      bacia5.graudaDor,
+                                  '06Ombro_DIREITO_SEM_${widget.numSem}':
+                                      ombro6!.painDegreeRight,
+                                  '06Ombro_ESQUERDO_SEM_${widget.numSem}':
+                                      ombro6!.painDegreeleft,
+                                  '07Braço_DIREITO_SEM_${widget.numSem}':
+                                      braco7.painDegreeRight,
+                                  '07Braço_ESQUERDO_SEM_${widget.numSem}':
+                                      braco7.painDegreeleft,
+                                  '08Cotovelo_DIREITO_SEM_${widget.numSem}':
+                                      cotovelo8.painDegreeRight,
+                                  '08Cotovelo_ESQUERDO_SEM_${widget.numSem}':
+                                      cotovelo8.painDegreeleft,
+                                  '09Antebraço_DIREITO_SEM_${widget.numSem}':
+                                      antebraco9.painDegreeRight,
+                                  '09Antebraço_ESQUERDO_SEM_${widget.numSem}':
+                                      antebraco9.painDegreeleft,
+                                  '10Punho_DIREITO_SEM_${widget.numSem}':
+                                      punho10.painDegreeRight,
+                                  '10Punho_ESQUERDO_SEM_${widget.numSem}':
+                                      punho10.painDegreeleft,
+                                  '11Mao_DIREITA_SEM_${widget.numSem}':
+                                      mao11.painDegreeRight,
+                                  '11Mao_ESQUERDA_SEM_${widget.numSem}':
+                                      mao11.painDegreeleft,
+                                  '12Perna_DIREITA_SEM_${widget.numSem}':
+                                      perna12.painDegreeRight,
+                                  '12Perna_ESQUERDA_SEM_${widget.numSem}':
+                                      perna12.painDegreeleft,
+                                  '13Joelho_DIREITO_SEM_${widget.numSem}':
+                                      joelho13.painDegreeRight,
+                                  '13Joelho_ESQUERDO_SEM_${widget.numSem}':
+                                      joelho13.painDegreeleft,
+                                  '14Panturrilha_DIREITA_SEM_${widget.numSem}':
+                                      panturrilha14.painDegreeRight,
+                                  '14Panturrilha_ESQUERDA_SEM_${widget.numSem}':
+                                      panturrilha14.painDegreeleft,
+                                  '15Tornozelo_DIREITO_SEM_${widget.numSem}':
+                                      tornozelo15.painDegreeleft,
+                                  '15Tornozelo_ESQUERDO_SEM_${widget.numSem}':
+                                      tornozelo15.painDegreeleft,
+                                  '16Pe_DIREITO_SEM_${widget.numSem}':
+                                      pe16.painDegreeRight,
+                                  '16Pe_ESQUERDO_SEM_${widget.numSem}':
+                                      pe16.painDegreeleft,
+                                });
+                              } catch (e) {
+                                setState(() {
+                                  _isloading = false;
+                                });
+                                ScaffoldMessenger.of(context).clearSnackBars();
+
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text(
+                                        'Algo deu errado ao ATUALIZAR OS DADOS DO CORPO HUMANO\n SEMANA${widget.numSem}!')));
+                              }
+
+                              servidor(widget.numSem);
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (constect) => Semanas(),
+                                    settings: const RouteSettings()),
+                              );
+                            }
+                          },
+                          child: Text(
+                            'Finalizar',
+                            style: TextStyle(color: Colors.white, fontSize: 20),
                           ),
-                        );
-                      } else {
-                        await UserPreferences.setBool(true);
-
-                        var firebase = await FirebaseFirestore.instance
-                            .collection('demo')
-                            .doc(FirebaseAuth.instance.currentUser!.uid);
-
-                        await firebase.update({
-                          'Pescoço0_SEM_${widget.numSem}': pescoco0.graudaDor,
-                          'Regiao_cervical1_SEM_${widget.numSem}':
-                              regiaoCervical1.graudaDor,
-                          'Costas_superior2_SEM_${widget.numSem}':
-                              costasSuperior2.graudaDor,
-                          'Costas_média3_SEM_${widget.numSem}':
-                              costasMedia3.graudaDor,
-                          'Costas_inferior4_SEM_${widget.numSem}':
-                              costasInferior4.graudaDor,
-                          'Bacia5_SEM_${widget.numSem}': bacia5.graudaDor,
-                          'Ombro6_DIREITO_SEM_${widget.numSem}':
-                              ombro6!.painDegreeRight,
-                          'Ombro6_ESQUERDO_SEM_${widget.numSem}':
-                              ombro6!.painDegreeleft,
-                          'Braço7_DIREITO_SEM_${widget.numSem}':
-                              braco7.painDegreeRight,
-                          'Braço7_ESQUERDO_SEM_${widget.numSem}':
-                              braco7.painDegreeleft,
-                          'Cotovelo8_DIREITO_SEM_${widget.numSem}':
-                              cotovelo8.painDegreeRight,
-                          'Cotovelo8_ESQUERDO_SEM_${widget.numSem}':
-                              cotovelo8.painDegreeleft,
-                          'Antebraço9_DIREITO_SEM_${widget.numSem}':
-                              antebraco9.painDegreeRight,
-                          'Antebraço9_ESQUERDO_SEM_${widget.numSem}':
-                              antebraco9.painDegreeleft,
-                          'Punho10_DIREITO_SEM_${widget.numSem}':
-                              punho10.painDegreeRight,
-                          'Punho10_ESQUERDO_SEM_${widget.numSem}':
-                              punho10.painDegreeleft,
-                          'Mao11_DIREITA_SEM_${widget.numSem}':
-                              mao11.painDegreeRight,
-                          'Mao11_ESQUERDA_SEM_${widget.numSem}':
-                              mao11.painDegreeleft,
-                          'Perna12_DIREITA_SEM_${widget.numSem}':
-                              perna12.painDegreeRight,
-                          'Perna12_ESQUERDA_SEM_${widget.numSem}':
-                              perna12.painDegreeleft,
-                          'Joelho13_DIREITO_SEM_${widget.numSem}':
-                              joelho13.painDegreeRight,
-                          'Joelho13_ESQUERDO_SEM_${widget.numSem}':
-                              joelho13.painDegreeleft,
-                          'Panturrilha14_DIREITA_SEM_${widget.numSem}':
-                              panturrilha14.painDegreeRight,
-                          'Panturrilha14_ESQUERDA_SEM_${widget.numSem}':
-                              panturrilha14.painDegreeleft,
-                          'Tornozelo15_DIREITO_SEM_${widget.numSem}':
-                              tornozelo15.painDegreeleft,
-                          'Tornozelo15_ESQUERDO_SEM_${widget.numSem}':
-                              tornozelo15.painDegreeleft,
-                          'Pe16_DIREITO_SEM_${widget.numSem}':
-                              pe16.painDegreeRight,
-                          'Pe16_ESQUERDO_SEM_${widget.numSem}':
-                              pe16.painDegreeleft,
-                        });
-                        servidor(widget.numSem);
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (constect) => Semanas(),
-                              settings: const RouteSettings()),
-                        );
-                      }
-                    },
-                    child: Text(
-                      'Finalizar',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                      side: BorderSide(color: Theme.of(context).primaryColor),
-                    ),
-                  )
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            side: BorderSide(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                        )
+                      : CircularProgressIndicator()
                 ],
               ),
             ),
