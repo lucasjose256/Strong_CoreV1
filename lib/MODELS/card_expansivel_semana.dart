@@ -393,10 +393,9 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                   .doc(FirebaseAuth.instance.currentUser!.uid!)
                                   .update({
                                 '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana + 1}':
-                                    horario =
-                                        DateTime.now().add(Duration(seconds: 3
-                                            //    hours: 24, /*days: 2*/
-                                            )),
+                                    horario = DateTime.now().add(Duration(
+                                  hours: 24, /*days: 2*/
+                                )),
                               });
                             } else {
                               await FirebaseFirestore.instance
@@ -406,9 +405,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                 //verificar se o update apaga os dados dos formularios
                                 '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}':
                                     horario = DateTime.now().add(const Duration(
-                                  seconds: 3,
-
-                                  /// hours: 24, /*days: 2*/
+                                  hours: 24, /*days: 2*/
                                 )),
                               });
                             }
