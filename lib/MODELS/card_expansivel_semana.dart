@@ -394,7 +394,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                   .update({
                                 '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana + 1}':
                                     horario = DateTime.now().add(Duration(
-                                  hours: 24, /*days: 2*/
+                                  hours: 12, /*days: 2*/
                                 )),
                               });
                             } else {
@@ -405,7 +405,7 @@ class _CartaoSemanasState extends State<CartaoSemanas> {
                                 //verificar se o update apaga os dados dos formularios
                                 '_HORARIO_LIBERA_PROXIMO_VIDEO_SEMANA_${widget.numeroSemana}':
                                     horario = DateTime.now().add(const Duration(
-                                  hours: 24, /*days: 2*/
+                                  hours: 12, /*days: 2*/
                                 )),
                               });
                             }
